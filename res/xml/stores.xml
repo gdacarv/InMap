@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<stores>
+    <store>
+        <name>Livraria Cultura</name>
+        <description>É uma livraria com vários livros e filmes e eventos.</description>
+        <phone>(71) 3355-6666</phone>
+        <website>www.livrariacultura.com.br</website>
+        <tags>livro,filme,dvd,revista,evento</tags>
+        <id_storecategory>8</id_storecategory>
+        <level>1</level>
+        <area>14,716,126,793</area>
+    </store>
+    
+    <store>
+        <name>Subway</name>
+        <description>Fast-food de sanduiches.</description>
+        <phone>(71) 3355-6666</phone>
+        <website>www.subway.com</website>
+        <tags>comida,sanduiche</tags>
+        <id_storecategory>6</id_storecategory>
+        <level>0</level>
+        <area>138,256,158,270</area>
+    </store>
+</stores>

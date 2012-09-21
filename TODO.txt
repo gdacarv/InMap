@@ -1,0 +1,14 @@
+TODO Agora:
+
+- Implementar clique no mapa (mostra a loja);
+- Activity de informação de Store;
+- Pesquisa;
+- Aplicar design;
+- Criar métricas;
+
+Futuro:
+
+- Mapa da vertical ou horizontal a depender da orientação;
+- Zoom Pinch dar zoom no meio do pinch;
+- Selecionador móvel com animação na seleção de level;
+- Colocar animação ao aparecer um infrastructure item no mapa (MapItem);

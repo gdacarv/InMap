@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">In Map</string>
+    <string name="alternate_title">An alternate title that is long</string>
+    <string name="toggle_title">Toggle title</string>
+
+    <string name="menu_refresh">Refresh</string>
+    <string name="menu_search">Search</string>
+    <string name="menu_levels">Andar</string>
+    
+    <string name="title_clothing_man">Roupa Masculina</string>
+    <string name="title_clothing_woman">Roupa Feminina</string>
+    <string name="title_gifts">Presentes</string>
+    <string name="title_shoes">Sapatos</string>
+    <string name="title_eletronics">Eletrônicos</string>
+    <string name="title_food">Alimentação</string>
+    <string name="title_entertainment">Entretenimento</string>
+    <string name="title_bookstore">Livraria</string>
+    <string name="title_bank">Banco</string>
+    <string name="title_services">Serviços</string>
+    <string name="title_carrier">Operadoras Telefônicas</string>
+    <string name="title_department">Loja de Departamento</string>
+    <string name="title_health">Saúde</string>
+    <string name="carregando_lojas">Carregando lojas...</string>
+    <string name="_categorias">^ Categorias</string>
+    <string name="mapa_">Mapa ></string>
+</resources>
