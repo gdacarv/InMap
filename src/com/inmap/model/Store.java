@@ -1,11 +1,15 @@
 package com.inmap.model;
 
+import java.io.Serializable;
+
 import android.graphics.Bitmap;
 
 import com.inmap.applicationdata.StoreCategory;
 import com.inmap.interfaces.StoreMapItem;
 
-public class Store implements StoreMapItem{
+public class Store implements StoreMapItem, Serializable{
+	
+	private static final long serialVersionUID = 2516026149726961993L; 
 	
 	private String name, description, phone, website, tags[];
 	private StoreCategory mCategory;
@@ -97,7 +101,7 @@ public class Store implements StoreMapItem{
 
 	@Override
 	public String getSubtext() {
-		return description;// Not the best choice...
+		return description;// XXX Not the best choice...
 	}
 	
 

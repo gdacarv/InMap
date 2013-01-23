@@ -14,8 +14,10 @@
  * limitations under the License.
  */
 
-package com.inmap;
+package com.inmap.activities;
 
+import com.inmap.R;
+import com.inmap.StoreParameters;
 import com.inmap.actionbar.ActionBarActivity;
 import com.inmap.applicationdata.SalvadorShopApplicationDataFacade;
 import com.inmap.fragments.LevelPickerFragment;
@@ -35,6 +37,7 @@ import com.inmap.interfaces.StoreOnMapController;
 import com.inmap.model.Store;
 import com.inmap.views.AnimateFrameLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.util.DisplayMetrics;
@@ -72,7 +75,7 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
+		setContentView(R.layout.activity_main);
 
 		DisplayMetrics metrics = getResources().getDisplayMetrics();
 		int width = metrics.widthPixels;
@@ -146,7 +149,9 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 
 	@Override
 	public void onStoreSelected(Store store) {
-		Toast.makeText(this, "Store selected: " + store.getName(), Toast.LENGTH_SHORT).show(); // TODO
+		Intent i = new Intent(this, StoreDetailsActivity.class);
+		i.putExtra(StoreDetailsActivity.STORE, store);
+		startActivity(i);
 	}
 
 	@Override
