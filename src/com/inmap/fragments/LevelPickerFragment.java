@@ -33,7 +33,7 @@ public class LevelPickerFragment extends Fragment {
 			public void onClick(View v) {
 				for(int i = 0; i < mLevelButtons.length; i++)
 					if(mLevelButtons[i] == v){
-						mOnLevelSelectedListener.onLevelSelected(i, mLevelInformation.getMapResource(i));
+						mOnLevelSelectedListener.onLevelSelected(i);
 						break;
 					}
 			}
@@ -57,6 +57,6 @@ public class LevelPickerFragment extends Fragment {
 	}
 	
 	public interface OnLevelSelectedListener {
-		public void onLevelSelected(int level, int mapResource);
+		public void onLevelSelected(int level);
 	}
 }

@@ -1,5 +1,7 @@
 package com.inmap.interfaces;
 
+import com.inmap.views.InMapImageView.OnStoreBallonClickListener;
+
 public interface InMapViewController {
 
 	void zoomIn();
@@ -9,5 +11,9 @@ public interface InMapViewController {
 	void setLevel(int level, int mapResource);
 	
 	void setMapController(MapController controller);
+	
+	void setOnStoreBallonClickListener(OnStoreBallonClickListener listener);
+	
+	void openStoreBallon(StoreMapItem storeMapItem);
 
 }

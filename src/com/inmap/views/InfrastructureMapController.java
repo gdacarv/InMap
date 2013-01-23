@@ -25,7 +25,7 @@ public class InfrastructureMapController implements MapController,
 	}
 
 	@Override
-	public void onLevelSelected(int level, int mapResource) {
+	public void onLevelSelected(int level) {
 		this.level = level;
 		reloadMapItems();
 	}

@@ -16,31 +16,11 @@
 
 package com.inmap.activities;
 
-import com.inmap.R;
-import com.inmap.StoreParameters;
-import com.inmap.actionbar.ActionBarActivity;
-import com.inmap.applicationdata.SalvadorShopApplicationDataFacade;
-import com.inmap.fragments.LevelPickerFragment;
-import com.inmap.fragments.LevelPickerFragment.OnLevelSelectedListener;
-import com.inmap.fragments.StoreCategoryListFragment;
-import com.inmap.fragments.InfrastructureBarFragment;
-import com.inmap.fragments.InfrastructureBarFragment.OnInfrastructureCategoryChangedListener;
-import com.inmap.fragments.StoreCategoryListFragment.OnStoreCategoryChangedListener;
-import com.inmap.fragments.StoreListFragment;
-import com.inmap.fragments.StoreListFragment.OnStoreSelectedListener;
-import com.inmap.fragments.StoreListFragment.StoreListController;
-import com.inmap.interfaces.ApplicationDataFacade;
-import com.inmap.interfaces.InMapViewController;
-import com.inmap.interfaces.LevelInformation;
-import com.inmap.interfaces.OnAnimationEnd;
-import com.inmap.interfaces.StoreOnMapController;
-import com.inmap.model.Store;
-import com.inmap.views.AnimateFrameLayout;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -53,26 +33,55 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 import android.widget.ZoomControls;
 
-public class MainActivity extends ActionBarActivity implements OnInfrastructureCategoryChangedListener, OnStoreCategoryChangedListener, OnStoreSelectedListener, OnLevelSelectedListener, StoreListController {
+import com.inmap.R;
+import com.inmap.StoreParameters;
+import com.inmap.actionbar.ActionBarActivity;
+import com.inmap.applicationdata.SalvadorShopApplicationDataFacade;
+import com.inmap.fragments.InfrastructureBarFragment;
+import com.inmap.fragments.InfrastructureBarFragment.OnInfrastructureCategoryChangedListener;
+import com.inmap.fragments.LevelPickerFragment;
+import com.inmap.fragments.LevelPickerFragment.OnLevelSelectedListener;
+import com.inmap.fragments.StoreCategoryListFragment;
+import com.inmap.fragments.StoreCategoryListFragment.OnStoreCategoryChangedListener;
+import com.inmap.fragments.StoreListFragment;
+import com.inmap.fragments.StoreListFragment.OnStoreSelectedListener;
+import com.inmap.fragments.StoreListFragment.StoreListController;
+import com.inmap.interfaces.ApplicationDataFacade;
+import com.inmap.interfaces.InMapViewController;
+import com.inmap.interfaces.LevelInformation;
+import com.inmap.interfaces.OnAnimationEnd;
+import com.inmap.interfaces.StoreMapItem;
+import com.inmap.interfaces.StoreOnMapController;
+import com.inmap.model.Store;
+import com.inmap.views.AnimateFrameLayout;
+import com.inmap.views.InMapImageView.OnStoreBallonClickListener;
+
+public class MainActivity extends ActionBarActivity implements OnInfrastructureCategoryChangedListener, OnStoreCategoryChangedListener, OnStoreSelectedListener, OnLevelSelectedListener, StoreListController, OnStoreBallonClickListener {
+
+	protected static final String SHOW_STORE_INMAP = "show_store_inmap";
+
 
 	private ApplicationDataFacade mApplicationDataFacade = SalvadorShopApplicationDataFacade.getInstance(this);
 
-	
+
 	private AnimateFrameLayout mLayoutMap, mLayoutStoreList, mLayoutCategoryList, mLayoutLevelPicker;
 	private StoreCategoryListFragment mStoreCategoryListFragment;
 	private InfrastructureBarFragment mInfrastructureBarFragment;
 	private StoreListFragment mStoreListFragment;
 	private LevelPickerFragment mLevelPickerFragment;
 	private boolean isShowingList = false,
-					isShowingStoreList = false,
-					isShowingLevelPicker = false;
+	isShowingStoreList = false,
+	isShowingLevelPicker = false;
 	private FrameLayout mLayoutLists;
 	private InMapViewController mInMapViewController;
 	private ZoomControls mZoom;
 	private OnLevelSelectedListener[] mLevelSelectedListeners;
 	private OnInfrastructureCategoryChangedListener[] mInfrastructureCategoryChangedListeners;
 	private StoreOnMapController mStoreOnMapController;
-	
+
+
+	private LevelInformation mLevelInformation;
+
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
@@ -83,10 +92,13 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 		configureFragments();
 
 		configureAllLayout(width);
-		
+
 		loadInformationFromApplicationDataFacade();
+
 		
-		setInitialLevel();
+		if(!verifyIntentShowStoreOnMap())
+			setInitialLevel();
+
 	}
 
 	@Override
@@ -166,9 +178,10 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 	}
 
 	@Override
-	public void onLevelSelected(int level, int mapResource) {
+	public void onLevelSelected(int level) {
+		int mapResource = mLevelInformation.getMapResource(level);
 		for(OnLevelSelectedListener listener : mLevelSelectedListeners)
-			listener.onLevelSelected(level, mapResource);
+			listener.onLevelSelected(level);
 		mInMapViewController.setLevel(level, mapResource);
 	}
 
@@ -177,14 +190,14 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 
 		mStoreCategoryListFragment = (StoreCategoryListFragment) fm.findFragmentById(R.id.fragment_categorylist);
 		mStoreCategoryListFragment.setOnStoreCategoryChangedListener(this);
-		
+
 		mInfrastructureBarFragment = (InfrastructureBarFragment) fm.findFragmentById(R.id.fragment_infrabar);
 		mInfrastructureBarFragment.setOnInfrastructureCategoryChangeListener(this);
-		
+
 		mStoreListFragment = (StoreListFragment) fm.findFragmentById(R.id.fragment_storelist);
 		mStoreListFragment.setOnStoreSelectedListener(this);
 		mStoreListFragment.setStoreListController(this);
-		
+
 		mLevelPickerFragment = (LevelPickerFragment) fm.findFragmentById(R.id.fragment_levelpicker);
 		mLevelPickerFragment.setOnLevelSelectedListener(this);
 	}
@@ -197,6 +210,7 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 		configureLayoutLevelPicker();
 		configureZoomControls();
 		mInMapViewController = (InMapViewController) findViewById(R.id.map);
+		mInMapViewController.setOnStoreBallonClickListener(this);
 	}
 
 	private void configureLayoutMap(int width) {
@@ -224,7 +238,7 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 	private void configureLayoutCategoryList() {
 		mLayoutCategoryList = (AnimateFrameLayout) findViewById(R.id.layout_categorylist);
 		mLayoutCategoryList.setOnAnimationEnd(new OnAnimationEnd() {
-			
+
 			@Override
 			public void onAnimationEnded() {
 				if(isShowingStoreList) mLayoutCategoryList.setVisibility(View.GONE);
@@ -235,7 +249,7 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 	private void configureLayoutStoreList() {
 		mLayoutStoreList = (AnimateFrameLayout) findViewById(R.id.layout_storelist);
 		mLayoutStoreList.setOnAnimationEnd(new OnAnimationEnd() {
-			
+
 			@Override
 			public void onAnimationEnded() {
 				if(!isShowingStoreList) mLayoutStoreList.setVisibility(View.GONE);
@@ -251,7 +265,7 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 	private void configureLayoutLevelPicker() {
 		mLayoutLevelPicker = (AnimateFrameLayout) findViewById(R.id.layout_levels);
 		mLayoutLevelPicker.setOnAnimationEnd(new OnAnimationEnd() {
-			
+
 			@Override
 			public void onAnimationEnded() {
 				if(!isShowingLevelPicker) mLayoutLevelPicker.setVisibility(View.INVISIBLE);
@@ -262,14 +276,14 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 	private void configureZoomControls() {
 		mZoom = (ZoomControls) findViewById(R.id.zoomControls);
 		mZoom.setOnZoomInClickListener(new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				mInMapViewController.zoomIn();
 			}
 		});
 		mZoom.setOnZoomOutClickListener(new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				mInMapViewController.zoomOut();
@@ -282,13 +296,13 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 		mLevelSelectedListeners = mApplicationDataFacade.getOnLevelSelectedListeners();
 		mInfrastructureCategoryChangedListeners = mApplicationDataFacade.getOnInfrastructureCategoryChangedListeners();
 		mStoreOnMapController = mApplicationDataFacade.getStoreOnMapController();
+		mLevelInformation = mApplicationDataFacade.getLevelInformation();
 	}
 
 	private void setInitialLevel() {
-		LevelInformation information = mApplicationDataFacade.getLevelInformation();
-		onLevelSelected(information.initializerLevel(), information.getMapResource(information.initializerLevel()));
+		onLevelSelected(mLevelInformation.initializerLevel());
 	}
-	
+
 	private void toggleLevelPicker() {
 		isShowingLevelPicker = !isShowingLevelPicker;
 		if(isShowingLevelPicker){
@@ -318,5 +332,28 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 		mLayoutCategoryList.setVisibility(View.VISIBLE);
 		mLayoutCategoryList.startAnimation(AnimationUtils.loadAnimation(this, R.anim.to_down_from__100_to_0));
 		mLayoutStoreList.startAnimation(AnimationUtils.loadAnimation(this, R.anim.to_down_100));
+	}
+
+	@Override
+	public void onStoreBallonClicked(StoreMapItem store) {
+		onStoreSelected(store.getStore());
+	}
+
+	private boolean verifyIntentShowStoreOnMap() {
+		Intent i = getIntent();
+		if(i != null) {
+			Store store = (Store) i.getSerializableExtra(SHOW_STORE_INMAP);
+			if(store != null) {
+				showStoreOnMap(store);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private void showStoreOnMap(Store store) {
+		onLevelSelected(store.getLevel());
+		mStoreOnMapController.setStores(store);
+		mInMapViewController.openStoreBallon(store);
 	}
 }

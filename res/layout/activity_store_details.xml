@@ -35,5 +35,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/hello_world" />
+    
+    <Button 
+        android:id="@+id/btn_details_map"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/apontar_no_mapa"/>
 
 </LinearLayout>

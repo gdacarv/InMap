@@ -6,6 +6,7 @@ import com.inmap.interfaces.MapController;
 import com.inmap.interfaces.MapItem;
 import com.inmap.interfaces.MapItemsListener;
 import com.inmap.interfaces.StoreMapItem;
+import com.inmap.model.Store;
 import com.inmap.views.TranslateHelper.TranslateItem;
 import com.inmap.views.ZoomHelper.ZoomItem;
 
@@ -14,6 +15,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -38,6 +41,8 @@ public class InMapImageView extends ImageView implements InMapViewController, Tr
 	private StoreMapItem mStoreMapItemShowingInformation;
 
 	private int TRANSLATE_MARGIN;
+	private RectF mRectBallon;
+	private OnStoreBallonClickListener mOnStoreBallonClickListener;
 
 	public InMapImageView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
@@ -63,6 +68,8 @@ public class InMapImageView extends ImageView implements InMapViewController, Tr
 		mPaintSubtext = new Paint();
 		mPaintSubtext.setTextSize(20);
 		//mPaintSubtext.
+		
+		mRectBallon = new RectF();
 	
 	}
 
@@ -114,11 +121,15 @@ public class InMapImageView extends ImageView implements InMapViewController, Tr
 		if(showingInformationBalloon){
 			float x = getScreenX(mStoreMapItemShowingInformation.getX()),
 			y = getScreenY(mStoreMapItemShowingInformation.getY());
-			canvas.drawBitmap(mBitmapBallon, x-mBitmapBallon.getWidth()/2, y-mBitmapBallon.getHeight(), null);
+			mRectBallon.left = x-mBitmapBallon.getWidth()/2;
+			mRectBallon.top = y-mBitmapBallon.getHeight();
+			mRectBallon.right = mRectBallon.left + mBitmapBallon.getWidth();
+			mRectBallon.bottom = mRectBallon.top + mBitmapBallon.getHeight();
+			canvas.drawBitmap(mBitmapBallon, mRectBallon.left, mRectBallon.top, null);
 			canvas.drawText(mStoreMapItemShowingInformation.getTitle(), x-mBitmapBallon.getWidth()/2+10, 
 					y-mBitmapBallon.getHeight()+40, mPaintTitle);
 			canvas.drawText(mStoreMapItemShowingInformation.getSubtext(), x-mBitmapBallon.getWidth()/2+10, 
-					y-mBitmapBallon.getHeight()/2, mPaintSubtext);
+					y-mBitmapBallon.getHeight()/2, mPaintSubtext); // TODO Break if string is to long
 		}
 	}
 
@@ -166,8 +177,13 @@ public class InMapImageView extends ImageView implements InMapViewController, Tr
 	private void onClick(float x, float y) {
 		Log.d("InMapImageView", "x: " + x + " y: " + y);
 		if(showingInformationBalloon){
-			showingInformationBalloon = false;
-			invalidate();
+			if(mRectBallon.contains(x, y)) {
+				if(mOnStoreBallonClickListener != null)
+					mOnStoreBallonClickListener.onStoreBallonClicked(mStoreMapItemShowingInformation);
+			}else{
+				showingInformationBalloon = false;
+				invalidate();
+			}
 			return;
 		}
 		if(mMapItems != null){
@@ -183,6 +199,11 @@ public class InMapImageView extends ImageView implements InMapViewController, Tr
 	}
 
 	private void onClickedStoreMapItem(StoreMapItem store) {
+		openStoreBallon(store);
+	}
+
+	@Override
+	public void openStoreBallon(StoreMapItem store) {
 		showingInformationBalloon = true;
 		mStoreMapItemShowingInformation = store;
 		invalidate();
@@ -298,5 +319,14 @@ public class InMapImageView extends ImageView implements InMapViewController, Tr
 		mMapItems = mMapController.getMapItems();
 		showingInformationBalloon = false;
 		invalidate();
+	}
+	
+	public interface OnStoreBallonClickListener{
+		void onStoreBallonClicked(StoreMapItem store);
+	}
+
+	@Override
+	public void setOnStoreBallonClickListener(OnStoreBallonClickListener listener) {
+		mOnStoreBallonClickListener = listener;
 	}
 }

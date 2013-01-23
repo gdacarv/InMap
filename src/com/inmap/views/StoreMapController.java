@@ -44,7 +44,7 @@ public class StoreMapController implements MapController, StoreOnMapController, 
 	}
 
 	@Override
-	public void onLevelSelected(int level, int mapResource) {
+	public void onLevelSelected(int level) {
 		this.level = level;
 		if(mItems != null)
 			reloadShowingItems();

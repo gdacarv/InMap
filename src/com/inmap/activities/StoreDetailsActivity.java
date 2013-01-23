@@ -1,9 +1,12 @@
 package com.inmap.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.TextView;
 
 import com.inmap.R;
@@ -29,10 +32,16 @@ public class StoreDetailsActivity extends ActionBarActivity {
 		
 		setActionBarTitle(mStore.getTitle());
 		populateViews();
+		
+		findViewById(R.id.btn_details_map).setOnClickListener(onMapButtonClick);
 	}
 
 	private void populateViews() {
 		((TextView)findViewById(R.id.txt_details_description)).setText(getString(R.string.descricao_) + " " + mStore.getDescription());
+		((TextView)findViewById(R.id.txt_details_phone)).setText(getString(R.string.telefone_) + " " + mStore.getPhone());
+		((TextView)findViewById(R.id.txt_details_website)).setText(getString(R.string.site_) + " " + mStore.getWebsite());
+		((TextView)findViewById(R.id.txt_details_category)).setText(getString(R.string.categoria_) + " " + getString(mStore.getCategory().getTitleRes()));
+		((TextView)findViewById(R.id.txt_details_level)).setText(getString(R.string.andar_) + " " + mStore.getLevel());
 	}
 
 	private void setActionBarTitle(String title) {
@@ -63,4 +72,13 @@ public class StoreDetailsActivity extends ActionBarActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
+	private OnClickListener onMapButtonClick = new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			Intent i = new Intent(StoreDetailsActivity.this, MainActivity.class);
+			i.putExtra(MainActivity.SHOW_STORE_INMAP, mStore);
+			startActivity(i);
+		}
+	};
 }
