@@ -1,9 +1,9 @@
 package com.inmap.fragments;
 
 import com.inmap.R;
-import com.inmap.StoreParameters;
 import com.inmap.model.DbAdapter;
 import com.inmap.model.Store;
+import com.inmap.model.StoreParameters;
 
 import android.content.Context;
 import android.os.AsyncTask;

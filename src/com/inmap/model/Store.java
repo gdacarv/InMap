@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 import android.graphics.Bitmap;
 
-import com.inmap.applicationdata.StoreCategory;
 import com.inmap.interfaces.StoreMapItem;
+import com.inmap.salvadorshop.applicationdata.StoreCategory;
 
 public class Store implements StoreMapItem, Serializable{
 	

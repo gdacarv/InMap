@@ -10,5 +10,12 @@ public interface ApplicationDataFacade {
 	OnLevelSelectedListener[] getOnLevelSelectedListeners();
 	OnInfrastructureCategoryChangedListener[] getOnInfrastructureCategoryChangedListeners();
 	StoreOnMapController getStoreOnMapController();
+	double getLatitude();
+	double getLongitude();
+	float getMapZoom();
+	float getMapRotation();
+	double getInitialLatitude();
+	double getInitialLongitude();
+	float getInitialMapZoom();
 	
 }

@@ -1,7 +1,7 @@
 package com.inmap.fragments;
 
 import com.inmap.R;
-import com.inmap.applicationdata.InfrastructureCategory;
+import com.inmap.salvadorshop.applicationdata.InfrastructureCategory;
 import com.inmap.interfaces.OnAnimationEnd;
 import com.inmap.views.AnimateFrameLayout;
 

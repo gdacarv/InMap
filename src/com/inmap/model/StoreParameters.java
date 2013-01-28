@@ -1,6 +1,6 @@
-package com.inmap;
+package com.inmap.model;
 
-import com.inmap.applicationdata.StoreCategory;
+import com.inmap.salvadorshop.applicationdata.StoreCategory;
 
 public class StoreParameters {
 

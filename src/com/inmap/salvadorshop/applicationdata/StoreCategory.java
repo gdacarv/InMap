@@ -1,4 +1,4 @@
-package com.inmap.applicationdata;
+package com.inmap.salvadorshop.applicationdata;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;

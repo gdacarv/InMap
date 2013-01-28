@@ -1,7 +1,7 @@
 package com.inmap.fragments;
 
 import com.inmap.R;
-import com.inmap.applicationdata.SalvadorShopApplicationDataFacade;
+import com.inmap.salvadorshop.applicationdata.SalvadorShopApplicationDataFacade;
 import com.inmap.interfaces.ApplicationDataFacade;
 import com.inmap.interfaces.LevelInformation;
 

@@ -2,8 +2,8 @@ package com.inmap.model;
 
 import android.graphics.Bitmap;
 
-import com.inmap.applicationdata.InfrastructureCategory;
 import com.inmap.interfaces.MapItem;
+import com.inmap.salvadorshop.applicationdata.InfrastructureCategory;
 
 public class Infrastructure implements MapItem{
 	private InfrastructureCategory category;

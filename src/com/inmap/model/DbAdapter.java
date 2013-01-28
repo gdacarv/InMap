@@ -1,8 +1,7 @@
 package com.inmap.model;
 
-import com.inmap.StoreParameters;
-import com.inmap.applicationdata.InfrastructureCategory;
-import com.inmap.applicationdata.StoreCategory;
+import com.inmap.salvadorshop.applicationdata.InfrastructureCategory;
+import com.inmap.salvadorshop.applicationdata.StoreCategory;
 
 import android.content.Context;
 import android.database.Cursor;

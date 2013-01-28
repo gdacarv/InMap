@@ -1,4 +1,4 @@
-package com.inmap.applicationdata;
+package com.inmap.salvadorshop.applicationdata;
 
 import com.inmap.R;
 import com.inmap.interfaces.LevelInformation;

@@ -18,9 +18,9 @@ package com.inmap.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.FragmentManager;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -33,10 +33,13 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 import android.widget.ZoomControls;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
 import com.inmap.R;
-import com.inmap.StoreParameters;
 import com.inmap.actionbar.ActionBarActivity;
-import com.inmap.applicationdata.SalvadorShopApplicationDataFacade;
 import com.inmap.fragments.InfrastructureBarFragment;
 import com.inmap.fragments.InfrastructureBarFragment.OnInfrastructureCategoryChangedListener;
 import com.inmap.fragments.LevelPickerFragment;
@@ -53,6 +56,8 @@ import com.inmap.interfaces.OnAnimationEnd;
 import com.inmap.interfaces.StoreMapItem;
 import com.inmap.interfaces.StoreOnMapController;
 import com.inmap.model.Store;
+import com.inmap.model.StoreParameters;
+import com.inmap.salvadorshop.applicationdata.SalvadorShopApplicationDataFacade;
 import com.inmap.views.AnimateFrameLayout;
 import com.inmap.views.InMapImageView.OnStoreBallonClickListener;
 
@@ -79,13 +84,18 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 	private OnInfrastructureCategoryChangedListener[] mInfrastructureCategoryChangedListeners;
 	private StoreOnMapController mStoreOnMapController;
 
+	private GoogleMap mMap;
 
 	private LevelInformation mLevelInformation;
+
+	private Handler mHandler;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+		mHandler = new Handler();
+		
 		DisplayMetrics metrics = getResources().getDisplayMetrics();
 		int width = metrics.widthPixels;
 
@@ -95,10 +105,18 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 
 		loadInformationFromApplicationDataFacade();
 
-		
+
 		if(!verifyIntentShowStoreOnMap())
 			setInitialLevel();
 
+		setUpMapIfNeeded();
+
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		setUpMapIfNeeded();
 	}
 
 	@Override
@@ -355,5 +373,63 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 		onLevelSelected(store.getLevel());
 		mStoreOnMapController.setStores(store);
 		mInMapViewController.openStoreBallon(store);
+	}
+
+	private void setUpMapIfNeeded() {
+		// Do a null check to confirm that we have not already instantiated the map.
+		if (mMap == null) {
+			// Try to obtain the map from the SupportMapFragment.
+			mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.google_map))
+			.getMap();
+			// Check if we were successful in obtaining the map.
+			if (mMap != null) {
+				setUpMap();
+			}
+		}
+	}
+
+	private void setUpMap() {
+		moveMapViewToInitialPosition();
+		mHandler.postDelayed(new Runnable() {
+			
+			@Override
+			public void run() {
+				moveMapViewToPosition();
+			}
+		}, 1500);
+		mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+
+	      /*  TileProvider tileProvider = new UrlTileProvider(256, 256) {
+	            @Override
+	            public synchronized URL getTileUrl(int x, int y, int zoom) {
+	                // The moon tile coordinate system is reversed.  This is not normal.
+	                int reversedY = (1 << zoom) - y - 1;
+	                String s = String.format(Locale.US, MOON_MAP_URL_FORMAT, zoom, x, reversedY);
+	                URL url = null;
+	                try {
+	                    url = new URL(s);
+	                } catch (MalformedURLException e) {
+	                    throw new AssertionError(e);
+	                }
+	                return url;
+	            }
+	        };
+
+	        mMap.addTileOverlay(new TileOverlayOptions().tileProvider(tileProvider));*/
+	}
+
+	private void moveMapViewToInitialPosition() {
+		mMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder()
+		.target(new LatLng(mApplicationDataFacade.getInitialLatitude(), mApplicationDataFacade.getInitialLongitude()))
+		.zoom(mApplicationDataFacade.getInitialMapZoom())
+		.build()));
+	}
+
+	private void moveMapViewToPosition() {
+		mMap.animateCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder()
+			.target(new LatLng(mApplicationDataFacade.getLatitude(), mApplicationDataFacade.getLongitude()))
+			.zoom(mApplicationDataFacade.getMapZoom())
+			.bearing(mApplicationDataFacade.getMapRotation())
+			.build()), 2000, null);
 	}
 }

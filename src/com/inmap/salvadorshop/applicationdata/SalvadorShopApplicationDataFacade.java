@@ -1,4 +1,4 @@
-package com.inmap.applicationdata;
+package com.inmap.salvadorshop.applicationdata;
 
 import android.content.Context;
 import com.inmap.fragments.InfrastructureBarFragment.OnInfrastructureCategoryChangedListener;
@@ -111,5 +111,40 @@ public class SalvadorShopApplicationDataFacade implements ApplicationDataFacade 
 		if(mStoreMapController == null)
 			mStoreMapController = new StoreMapController(mContext);
 		return mStoreMapController;
+	}
+
+	@Override
+	public double getLatitude() {
+		return -12.97837;
+	}
+
+	@Override
+	public double getLongitude() {
+		return -38.454875;
+	}
+
+	@Override
+	public float getMapRotation() {
+		return -60f;
+	}
+
+	@Override
+	public float getMapZoom() {
+		return 17f;
+	}
+
+	@Override
+	public double getInitialLatitude() {
+		return -12.979802;
+	}
+
+	@Override
+	public double getInitialLongitude() {
+		return -38.479031;
+	}
+
+	@Override
+	public float getInitialMapZoom() {
+		return 12f;
 	}
 }
