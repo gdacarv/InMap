@@ -28,5 +28,20 @@ public class SalvadorShopLevelInformation implements LevelInformation {
 		return 2;
 	}
 
+	@Override
+	public double getLevelLatitude(int i) {
+		return -12.97837d;
+	}
+
+	@Override
+	public double getLevelLongitude(int i) {
+		return -38.454875d;
+	}
+
+	@Override
+	public float getLevelWidth(int i) {
+		return 170f;
+	}
+
 	
 }

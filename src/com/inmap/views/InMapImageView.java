@@ -209,13 +209,11 @@ public class InMapImageView extends ImageView implements InMapViewController, Tr
 		invalidate();
 	}
 
-	@Override
 	public void zoomIn() {
 		float zoomAfter = zoomControl * 1.2f;
 		zoom(zoomAfter);
 	}
 
-	@Override
 	public void zoomOut() {
 		float zoomAfter = zoomControl * 0.8f;
 		zoom(zoomAfter);
@@ -295,8 +293,8 @@ public class InMapImageView extends ImageView implements InMapViewController, Tr
 	}
 
 	@Override
-	public void setLevel(int level, int mapResource) {
-		setImageResource(mapResource);
+	public void setLevel(int level) {
+		//setImageResource(mapResource); FIXME setLevel ImageResource InMapImageView
 		setParametersToDefault();
 	}
 
@@ -321,10 +319,6 @@ public class InMapImageView extends ImageView implements InMapViewController, Tr
 		invalidate();
 	}
 	
-	public interface OnStoreBallonClickListener{
-		void onStoreBallonClicked(StoreMapItem store);
-	}
-
 	@Override
 	public void setOnStoreBallonClickListener(OnStoreBallonClickListener listener) {
 		mOnStoreBallonClickListener = listener;

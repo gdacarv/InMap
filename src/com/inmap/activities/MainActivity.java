@@ -18,7 +18,6 @@ package com.inmap.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.FragmentManager;
 import android.util.DisplayMetrics;
 import android.view.Menu;
@@ -31,15 +30,11 @@ import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-import android.widget.ZoomControls;
-
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.LatLng;
 import com.inmap.R;
 import com.inmap.actionbar.ActionBarActivity;
+import com.inmap.controllers.GoogleMapInMapController;
 import com.inmap.fragments.InfrastructureBarFragment;
 import com.inmap.fragments.InfrastructureBarFragment.OnInfrastructureCategoryChangedListener;
 import com.inmap.fragments.LevelPickerFragment;
@@ -53,13 +48,13 @@ import com.inmap.interfaces.ApplicationDataFacade;
 import com.inmap.interfaces.InMapViewController;
 import com.inmap.interfaces.LevelInformation;
 import com.inmap.interfaces.OnAnimationEnd;
+import com.inmap.interfaces.OnStoreBallonClickListener;
 import com.inmap.interfaces.StoreMapItem;
 import com.inmap.interfaces.StoreOnMapController;
 import com.inmap.model.Store;
 import com.inmap.model.StoreParameters;
 import com.inmap.salvadorshop.applicationdata.SalvadorShopApplicationDataFacade;
 import com.inmap.views.AnimateFrameLayout;
-import com.inmap.views.InMapImageView.OnStoreBallonClickListener;
 
 public class MainActivity extends ActionBarActivity implements OnInfrastructureCategoryChangedListener, OnStoreCategoryChangedListener, OnStoreSelectedListener, OnLevelSelectedListener, StoreListController, OnStoreBallonClickListener {
 
@@ -79,7 +74,6 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 	isShowingLevelPicker = false;
 	private FrameLayout mLayoutLists;
 	private InMapViewController mInMapViewController;
-	private ZoomControls mZoom;
 	private OnLevelSelectedListener[] mLevelSelectedListeners;
 	private OnInfrastructureCategoryChangedListener[] mInfrastructureCategoryChangedListeners;
 	private StoreOnMapController mStoreOnMapController;
@@ -88,14 +82,10 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 
 	private LevelInformation mLevelInformation;
 
-	private Handler mHandler;
-
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		mHandler = new Handler();
-		
 		DisplayMetrics metrics = getResources().getDisplayMetrics();
 		int width = metrics.widthPixels;
 
@@ -103,14 +93,12 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 
 		configureAllLayout(width);
 
-		loadInformationFromApplicationDataFacade();
+		setUpMapIfNeeded();
 
+		loadInformationFromApplicationDataFacade();
 
 		if(!verifyIntentShowStoreOnMap())
 			setInitialLevel();
-
-		setUpMapIfNeeded();
-
 	}
 
 	@Override
@@ -197,10 +185,9 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 
 	@Override
 	public void onLevelSelected(int level) {
-		int mapResource = mLevelInformation.getMapResource(level);
 		for(OnLevelSelectedListener listener : mLevelSelectedListeners)
 			listener.onLevelSelected(level);
-		mInMapViewController.setLevel(level, mapResource);
+		mInMapViewController.setLevel(level);
 	}
 
 	private void configureFragments() {
@@ -226,9 +213,6 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 		configureLayoutStoreList();
 		configureLayoutLists(width);
 		configureLayoutLevelPicker();
-		configureZoomControls();
-		mInMapViewController = (InMapViewController) findViewById(R.id.map);
-		mInMapViewController.setOnStoreBallonClickListener(this);
 	}
 
 	private void configureLayoutMap(int width) {
@@ -291,26 +275,11 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 		});
 	}
 
-	private void configureZoomControls() {
-		mZoom = (ZoomControls) findViewById(R.id.zoomControls);
-		mZoom.setOnZoomInClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				mInMapViewController.zoomIn();
-			}
-		});
-		mZoom.setOnZoomOutClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				mInMapViewController.zoomOut();
-			}
-		});
-	}
-
 	private void loadInformationFromApplicationDataFacade() {
-		mInMapViewController.setMapController(mApplicationDataFacade.getMapController());
+		if(mMap == null)
+			throw new IllegalStateException("GoogleMap should not be null.");
+		mInMapViewController = new GoogleMapInMapController(mMap, mApplicationDataFacade);
+		mInMapViewController.setOnStoreBallonClickListener(this);
 		mLevelSelectedListeners = mApplicationDataFacade.getOnLevelSelectedListeners();
 		mInfrastructureCategoryChangedListeners = mApplicationDataFacade.getOnInfrastructureCategoryChangedListeners();
 		mStoreOnMapController = mApplicationDataFacade.getStoreOnMapController();
@@ -379,57 +348,8 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 		// Do a null check to confirm that we have not already instantiated the map.
 		if (mMap == null) {
 			// Try to obtain the map from the SupportMapFragment.
-			mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.google_map))
-			.getMap();
-			// Check if we were successful in obtaining the map.
-			if (mMap != null) {
-				setUpMap();
-			}
+			mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.google_map)).getMap();
 		}
 	}
 
-	private void setUpMap() {
-		moveMapViewToInitialPosition();
-		mHandler.postDelayed(new Runnable() {
-			
-			@Override
-			public void run() {
-				moveMapViewToPosition();
-			}
-		}, 1500);
-		mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-
-	      /*  TileProvider tileProvider = new UrlTileProvider(256, 256) {
-	            @Override
-	            public synchronized URL getTileUrl(int x, int y, int zoom) {
-	                // The moon tile coordinate system is reversed.  This is not normal.
-	                int reversedY = (1 << zoom) - y - 1;
-	                String s = String.format(Locale.US, MOON_MAP_URL_FORMAT, zoom, x, reversedY);
-	                URL url = null;
-	                try {
-	                    url = new URL(s);
-	                } catch (MalformedURLException e) {
-	                    throw new AssertionError(e);
-	                }
-	                return url;
-	            }
-	        };
-
-	        mMap.addTileOverlay(new TileOverlayOptions().tileProvider(tileProvider));*/
-	}
-
-	private void moveMapViewToInitialPosition() {
-		mMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder()
-		.target(new LatLng(mApplicationDataFacade.getInitialLatitude(), mApplicationDataFacade.getInitialLongitude()))
-		.zoom(mApplicationDataFacade.getInitialMapZoom())
-		.build()));
-	}
-
-	private void moveMapViewToPosition() {
-		mMap.animateCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder()
-			.target(new LatLng(mApplicationDataFacade.getLatitude(), mApplicationDataFacade.getLongitude()))
-			.zoom(mApplicationDataFacade.getMapZoom())
-			.bearing(mApplicationDataFacade.getMapRotation())
-			.build()), 2000, null);
-	}
 }
