@@ -80,14 +80,14 @@ public class Store implements StoreMapItem, Serializable{
 		return mCategory.getMapIconBitmap();
 	}
 
-	@Override
+	/*@Override // Useful only when using InMapImageView to determinate clickable area of marker
 	public float getCircularArea() {
 		Bitmap bmp = getMapIconBitmap();
 		if(bmp != null){
 			return (bmp.getHeight()+bmp.getWidth())/3;
 		}
 		return 0;
-	}
+	}*/
 
 	@Override
 	public String getTitle() {

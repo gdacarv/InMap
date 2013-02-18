@@ -1,5 +1,5 @@
 package com.inmap.views;
-/* Essa classe vai carregar as Infrastructures do BD e transforma-la em MapItem. */
+
 
 import android.content.Context;
 
@@ -11,12 +11,18 @@ import com.inmap.interfaces.MapItemsListener;
 import com.inmap.model.DbAdapter;
 import com.inmap.model.Infrastructure;
 
+/** Essa classe vai carregar as Infrastructures do BD e transforma-la em MapItem. */
 public class InfrastructureMapController implements MapController,
 		OnInfrastructureCategoryChangedListener, OnLevelSelectedListener {
 
 	private Context mContext;
 	private MapItem[] mItens;
-	private MapItemsListener mListener;
+	private MapItemsListener mListener = new MapItemsListener() {
+		
+		@Override
+		public void refreshMapItems() {
+		}
+	};
 	private int level, infrastructureCategoryId;
 	
 	
@@ -52,7 +58,7 @@ public class InfrastructureMapController implements MapController,
 			mItens = convertInfrastructuresInMapItems(infras);
 		}else
 			mItens = new MapItem[0];
-		mListener.refreshMapItemsListener();
+		mListener.refreshMapItems();
 	}
 
 	private Infrastructure[] getInfrastructuresFromDB() {

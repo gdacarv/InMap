@@ -283,6 +283,7 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 		mLevelSelectedListeners = mApplicationDataFacade.getOnLevelSelectedListeners();
 		mInfrastructureCategoryChangedListeners = mApplicationDataFacade.getOnInfrastructureCategoryChangedListeners();
 		mStoreOnMapController = mApplicationDataFacade.getStoreOnMapController();
+		mInMapViewController.setMapController(mApplicationDataFacade.getMapController());
 		mLevelInformation = mApplicationDataFacade.getLevelInformation();
 	}
 

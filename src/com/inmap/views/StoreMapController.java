@@ -16,7 +16,12 @@ public class StoreMapController implements MapController, StoreOnMapController, 
 
 	private Context mContext;
 	private MapItem[] mItems, mShowingItems;
-	private MapItemsListener mListener;
+	private MapItemsListener mListener = new MapItemsListener() {
+		
+		@Override
+		public void refreshMapItems() {
+		}
+	};
 	private int level;
 	
 	public StoreMapController(Context context) {
@@ -34,13 +39,13 @@ public class StoreMapController implements MapController, StoreOnMapController, 
 	}
 
 	@Override
-	public void setStores(Store[] stores) {
+	public void setStores(Store... stores) {
 		if(stores != null && stores.length > 0)
 			mItems = convertStoresInMapItems(stores);
 		else
 			mItems = new MapItem[0];
 		reloadShowingItems();
-		mListener.refreshMapItemsListener();
+		mListener.refreshMapItems();
 	}
 
 	@Override
@@ -48,7 +53,7 @@ public class StoreMapController implements MapController, StoreOnMapController, 
 		this.level = level;
 		if(mItems != null)
 			reloadShowingItems();
-		mListener.refreshMapItemsListener();
+		mListener.refreshMapItems();
 	}
 
 	private MapItem[] convertStoresInMapItems(Store[] stores) {

@@ -1,18 +1,26 @@
 package com.inmap.controllers;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
 import android.os.Handler;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.GroundOverlay;
 import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.inmap.interfaces.ApplicationDataFacade;
 import com.inmap.interfaces.InMapViewController;
 import com.inmap.interfaces.LevelInformation;
 import com.inmap.interfaces.MapController;
+import com.inmap.interfaces.MapItem;
 import com.inmap.interfaces.MapItemsListener;
 import com.inmap.interfaces.OnStoreBallonClickListener;
 import com.inmap.interfaces.StoreMapItem;
@@ -26,6 +34,7 @@ public class GoogleMapInMapController implements InMapViewController, MapItemsLi
 	private int mCurrentLevel;
 	private MapController mMapController;
 	private OnStoreBallonClickListener mOnStoreBallonClickListener;
+	private Map<Marker, MapItem> mMapItemsMarkers = new HashMap<Marker, MapItem>();
 
 	public GoogleMapInMapController(GoogleMap map, ApplicationDataFacade applicationDataFacade) {
 		mMap = map;
@@ -39,8 +48,10 @@ public class GoogleMapInMapController implements InMapViewController, MapItemsLi
 			}
 		}, 1500);
 		mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+		mMap.setOnInfoWindowClickListener(onInfoWindowClickListener);
 
 		configureLevels();
+		
 	}
 
 	public void configureLevels() {
@@ -83,14 +94,41 @@ public class GoogleMapInMapController implements InMapViewController, MapItemsLi
 
 	@Override
 	public void openStoreBallon(StoreMapItem storeMapItem) {
-		// TODO Auto-generated method stub
-
+		if(mMapItemsMarkers.containsValue(storeMapItem)) {
+			for(Marker marker : mMapItemsMarkers.keySet())
+				if(mMapItemsMarkers.get(marker) == storeMapItem)
+					marker.showInfoWindow();
+		}else
+			createMarker(mApplicationDataFacade.getLevelInformation(), storeMapItem).showInfoWindow();
 	}
 
 	@Override
-	public void refreshMapItemsListener() {
-		// TODO Auto-generated method stub
-		
+	public void refreshMapItems() {
+		MapItem[] mapItems = mMapController.getMapItems();
+		Iterator<Marker> it = mMapItemsMarkers.keySet().iterator();
+		while(it.hasNext()) {
+			it.next().remove();
+			it.remove();
+		}
+		LevelInformation levelInformation = mApplicationDataFacade.getLevelInformation();
+		for(MapItem item : mapItems) {
+			createMarker(levelInformation, item); 
+		} // XXX Might use optimizations
+	}
+
+	public Marker createMarker(LevelInformation levelInformation, MapItem item) {
+		MarkerOptions markerOptions = new MarkerOptions()
+			.icon(BitmapDescriptorFactory.fromBitmap(item.getMapIconBitmap()))
+			.position(new LatLng(levelInformation.getLevelLatitude(mCurrentLevel), levelInformation.getLevelLongitude(mCurrentLevel))); // FIXME get correct position
+		if(item instanceof StoreMapItem) {
+			StoreMapItem storeMapItem = (StoreMapItem) item;
+			markerOptions
+				.snippet(storeMapItem.getSubtext())
+				.title(storeMapItem.getTitle());
+		}
+		Marker marker = mMap.addMarker(markerOptions);
+		mMapItemsMarkers.put(marker, item);
+		return marker;
 	}
 
 	private void moveMapViewToInitialPosition() {
@@ -107,4 +145,16 @@ public class GoogleMapInMapController implements InMapViewController, MapItemsLi
 		.bearing(mApplicationDataFacade.getMapRotation())
 		.build()), 2000, null);
 	}
+
+	private OnInfoWindowClickListener onInfoWindowClickListener = new OnInfoWindowClickListener() {
+		
+		@Override
+		public void onInfoWindowClick(Marker marker) {
+			if(mOnStoreBallonClickListener != null) {
+				MapItem mapItem = mMapItemsMarkers.get(marker);
+				if(mapItem != null && mapItem instanceof StoreMapItem)
+					mOnStoreBallonClickListener.onStoreBallonClicked((StoreMapItem) mapItem);
+			}
+		}
+	};
 }
