@@ -49,6 +49,7 @@ public class GoogleMapInMapController implements InMapViewController, MapItemsLi
 		}, 1500);
 		mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 		mMap.setOnInfoWindowClickListener(onInfoWindowClickListener);
+		mMap.setMyLocationEnabled(true);
 
 		configureLevels();
 		
