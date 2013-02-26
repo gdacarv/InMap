@@ -19,7 +19,7 @@ package com.inmap.actionbar;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
-import com.inmap.R;
+import com.inmap.salvadorshop.R;
 
 import android.app.Activity;
 import android.content.Context;

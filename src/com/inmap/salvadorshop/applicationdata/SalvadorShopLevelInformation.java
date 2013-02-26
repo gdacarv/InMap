@@ -1,6 +1,6 @@
 package com.inmap.salvadorshop.applicationdata;
 
-import com.inmap.R;
+import com.inmap.salvadorshop.R;
 import com.inmap.interfaces.LevelInformation;
 
 public class SalvadorShopLevelInformation implements LevelInformation {
@@ -30,17 +30,17 @@ public class SalvadorShopLevelInformation implements LevelInformation {
 
 	@Override
 	public double getLevelLatitude(int i) {
-		return -12.97837d;
+		return -12.978255d;
 	}
 
 	@Override
 	public double getLevelLongitude(int i) {
-		return -38.454875d;
+		return -38.454847d;
 	}
 
 	@Override
 	public float getLevelWidth(int i) {
-		return 170f;
+		return 187.5f;
 	}
 
 	

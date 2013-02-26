@@ -4,7 +4,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
-import com.inmap.R;
+import com.inmap.salvadorshop.R;
 
 public enum InfrastructureCategory {
 	EXIT(1, R.drawable.ic_action_share, R.drawable.marker),

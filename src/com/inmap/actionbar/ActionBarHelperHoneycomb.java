@@ -17,7 +17,7 @@
 package com.inmap.actionbar;
 
 
-import com.inmap.R;
+import com.inmap.salvadorshop.R;
 
 import android.app.Activity;
 import android.content.Context;

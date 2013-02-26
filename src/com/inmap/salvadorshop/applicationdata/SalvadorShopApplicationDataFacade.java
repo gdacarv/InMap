@@ -125,7 +125,7 @@ public class SalvadorShopApplicationDataFacade implements ApplicationDataFacade 
 
 	@Override
 	public float getMapRotation() {
-		return -60f;
+		return -57f;
 	}
 
 	@Override

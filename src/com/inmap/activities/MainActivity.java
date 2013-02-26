@@ -32,7 +32,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.inmap.R;
+import com.inmap.salvadorshop.R;
 import com.inmap.actionbar.ActionBarActivity;
 import com.inmap.controllers.GoogleMapInMapController;
 import com.inmap.fragments.InfrastructureBarFragment;
@@ -97,8 +97,7 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 
 		loadInformationFromApplicationDataFacade();
 
-		if(!verifyIntentShowStoreOnMap())
-			setInitialLevel();
+		verifyIntentShowStoreOnMap();
 	}
 
 	@Override

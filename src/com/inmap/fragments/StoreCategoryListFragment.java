@@ -1,6 +1,6 @@
 package com.inmap.fragments;
 
-import com.inmap.R;
+import com.inmap.salvadorshop.R;
 import com.inmap.salvadorshop.applicationdata.StoreCategory;
 
 import android.content.Context;

@@ -4,7 +4,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
-import com.inmap.R;
+import com.inmap.salvadorshop.R;
 
 public enum StoreCategory {
 	CLOTHING_MAN(1, R.string.title_clothing_man, R.drawable.ic_home),

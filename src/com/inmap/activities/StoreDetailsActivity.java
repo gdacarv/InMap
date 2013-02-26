@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
-import com.inmap.R;
+import com.inmap.salvadorshop.R;
 import com.inmap.actionbar.ActionBarActivity;
 import com.inmap.model.Store;
 

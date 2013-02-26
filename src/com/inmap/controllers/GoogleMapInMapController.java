@@ -66,12 +66,12 @@ public class GoogleMapInMapController implements InMapViewController, MapItemsLi
 				.image(BitmapDescriptorFactory.fromResource(levelInformation.getMapResource(i)))
 				.bearing(mapRotation)
 				.visible(i == mCurrentLevel)
+				.transparency(0.2f)
 				.position(
 						new LatLng(levelInformation.getLevelLatitude(i), levelInformation.getLevelLongitude(i)), 
 						levelInformation.getLevelWidth(i)
 				));
 		}
-		mGroundOverlays[0].setVisible(true);
 	}
 
 	@Override
@@ -120,7 +120,7 @@ public class GoogleMapInMapController implements InMapViewController, MapItemsLi
 	public Marker createMarker(LevelInformation levelInformation, MapItem item) {
 		MarkerOptions markerOptions = new MarkerOptions()
 			.icon(BitmapDescriptorFactory.fromBitmap(item.getMapIconBitmap()))
-			.position(new LatLng(levelInformation.getLevelLatitude(mCurrentLevel), levelInformation.getLevelLongitude(mCurrentLevel))); // FIXME get correct position
+			.position(getLatLng(levelInformation, item)); 
 		if(item instanceof StoreMapItem) {
 			StoreMapItem storeMapItem = (StoreMapItem) item;
 			markerOptions
@@ -158,4 +158,8 @@ public class GoogleMapInMapController implements InMapViewController, MapItemsLi
 			}
 		}
 	};
+
+	public LatLng getLatLng(LevelInformation levelInformation, MapItem item) {// FIXME get correct position
+		return new LatLng(levelInformation.getLevelLatitude(mCurrentLevel), levelInformation.getLevelLongitude(mCurrentLevel));
+	}
 }
