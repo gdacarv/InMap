@@ -1,5 +1,7 @@
 package com.inmap.interfaces;
 
+import com.google.android.gms.maps.model.LatLng;
+
 public interface LevelInformation {
 
 	int getLevelsCount();
@@ -8,7 +10,7 @@ public interface LevelInformation {
 	
 	int getMapResource(int position);
 	
-	int initializerLevel();
+	int getInitLevel();
 
 	/** Latitude from center of map */
 	double getLevelLatitude(int i);
@@ -18,5 +20,9 @@ public interface LevelInformation {
 
 	/** Width, in meters, of map */
 	float getLevelWidth(int i);
+
+	LatLng getNorthwestBound(int level);
+
+	LatLng getSoutheastBound(int level);
 
 }

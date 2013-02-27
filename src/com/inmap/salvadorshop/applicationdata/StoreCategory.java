@@ -14,7 +14,7 @@ public enum StoreCategory {
 	ELETRONICS(5, R.string.title_eletronics, R.drawable.ic_home),
 	FOOD(6, R.string.title_food, R.drawable.ic_home),
 	ENTERTAINMENT(7, R.string.title_entertainment, R.drawable.ic_home),
-	BOOKSTORE(8, R.string.title_bookstore, R.drawable.ic_home),
+	BOOKSTORE(8, R.string.title_bookstore, 0),
 	BANK(9, R.string.title_bank, R.drawable.ic_home),
 	SERVICES(10, R.string.title_services, R.drawable.ic_home),
 	CARRIER(11, R.string.title_carrier, R.drawable.ic_home), 
@@ -45,7 +45,7 @@ public enum StoreCategory {
 	}
 	
 	public void loadMapIconBitmap(Resources res){
-		if(mBitmap == null)
+		if(mBitmap == null && mapIconRes > 0)
 			mBitmap = BitmapFactory.decodeResource(res, mapIconRes);
 	}
 }

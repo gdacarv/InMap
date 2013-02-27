@@ -277,7 +277,7 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 	private void loadInformationFromApplicationDataFacade() {
 		if(mMap == null)
 			throw new IllegalStateException("GoogleMap should not be null.");
-		mInMapViewController = new GoogleMapInMapController(mMap, mApplicationDataFacade);
+		mInMapViewController = new GoogleMapInMapController(getResources(), mMap, mApplicationDataFacade);
 		mInMapViewController.setOnStoreBallonClickListener(this);
 		mLevelSelectedListeners = mApplicationDataFacade.getOnLevelSelectedListeners();
 		mInfrastructureCategoryChangedListeners = mApplicationDataFacade.getOnInfrastructureCategoryChangedListeners();
@@ -287,7 +287,7 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 	}
 
 	private void setInitialLevel() {
-		onLevelSelected(mLevelInformation.initializerLevel());
+		onLevelSelected(mLevelInformation.getInitLevel());
 	}
 
 	private void toggleLevelPicker() {

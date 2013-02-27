@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.os.Handler;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -14,6 +16,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.GroundOverlay;
 import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.inmap.interfaces.ApplicationDataFacade;
@@ -22,6 +25,7 @@ import com.inmap.interfaces.LevelInformation;
 import com.inmap.interfaces.MapController;
 import com.inmap.interfaces.MapItem;
 import com.inmap.interfaces.MapItemsListener;
+import com.inmap.interfaces.MapLatLngConverter;
 import com.inmap.interfaces.OnStoreBallonClickListener;
 import com.inmap.interfaces.StoreMapItem;
 
@@ -35,8 +39,9 @@ public class GoogleMapInMapController implements InMapViewController, MapItemsLi
 	private MapController mMapController;
 	private OnStoreBallonClickListener mOnStoreBallonClickListener;
 	private Map<Marker, MapItem> mMapItemsMarkers = new HashMap<Marker, MapItem>();
+	private MapLatLngConverter mMapLatLngConverter;
 
-	public GoogleMapInMapController(GoogleMap map, ApplicationDataFacade applicationDataFacade) {
+	public GoogleMapInMapController(Resources resources,GoogleMap map, ApplicationDataFacade applicationDataFacade) {
 		mMap = map;
 		mApplicationDataFacade = applicationDataFacade;
 		moveMapViewToInitialPosition();
@@ -51,16 +56,17 @@ public class GoogleMapInMapController implements InMapViewController, MapItemsLi
 		mMap.setOnInfoWindowClickListener(onInfoWindowClickListener);
 		mMap.setMyLocationEnabled(true);
 
-		configureLevels();
+		configureLevels(resources);
 		
 	}
 
-	public void configureLevels() {
+	public void configureLevels(Resources resources) {
 		LevelInformation levelInformation = mApplicationDataFacade.getLevelInformation();
-		mGroundOverlays = new GroundOverlay[levelInformation.getLevelsCount()];
-		mCurrentLevel = levelInformation.initializerLevel();
-
 		float mapRotation = mApplicationDataFacade.getMapRotation();
+		mMapLatLngConverter = new PreSettedMapLatLngConverter(resources, levelInformation, mapRotation);
+		mGroundOverlays = new GroundOverlay[levelInformation.getLevelsCount()];
+		mCurrentLevel = levelInformation.getInitLevel();
+
 		for(int i = 0; i < mGroundOverlays.length; i++) {
 			mGroundOverlays[i] = mMap.addGroundOverlay(new GroundOverlayOptions()
 				.image(BitmapDescriptorFactory.fromResource(levelInformation.getMapResource(i)))
@@ -72,6 +78,10 @@ public class GoogleMapInMapController implements InMapViewController, MapItemsLi
 						levelInformation.getLevelWidth(i)
 				));
 		}
+		
+		/*LatLngBounds bounds = mGroundOverlays[2].getBounds(); Probably useless
+		mMap.addMarker(new MarkerOptions().position(bounds.northeast));
+		mMap.addMarker(new MarkerOptions().position(bounds.southwest));*/
 	}
 
 	@Override
@@ -100,7 +110,7 @@ public class GoogleMapInMapController implements InMapViewController, MapItemsLi
 				if(mMapItemsMarkers.get(marker) == storeMapItem)
 					marker.showInfoWindow();
 		}else
-			createMarker(mApplicationDataFacade.getLevelInformation(), storeMapItem).showInfoWindow();
+			createMarker(storeMapItem).showInfoWindow();
 	}
 
 	@Override
@@ -111,16 +121,18 @@ public class GoogleMapInMapController implements InMapViewController, MapItemsLi
 			it.next().remove();
 			it.remove();
 		}
-		LevelInformation levelInformation = mApplicationDataFacade.getLevelInformation();
 		for(MapItem item : mapItems) {
-			createMarker(levelInformation, item); 
+			createMarker(item); 
 		} // XXX Might use optimizations
 	}
 
-	public Marker createMarker(LevelInformation levelInformation, MapItem item) {
+	public Marker createMarker(MapItem item) {
+		LatLng latLng = mMapLatLngConverter.getLatLng(item, mCurrentLevel);
 		MarkerOptions markerOptions = new MarkerOptions()
-			.icon(BitmapDescriptorFactory.fromBitmap(item.getMapIconBitmap()))
-			.position(getLatLng(levelInformation, item)); 
+			.position(latLng); 
+		Bitmap mapIconBitmap = item.getMapIconBitmap();
+		if(mapIconBitmap != null)
+			markerOptions.icon(BitmapDescriptorFactory.fromBitmap(mapIconBitmap));
 		if(item instanceof StoreMapItem) {
 			StoreMapItem storeMapItem = (StoreMapItem) item;
 			markerOptions
@@ -158,8 +170,4 @@ public class GoogleMapInMapController implements InMapViewController, MapItemsLi
 			}
 		}
 	};
-
-	public LatLng getLatLng(LevelInformation levelInformation, MapItem item) {// FIXME get correct position
-		return new LatLng(levelInformation.getLevelLatitude(mCurrentLevel), levelInformation.getLevelLongitude(mCurrentLevel));
-	}
 }

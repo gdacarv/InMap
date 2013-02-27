@@ -109,7 +109,7 @@ public class SalvadorShopApplicationDataFacade implements ApplicationDataFacade 
 
 	private StoreMapController getStoreMapController() {
 		if(mStoreMapController == null)
-			mStoreMapController = new StoreMapController(mContext);
+			mStoreMapController = new StoreMapController(mContext, mLevelInformation.getInitLevel());
 		return mStoreMapController;
 	}
 

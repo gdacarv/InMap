@@ -24,8 +24,9 @@ public class StoreMapController implements MapController, StoreOnMapController, 
 	};
 	private int level;
 	
-	public StoreMapController(Context context) {
+	public StoreMapController(Context context, int levelInit) {
 		mContext = context;
+		level = levelInit;
 	}
 	
 	@Override
