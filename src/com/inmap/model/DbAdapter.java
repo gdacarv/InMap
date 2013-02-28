@@ -63,7 +63,24 @@ public class DbAdapter {
 				useAnd = true;
 			selectionBuilder.append(DatabaseHelper.KEY_LEVEL).append(" = ").append(level);
 		}
-		// FIXME USE HASPOINT AND AREA TO FILTER
+		Coordinate hasPoint = parameters.getContainsPoint();
+		if(hasPoint != null) {
+			if(useAnd)
+				selectionBuilder.append(" AND ");
+			else 
+				useAnd = true;
+			selectionBuilder.append("((")
+				.append(DatabaseHelper.KEY_AREAR1P1X).append(" < ").append(hasPoint.x)
+				.append(" AND ").append(DatabaseHelper.KEY_AREAR1P1Y).append(" < ").append(hasPoint.y)
+				.append(" AND ").append(DatabaseHelper.KEY_AREAR1P2X).append(" >= ").append(hasPoint.x)
+				.append(" AND ").append(DatabaseHelper.KEY_AREAR1P2Y).append(" >= ").append(hasPoint.y)
+				.append(") OR (")
+				.append(DatabaseHelper.KEY_AREAR2P1X).append(" < ").append(hasPoint.x)
+				.append(" AND ").append(DatabaseHelper.KEY_AREAR2P1Y).append(" < ").append(hasPoint.y)
+				.append(" AND ").append(DatabaseHelper.KEY_AREAR2P2X).append(" >= ").append(hasPoint.x)
+				.append(" AND ").append(DatabaseHelper.KEY_AREAR2P2Y).append(" >= ").append(hasPoint.y)
+				.append("))");
+		}
 		String selection = selectionBuilder.toString();
 		Cursor cursor = mDb.query(DatabaseHelper.DATABASE_TABLE_STORE, null, selection, null, null, null, null); // TODO Right things based on Parameters
 		return cursor != null ? getStoresFromCursor(cursor) : null;
@@ -72,6 +89,14 @@ public class DbAdapter {
 	private Store[] getStoresFromCursor(Cursor cursor) {
 		Store[] stores;
 		if(cursor.moveToFirst()){
+			int[] pointsColumn = {cursor.getColumnIndex(DatabaseHelper.KEY_AREAR1P1X), 
+					cursor.getColumnIndex(DatabaseHelper.KEY_AREAR1P1Y), 
+					cursor.getColumnIndex(DatabaseHelper.KEY_AREAR1P2X), 
+					cursor.getColumnIndex(DatabaseHelper.KEY_AREAR1P2Y), 
+					cursor.getColumnIndex(DatabaseHelper.KEY_AREAR2P1X), 
+					cursor.getColumnIndex(DatabaseHelper.KEY_AREAR2P1Y), 
+					cursor.getColumnIndex(DatabaseHelper.KEY_AREAR2P2X), 
+					cursor.getColumnIndex(DatabaseHelper.KEY_AREAR2P2Y)};
 			stores = new Store[cursor.getCount()];
 			int idColumn = cursor.getColumnIndex(DatabaseHelper.KEY_ID),
 				nameColumn = cursor.getColumnIndex(DatabaseHelper.KEY_NAME),
@@ -80,18 +105,17 @@ public class DbAdapter {
 				websiteColumn = cursor.getColumnIndex(DatabaseHelper.KEY_WEBSITE),
 				levelColumn = cursor.getColumnIndex(DatabaseHelper.KEY_LEVEL),
 				categoryColumn = cursor.getColumnIndex(DatabaseHelper.KEY_STORECATEGORY),
-				tagsColumn = cursor.getColumnIndex(DatabaseHelper.KEY_TAGS),
-				areaColumn = cursor.getColumnIndex(DatabaseHelper.KEY_AREA);
+				tagsColumn = cursor.getColumnIndex(DatabaseHelper.KEY_TAGS);
 			StoreCategory[] categorys = StoreCategory.values();
 			for(int i = 0; i < stores.length; i++){
-				String[] areaStringArray = cursor.getString(areaColumn).split(",");
-				int[] areaIntArray = new int[areaStringArray.length];
+				int[] areaIntArray = new int[pointsColumn.length];
 				for(int l = 0; l < areaIntArray.length; l++)
-					areaIntArray[l] = Integer.parseInt(areaStringArray[l]);
+					areaIntArray[l] = cursor.getInt(pointsColumn[l]);
+				String tagsString = cursor.getString(tagsColumn);
 				stores[i] = new Store(cursor.getLong(idColumn), cursor.getString(nameColumn),
 						cursor.getString(descriptionColumn), cursor.getString(phoneColumn), 
 						cursor.getString(websiteColumn), categorys[cursor.getInt(categoryColumn)-1], 
-						cursor.getInt(levelColumn), cursor.getString(tagsColumn).split(","),
+						cursor.getInt(levelColumn), tagsString == null ? new String[0] : tagsString.split(","),
 						areaIntArray);
 				cursor.moveToNext();
 			}

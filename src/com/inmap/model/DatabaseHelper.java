@@ -30,7 +30,14 @@ class DatabaseHelper extends SQLiteOpenHelper {
 	static final String KEY_LEVEL = "level";
 	static final String KEY_STORECATEGORY = "id_storecategory";
 	static final String KEY_TAGS = "tags";
-	static final String KEY_AREA = "area";
+	static final String KEY_AREAR1P1X = "arear1p1x";
+	static final String KEY_AREAR1P1Y = "arear1p1y";
+	static final String KEY_AREAR1P2X = "arear1p2x";
+	static final String KEY_AREAR1P2Y = "arear1p2y";
+	static final String KEY_AREAR2P1X = "arear2p1x";
+	static final String KEY_AREAR2P1Y = "arear2p1y";
+	static final String KEY_AREAR2P2X = "arear2p2x";
+	static final String KEY_AREAR2P2Y = "arear2p2y";
 	
 
 	static final String DATABASE_TABLE_INFRASTRUCTURE = "infrastructure";
@@ -51,7 +58,14 @@ class DatabaseHelper extends SQLiteOpenHelper {
 			+ KEY_LEVEL + " integer not null, "
 			+ KEY_STORECATEGORY + " integer not null, "
 			+ KEY_TAGS + " text, "
-			+ KEY_AREA + " text not null);",
+			+ KEY_AREAR1P1X + " integer, "
+			+ KEY_AREAR1P1Y + " integer, "
+			+ KEY_AREAR1P2X + " integer, "
+			+ KEY_AREAR1P2Y + " integer, "
+			+ KEY_AREAR2P1X + " integer, "
+			+ KEY_AREAR2P1Y + " integer, "
+			+ KEY_AREAR2P2X + " integer, "
+			+ KEY_AREAR2P2Y + " integer);",
 			
 			"create table " + DATABASE_TABLE_INFRASTRUCTURE + " (" 
 			+ KEY_ID + " integer primary key autoincrement, "
@@ -91,6 +105,7 @@ class DatabaseHelper extends SQLiteOpenHelper {
 	}
 
 	private void populateStores(SQLiteDatabase db) throws XmlPullParserException, IOException {
+		String[] pointsNames = {KEY_AREAR1P1X, KEY_AREAR1P1Y, KEY_AREAR1P2X, KEY_AREAR1P2Y, KEY_AREAR2P1X, KEY_AREAR2P1Y, KEY_AREAR2P2X, KEY_AREAR2P2Y};
 		XmlResourceParser xpp = mCtx.getResources().getXml(R.xml.stores);
 		int eventType;
 		ContentValues values = new ContentValues(8);
@@ -109,7 +124,11 @@ class DatabaseHelper extends SQLiteOpenHelper {
 					value = xpp.getText();
 					if(temp.equals("level") || temp.equals("id_storecategory"))
 						values.put(temp, Integer.parseInt(value));
-					else
+					else if(temp.equals("area")) {
+						String[] points = value.split(",");
+						for(int i = 0; i < points.length; i++)
+							values.put(pointsNames[i], points[i]);
+					}else
 						values.put(temp, value);
 					xpp.next();
 				}

@@ -7,7 +7,7 @@
         <website>www.livrariacultura.com.br</website>
         <tags>livro,filme,dvd,revista,evento</tags>
         <id_storecategory>8</id_storecategory>
-        <level>2</level>
+        <level>1</level>
         <area>347,418,377,462</area>
     </store>
     
@@ -20,5 +20,17 @@
         <id_storecategory>6</id_storecategory>
         <level>0</level>
         <area>138,256,158,270</area>
+    </store>
+    
+    
+    <store>
+        <name>Bompreço</name>
+        <description>Supermercado.</description>
+        <phone>(71) 3355-6666</phone>
+        <website></website>
+        <tags></tags>
+        <id_storecategory>8</id_storecategory>
+        <level>2</level>
+        <area>372,0,754,260</area>
     </store>
 </stores>
