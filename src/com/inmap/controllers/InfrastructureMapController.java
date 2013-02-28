@@ -1,4 +1,4 @@
-package com.inmap.views;
+package com.inmap.controllers;
 
 
 import android.content.Context;

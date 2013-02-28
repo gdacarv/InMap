@@ -4,19 +4,21 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.os.Handler;
+import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
+import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.GroundOverlay;
 import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.inmap.interfaces.ApplicationDataFacade;
@@ -28,6 +30,10 @@ import com.inmap.interfaces.MapItemsListener;
 import com.inmap.interfaces.MapLatLngConverter;
 import com.inmap.interfaces.OnStoreBallonClickListener;
 import com.inmap.interfaces.StoreMapItem;
+import com.inmap.model.Coordinate;
+import com.inmap.model.DbAdapter;
+import com.inmap.model.Store;
+import com.inmap.model.StoreParameters;
 
 public class GoogleMapInMapController implements InMapViewController, MapItemsListener {
 
@@ -40,8 +46,10 @@ public class GoogleMapInMapController implements InMapViewController, MapItemsLi
 	private OnStoreBallonClickListener mOnStoreBallonClickListener;
 	private Map<Marker, MapItem> mMapItemsMarkers = new HashMap<Marker, MapItem>();
 	private MapLatLngConverter mMapLatLngConverter;
+	private Context mContext;
 
-	public GoogleMapInMapController(Resources resources,GoogleMap map, ApplicationDataFacade applicationDataFacade) {
+	public GoogleMapInMapController(Context context, GoogleMap map, ApplicationDataFacade applicationDataFacade) {
+		mContext = context;
 		mMap = map;
 		mApplicationDataFacade = applicationDataFacade;
 		moveMapViewToInitialPosition();
@@ -56,7 +64,9 @@ public class GoogleMapInMapController implements InMapViewController, MapItemsLi
 		mMap.setOnInfoWindowClickListener(onInfoWindowClickListener);
 		mMap.setMyLocationEnabled(true);
 
-		configureLevels(resources);
+		configureLevels(mContext.getResources());
+		
+		mMap.setOnMapClickListener(onMapClickListener);
 		
 	}
 
@@ -168,6 +178,33 @@ public class GoogleMapInMapController implements InMapViewController, MapItemsLi
 				if(mapItem != null && mapItem instanceof StoreMapItem)
 					mOnStoreBallonClickListener.onStoreBallonClicked((StoreMapItem) mapItem);
 			}
+		}
+	};
+
+	private OnMapClickListener onMapClickListener = new OnMapClickListener() {
+		
+		private Marker mTempMarker;
+
+		@Override
+		public void onMapClick(LatLng latlng) { // TODO Do it async
+			if(mTempMarker != null)
+				mTempMarker.remove();
+			Coordinate coor = mMapLatLngConverter.getMapCoordinate(latlng, mCurrentLevel);
+			Log.i("GoogleMapInMapController.onMapClickListener.new OnMapClickListener() {...}",
+					"onMapClick " +coor.toString());
+			if(coor.x < 0 || coor.y < 0)
+				return;
+			Store[] stores = null;
+			DbAdapter dbAdapter = DbAdapter.getInstance(mContext).open();
+			try {
+				stores = dbAdapter.getStores(new StoreParameters().setLevel(mCurrentLevel).hasPoint(coor));
+			} finally {
+				dbAdapter.close();
+			}
+			if(stores == null || stores.length < 1)
+				return;
+			mTempMarker = createMarker(stores[0]);
+			mTempMarker.showInfoWindow();
 		}
 	};
 }

@@ -7,6 +7,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.inmap.interfaces.LevelInformation;
 import com.inmap.interfaces.MapItem;
 import com.inmap.interfaces.MapLatLngConverter;
+import com.inmap.model.Coordinate;
 
 public class PreSettedMapLatLngConverter implements MapLatLngConverter {
 
@@ -104,6 +105,21 @@ public class PreSettedMapLatLngConverter implements MapLatLngConverter {
 
 	private int getMapImageHeight(int level) {
 		return mapImageSizes[level][1];
+	}
+
+	@Override
+	public Coordinate getMapCoordinate(LatLng latlng, int level) {
+		LatLng northwestBound = getNorthwestBound(level),
+			southeastBound = getSoutheastBound(level);
+		float pY = (float) ((northwestBound.latitude - latlng.latitude)/(northwestBound.latitude-southeastBound.latitude)),
+			pX = (float) ((latlng.longitude - northwestBound.longitude)/(southeastBound.longitude-northwestBound.longitude));
+		int nX = (int) (getRotatedWidth(level)*(pX - 0.5f)),
+			nY = (int) (getRotatedHeight(level)*(pY - 0.5f));
+		int x = (int) (nY*sin + nX*cos),
+			y = (int) (-1*nX*sin + nY*cos);
+		int halfwidth = getMapImageWidth(level)/2,
+			halfheight = getMapImageHeight(level)/2;
+		return new Coordinate(x > halfwidth ? -1 : x + halfwidth, y > halfheight ? -1 : y + halfheight);
 	}
 
 }

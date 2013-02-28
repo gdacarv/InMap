@@ -9,6 +9,7 @@ public class StoreParameters {
 	private int categoryCounter = 0;
 	private int level = -1;
 	private int area[];
+	private Coordinate hasPoint;
 
 	public StoreParameters(){
 	}
@@ -59,6 +60,11 @@ public class StoreParameters {
 		this.level = level;
 		return this;
 	}
+	
+	public StoreParameters hasPoint(Coordinate coord) {
+		hasPoint = coord;
+		return this;
+	}
 
 	public String getCategoryString(){
 		if(categoryCounter == 0)
@@ -67,6 +73,14 @@ public class StoreParameters {
 		for(int i = 1; i < categoryCounter; i++)
 			result += "," + mCategorys[i];
 		return result;
+	}
+	
+	public int getLevel() {
+		return level;
+	}
+	
+	public Coordinate getContainsPoint() {
+		return hasPoint;
 	}
 
 	/*public StoreParameters(String name, String description, String phone, String website, StoreCategory mCategory, int level, String[] tags, int[] area) {

@@ -47,11 +47,23 @@ public class DbAdapter {
 		return mDb == null || !mDb.isOpen();
 	}
 
-	public Store[] getStores(StoreParameters mParameters) {
+	public Store[] getStores(StoreParameters parameters) {
+		boolean useAnd = false;
 		StringBuilder selectionBuilder = new StringBuilder();
-		String categoryString = mParameters.getCategoryString();
-		if(categoryString.length() > 0)
-			selectionBuilder.append(DatabaseHelper.KEY_STORECATEGORY + " in (" + categoryString + ")");
+		String categoryString = parameters.getCategoryString();
+		if(categoryString.length() > 0) {
+			selectionBuilder.append(DatabaseHelper.KEY_STORECATEGORY).append(" in (").append(categoryString).append(")");
+			useAnd = true;
+		}
+		int level = parameters.getLevel();
+		if(level >= 0) {
+			if(useAnd)
+				selectionBuilder.append(" AND ");
+			else 
+				useAnd = true;
+			selectionBuilder.append(DatabaseHelper.KEY_LEVEL).append(" = ").append(level);
+		}
+		// FIXME USE HASPOINT AND AREA TO FILTER
 		String selection = selectionBuilder.toString();
 		Cursor cursor = mDb.query(DatabaseHelper.DATABASE_TABLE_STORE, null, selection, null, null, null, null); // TODO Right things based on Parameters
 		return cursor != null ? getStoresFromCursor(cursor) : null;

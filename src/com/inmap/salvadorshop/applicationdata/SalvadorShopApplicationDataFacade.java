@@ -1,15 +1,16 @@
 package com.inmap.salvadorshop.applicationdata;
 
 import android.content.Context;
+
+import com.inmap.controllers.InfrastructureMapController;
+import com.inmap.controllers.StoreMapController;
+import com.inmap.controllers.TwoMapController;
 import com.inmap.fragments.InfrastructureBarFragment.OnInfrastructureCategoryChangedListener;
 import com.inmap.fragments.LevelPickerFragment.OnLevelSelectedListener;
 import com.inmap.interfaces.ApplicationDataFacade;
 import com.inmap.interfaces.LevelInformation;
 import com.inmap.interfaces.MapController;
 import com.inmap.interfaces.StoreOnMapController;
-import com.inmap.views.InfrastructureMapController;
-import com.inmap.views.StoreMapController;
-import com.inmap.views.TwoMapController;
 
 public class SalvadorShopApplicationDataFacade implements ApplicationDataFacade {
 	
