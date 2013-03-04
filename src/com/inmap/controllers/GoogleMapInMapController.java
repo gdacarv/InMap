@@ -19,6 +19,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.GroundOverlay;
 import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.inmap.interfaces.ApplicationDataFacade;
@@ -85,8 +86,8 @@ public class GoogleMapInMapController implements InMapViewController, MapItemsLi
 				.transparency(0.2f)
 				.position(
 						new LatLng(levelInformation.getLevelLatitude(i), levelInformation.getLevelLongitude(i)), 
-						levelInformation.getLevelWidth(i)
-				));
+						levelInformation.getLevelWidth(i))
+				);
 		}
 		
 		/*LatLngBounds bounds = mGroundOverlays[2].getBounds(); Probably useless

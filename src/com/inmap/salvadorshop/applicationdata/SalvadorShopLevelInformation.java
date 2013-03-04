@@ -56,5 +56,4 @@ public class SalvadorShopLevelInformation implements LevelInformation {
 		return southeastBound;
 	}
 
-	
 }
