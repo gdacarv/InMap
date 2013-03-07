@@ -50,11 +50,13 @@ public class DbAdapter {
 	public Store[] getStores(StoreParameters parameters) {
 		boolean useAnd = false;
 		StringBuilder selectionBuilder = new StringBuilder();
+		
 		String categoryString = parameters.getCategoryString();
 		if(categoryString.length() > 0) {
 			selectionBuilder.append(DatabaseHelper.KEY_STORECATEGORY).append(" in (").append(categoryString).append(")");
 			useAnd = true;
 		}
+		
 		int level = parameters.getLevel();
 		if(level >= 0) {
 			if(useAnd)
@@ -63,6 +65,7 @@ public class DbAdapter {
 				useAnd = true;
 			selectionBuilder.append(DatabaseHelper.KEY_LEVEL).append(" = ").append(level);
 		}
+		
 		Coordinate hasPoint = parameters.getContainsPoint();
 		if(hasPoint != null) {
 			if(useAnd)
@@ -81,6 +84,21 @@ public class DbAdapter {
 				.append(" AND ").append(DatabaseHelper.KEY_AREAR2P2Y).append(" >= ").append(hasPoint.y)
 				.append("))");
 		}
+		
+		String anytext = parameters.getAnytext();
+		if(anytext != null) {
+			if(useAnd)
+				selectionBuilder.append(" AND ");
+			else 
+				useAnd = true;
+			selectionBuilder.append("(")
+				.append(DatabaseHelper.KEY_NAME).append(" LIKE '%").append(anytext).append("%' OR ")
+				.append(DatabaseHelper.KEY_TAGS).append(" LIKE '%").append(anytext).append("%' OR ")
+				.append(DatabaseHelper.KEY_DESCRIPTION).append(" LIKE '%").append(anytext).append("%' OR ")
+				.append(DatabaseHelper.KEY_WEBSITE).append(" LIKE '%").append(anytext)
+				.append("%')");
+		}
+		
 		String selection = selectionBuilder.toString();
 		Cursor cursor = mDb.query(DatabaseHelper.DATABASE_TABLE_STORE, null, selection, null, null, null, null); // TODO Right things based on Parameters
 		return cursor != null ? getStoresFromCursor(cursor) : null;

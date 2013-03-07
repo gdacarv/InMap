@@ -20,7 +20,7 @@ import android.widget.TextView;
 
 public class StoreListFragment extends Fragment {
 
-	private View mRoot;
+	private View mRoot, mViewNoItemList;
 	private ListView mStoreList;
 	private Button mBackToCategoryButton, mShowOnMapButton;
 	private Context mContext;
@@ -34,6 +34,7 @@ public class StoreListFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		mContext = getActivity();
 		mRoot = inflater.inflate(R.layout.fragment_liststore, null);
+		mViewNoItemList = mRoot.findViewById(R.id.txt_list_store_empty);
 		mStoreList = (ListView) mRoot.findViewById(R.id.list_store);
 		mStoreListAdapter = new StoreListAdapter(mContext);
 		mStoreList.setAdapter(mStoreListAdapter);
@@ -147,7 +148,7 @@ public class StoreListFragment extends Fragment {
 			return convertView;
 		}
 		
-		private class getStoresAsyncTask extends AsyncTask<Void, Void, Void>{
+		private class getStoresAsyncTask extends AsyncTask<Void, Void, Store[]>{
 			
 			private View loadingView;
 			
@@ -160,18 +161,20 @@ public class StoreListFragment extends Fragment {
 			}
 
 			@Override
-			protected Void doInBackground(Void... params) {
+			protected Store[] doInBackground(Void... params) {
 				DbAdapter dbAdapter = DbAdapter.getInstance(mContext).open();
-				mStores = dbAdapter.getStores(mParameters);
+				Store[] stores = dbAdapter.getStores(mParameters);
 				dbAdapter.close();
-				return null;
+				return stores;
 			}
 			
 			@Override
-			protected void onPostExecute(Void result) {
+			protected void onPostExecute(Store[] result) {
 				super.onPostExecute(result);
+				mStores = result;
 				notifyDataSetChanged();
 				loadingView.setVisibility(View.GONE);
+				mViewNoItemList.setVisibility(result.length == 0 ? View.VISIBLE : View.GONE);
 				//mStoreList.setVisibility(View.VISIBLE);
 			}
 		}

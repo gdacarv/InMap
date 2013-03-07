@@ -16,7 +16,12 @@
 
 package com.inmap.activities;
 
+import java.util.List;
+
+import android.annotation.TargetApi;
+import android.app.SearchManager;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.util.DisplayMetrics;
@@ -29,10 +34,9 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.Toast;
+
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.inmap.salvadorshop.R;
 import com.inmap.actionbar.ActionBarActivity;
 import com.inmap.controllers.GoogleMapInMapController;
 import com.inmap.fragments.InfrastructureBarFragment;
@@ -53,6 +57,7 @@ import com.inmap.interfaces.StoreMapItem;
 import com.inmap.interfaces.StoreOnMapController;
 import com.inmap.model.Store;
 import com.inmap.model.StoreParameters;
+import com.inmap.salvadorshop.R;
 import com.inmap.salvadorshop.applicationdata.SalvadorShopApplicationDataFacade;
 import com.inmap.views.AnimateFrameLayout;
 
@@ -70,8 +75,8 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 	private StoreListFragment mStoreListFragment;
 	private LevelPickerFragment mLevelPickerFragment;
 	private boolean isShowingList = false,
-					isShowingStoreList = false,
-					isShowingLevelPicker = false;
+	isShowingStoreList = false,
+	isShowingLevelPicker = false;
 	private FrameLayout mLayoutLists;
 	private InMapViewController mInMapViewController;
 	private OnLevelSelectedListener[] mLevelSelectedListeners;
@@ -82,12 +87,16 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 
 	private LevelInformation mLevelInformation;
 
+	@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
 		DisplayMetrics metrics = getResources().getDisplayMetrics();
 		int width = metrics.widthPixels;
+
+		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+			getActionBar().setHomeButtonEnabled(true);
 
 		configureFragments();
 
@@ -97,7 +106,10 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 
 		loadInformationFromApplicationDataFacade();
 
-		verifyIntentShowStoreOnMap();
+		Intent intent = getIntent();
+
+		verifyIntentShowStoreOnMap(intent);
+		verifyIntentSearch(intent);
 	}
 
 	@Override
@@ -117,7 +129,7 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
-			Toast.makeText(this, "Tapped home", Toast.LENGTH_SHORT).show();
+			mInMapViewController.moveMapViewToPlacePosition();
 			break;
 
 		case R.id.menu_refresh:
@@ -125,7 +137,7 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 			break;
 
 		case R.id.menu_search:
-			mInMapViewController.moveMapViewToPlacePosition();
+			onSearchRequested();
 			break;
 
 		case R.id.menu_levels:
@@ -156,8 +168,12 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 
 	@Override
 	public void onStoreCategoryChanged(int id) {
-		isShowingStoreList = true;
 		mStoreListFragment.setStoreParameters(new StoreParameters().addCategory(id));
+		showStoreList();
+	}
+
+	private void showStoreList() {
+		isShowingStoreList = true;
 		mLayoutStoreList.setVisibility(View.VISIBLE);
 		mLayoutCategoryList.startAnimation(AnimationUtils.loadAnimation(this, R.anim.to_up_100));
 		mLayoutStoreList.startAnimation(AnimationUtils.loadAnimation(this, R.anim.to_up_from_100));
@@ -326,11 +342,12 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 		onStoreSelected(store.getStore());
 	}
 
-	private boolean verifyIntentShowStoreOnMap() {
-		Intent i = getIntent();
+	private boolean verifyIntentShowStoreOnMap(Intent i) {
 		if(i != null) {
 			Store store = (Store) i.getSerializableExtra(SHOW_STORE_INMAP);
 			if(store != null) {
+				if(isShowingList)
+					toggleList();
 				showStoreOnMap(store);
 				return true;
 			}
@@ -352,4 +369,21 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 		}
 	}
 
+	@Override
+	protected void onNewIntent(Intent intent) {
+		super.onNewIntent(intent);
+		verifyIntentShowStoreOnMap(intent);
+		verifyIntentSearch(intent);
+	}
+
+	private void verifyIntentSearch(Intent intent) {
+		if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+			String query = intent.getStringExtra(SearchManager.QUERY);
+			mStoreListFragment.setStoreParameters(new StoreParameters().setText(query));
+			if(!isShowingList)
+				toggleList();
+			if(!isShowingStoreList)
+				showStoreList();
+		}
+	}
 }

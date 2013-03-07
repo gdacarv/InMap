@@ -4,7 +4,7 @@ import com.inmap.salvadorshop.applicationdata.StoreCategory;
 
 public class StoreParameters {
 
-	private String name, description, phone, website, tags[];
+	private String name, description, phone, website, tags[], anytext;
 	private int[] mCategorys = new int[StoreCategory.length];
 	private int categoryCounter = 0;
 	private int level = -1;
@@ -23,11 +23,7 @@ public class StoreParameters {
 	}
 
 	public StoreParameters setText(String text){
-		setName(text);
-		setDescription(text);
-		setPhone(text);
-		setWebsite(text);
-		setTags(text);
+		anytext = text;
 		return this;
 	}
 
@@ -81,6 +77,10 @@ public class StoreParameters {
 	
 	public Coordinate getContainsPoint() {
 		return hasPoint;
+	}
+
+	public String getAnytext() {
+		return anytext;
 	}
 
 	/*public StoreParameters(String name, String description, String phone, String website, StoreCategory mCategory, int level, String[] tags, int[] area) {

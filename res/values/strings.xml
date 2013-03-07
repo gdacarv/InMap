@@ -23,7 +23,6 @@
     <string name="carregando_lojas">Carregando lojas...</string>
     <string name="_categorias">^ Categorias</string>
     <string name="mapa_">Mapa ></string>
-    <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_store_details">StoreDetailsActivity</string>
     <string name="descricao_">"Descrição: "</string>
@@ -32,5 +31,7 @@
     <string name="categoria_">Categoria:</string>
     <string name="andar_">Andar:</string>
     <string name="apontar_no_mapa">Apontar no Mapa</string>
+    <string name="search_hint">Digite o que deseja...</string>
+    <string name="message_noitems_list_store">Ops, nada foi encontrado.</string>
 
 </resources>

@@ -19,7 +19,7 @@ public class SalvadorShopLevelInformation implements LevelInformation {
 	
 	private double[][] levelsPosition = {
 			{-12.978545704875309d, -38.454948328435420d},  // G1 TODO             
-			{-12.978399991619712d, -38.455129712820005d},  // G2             
+			{-12.978399991619712d, -38.455129712820005d},  // G2 TODO map will change
 			{-12.978243170083285d, -38.454786825342274d},  // L1                  
 			{-12.978243170083285d, -38.454786825342274d},  // L2 TODO Right position
 			{-12.978243170083285d, -38.454786825342274d}   // L3 TODO Right position
@@ -27,7 +27,7 @@ public class SalvadorShopLevelInformation implements LevelInformation {
 	
 	private float[] levelsWidth = { // In meters
 			90f,  // G1 TODO       
-			90f,  // G2        
+			90f,  // G2 TODO map will change    
 			170f,  // L1            
 			170f,  // L2 TODO Right position
 			170f,  // L3 TODO Right position

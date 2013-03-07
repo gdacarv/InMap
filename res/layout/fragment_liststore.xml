@@ -40,22 +40,35 @@
                 android:id="@+id/btn_backtocategorys"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-            	android:layout_weight="1"
+                android:layout_weight="1"
                 android:text="@string/_categorias" />
 
             <Button
                 android:id="@+id/btn_showonmap"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-            	android:layout_weight="1"
+                android:layout_weight="1"
                 android:text="@string/mapa_" />
         </LinearLayout>
 
-        <ListView
-            android:id="@+id/list_store"
+        <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_weight="1" >
+
+            <ListView
+                android:id="@+id/list_store"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" />
+
+            <TextView
+                android:id="@+id/txt_list_store_empty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/message_noitems_list_store"
+                android:visibility="gone" />
+        </RelativeLayout>
     </LinearLayout>
 
 </LinearLayout>
