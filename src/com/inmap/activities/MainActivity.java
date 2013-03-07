@@ -70,8 +70,8 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 	private StoreListFragment mStoreListFragment;
 	private LevelPickerFragment mLevelPickerFragment;
 	private boolean isShowingList = false,
-	isShowingStoreList = false,
-	isShowingLevelPicker = false;
+					isShowingStoreList = false,
+					isShowingLevelPicker = false;
 	private FrameLayout mLayoutLists;
 	private InMapViewController mInMapViewController;
 	private OnLevelSelectedListener[] mLevelSelectedListeners;
@@ -125,7 +125,7 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 			break;
 
 		case R.id.menu_search:
-			Toast.makeText(this, "Tapped search", Toast.LENGTH_SHORT).show();
+			mInMapViewController.moveMapViewToPlacePosition();
 			break;
 
 		case R.id.menu_levels:

@@ -8,7 +8,7 @@
         <tags>livro,filme,dvd,revista,evento</tags>
         <id_storecategory>8</id_storecategory>
         <level>1</level>
-        <area>347,418,377,462</area>
+        <area>347,418,377,462,000,000,000</area> <!-- 235 -->
     </store>
     
     <store>
@@ -31,6 +31,17 @@
         <tags></tags>
         <id_storecategory>8</id_storecategory>
         <level>2</level>
-        <area>372,0,754,260</area>
+        <area>372,0,760,260</area>
+    </store>
+    
+    <store>
+        <name>Lojinha do João</name>
+        <description>Testando.</description>
+        <phone>(71) 3355-6666</phone>
+        <website></website>
+        <tags></tags>
+        <id_storecategory>8</id_storecategory>
+        <level>2</level>
+        <area>304,322,342,367</area>
     </store>
 </stores>

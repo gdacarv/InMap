@@ -7,8 +7,10 @@ import java.util.Map;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.location.Location;
 import android.os.Handler;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -41,27 +43,29 @@ public class GoogleMapInMapController implements InMapViewController, MapItemsLi
 
 	private GoogleMap mMap;
 	private ApplicationDataFacade mApplicationDataFacade;
-	private GroundOverlay[] mGroundOverlays;
+	private GroundOverlay mLevelGroundOverlay;
 	private int mCurrentLevel;
 	private MapController mMapController;
 	private OnStoreBallonClickListener mOnStoreBallonClickListener;
 	private Map<Marker, MapItem> mMapItemsMarkers = new HashMap<Marker, MapItem>();
 	private MapLatLngConverter mMapLatLngConverter;
 	private Context mContext;
+	private Marker mMarkerLatLng;
 
 	public GoogleMapInMapController(Context context, GoogleMap map, ApplicationDataFacade applicationDataFacade) {
 		mContext = context;
 		mMap = map;
 		mApplicationDataFacade = applicationDataFacade;
+		mLevelInformation = mApplicationDataFacade.getLevelInformation();
 		moveMapViewToInitialPosition();
 		new Handler().postDelayed(new Runnable() {
 
 			@Override
 			public void run() {
-				moveMapViewToPosition();
+				moveMapViewToPlacePosition();
 			}
 		}, 1500);
-		mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+		//mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 		mMap.setOnInfoWindowClickListener(onInfoWindowClickListener);
 		mMap.setMyLocationEnabled(true);
 
@@ -69,37 +73,42 @@ public class GoogleMapInMapController implements InMapViewController, MapItemsLi
 		
 		mMap.setOnMapClickListener(onMapClickListener);
 		
+		configureMarkerLatLng();
+		configureSimpleMarker();
+	}
+
+	private void configureMarkerLatLng() {
+		LevelInformation levelInfo = mApplicationDataFacade.getLevelInformation();
+		mMarkerLatLng = mMap.addMarker(new MarkerOptions().draggable(true).position(new LatLng(levelInfo.getLevelLatitude(0), levelInfo.getLevelLongitude(0))).title("Click to see position"));
+	}
+
+	private void configureSimpleMarker() {
+		LevelInformation levelInfo = mApplicationDataFacade.getLevelInformation();
+		LatLng latLng = new LatLng(levelInfo.getLevelLatitude(mCurrentLevel), levelInfo.getLevelLongitude(mCurrentLevel));
+		mMap.addMarker(new MarkerOptions().draggable(true).position(latLng));
+		mMap.addMarker(new MarkerOptions().draggable(true).position(latLng));
 	}
 
 	public void configureLevels(Resources resources) {
-		LevelInformation levelInformation = mApplicationDataFacade.getLevelInformation();
-		float mapRotation = mApplicationDataFacade.getMapRotation();
-		mMapLatLngConverter = new PreSettedMapLatLngConverter(resources, levelInformation, mapRotation);
-		mGroundOverlays = new GroundOverlay[levelInformation.getLevelsCount()];
-		mCurrentLevel = levelInformation.getInitLevel();
-
-		for(int i = 0; i < mGroundOverlays.length; i++) {
-			mGroundOverlays[i] = mMap.addGroundOverlay(new GroundOverlayOptions()
-				.image(BitmapDescriptorFactory.fromResource(levelInformation.getMapResource(i)))
-				.bearing(mapRotation)
-				.visible(i == mCurrentLevel)
-				.transparency(0.2f)
-				.position(
-						new LatLng(levelInformation.getLevelLatitude(i), levelInformation.getLevelLongitude(i)), 
-						levelInformation.getLevelWidth(i))
-				);
-		}
+		mMapRotation = mApplicationDataFacade.getMapRotation();
+		mMapLatLngConverter = new PreSettedMapLatLngConverter(resources, mLevelInformation, mMapRotation);
+		mCurrentLevel = mLevelInformation.getInitLevel();
+		mLevelGroundOverlay = addLevelGroundOverlay(mCurrentLevel);
 		
 		/*LatLngBounds bounds = mGroundOverlays[2].getBounds(); Probably useless
 		mMap.addMarker(new MarkerOptions().position(bounds.northeast));
-		mMap.addMarker(new MarkerOptions().position(bounds.southwest));*/
+		mMap.addMarker(new MarkerOptions().position(bounds.southwest));
+
+		mMap.addMarker(new MarkerOptions().position(mLevelInformation.getNorthwestBound(mCurrentLevel)));
+		mMap.addMarker(new MarkerOptions().position(mLevelInformation.getSoutheastBound(mCurrentLevel)));*/
 	}
 
 	@Override
 	public void setLevel(int level) {
 		if(level != mCurrentLevel) {
-			mGroundOverlays[mCurrentLevel].setVisible(false);
-			mGroundOverlays[mCurrentLevel = level].setVisible(true);
+			mCurrentLevel = level;
+			mLevelGroundOverlay.remove();
+			mLevelGroundOverlay = addLevelGroundOverlay(level);
 		}
 	}
 
@@ -162,7 +171,7 @@ public class GoogleMapInMapController implements InMapViewController, MapItemsLi
 		.build()));
 	}
 
-	private void moveMapViewToPosition() {
+	public void moveMapViewToPlacePosition() {
 		mMap.animateCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder()
 		.target(new LatLng(mApplicationDataFacade.getLatitude(), mApplicationDataFacade.getLongitude()))
 		.zoom(mApplicationDataFacade.getMapZoom())
@@ -174,6 +183,13 @@ public class GoogleMapInMapController implements InMapViewController, MapItemsLi
 		
 		@Override
 		public void onInfoWindowClick(Marker marker) {
+			if(mMarkerLatLng.equals(marker)) {
+				LatLng pos = marker.getPosition();
+				String text = "onInfoWindowClick " + "lat: " + pos.latitude + " long: " + pos.longitude;
+				Log.i("OnInfoWindowClickListener", text);
+				Toast.makeText(mContext, text, Toast.LENGTH_LONG).show();
+			} else
+				
 			if(mOnStoreBallonClickListener != null) {
 				MapItem mapItem = mMapItemsMarkers.get(marker);
 				if(mapItem != null && mapItem instanceof StoreMapItem)
@@ -208,4 +224,20 @@ public class GoogleMapInMapController implements InMapViewController, MapItemsLi
 			mTempMarker.showInfoWindow();
 		}
 	};
+	private float mMapRotation;
+	private LevelInformation mLevelInformation;
+	
+	public void onMyLocationChange (Location location) {
+		
+	}
+	
+	private GroundOverlay addLevelGroundOverlay(int level) {
+		return mMap.addGroundOverlay(new GroundOverlayOptions()
+		.image(BitmapDescriptorFactory.fromResource(mLevelInformation.getMapResource(level)))
+		.bearing(mMapRotation)
+		.position(
+				new LatLng(mLevelInformation.getLevelLatitude(level), mLevelInformation.getLevelLongitude(level)), 
+				mLevelInformation.getLevelWidth(level))
+		);
+	}
 }
