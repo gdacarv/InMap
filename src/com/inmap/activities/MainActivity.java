@@ -16,11 +16,10 @@
 
 package com.inmap.activities;
 
-import java.util.List;
-
 import android.annotation.TargetApi;
 import android.app.SearchManager;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -55,6 +54,7 @@ import com.inmap.interfaces.OnAnimationEnd;
 import com.inmap.interfaces.OnStoreBallonClickListener;
 import com.inmap.interfaces.StoreMapItem;
 import com.inmap.interfaces.StoreOnMapController;
+import com.inmap.model.DbAdapter;
 import com.inmap.model.Store;
 import com.inmap.model.StoreParameters;
 import com.inmap.salvadorshop.R;
@@ -82,6 +82,7 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 	private OnLevelSelectedListener[] mLevelSelectedListeners;
 	private OnInfrastructureCategoryChangedListener[] mInfrastructureCategoryChangedListeners;
 	private StoreOnMapController mStoreOnMapController;
+	private DbAdapter mDbAdapter;
 
 	private GoogleMap mMap;
 
@@ -97,6 +98,8 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 
 		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 			getActionBar().setHomeButtonEnabled(true);
+		
+		mDbAdapter = DbAdapter.getInstance(this);
 
 		configureFragments();
 
@@ -182,9 +185,11 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 
 	@Override
 	public void onStoreSelected(Store store) {
-		Intent i = new Intent(this, StoreDetailsActivity.class);
-		i.putExtra(StoreDetailsActivity.STORE, store);
-		startActivity(i);
+		if(store != null) {
+			Intent i = new Intent(this, StoreDetailsActivity.class);
+			i.putExtra(StoreDetailsActivity.STORE, store);
+			startActivity(i);
+		}
 	}
 
 	@Override
@@ -384,6 +389,17 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 				toggleList();
 			if(!isShowingStoreList)
 				showStoreList();
+		}else if (Intent.ACTION_VIEW.equals(intent.getAction())) {
+		    // Handle a suggestions click (because the suggestions all use ACTION_VIEW)
+		    long id = Long.parseLong(intent.getDataString());
+		    mDbAdapter.open();
+		    Store store;
+		    try {
+		    	store = mDbAdapter.getStore(id);
+		    }finally {
+		    	mDbAdapter.close();
+		    }
+		    onStoreSelected(store);
 		}
 	}
 }
