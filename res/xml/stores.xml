@@ -1,27 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <stores>
-    <store>
-        <name>Livraria Cultura</name>
-        <description>É uma livraria com vários livros e filmes e eventos.</description>
-        <phone>(71) 3355-6666</phone>
-        <website>www.livrariacultura.com.br</website>
-        <tags>livro,filme,dvd,revista,evento</tags>
-        <id_storecategory>8</id_storecategory>
-        <level>1</level>
-        <area>347,418,377,462,000,000,000</area> <!-- 235 -->
-    </store>
-    
-    <store>
-        <name>Subway</name>
-        <description>Fast-food de sanduiches.</description>
-        <phone>(71) 3355-6666</phone>
-        <website>www.subway.com</website>
-        <tags>comida,sanduiche</tags>
-        <id_storecategory>6</id_storecategory>
-        <level>0</level>
-        <area>138,256,158,270</area>
-    </store>
-    
     
     <store>
         <name>Bompreço</name>
@@ -44,4 +22,283 @@
         <level>2</level>
         <area>304,322,342,367</area>
     </store>
+    
+    <store>
+        <name>Só Saúde</name>
+        <description>A Só Saúde é uma loja especializada em produtos médico-hospitalares com uma excelente qualidade em seus produtos na área hospitalar.</description>
+        <phone>(71) 3019-8558</phone>
+        <website>www.sosaudebrasil.com.br/</website>
+        <tags>saude,corpo,saudavel,postura,massageador</tags>
+        <id_storecategory>13</id_storecategory>
+        <level>0</level>
+        <area>214,221,265,234</area> <!-- LOJA 01 -->
+    </store>
+    
+    <store>
+        <name>Mega Pixel</name>
+        <description>Mega Pixel é uma  loja de revelação de fotos e vendas de maquinas fotográficas com qualidade no seus produtos e agilidade.</description>
+        <phone>(71) 3355-6666</phone>
+        <website>www.subway.com</website>
+        <tags>comida,sanduiche</tags>
+        <id_storecategory>6</id_storecategory>
+        <level>0</level>
+        <area>214,204,264,217</area> <!-- LOJA 02 -->
+    </store>
+
+  <store>
+        <name>Dental White</name>
+        <description>Clinica odontológica moderna, com equipamentos de ponta, com os serviços de ortodontia, implante, estética, endodontia, prótese, cirurgia, clareamento.</description>
+        <phone>71 34142318</phone>
+        <website>www.clinicadentalwhite.com.br/salvador/</website>
+        <tags>Dente,clinica,dentaria,dentes,clinicas</tags>
+        <id_storecategory>13</id_storecategory>
+        <level>0</level>
+        <area>214,172,264,199</area> <!-- LOJA 03 -->
+    </store>
+
+
+  <store>
+        <name>Bamboo Podologia e Bem Estar</name>
+        <description>Clinica especializada em tratamento do bem estar dos pés, com diversas técnicas de massagem e relaxamento para os pés e mãos, tratando de calosidades, calos, unhas encravadas entre outros serviços de qualidade.</description>
+        <phone>71 33411919</phone>
+        <website>http://bamboopodologia.blogspot.com.br/</website>
+        <tags>pe,clinica,pes,clinicas,podologia</tags>
+        <id_storecategory>13</id_storecategory>
+        <level>0</level>
+        <area>240,94,265,130</area> <!-- LOJA 04 -->
+    </store>
+
+
+ <store>
+        <name>5 à Sec</name>
+        <description>Rede de lojas especializada no tratamento de roupas, por meio de um sistema profissional para limpeza a seco e a água, que utiliza equipamentos e produtos de alta tecnologia, sem qualquer prejuízo ao meio ambiente.</description>
+        <phone>71 30196666</phone>
+        <website>http://www.5asec.com.br/Novo2012/pt/index.php?id=02</website>
+        <tags>roupa,lavanderia,lavagem</tags>
+        <id_storecategory>10</id_storecategory>
+        <level>0</level>
+        <area>215,25,264,57,241,58,265,90</area> <!-- LOJA 05 -->
+    </store>
+
+
+<store>
+        <name>Multicoisas</name>
+        <description>Loja de utilidades para o lar onde você pode encontrar materiais de segurança e lazer, informática, ferramentas, ferragens, hidráulica, elétrica e químicoscom as melhores marcas do mercado.</description>
+        <phone>71 32720340</phone>
+        <website>http://www.multicoisas.com.br/</website>
+        <tags>ferramentas,acessorios,peças</tags>
+        <id_storecategory>10</id_storecategory>
+        <level>0</level>
+        <area>215,3,264,23</area> <!-- LOJA 06 -->
+    </store>
+
+
+<store>
+        <name>Espaço A Tarde</name>
+        <description>Espaço reservado para fazer anúncios no jornal, utilizar lan house  e fazer assinaturas de jornais com serviços rápidos e com ótima qualidade.</description>
+        <phone></phone>
+        <website></website>
+        <tags>jornal,jornalismo,notícias</tags>
+        <id_storecategory>10</id_storecategory>
+        <level>0</level>
+        <area>214,81,236,121</area> <!-- LOJA 07 -->
+    </store>
+
+
+<store>
+        <name>Zitto</name>
+        <description>Loja que oferece a seus clientes concertos de óculos de grau e solar com venda de acessórios, troca de armações entre outros com ótimos preços e excelente qualidade nos serviços oferecidos.</description>
+        <phone>71 30197312</phone>
+        <website></website>
+        <tags>óculos,armação,lentes</tags>
+        <id_storecategory>10</id_storecategory>
+        <level>0</level>
+        <area>214,62,236,76</area> <!-- LOJA 08 -->
+    </store>
+
+
+<store>
+        <name>Carga e Recarga</name>
+        <description>Loja de recarga e venda de cartuchos para impressoras e tonner com agilidade e qualidade no seu atendimento.</description>
+        <phone>71 30225200</phone>
+        <website></website>
+        <tags>informática,computador,pc,cartuchos,recarga</tags>
+        <id_storecategory>10</id_storecategory>
+        <level>0</level>
+        <area>159,42,174,65</area> <!-- LOJA 09 -->
+    </store>
+
+
+<store>
+        <name>Restaura Jeans</name>
+        <description>Loja de restauração de jeans com duas décadas no mercado oferecendo seus melhores serviços onde você pode obter os serviços de tingimento, lavanderia, costura e reforma sob medida, renovação de couro  tudo isso em um só lugar.</description>
+        <phone>71 32723336</phone>
+        <website>http://www.restaurajeans.com/</website>
+        <tags>restauração,roupas,jeans,tingimento,lavanderia</tags>
+        <id_storecategory>10</id_storecategory>
+        <level>0</level>
+        <area>137,27,173,38</area> <!-- LOJA 10 -->
+    </store>
+
+
+<store>
+        <name>Soler</name>
+        <description>Presentes nos locais mais movimentados de Salvador a Soler é uma loja de entretenimento onde você encontra produtos que satisfaça suas necessidades.</description>
+        <phone>71 3019-5221</phone>
+        <website>http://soler.com.br/loja/</website>
+        <tags>Livros,tabacaria,revistas,presentes</tags>
+        <id_storecategory>7</id_storecategory>
+        <level>0</level>
+        <area>117,42,153,65</area> <!-- LOJA 11 -->
+    </store>
+
+
+<store>
+        <name>Colonézi Service</name>
+        <description>Loja especializada em concertos de celulares e venda de artigos para celular com diversas opções e muita qualidade.</description>
+        <phone>71 30162569</phone>
+        <website>http://www.iphoneclub.com.br/</website>
+        <tags>iphone, celulares, assistência técnica, acessórios</tags>
+        <id_storecategory>10</id_storecategory>
+        <level>0</level> 
+        <area>96,28,133,38</area> <!-- LOJA 12 -->
+    </store>
+
+
+<store>
+        <name>Acessorium</name>
+        <description>Venda de bolsas, carteiras, bijuterias, lenços e todo artigo de presentes com qualidade que só a acessorium tem.  </description>
+        <phone>71 33421842</phone>
+        <website></website>
+        <tags>bijouterias, acessórios</tags>
+        <id_storecategory>23</id_storecategory>
+        <level>0</level>
+        <area>96,42,113,65</area> <!-- LOJA 13 -->
+    </store>
+
+
+<store>
+        <name>Centro de Vacinas Louis Pasteur</name>
+        <description>Centro médico de vacinas para crianças que segue recomendações do Programa de Imunização da Organização Mundial de Saúde e no Programa Nacional de Imunizações e da Academia Americana de Pediatria.</description>
+        <phone>0800 401 2000</phone>
+        <website>http://www.vacinaslouispasteur.com.br/</website>
+        <tags>vacinas, saúde,doenças,qualidade de vida,medicação</tags>
+        <id_storecategory>13</id_storecategory>
+        <level>0</level>
+        <area>2,223,53,235</area> <!-- LOJA N 14) -->
+    </store>
+
+<store>
+<name>Empada Carioca</name>
+        <description>Venda de salgados e empadas que é o seu diferencial no mercado com diversos sabores e variados salgados.      </description>
+        <phone>71 30195170</phone>
+        <website>http://www.empadacarioca.com/</website>
+        <tags>lanches, empada, salgados, lanchonete</tags>
+        <id_storecategory>6</id_storecategory>
+        <level>0</level>
+        <area>2,206,53,220</area> <!-- LOJA N 15) -->
+    </store>
+
+<store>
+<name>Bora Bahêêa!! Store</name>
+        <description>Artigos do time do Bahia para todas as idades em diversos materiais e excelente preço.</description>
+        <phone>71 30234302</phone>
+        <website>http://borabaheastore.com/</website>
+        <tags>Bahia, time, torcida, Bahêa, Bahêêa, futebol</tags>
+        <id_storecategory>17</id_storecategory>
+        <level>0</level>
+        <area>3,176,53,202</area> <!-- LOJA N 16) -->
+    </store>
+
+<store>
+<name>Armarinho Salvador</name>
+        <description>Vendas de artigos para costura, lá você pode encontrar laços, linhas, agulhas, zíper com atendimento rápido e de boa qualidade.</description>
+        <phone>71 30197470</phone>
+        <website></website>
+        <tags>armarinho, acessórios, papelaria</tags>
+        <id_storecategory>10</id_storecategory>
+        <level>0</level>
+        <area>3,77,55,89</area> <!-- LOJA N 17) -->
+    </store>
+
+<store>
+<name>Casa da Cópia</name>
+        <description>Loja de serviços especializados  onde suas ideias são  transformar em material físico, seja banner, cartaz, adesivo, cartão de apresentação ou digitalização, até o formato A0.</description>
+        <phone>71 30134520</phone>
+        <website>http://www.casadacopia.com.br/</website>
+        <tags>cópias, copiadora, impressão, cartucho, copiadoras</tags>
+        <id_storecategory>3</id_storecategory>
+        <level>0</level>
+        <area>3,61,55,73</area> <!-- LOJA N 18) -->
+    </store>
+
+<store>
+<name>Mundo do iPhone e Blackberry</name>
+        <description>Loja especializada em concertos de celulares e venda de fones, carregadores, vidro, touch, baterias, películas protetoras, carcaça completa, capas.</description>
+        <phone>71 30221337</phone>
+        <website>http://www.iphonebahia.com.br/blackberry.asp</website>
+        <tags>iphone, celulares, blackberry, ipad, ipod</tags>
+        <id_storecategory>10</id_storecategory>
+        <level>0</level>
+        <area>3,47,55,57</area> <!-- LOJA N 19) -->
+    </store>
+
+<store>
+<name>Correios</name>
+        <description>Serviço de envio de correspondências nacionais, serviço internacional , telegrama, mala direta, malotes com menor preço do mercado.</description>
+        <phone>71 31132766</phone>
+        <website>http://www.correios.com.br/</website>
+        <tags>correios, correspondência, encomendas, sedex, cartas, entregas </tags>
+        <id_storecategory>3</id_storecategory>
+        <level>0</level>
+        <area>3,33,55,43</area> <!-- LOJA N 20) -->
+    </store>
+
+<store>
+<name>Loteria Salvador Shopping</name>
+        <description>Loja que propicia realização de operações bancárias com muita comodidade,fazer apostas,pagamento, deposito, consultas e saques.</description>
+        <phone>71 30191314</phone>
+        <website></website>
+        <tags>loteria, mega-sena, quina, loteria esportiva, quadra, prêmio, sorteio</tags>
+        <id_storecategory>3</id_storecategory>
+        <level>0</level>
+        <area>3,19,55,29</area> <!-- LOJA N 21) -->
+    </store>
+
+<store>
+<name>Chang</name>
+        <description>Loja especializada em concerto de celulares e venda de acessórios.</description>
+        <phone>71 33421040</phone>
+        <website></website>
+        <tags>eletrônicos,celulares,consertosr,acessórios,relógios</tags>
+        <id_storecategory>10</id_storecategory>
+        <level>0</level>
+        <area>3,4,55,14</area> <!-- LOJA N 22) -->
+    </store>
+
+
+<store>
+<name>Casas Bahia</name>
+        <description>Loja de eletrodomésticos que vende uma variedade de artigos para o lar, cama, mesa e banho,ferramentas com excelente qualidade.</description>
+        <phone>71 31145651</phone>
+        <website>http://www.casasbahia.com.br/</website>
+        <tags>eletrônicos, eletrodomésticos, móveis, utilidades para o lar, </tags>
+        <id_storecategory>10</id_storecategory>
+        <level>1</level>
+        <area>123,130,169,310</area> <!-- LOJA N 23) -->
+    </store>
+
+<store>
+<name>SAC</name>
+        <description>Oferece alguns serviços de utilidade pública com Administração, Policia Federal, SSP/Antecedente
+, Banco Mais BB, SAEB/CPF, SSP/Identidade, DETRAN, SEFAZ Estadual, TJ/SAJ, JUCEB, SJCDH/PROCON.
+</description>
+        <phone>0800 071 5353</phone>
+        <website>http://www.sac.ba.gov.br/index.php/SALVADOR-SHOPPING.html</website>
+        <tags>Serviços, SAC, CPF, RG, CNPJ, SAJ, CNH, documentos</tags>
+        <id_storecategory>10</id_storecategory>
+        <level>1</level>
+        <area>21,3,117,150,118,52,150,99</area> <!-- LOJA N 24) -->
+    </store>
+    
 </stores>

@@ -12,6 +12,7 @@ import android.content.Context;
 import android.content.res.XmlResourceParser;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -113,31 +114,36 @@ class DatabaseHelper extends SQLiteOpenHelper {
 		xpp.next();
 		xpp.next();
 		do{
-			eventType = xpp.next();
-			switch (eventType) {
-			case XmlPullParser.START_TAG:
-				temp = xpp.getName();
-				if(temp.equals("store")){
-					values.clear();
-				}else{
-					xpp.next();
-					value = xpp.getText();
-					if(temp.equals("level") || temp.equals("id_storecategory"))
-						values.put(temp, Integer.parseInt(value));
-					else if(temp.equals("area")) {
-						String[] points = value.split(",");
-						for(int i = 0; i < points.length; i++)
-							values.put(pointsNames[i], points[i]);
-					}else
-						values.put(temp, value);
-					xpp.next();
+			try {
+				eventType = xpp.next();
+				switch (eventType) {
+				case XmlPullParser.START_TAG:
+					temp = xpp.getName();
+					if(temp.equals("store")){
+						values.clear();
+					}else{
+						xpp.next();
+						value = xpp.getText();
+						if(temp.equals("level") || temp.equals("id_storecategory"))
+							values.put(temp, Integer.parseInt(value));
+						else if(temp.equals("area")) {
+							String[] points = value.split(",");
+							for(int i = 0; i < points.length; i++)
+								values.put(pointsNames[i], points[i]);
+						}else
+							values.put(temp, value);
+						xpp.next();
+					}
+					break;
+				case XmlPullParser.END_TAG:
+					if(xpp.getName().equals("store")){
+						db.insert(DATABASE_TABLE_STORE, null, values);
+					}
+					break;
 				}
-				break;
-			case XmlPullParser.END_TAG:
-				if(xpp.getName().equals("store")){
-					db.insert(DATABASE_TABLE_STORE, null, values);
-				}
-				break;
+			} catch (RuntimeException e) {
+				Log.e("DbPopulating", "Current ContentValues: " + values);
+				throw e;
 			}
 		}while (eventType != XmlPullParser.END_DOCUMENT);
 	}
