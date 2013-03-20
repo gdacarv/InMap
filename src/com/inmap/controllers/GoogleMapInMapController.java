@@ -21,7 +21,6 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.GroundOverlay;
 import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.inmap.interfaces.ApplicationDataFacade;
@@ -239,5 +238,10 @@ public class GoogleMapInMapController implements InMapViewController, MapItemsLi
 				new LatLng(mLevelInformation.getLevelLatitude(level), mLevelInformation.getLevelLongitude(level)), 
 				mLevelInformation.getLevelWidth(level))
 		);
+	}
+
+	@Override
+	public int getLevel() {
+		return mCurrentLevel;
 	}
 }

@@ -19,7 +19,6 @@ package com.inmap.activities;
 import android.annotation.TargetApi;
 import android.app.SearchManager;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -205,9 +204,9 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 
 	@Override
 	public void onLevelSelected(int level) {
+		mInMapViewController.setLevel(level);
 		for(OnLevelSelectedListener listener : mLevelSelectedListeners)
 			listener.onLevelSelected(level);
-		mInMapViewController.setLevel(level);
 	}
 
 	private void configureFragments() {

@@ -37,10 +37,10 @@
     <store>
         <name>Mega Pixel</name>
         <description>Mega Pixel é uma  loja de revelação de fotos e vendas de maquinas fotográficas com qualidade no seus produtos e agilidade.</description>
-        <phone>(71) 3355-6666</phone>
-        <website>www.subway.com</website>
-        <tags>comida,sanduiche</tags>
-        <id_storecategory>6</id_storecategory>
+        <phone></phone>
+        <website></website>
+        <tags>foto,maquina,fotografica,revelação</tags>
+        <id_storecategory>10</id_storecategory>
         <level>0</level>
         <area>214,204,264,217</area> <!-- LOJA 02 -->
     </store>
@@ -87,7 +87,7 @@
         <phone>71 32720340</phone>
         <website>http://www.multicoisas.com.br/</website>
         <tags>ferramentas,acessorios,peças</tags>
-        <id_storecategory>10</id_storecategory>
+        <id_storecategory>12</id_storecategory>
         <level>0</level>
         <area>215,3,264,23</area> <!-- LOJA 06 -->
     </store>
@@ -205,7 +205,7 @@
         <phone>71 30234302</phone>
         <website>http://borabaheastore.com/</website>
         <tags>Bahia, time, torcida, Bahêa, Bahêêa, futebol</tags>
-        <id_storecategory>17</id_storecategory>
+        <id_storecategory>3</id_storecategory>
         <level>0</level>
         <area>3,176,53,202</area> <!-- LOJA N 16) -->
     </store>
@@ -249,7 +249,7 @@
         <phone>71 31132766</phone>
         <website>http://www.correios.com.br/</website>
         <tags>correios, correspondência, encomendas, sedex, cartas, entregas </tags>
-        <id_storecategory>3</id_storecategory>
+        <id_storecategory>10</id_storecategory>
         <level>0</level>
         <area>3,33,55,43</area> <!-- LOJA N 20) -->
     </store>
@@ -260,7 +260,7 @@
         <phone>71 30191314</phone>
         <website></website>
         <tags>loteria, mega-sena, quina, loteria esportiva, quadra, prêmio, sorteio</tags>
-        <id_storecategory>3</id_storecategory>
+        <id_storecategory>9</id_storecategory>
         <level>0</level>
         <area>3,19,55,29</area> <!-- LOJA N 21) -->
     </store>
@@ -283,7 +283,7 @@
         <phone>71 31145651</phone>
         <website>http://www.casasbahia.com.br/</website>
         <tags>eletrônicos, eletrodomésticos, móveis, utilidades para o lar, </tags>
-        <id_storecategory>10</id_storecategory>
+        <id_storecategory>5</id_storecategory>
         <level>1</level>
         <area>123,130,169,310</area> <!-- LOJA N 23) -->
     </store>

@@ -10,7 +10,7 @@ public class SalvadorShopLevelInformation implements LevelInformation {
 	private int [] maps = {R.drawable.mapg1, R.drawable.mapg2, R.drawable.mapl1, R.drawable.mapl2, R.drawable.mapl3};
 	
 	private LatLng[][] levelsBounds = {
-			{new LatLng(-12.976628229215127d,-38.456756472587585d), new LatLng(-12.979861040846481d,-38.45281630754471d)}, // G1 TODO 
+			{new LatLng(-12.978045836176044d,-38.455430455505850d), new LatLng(-12.979048512964715d,-38.454466201364994d)}, // G1 TODO 
 			{new LatLng(-12.976628229215127d,-38.456756472587585d), new LatLng(-12.979861040846481d,-38.45281630754471d)}, // G2 TODO
 			{new LatLng(-12.976628229215127d,-38.456756472587585d), new LatLng(-12.979861040846481d,-38.45281630754471d)}, // L1
 			{new LatLng(-12.976628229215127d,-38.456756472587585d), new LatLng(-12.979861040846481d,-38.45281630754471d)}, // L2 TODO Right bounds

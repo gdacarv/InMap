@@ -26,8 +26,9 @@ public class InfrastructureMapController implements MapController,
 	private int level, infrastructureCategoryId;
 	
 	
-	public InfrastructureMapController(Context context) {
+	public InfrastructureMapController(Context context, int initialLevel) {
 		this.mContext = context;
+		this.level = initialLevel;
 	}
 
 	@Override

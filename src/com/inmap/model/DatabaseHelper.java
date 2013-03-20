@@ -39,7 +39,7 @@ class DatabaseHelper extends SQLiteOpenHelper {
 	static final String KEY_AREAR2P1Y = "arear2p1y";
 	static final String KEY_AREAR2P2X = "arear2p2x";
 	static final String KEY_AREAR2P2Y = "arear2p2y";
-	
+
 
 	static final String DATABASE_TABLE_INFRASTRUCTURE = "infrastructure";
 	static final String KEY_INFRACATEGORY = "id_infracategory";
@@ -67,15 +67,15 @@ class DatabaseHelper extends SQLiteOpenHelper {
 			+ KEY_AREAR2P1Y + " integer, "
 			+ KEY_AREAR2P2X + " integer, "
 			+ KEY_AREAR2P2Y + " integer);",
-			
+
 			"create table " + DATABASE_TABLE_INFRASTRUCTURE + " (" 
 			+ KEY_ID + " integer primary key autoincrement, "
 			+ KEY_INFRACATEGORY + " integer not null, "
 			+ KEY_X + " integer not null, "
 			+ KEY_Y + " integer not null, "
 			+ KEY_LEVEL + " integer not null);"
-			
-			
+
+
 	};
 
 	DatabaseHelper(Context context) {
@@ -122,17 +122,22 @@ class DatabaseHelper extends SQLiteOpenHelper {
 					if(temp.equals("store")){
 						values.clear();
 					}else{
-						xpp.next();
-						value = xpp.getText();
-						if(temp.equals("level") || temp.equals("id_storecategory"))
-							values.put(temp, Integer.parseInt(value));
-						else if(temp.equals("area")) {
-							String[] points = value.split(",");
-							for(int i = 0; i < points.length; i++)
-								values.put(pointsNames[i], points[i]);
-						}else
-							values.put(temp, value);
-						xpp.next();
+						eventType = xpp.next();
+						if(eventType != XmlPullParser.END_TAG) {
+							value = xpp.getText();
+							if(temp.equals("level") || temp.equals("id_storecategory"))
+								values.put(temp, Integer.parseInt(value));
+							else if(temp.equals("area")) {
+								String[] points = value.split(",");
+								for(int i = 0; i < points.length; i++)
+									values.put(pointsNames[i], points[i]);
+							}else {
+								if(temp.equals("tags"))
+									value = value.replace(", ", ",").replace(" ,", ",");
+								values.put(temp, value);
+							}
+							xpp.next();
+						}
 					}
 					break;
 				case XmlPullParser.END_TAG:

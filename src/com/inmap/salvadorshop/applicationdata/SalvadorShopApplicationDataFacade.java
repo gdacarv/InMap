@@ -104,7 +104,7 @@ public class SalvadorShopApplicationDataFacade implements ApplicationDataFacade 
 
 	private InfrastructureMapController getInfrastructureMapController() {
 		if(mInfrastructureMapController == null)
-			mInfrastructureMapController = new InfrastructureMapController(mContext);
+			mInfrastructureMapController = new InfrastructureMapController(mContext, mLevelInformation.getInitLevel());
 		return mInfrastructureMapController;
 	}
 

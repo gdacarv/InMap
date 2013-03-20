@@ -2,9 +2,9 @@
 <infrastructures>
     <infrastructure>
         <id_infracategory>1</id_infracategory>
-        <level>3</level>
-        <x>10</x>
-        <y>10</y>
+        <level>2</level>
+        <x>428</x>
+        <y>980</y>
     </infrastructure>
     <infrastructure>
         <id_infracategory>2</id_infracategory>
