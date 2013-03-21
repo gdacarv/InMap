@@ -19,7 +19,18 @@ public enum StoreCategory {
 	SERVICES(10, R.string.title_services, R.drawable.ic_home),
 	CARRIER(11, R.string.title_carrier, R.drawable.ic_home), 
 	DEPARTMENT(12, R.string.title_department, R.drawable.ic_home), 
-	HEALTH(13, R.string.title_health, R.drawable.ic_home);
+	HEALTH(13, R.string.title_health, R.drawable.ic_home), 
+	UNISSEX(14, R.string.title_unissex, R.drawable.ic_home), 
+	UNDERWEAR(15, R.string.title_underwear, R.drawable.ic_home), 
+	COSMETIC(16, R.string.title_cosmetic, R.drawable.ic_home), 
+	SPORTS(17, R.string.title_sports, R.drawable.ic_home), 
+	BABY(18, R.string.title_baby, R.drawable.ic_home), 
+	STREET(19, R.string.title_street, R.drawable.ic_home), 
+	OPTICS(20, R.string.title_optics, R.drawable.ic_home), 
+	BEDBATHTABLE(21, R.string.title_bedbathtable, R.drawable.ic_home), 
+	JEWELRY(22, R.string.title_jewelry, R.drawable.ic_home), 
+	ACCESSORIES(13, R.string.title_accessories, R.drawable.ic_home), 
+	HOME(13, R.string.title_home, R.drawable.ic_home);
 	
 	private int id, titleRes, mapIconRes;
 	private Bitmap mBitmap;

@@ -10,7 +10,7 @@
     <string name="title_clothing_man">Roupa Masculina</string>
     <string name="title_clothing_woman">Roupa Feminina</string>
     <string name="title_gifts">Presentes</string>
-    <string name="title_shoes">Sapatos</string>
+    <string name="title_shoes">Calçados/Acessórios/Bolsas</string>
     <string name="title_eletronics">Eletrônicos</string>
     <string name="title_food">Alimentação</string>
     <string name="title_entertainment">Entretenimento</string>
@@ -20,6 +20,17 @@
     <string name="title_carrier">Operadoras Telefônicas</string>
     <string name="title_department">Loja de Departamento</string>
     <string name="title_health">Saúde</string>
+    <string name="title_unissex">Unissex</string>
+    <string name="title_underwear">Moda Íntima</string>
+    <string name="title_cosmetic">Cosméticos/Estética/Perfumaria</string>
+    <string name="title_sports">Artigos Esportivos</string>
+    <string name="title_baby">Artigos infantis/Bebê</string>
+    <string name="title_street">Moda Street/Surf/Praia</string>
+    <string name="title_optics">Ótica</string>
+    <string name="title_bedbathtable">Cama, Mesa e Banho</string>
+    <string name="title_jewelry">Joalheria</string>
+    <string name="title_accessories">Acessórios/Bijouteria</string>
+    <string name="title_home">Utilidades para o Lar</string>
     <string name="carregando_lojas">Carregando lojas...</string>
     <string name="_categorias">^ Categorias</string>
     <string name="mapa_">Mapa ></string>
