@@ -72,8 +72,8 @@ public class GoogleMapInMapController implements InMapViewController, MapItemsLi
 		
 		mMap.setOnMapClickListener(onMapClickListener);
 		
-		configureMarkerLatLng();
-		configureSimpleMarker();
+		//configureMarkerLatLng();
+		//configureSimpleMarker();
 	}
 
 	private void configureMarkerLatLng() {
@@ -182,7 +182,7 @@ public class GoogleMapInMapController implements InMapViewController, MapItemsLi
 		
 		@Override
 		public void onInfoWindowClick(Marker marker) {
-			if(mMarkerLatLng.equals(marker)) {
+			if(mMarkerLatLng != null && mMarkerLatLng.equals(marker)) {
 				LatLng pos = marker.getPosition();
 				String text = "onInfoWindowClick " + "lat: " + pos.latitude + " long: " + pos.longitude;
 				Log.i("OnInfoWindowClickListener", text);

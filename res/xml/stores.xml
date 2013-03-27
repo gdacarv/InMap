@@ -1,28 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <stores>
-    
-    <store>
-        <name>Bompreço</name>
-        <description>Supermercado.</description>
-        <phone>(71) 3355-6666</phone>
-        <website></website>
-        <tags></tags>
-        <id_storecategory>8</id_storecategory>
-        <level>2</level>
-        <area>372,0,760,260</area>
-    </store>
-    
-    <store>
-        <name>Lojinha do João</name>
-        <description>Testando.</description>
-        <phone>(71) 3355-6666</phone>
-        <website></website>
-        <tags></tags>
-        <id_storecategory>8</id_storecategory>
-        <level>2</level>
-        <area>304,322,342,367</area>
-    </store>
-    
     <store>
         <name>Só Saúde</name>
         <description>A Só Saúde é uma loja especializada em produtos médico-hospitalares com uma excelente qualidade em seus produtos na área hospitalar.</description>
@@ -31,18 +8,18 @@
         <tags>saude,corpo,saudavel,postura,massageador</tags>
         <id_storecategory>13</id_storecategory>
         <level>0</level>
-        <area>214,221,265,234</area> <!-- LOJA 01 -->
+        <area>65,265,82,313</area> <!-- LOJA 01 -->
     </store>
     
     <store>
         <name>Mega Pixel</name>
         <description>Mega Pixel é uma  loja de revelação de fotos e vendas de maquinas fotográficas com qualidade no seus produtos e agilidade.</description>
         <phone></phone>
-        <website></website>
-        <tags>foto,maquina,fotografica,revelação</tags>
-        <id_storecategory>10</id_storecategory>
+        <website>foto,revelação,maquina,fotografica</website>
+        <tags>comida,sanduiche</tags>
+        <id_storecategory>6</id_storecategory>
         <level>0</level>
-        <area>214,204,264,217</area> <!-- LOJA 02 -->
+        <area>88,264,103,313</area> <!-- LOJA 02 -->
     </store>
 
   <store>
@@ -53,7 +30,7 @@
         <tags>Dente,clinica,dentaria,dentes,clinicas</tags>
         <id_storecategory>13</id_storecategory>
         <level>0</level>
-        <area>214,172,264,199</area> <!-- LOJA 03 -->
+        <area>108,264,146,314</area> <!-- LOJA 03 -->
     </store>
 
 
@@ -65,7 +42,7 @@
         <tags>pe,clinica,pes,clinicas,podologia</tags>
         <id_storecategory>13</id_storecategory>
         <level>0</level>
-        <area>240,94,265,130</area> <!-- LOJA 04 -->
+        <area>231,291,268,311</area> <!-- LOJA 04 -->
     </store>
 
 
@@ -77,7 +54,7 @@
         <tags>roupa,lavanderia,lavagem</tags>
         <id_storecategory>10</id_storecategory>
         <level>0</level>
-        <area>215,25,264,57,241,58,265,90</area> <!-- LOJA 05 -->
+        <area>272,292,353,313,315,265,352,286</area> <!-- LOJA 05 -->
     </store>
 
 
@@ -87,9 +64,9 @@
         <phone>71 32720340</phone>
         <website>http://www.multicoisas.com.br/</website>
         <tags>ferramentas,acessorios,peças</tags>
-        <id_storecategory>12</id_storecategory>
+        <id_storecategory>10</id_storecategory>
         <level>0</level>
-        <area>215,3,264,23</area> <!-- LOJA 06 -->
+        <area>357,265,394,313</area> <!-- LOJA 06 -->
     </store>
 
 
@@ -101,7 +78,7 @@
         <tags>jornal,jornalismo,notícias</tags>
         <id_storecategory>10</id_storecategory>
         <level>0</level>
-        <area>214,81,236,121</area> <!-- LOJA 07 -->
+        <area>241,261,290,287</area> <!-- LOJA 07 -->
     </store>
 
 
@@ -111,9 +88,9 @@
         <phone>71 30197312</phone>
         <website></website>
         <tags>óculos,armação,lentes</tags>
-        <id_storecategory>10</id_storecategory>
+        <id_storecategory>20</id_storecategory>
         <level>0</level>
-        <area>214,62,236,76</area> <!-- LOJA 08 -->
+        <area>293,265,311,286</area> <!-- LOJA 08 -->
     </store>
 
 
@@ -125,7 +102,7 @@
         <tags>informática,computador,pc,cartuchos,recarga</tags>
         <id_storecategory>10</id_storecategory>
         <level>0</level>
-        <area>159,42,174,65</area> <!-- LOJA 09 -->
+        <area>305,203,337,219</area> <!-- LOJA 09 -->
     </store>
 
 
@@ -137,19 +114,19 @@
         <tags>restauração,roupas,jeans,tingimento,lavanderia</tags>
         <id_storecategory>10</id_storecategory>
         <level>0</level>
-        <area>137,27,173,38</area> <!-- LOJA 10 -->
+        <area>341,185,357,219</area> <!-- LOJA 10 -->
     </store>
 
 
 <store>
-        <name>Soler</name>
-        <description>Presentes nos locais mais movimentados de Salvador a Soler é uma loja de entretenimento onde você encontra produtos que satisfaça suas necessidades.</description>
+        <name>Chocolates Brasil Cacau</name>
+        <description>Pensou Chocolate? Os mais deliciosos chocolates, sorvetes, e doces estão aqui.</description>
         <phone>71 3019-5221</phone>
-        <website>http://soler.com.br/loja/</website>
-        <tags>Livros,tabacaria,revistas,presentes</tags>
-        <id_storecategory>7</id_storecategory>
+        <website>http://www.chocolatesbrasilcacau.com.br/</website>
+        <tags>chocolate,cacau,sorvete,cafe,cha,doce</tags>
+        <id_storecategory>6</id_storecategory>
         <level>0</level>
-        <area>117,42,153,65</area> <!-- LOJA 11 -->
+        <area>305,165,336,198</area> <!-- LOJA 11 -->
     </store>
 
 
@@ -161,7 +138,7 @@
         <tags>iphone, celulares, assistência técnica, acessórios</tags>
         <id_storecategory>10</id_storecategory>
         <level>0</level> 
-        <area>96,28,133,38</area> <!-- LOJA 12 -->
+        <area>341,145,356,180</area> <!-- LOJA 12 -->
     </store>
 
 
@@ -173,7 +150,7 @@
         <tags>bijouterias, acessórios</tags>
         <id_storecategory>23</id_storecategory>
         <level>0</level>
-        <area>96,42,113,65</area> <!-- LOJA 13 -->
+        <area>302,143,336,160</area> <!-- LOJA 13 -->
     </store>
 
 
@@ -185,7 +162,7 @@
         <tags>vacinas, saúde,doenças,qualidade de vida,medicação</tags>
         <id_storecategory>13</id_storecategory>
         <level>0</level>
-        <area>2,223,53,235</area> <!-- LOJA N 14) -->
+        <area>66,51,82,99</area> <!-- LOJA N 14) -->
     </store>
 
 <store>
@@ -196,7 +173,7 @@
         <tags>lanches, empada, salgados, lanchonete</tags>
         <id_storecategory>6</id_storecategory>
         <level>0</level>
-        <area>2,206,53,220</area> <!-- LOJA N 15) -->
+        <area>88,51,104,98</area> <!-- LOJA N 15) -->
     </store>
 
 <store>
@@ -205,9 +182,20 @@
         <phone>71 30234302</phone>
         <website>http://borabaheastore.com/</website>
         <tags>Bahia, time, torcida, Bahêa, Bahêêa, futebol</tags>
-        <id_storecategory>3</id_storecategory>
+        <id_storecategory>17</id_storecategory>
         <level>0</level>
-        <area>3,176,53,202</area> <!-- LOJA N 16) -->
+        <area>109,51,143,98</area> <!-- LOJA N 16) -->
+    </store>
+
+<store>
+<name>UNNAME2</name>
+        <description></description>
+        <phone>71 30234302</phone>
+        <website>http://borabaheastore.com/</website>
+        <tags></tags>
+        <id_storecategory>25</id_storecategory>
+        <level>0</level>
+        <area>155,50,226,89</area> <!-- LOJA N 16.1) -->
     </store>
 
 <store>
@@ -218,7 +206,7 @@
         <tags>armarinho, acessórios, papelaria</tags>
         <id_storecategory>10</id_storecategory>
         <level>0</level>
-        <area>3,77,55,89</area> <!-- LOJA N 17) -->
+        <area>275,54,291,100</area> <!-- LOJA N 17) -->
     </store>
 
 <store>
@@ -229,7 +217,7 @@
         <tags>cópias, copiadora, impressão, cartucho, copiadoras</tags>
         <id_storecategory>3</id_storecategory>
         <level>0</level>
-        <area>3,61,55,73</area> <!-- LOJA N 18) -->
+        <area>295,53,312,100</area> <!-- LOJA N 18) -->
     </store>
 
 <store>
@@ -240,7 +228,7 @@
         <tags>iphone, celulares, blackberry, ipad, ipod</tags>
         <id_storecategory>10</id_storecategory>
         <level>0</level>
-        <area>3,47,55,57</area> <!-- LOJA N 19) -->
+        <area>316,53,332,99</area> <!-- LOJA N 19) -->
     </store>
 
 <store>
@@ -249,9 +237,9 @@
         <phone>71 31132766</phone>
         <website>http://www.correios.com.br/</website>
         <tags>correios, correspondência, encomendas, sedex, cartas, entregas </tags>
-        <id_storecategory>10</id_storecategory>
+        <id_storecategory>3</id_storecategory>
         <level>0</level>
-        <area>3,33,55,43</area> <!-- LOJA N 20) -->
+        <area>337,54,354,99</area> <!-- LOJA N 20) -->
     </store>
 
 <store>
@@ -260,10 +248,21 @@
         <phone>71 30191314</phone>
         <website></website>
         <tags>loteria, mega-sena, quina, loteria esportiva, quadra, prêmio, sorteio</tags>
-        <id_storecategory>9</id_storecategory>
+        <id_storecategory>3</id_storecategory>
         <level>0</level>
-        <area>3,19,55,29</area> <!-- LOJA N 21) -->
+        <area>358,54,374,99,377,54,394,70</area> <!-- LOJA N 21) -->
     </store>
+
+<!-- <store>
+ <name>UNNAME</name>
+        <description>Loja que propicia realização de operações bancárias com muita comodidade,fazer apostas,pagamento, deposito, consultas e saques.</description>
+        <phone>71 30191314</phone>
+        <website></website>
+        <tags></tags>
+        <id_storecategory>25</id_storecategory>
+        <level>0</level>
+        <area>378,75,394,100</area>  LOJA N 21.1) 
+    </store> -->
 
 <store>
 <name>Chang</name>
@@ -273,32 +272,18 @@
         <tags>eletrônicos,celulares,consertosr,acessórios,relógios</tags>
         <id_storecategory>10</id_storecategory>
         <level>0</level>
-        <area>3,4,55,14</area> <!-- LOJA N 22) -->
-    </store>
-
-
-<store>
-<name>Casas Bahia</name>
-        <description>Loja de eletrodomésticos que vende uma variedade de artigos para o lar, cama, mesa e banho,ferramentas com excelente qualidade.</description>
-        <phone>71 31145651</phone>
-        <website>http://www.casasbahia.com.br/</website>
-        <tags>eletrônicos, eletrodomésticos, móveis, utilidades para o lar, </tags>
-        <id_storecategory>5</id_storecategory>
-        <level>1</level>
-        <area>123,130,169,310</area> <!-- LOJA N 23) -->
+        <area>378,75,394,100</area> <!-- LOJA N 22) -->
     </store>
 
 <store>
-<name>SAC</name>
-        <description>Oferece alguns serviços de utilidade pública com Administração, Policia Federal, SSP/Antecedente
-, Banco Mais BB, SAEB/CPF, SSP/Identidade, DETRAN, SEFAZ Estadual, TJ/SAJ, JUCEB, SJCDH/PROCON.
-</description>
-        <phone>0800 071 5353</phone>
-        <website>http://www.sac.ba.gov.br/index.php/SALVADOR-SHOPPING.html</website>
-        <tags>Serviços, SAC, CPF, RG, CNPJ, SAJ, CNH, documentos</tags>
-        <id_storecategory>10</id_storecategory>
-        <level>1</level>
-        <area>21,3,117,150,118,52,150,99</area> <!-- LOJA N 24) -->
+<name>Lojas Americanas</name>
+        <description>Loja de grande qualidade no mercado com anos de serviços, oferecendo produtos de cama, mesa e banho, eletrodomésticos, beleza e saúde, brinquedos, roupas unissex.</description>
+        <phone>71 4003 4848</phone>
+        <website>http://www.americanas.com.br/</website>
+        <tags>eletrônicos, doces, eletrodomésticos, acessórios, brinquedos, lar, americanas, lojas americanas</tags>
+        <id_storecategory>12</id_storecategory>
+        <level>2</level>
+        <area>1778,570,2016,848</area> <!-- LOJA N 25) -->
     </store>
     
 </stores>
