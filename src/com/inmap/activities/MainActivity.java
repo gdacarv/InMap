@@ -28,6 +28,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
@@ -254,6 +255,7 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 					mLayoutLists.setVisibility(View.GONE);
 			}
 		});
+		mLayoutMap.requestTransparentRegion(mLayoutMap);
 	}
 
 	private void configureLayoutCategoryList() {
