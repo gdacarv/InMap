@@ -22,12 +22,16 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
+
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.inmap.actionbar.ActionBarActivity;
@@ -99,6 +103,8 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 		
 		mDbAdapter = DbAdapter.getInstance(this);
 		
+		fixZoomButtons();
+		
 		configureSlidingMenu();
 
 		configureFragments();
@@ -114,6 +120,30 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 		verifyIntentShowStoreOnMap(intent);
 		verifyIntentSearch(intent);
 		
+	}
+
+	public void fixZoomButtons() {
+		View root = getChildAt(getChildAt(getChildAt(findViewById(android.R.id.content))));
+		View view = root.findViewById(1);
+		if (view != null){
+	        int actionBarHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 15, getResources().getDisplayMetrics());
+	        
+	        // Sets the margin of the button
+	        ViewGroup.MarginLayoutParams marginParams = new ViewGroup.MarginLayoutParams(view.getLayoutParams());
+	        marginParams.setMargins(0, 0, actionBarHeight, actionBarHeight*3);
+	        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(marginParams);
+	        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
+	        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
+	        view.setLayoutParams(layoutParams);
+	}
+	}
+
+	public View getChildAt(View view) {
+		return getChildAt(view, 0);
+	}
+
+	public View getChildAt(View view, int index) {
+		return ((ViewGroup)view).getChildAt(index);
 	}
 
 	@Override
