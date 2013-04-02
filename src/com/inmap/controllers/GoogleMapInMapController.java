@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import android.location.Location;
 import android.os.Handler;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -23,6 +24,7 @@ import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.inmap.activities.MainActivity;
 import com.inmap.interfaces.ApplicationDataFacade;
 import com.inmap.interfaces.InMapViewController;
 import com.inmap.interfaces.LevelInformation;
@@ -69,9 +71,9 @@ public class GoogleMapInMapController implements InMapViewController, MapItemsLi
 		mMap.setMyLocationEnabled(true);
 
 		configureLevels(mContext.getResources());
-		
+
 		mMap.setOnMapClickListener(onMapClickListener);
-		
+
 		//configureMarkerLatLng();
 		//configureSimpleMarker();
 	}
@@ -93,7 +95,7 @@ public class GoogleMapInMapController implements InMapViewController, MapItemsLi
 		mMapLatLngConverter = new PreSettedMapLatLngConverter(resources, mLevelInformation, mMapRotation);
 		mCurrentLevel = mLevelInformation.getInitLevel();
 		mLevelGroundOverlay = addLevelGroundOverlay(mCurrentLevel);
-		
+
 		/*LatLngBounds bounds = mGroundOverlays[2].getBounds(); Probably useless
 		mMap.addMarker(new MarkerOptions().position(bounds.northeast));
 		mMap.addMarker(new MarkerOptions().position(bounds.southwest));
@@ -148,15 +150,15 @@ public class GoogleMapInMapController implements InMapViewController, MapItemsLi
 	public Marker createMarker(MapItem item) {
 		LatLng latLng = mMapLatLngConverter.getLatLng(item, mCurrentLevel);
 		MarkerOptions markerOptions = new MarkerOptions()
-			.position(latLng); 
+		.position(latLng); 
 		Bitmap mapIconBitmap = item.getMapIconBitmap();
 		if(mapIconBitmap != null)
 			markerOptions.icon(BitmapDescriptorFactory.fromBitmap(mapIconBitmap));
 		if(item instanceof StoreMapItem) {
 			StoreMapItem storeMapItem = (StoreMapItem) item;
 			markerOptions
-				.snippet(storeMapItem.getSubtext())
-				.title(storeMapItem.getTitle());
+			.snippet(storeMapItem.getSubtext())
+			.title(storeMapItem.getTitle());
 		}
 		Marker marker = mMap.addMarker(markerOptions);
 		mMapItemsMarkers.put(marker, item);
@@ -179,7 +181,7 @@ public class GoogleMapInMapController implements InMapViewController, MapItemsLi
 	}
 
 	private OnInfoWindowClickListener onInfoWindowClickListener = new OnInfoWindowClickListener() {
-		
+
 		@Override
 		public void onInfoWindowClick(Marker marker) {
 			if(mMarkerLatLng != null && mMarkerLatLng.equals(marker)) {
@@ -188,17 +190,17 @@ public class GoogleMapInMapController implements InMapViewController, MapItemsLi
 				Log.i("OnInfoWindowClickListener", text);
 				Toast.makeText(mContext, text, Toast.LENGTH_LONG).show();
 			} else
-				
-			if(mOnStoreBallonClickListener != null) {
-				MapItem mapItem = mMapItemsMarkers.get(marker);
-				if(mapItem != null && mapItem instanceof StoreMapItem)
-					mOnStoreBallonClickListener.onStoreBallonClicked((StoreMapItem) mapItem);
-			}
+
+				if(mOnStoreBallonClickListener != null) {
+					MapItem mapItem = mMapItemsMarkers.get(marker);
+					if(mapItem != null && mapItem instanceof StoreMapItem)
+						mOnStoreBallonClickListener.onStoreBallonClicked((StoreMapItem) mapItem);
+				}
 		}
 	};
 
 	private OnMapClickListener onMapClickListener = new OnMapClickListener() {
-		
+
 		private Marker mTempMarker;
 
 		@Override
@@ -208,28 +210,36 @@ public class GoogleMapInMapController implements InMapViewController, MapItemsLi
 			Coordinate coor = mMapLatLngConverter.getMapCoordinate(latlng, mCurrentLevel);
 			Log.i("GoogleMapInMapController.onMapClickListener.new OnMapClickListener() {...}",
 					"onMapClick " +coor.toString());
-			if(coor.x < 0 || coor.y < 0)
-				return;
-			Store[] stores = null;
-			DbAdapter dbAdapter = DbAdapter.getInstance(mContext).open();
-			try {
-				stores = dbAdapter.getStores(new StoreParameters().setLevel(mCurrentLevel).hasPoint(coor));
-			} finally {
-				dbAdapter.close();
+			boolean forceShowClearButton = false;
+			if(coor.x >= 0 && coor.y >= 0) {
+				Store[] stores = null;
+				DbAdapter dbAdapter = DbAdapter.getInstance(mContext).open();
+				try {
+					stores = dbAdapter.getStores(new StoreParameters().setLevel(mCurrentLevel).hasPoint(coor));
+				} finally {
+					dbAdapter.close();
+				}
+				if(stores != null && stores.length >0){
+					mTempMarker = createMarker(stores[0]);
+					mTempMarker.showInfoWindow();
+					forceShowClearButton = true;
+				}
 			}
-			if(stores == null || stores.length < 1)
-				return;
-			mTempMarker = createMarker(stores[0]);
-			mTempMarker.showInfoWindow();
+			if(mContext instanceof MainActivity) {
+				if(forceShowClearButton)
+					((MainActivity)mContext).updateClearMarkersVisibility(View.VISIBLE);
+				else
+					((MainActivity)mContext).updateClearMarkersVisibility();
+			}
 		}
 	};
 	private float mMapRotation;
 	private LevelInformation mLevelInformation;
-	
+
 	public void onMyLocationChange (Location location) {
-		
+
 	}
-	
+
 	private GroundOverlay addLevelGroundOverlay(int level) {
 		return mMap.addGroundOverlay(new GroundOverlayOptions()
 		.image(BitmapDescriptorFactory.fromResource(mLevelInformation.getMapResource(level)))

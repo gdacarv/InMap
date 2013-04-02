@@ -71,4 +71,9 @@ public class StoreMapController implements MapController, StoreOnMapController, 
 				mapItems.add(item);
 		mShowingItems = mapItems.toArray(new MapItem[mapItems.size()]);
 	}
+
+	@Override
+	public void clearMarkers() {
+		setStores();
+	}
 }

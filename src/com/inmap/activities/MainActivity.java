@@ -22,18 +22,12 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
-import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.inmap.actionbar.ActionBarActivity;
@@ -83,6 +77,7 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 	private OnInfrastructureCategoryChangedListener[] mInfrastructureCategoryChangedListeners;
 	private StoreOnMapController mStoreOnMapController;
 	private DbAdapter mDbAdapter;
+	private View mClearMarkersButton;
 
 	private GoogleMap mMap;
 
@@ -90,6 +85,9 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 
 
 	private SlidingMenu mSlidingMenu;
+
+
+	private boolean infraHasMarkers, storesHasMarkers;
 
 	@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 	public void onCreate(Bundle savedInstanceState) {
@@ -167,10 +165,11 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 
 	@Override
 	public void onInfrastructureCategoryChanged(int id) {
+		infraHasMarkers = id > 0;
+		updateClearMarkersVisibility();
 		for(OnInfrastructureCategoryChangedListener listener : mInfrastructureCategoryChangedListeners)
 			listener.onInfrastructureCategoryChanged(id);
 	}
-
 
 	@Override
 	public void onStoreCategoryChanged(int id) {
@@ -204,6 +203,8 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 	public void onShowOnMapClicked(Store[] stores) {
 		toggleList();
 		mStoreOnMapController.setStores(stores);
+		storesHasMarkers = stores != null && stores.length > 0;
+		updateClearMarkersVisibility();
 	}
 
 	@Override
@@ -245,6 +246,7 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 		configureLayoutCategoryList();
 		configureLayoutStoreList();
 		mLayoutLists = (FrameLayout) findViewById(R.id.layout_lists);
+		mClearMarkersButton = findViewById(R.id.btn_clear_markers);
 		configureLayoutLevelPicker();
 	}
 
@@ -341,6 +343,8 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 		onLevelSelected(store.getLevel());
 		mStoreOnMapController.setStores(store);
 		mInMapViewController.openStoreBallon(store);
+		storesHasMarkers = store != null;
+		updateClearMarkersVisibility();
 	}
 
 	private void setUpMapIfNeeded() {
@@ -378,5 +382,19 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 		    }
 		    onStoreSelected(store);
 		}
+	}
+	
+	public void onClearMarkersButtonClick(View v) {
+		mStoreOnMapController.clearMarkers();
+		storesHasMarkers = false;
+		onInfrastructureCategoryChanged(0);
+	}
+
+	public void updateClearMarkersVisibility() {
+		mClearMarkersButton.setVisibility(storesHasMarkers || infraHasMarkers ? View.VISIBLE : View.INVISIBLE);
+	}
+
+	public void updateClearMarkersVisibility(int visible) {
+		mClearMarkersButton.setVisibility(visible);
 	}
 }
