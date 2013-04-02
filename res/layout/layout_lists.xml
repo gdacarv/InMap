@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_lists"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <com.inmap.views.AnimateFrameLayout
+        android:id="@+id/layout_categorylist"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <fragment
+            android:id="@+id/fragment_categorylist"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            class="com.inmap.fragments.StoreCategoryListFragment" />
+    </com.inmap.views.AnimateFrameLayout>
+
+    <com.inmap.views.AnimateFrameLayout
+        android:id="@+id/layout_storelist"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" >
+
+        <fragment
+            android:id="@+id/fragment_storelist"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            class="com.inmap.fragments.StoreListFragment" />
+    </com.inmap.views.AnimateFrameLayout>
+
+</FrameLayout>

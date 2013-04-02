@@ -60,6 +60,7 @@ import com.inmap.model.StoreParameters;
 import com.inmap.salvadorshop.R;
 import com.inmap.salvadorshop.applicationdata.SalvadorShopApplicationDataFacade;
 import com.inmap.views.AnimateFrameLayout;
+import com.slidingmenu.lib.SlidingMenu;
 
 public class MainActivity extends ActionBarActivity implements OnInfrastructureCategoryChangedListener, OnStoreCategoryChangedListener, OnStoreSelectedListener, OnLevelSelectedListener, StoreListController, OnStoreBallonClickListener {
 
@@ -69,14 +70,13 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 	private ApplicationDataFacade mApplicationDataFacade = SalvadorShopApplicationDataFacade.getInstance(this);
 
 
-	private AnimateFrameLayout mLayoutMap, mLayoutStoreList, mLayoutCategoryList, mLayoutLevelPicker;
+	private AnimateFrameLayout mLayoutStoreList, mLayoutCategoryList, mLayoutLevelPicker;
 	private StoreCategoryListFragment mStoreCategoryListFragment;
 	private InfrastructureBarFragment mInfrastructureBarFragment;
 	private StoreListFragment mStoreListFragment;
 	private LevelPickerFragment mLevelPickerFragment;
-	private boolean isShowingList = false,
-	isShowingStoreList = false,
-	isShowingLevelPicker = false;
+	private boolean isShowingStoreList = false,
+		isShowingLevelPicker = false;
 	private FrameLayout mLayoutLists;
 	private InMapViewController mInMapViewController;
 	private OnLevelSelectedListener[] mLevelSelectedListeners;
@@ -88,22 +88,24 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 
 	private LevelInformation mLevelInformation;
 
+
+	private SlidingMenu mSlidingMenu;
+
 	@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		DisplayMetrics metrics = getResources().getDisplayMetrics();
-		int width = metrics.widthPixels;
-
 		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 			getActionBar().setHomeButtonEnabled(true);
 		
 		mDbAdapter = DbAdapter.getInstance(this);
+		
+		configureSlidingMenu();
 
 		configureFragments();
 
-		configureAllLayout(width);
+		configureAllLayout();
 
 		setUpMapIfNeeded();
 
@@ -113,6 +115,7 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 
 		verifyIntentShowStoreOnMap(intent);
 		verifyIntentSearch(intent);
+		
 	}
 
 	@Override
@@ -152,7 +155,7 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 
 	@Override
 	public void onBackPressed() {
-		if(isShowingList){
+		if(mSlidingMenu.isMenuShowing()){
 			if(isShowingStoreList)
 				returnToCategoryList();
 			else
@@ -209,6 +212,17 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 		for(OnLevelSelectedListener listener : mLevelSelectedListeners)
 			listener.onLevelSelected(level);
 	}
+	
+	private void configureSlidingMenu() {
+		mSlidingMenu = new SlidingMenu(this);
+		mSlidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
+		mSlidingMenu.setShadowWidthRes(R.dimen.shadow_width);
+		mSlidingMenu.setShadowDrawable(R.drawable.shadow);
+		mSlidingMenu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
+		mSlidingMenu.setFadeDegree(0.35f);
+		mSlidingMenu.attachToActivity(this, SlidingMenu.SLIDING_WINDOW);
+		mSlidingMenu.setMenu(R.layout.layout_lists);
+	}
 
 	private void configureFragments() {
 		FragmentManager fm = getSupportFragmentManager();
@@ -227,36 +241,14 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 		mLevelPickerFragment.setOnLevelSelectedListener(this);
 	}
 
-	private void configureAllLayout(int width) {
-		configureLayoutMap(width);
+	private void configureAllLayout() {
 		configureLayoutCategoryList();
 		configureLayoutStoreList();
-		configureLayoutLists(width);
+		mLayoutLists = (FrameLayout) findViewById(R.id.layout_lists);
 		configureLayoutLevelPicker();
 	}
 
-	private void configureLayoutMap(int width) {
-		mLayoutMap = (AnimateFrameLayout) findViewById(R.id.layout_map);
-		mLayoutMap.setLayoutParams(new LinearLayout.LayoutParams(width, LinearLayout.LayoutParams.FILL_PARENT));
-		mLayoutMap.setOnTouchListener(new View.OnTouchListener() {
-
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				if(isShowingList)
-					toggleList();
-				return false;
-			}
-		});
-		mLayoutMap.setOnAnimationEnd(new OnAnimationEnd() {
-
-			@Override
-			public void onAnimationEnded() {
-				if(!isShowingList)
-					mLayoutLists.setVisibility(View.GONE);
-			}
-		});
-		mLayoutMap.requestTransparentRegion(mLayoutMap);
-	}
+	
 
 	private void configureLayoutCategoryList() {
 		mLayoutCategoryList = (AnimateFrameLayout) findViewById(R.id.layout_categorylist);
@@ -278,11 +270,6 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 				if(!isShowingStoreList) mLayoutStoreList.setVisibility(View.GONE);
 			}
 		});
-	}
-
-	private void configureLayoutLists(int width) {
-		mLayoutLists = (FrameLayout) findViewById(R.id.layout_lists);
-		mLayoutLists.setLayoutParams(new LinearLayout.LayoutParams((int) (width*0.8), LinearLayout.LayoutParams.FILL_PARENT));
 	}
 
 	private void configureLayoutLevelPicker() {
@@ -308,10 +295,6 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 		mLevelInformation = mApplicationDataFacade.getLevelInformation();
 	}
 
-	private void setInitialLevel() {
-		onLevelSelected(mLevelInformation.getInitLevel());
-	}
-
 	private void toggleLevelPicker() {
 		isShowingLevelPicker = !isShowingLevelPicker;
 		if(isShowingLevelPicker){
@@ -323,17 +306,10 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 	}
 
 	protected void toggleList() {
-		isShowingList = !isShowingList;
-		if(isShowingList){
-			mLayoutLists.setVisibility(View.VISIBLE);
-			mLayoutLists.startAnimation(AnimationUtils.loadAnimation(this, R.anim.to_right_100));
-			mLayoutMap.startAnimation(AnimationUtils.loadAnimation(this, R.anim.to_right_80));
-			mInfrastructureBarFragment.hideBar(); 
-		}else{
-			Animation anim = AnimationUtils.loadAnimation(this, R.anim.to_left_100);
-			mLayoutLists.startAnimation(anim);
-			mLayoutMap.startAnimation(AnimationUtils.loadAnimation(this, R.anim.to_left_80));
-		}
+		if(mSlidingMenu.isMenuShowing())
+			mSlidingMenu.showContent();
+		else
+			mSlidingMenu.showMenu();
 	}
 
 	private void returnToCategoryList() {
@@ -352,7 +328,7 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 		if(i != null) {
 			Store store = (Store) i.getSerializableExtra(SHOW_STORE_INMAP);
 			if(store != null) {
-				if(isShowingList)
+				if(mSlidingMenu.isMenuShowing())
 					toggleList();
 				showStoreOnMap(store);
 				return true;
@@ -386,7 +362,7 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 		if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
 			String query = intent.getStringExtra(SearchManager.QUERY);
 			mStoreListFragment.setStoreParameters(new StoreParameters().setText(query));
-			if(!isShowingList)
+			if(!mSlidingMenu.isMenuShowing())
 				toggleList();
 			if(!isShowingStoreList)
 				showStoreList();

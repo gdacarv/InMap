@@ -1,113 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
+    <fragment
+        android:id="@+id/google_map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        class="com.google.android.gms.maps.SupportMapFragment" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal" >
-
-        <FrameLayout
-            android:id="@+id/layout_lists"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:visibility="gone"
-            tools:ignore="Suspicious0dp" >
-
-            <com.inmap.views.AnimateFrameLayout
-                android:id="@+id/layout_categorylist"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
-
-                <fragment
-                    android:id="@+id/fragment_categorylist"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    class="com.inmap.fragments.StoreCategoryListFragment" />
-            </com.inmap.views.AnimateFrameLayout>
-
-            <com.inmap.views.AnimateFrameLayout
-                android:id="@+id/layout_storelist"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="gone" >
-
-                <fragment
-                    android:id="@+id/fragment_storelist"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    class="com.inmap.fragments.StoreListFragment" />
-            </com.inmap.views.AnimateFrameLayout>
-        </FrameLayout>
+        android:layout_gravity="bottom"
+        android:orientation="vertical" >
 
         <com.inmap.views.AnimateFrameLayout
-            android:id="@+id/layout_map"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-
-            <!--
-        <com.inmap.views.InMapImageView
-            android:id="@+id/map"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/mapg1" />
-            -->
+            android:id="@+id/layout_levels"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="right"
+            android:layout_weight="1"
+            android:visibility="invisible" >
 
             <fragment
-                android:id="@+id/google_map"
-                android:layout_width="match_parent"
+                android:id="@+id/fragment_levelpicker"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                class="com.google.android.gms.maps.SupportMapFragment" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="bottom"
-                android:orientation="vertical" >
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" >
-
-                    <com.inmap.views.AnimateFrameLayout
-                        android:id="@+id/layout_levels"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="right"
-                        android:visibility="invisible" >
-
-                        <fragment
-                            android:id="@+id/fragment_levelpicker"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            class="com.inmap.fragments.LevelPickerFragment" />
-                    </com.inmap.views.AnimateFrameLayout>
-
-                    <!--
-                     <ZoomControls
-                    android:id="@+id/zoomControls"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal|bottom" />
-                    -->
-                </FrameLayout>
-
-                <fragment
-                    android:id="@+id/fragment_infrabar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right|bottom"
-                    class="com.inmap.fragments.InfrastructureBarFragment" />
-            </LinearLayout>
+                class="com.inmap.fragments.LevelPickerFragment" />
         </com.inmap.views.AnimateFrameLayout>
+
+        <fragment
+            android:id="@+id/fragment_infrabar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|bottom"
+            class="com.inmap.fragments.InfrastructureBarFragment" />
     </LinearLayout>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/transparent" />
-
-</FrameLayout>
+</RelativeLayout>
