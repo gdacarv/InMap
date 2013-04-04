@@ -129,7 +129,7 @@ class DatabaseHelper extends SQLiteOpenHelper {
 								values.put(temp, Integer.parseInt(value));
 							else if(temp.equals("area")) {
 								String[] points = value.split(",");
-								for(int i = 0; i < points.length; i++)
+								for(int i = 0; i < points.length && i < pointsNames.length; i++)
 									values.put(pointsNames[i], points[i]);
 							}else {
 								if(temp.equals("tags"))
