@@ -9,6 +9,7 @@ import com.inmap.salvadorshop.R;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -51,7 +52,7 @@ class DatabaseHelper extends SQLiteOpenHelper {
 	//static final String DATE_FORMAT_WRITE = "yyyy/MM/dd hh:mm";
 
 	private final String DATABASE_CREATE[] = {"create table " + DATABASE_TABLE_STORE + " (" 
-			+ KEY_ID + " integer primary key autoincrement, "
+			+ KEY_ID + " integer primary key, "
 			+ KEY_NAME + " text not null, "
 			+ KEY_DESCRIPTION + " text, "
 			+ KEY_PHONE + " text, "
@@ -69,7 +70,7 @@ class DatabaseHelper extends SQLiteOpenHelper {
 			+ KEY_AREAR2P2Y + " integer);",
 
 			"create table " + DATABASE_TABLE_INFRASTRUCTURE + " (" 
-			+ KEY_ID + " integer primary key autoincrement, "
+			+ KEY_ID + " integer primary key, "
 			+ KEY_INFRACATEGORY + " integer not null, "
 			+ KEY_X + " integer not null, "
 			+ KEY_Y + " integer not null, "
@@ -101,13 +102,13 @@ class DatabaseHelper extends SQLiteOpenHelper {
 	}
 
 	public void populateBase(SQLiteDatabase db) throws XmlPullParserException, IOException {
-		populateStores(db);
-		populateInfrastructures(db);
+		Resources resources = mCtx.getResources();
+		populateStores(db, resources.getXml(R.xml.stores));
+		populateInfrastructures(db, resources.getXml(R.xml.infrastructures));
 	}
 
-	private void populateStores(SQLiteDatabase db) throws XmlPullParserException, IOException {
+	private void populateStores(SQLiteDatabase db, XmlPullParser xpp) throws XmlPullParserException, IOException {
 		String[] pointsNames = {KEY_AREAR1P1X, KEY_AREAR1P1Y, KEY_AREAR1P2X, KEY_AREAR1P2Y, KEY_AREAR2P1X, KEY_AREAR2P1Y, KEY_AREAR2P2X, KEY_AREAR2P2Y};
-		XmlResourceParser xpp = mCtx.getResources().getXml(R.xml.stores);
 		int eventType;
 		ContentValues values = new ContentValues(8);
 		String temp, value;
@@ -125,15 +126,15 @@ class DatabaseHelper extends SQLiteOpenHelper {
 						eventType = xpp.next();
 						if(eventType != XmlPullParser.END_TAG) {
 							value = xpp.getText();
-							if(temp.equals("level") || temp.equals("id_storecategory"))
-								values.put(temp, Integer.parseInt(value));
+							if(temp.equals("level") || temp.equals("id_storecategory") || temp.equals("id"))
+								values.put(temp.equals("id") ? KEY_ID : temp, Integer.parseInt(value));
 							else if(temp.equals("area")) {
 								String[] points = value.split(",");
 								for(int i = 0; i < points.length && i < pointsNames.length; i++)
 									values.put(pointsNames[i], points[i]);
 							}else {
 								if(temp.equals("tags"))
-									value = value.replace(", ", ",").replace(" ,", ",");
+									value = value.replace(", ", ",").replace(" ,", ","); // XXX Maybe useless
 								values.put(temp, value);
 							}
 							xpp.next();
@@ -142,7 +143,7 @@ class DatabaseHelper extends SQLiteOpenHelper {
 					break;
 				case XmlPullParser.END_TAG:
 					if(xpp.getName().equals("store")){
-						db.insert(DATABASE_TABLE_STORE, null, values);
+						db.insertWithOnConflict(DATABASE_TABLE_STORE, null, values, SQLiteDatabase.CONFLICT_REPLACE);
 					}
 					break;
 				}
@@ -153,8 +154,7 @@ class DatabaseHelper extends SQLiteOpenHelper {
 		}while (eventType != XmlPullParser.END_DOCUMENT);
 	}
 
-	private void populateInfrastructures(SQLiteDatabase db) throws XmlPullParserException, IOException {
-		XmlResourceParser xpp = mCtx.getResources().getXml(R.xml.infrastructures);
+	private void populateInfrastructures(SQLiteDatabase db, XmlPullParser xpp) throws XmlPullParserException, IOException {
 		int eventType;
 		ContentValues values = new ContentValues(4);
 		String temp, value;
@@ -167,6 +167,11 @@ class DatabaseHelper extends SQLiteOpenHelper {
 				temp = xpp.getName();
 				if(temp.equals("infrastructure")){
 					values.clear();
+				}else if(temp.equals("id")){
+					xpp.next();
+					value = xpp.getText();
+					values.put(KEY_ID, Integer.parseInt(value));
+					xpp.next();
 				}else{
 					xpp.next();
 					value = xpp.getText();
@@ -176,7 +181,7 @@ class DatabaseHelper extends SQLiteOpenHelper {
 				break;
 			case XmlPullParser.END_TAG:
 				if(xpp.getName().equals("infrastructure")){
-					db.insert(DATABASE_TABLE_INFRASTRUCTURE, null, values);
+					db.insertWithOnConflict(DATABASE_TABLE_INFRASTRUCTURE, null, values, SQLiteDatabase.CONFLICT_REPLACE);
 				}
 				break;
 			}

@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <infrastructures>
+    
     <infrastructure>
+        <id>1</id>
         <id_infracategory>1</id_infracategory>
         <level>2</level>
         <x>428</x>
         <y>980</y>
     </infrastructure>
+    
     <infrastructure>
+        <id>2</id>
         <id_infracategory>2</id_infracategory>
         <level>3</level>
         <x>50</x>
         <y>60</y>
     </infrastructure>
- 
+    
 </infrastructures>

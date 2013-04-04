@@ -11,7 +11,10 @@ public enum InfrastructureCategory {
 	PARKING(2, R.drawable.ic_action_share, R.drawable.marker),
 	STAIRS(3, R.drawable.ic_action_share, R.drawable.marker), 
 	ELEVATOR(4, R.drawable.ic_action_share, R.drawable.marker), 
-	TOILET(5, R.drawable.ic_action_share, R.drawable.marker);
+	TOILET(5, R.drawable.ic_action_share, R.drawable.marker), 
+	ESCALATOR(6, R.drawable.ic_action_share, R.drawable.marker), 
+	PHONES(7, R.drawable.ic_action_share, R.drawable.marker), 
+	BABY_FACILITIES(8, R.drawable.ic_action_share, R.drawable.marker);
 	
 	private int id, menuIconRes, mapIconRes;
 	private Bitmap mBitmap;
