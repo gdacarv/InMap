@@ -11,6 +11,7 @@
     <permission
         android:name="com.inmap.permission.MAPS_RECEIVE"
         android:protectionLevel="signature" />
+    
 
     <uses-permission android:name="com.inmap.permission.MAPS_RECEIVE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -25,6 +26,7 @@
         android:required="true" />
 
     <application
+        android:name="com.inmap.InMapApplication"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
@@ -52,6 +54,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.inmap.activities.MainActivity" />
         </activity>
+        
+        <service android:name="com.inmap.server.UpdateDataService" />
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
@@ -61,6 +65,10 @@
             android:name="com.inmap.model.StoreContentProvider"
             android:authorities="com.inmap.model.StoreContentProvider" >
         </provider>
+        
+        <meta-data android:name="url_info" android:value="https://dl.dropbox.com/s/awpi1m99j1m20c1/SalvadorShopInfo.json?dl=1" />
+        <meta-data android:name="url_infra" android:value="https://dl.dropbox.com/s/qk01f4q5lwazrl1/infrastructures.xml?dl=1" />
+        <meta-data android:name="url_stores" android:value="https://dl.dropbox.com/s/qcswd293z8f4386/stores.xml?dl=1" />
     </application>
 
 </manifest>

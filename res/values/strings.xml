@@ -45,5 +45,6 @@
     <string name="apontar_no_mapa">Apontar no Mapa</string>
     <string name="search_hint">Digite o que deseja...</string>
     <string name="message_noitems_list_store">Ops, nada foi encontrado.</string>
+    <string name="msg_error_server">Erro ao atualizar informações. Avise ao desenvolvedor.</string>
 
 </resources>

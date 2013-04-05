@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <stores>
 	<store>
         <id>1</id>
@@ -2166,7 +2166,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
 <store>
         <id>180</id>
 <name>Caixa economica</name>
-        <description>Loja especializada em transação bancaria que oferece aos seus clientes uma grande variedade de formas de pagamento.</description>
+        <description>Agência do banco Caixa Econômica Federal que atende apenas Pessoas Jurídica e orgãos do governo.</description>
         <phone>71 34028600</phone>
         <website>http://www.caixa.gov.br/</website>
         <tags></tags>

@@ -10,12 +10,11 @@ import com.inmap.salvadorshop.R;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.res.Resources;
-import android.content.res.XmlResourceParser;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-class DatabaseHelper extends SQLiteOpenHelper {
+public class DatabaseHelper extends SQLiteOpenHelper {
 
 	private Context mCtx;
 
@@ -79,7 +78,7 @@ class DatabaseHelper extends SQLiteOpenHelper {
 
 	};
 
-	DatabaseHelper(Context context) {
+	public DatabaseHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 		mCtx = context;
 	}
@@ -107,7 +106,7 @@ class DatabaseHelper extends SQLiteOpenHelper {
 		populateInfrastructures(db, resources.getXml(R.xml.infrastructures));
 	}
 
-	private void populateStores(SQLiteDatabase db, XmlPullParser xpp) throws XmlPullParserException, IOException {
+	public void populateStores(SQLiteDatabase db, XmlPullParser xpp) throws XmlPullParserException, IOException {
 		String[] pointsNames = {KEY_AREAR1P1X, KEY_AREAR1P1Y, KEY_AREAR1P2X, KEY_AREAR1P2Y, KEY_AREAR2P1X, KEY_AREAR2P1Y, KEY_AREAR2P2X, KEY_AREAR2P2Y};
 		int eventType;
 		ContentValues values = new ContentValues(8);
@@ -154,7 +153,7 @@ class DatabaseHelper extends SQLiteOpenHelper {
 		}while (eventType != XmlPullParser.END_DOCUMENT);
 	}
 
-	private void populateInfrastructures(SQLiteDatabase db, XmlPullParser xpp) throws XmlPullParserException, IOException {
+	public void populateInfrastructures(SQLiteDatabase db, XmlPullParser xpp) throws XmlPullParserException, IOException {
 		int eventType;
 		ContentValues values = new ContentValues(4);
 		String temp, value;
