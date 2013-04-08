@@ -155,9 +155,9 @@ public class GoogleMapInMapController implements InMapViewController, MapItemsLi
 		LatLng latLng = mMapLatLngConverter.getLatLng(item, mCurrentLevel);
 		MarkerOptions markerOptions = new MarkerOptions()
 		.position(latLng); 
-		Bitmap mapIconBitmap = item.getMapIconBitmap();
-		if(mapIconBitmap != null)
-			markerOptions.icon(BitmapDescriptorFactory.fromBitmap(mapIconBitmap));
+		int mapIconResId = item.getMapIconResId();
+		if(mapIconResId != 0)
+			markerOptions.icon(BitmapDescriptorFactory.fromResource(mapIconResId));
 		if(item instanceof StoreMapItem) {
 			StoreMapItem storeMapItem = (StoreMapItem) item;
 			markerOptions

@@ -1,23 +1,18 @@
 package com.inmap.salvadorshop.applicationdata;
 
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-
 import com.inmap.salvadorshop.R;
 
 public enum InfrastructureCategory {
-	EXIT(1, R.drawable.ic_action_share, R.drawable.marker),
-	PARKING(2, R.drawable.ic_action_share, R.drawable.marker),
-	STAIRS(3, R.drawable.ic_action_share, R.drawable.marker), 
-	ELEVATOR(4, R.drawable.ic_action_share, R.drawable.marker), 
-	TOILET(5, R.drawable.ic_action_share, R.drawable.marker), 
-	ESCALATOR(6, R.drawable.ic_action_share, R.drawable.marker), 
-	PHONES(7, R.drawable.ic_action_share, R.drawable.marker), 
-	BABY_FACILITIES(8, R.drawable.ic_action_share, R.drawable.marker);
+	EXIT(1, R.drawable.ic_action_share, 0),
+	PARKING(2, R.drawable.ic_action_share, 0),
+	STAIRS(3, R.drawable.ic_action_share, 0), 
+	ELEVATOR(4, R.drawable.ic_action_share, 0), 
+	TOILET(5, R.drawable.ic_action_share, 0), 
+	ESCALATOR(6, R.drawable.ic_action_share, 0), 
+	PHONES(7, R.drawable.ic_action_share, 0), 
+	BABY_FACILITIES(8, R.drawable.ic_action_share, 0);
 	
 	private int id, menuIconRes, mapIconRes;
-	private Bitmap mBitmap;
 
 	private InfrastructureCategory(int id, int menuIconRes, int mapIconRes){
 		this.id = id;
@@ -29,17 +24,12 @@ public enum InfrastructureCategory {
 		return id;
 	}
 
-	public int getMenuIconRes() {
+	public int getMenuIconResId() {
 		return menuIconRes;
 	}
 
-	public Bitmap getMapIconBitmap() {
-		return mBitmap;
-	}
-	
-	public void loadMapIconBitmap(Resources res){
-		if(mBitmap == null)
-			mBitmap = BitmapFactory.decodeResource(res, mapIconRes);
+	public int getMapIconResId() {
+		return mapIconRes;
 	}
 
 }

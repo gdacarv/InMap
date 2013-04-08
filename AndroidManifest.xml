@@ -28,11 +28,12 @@
     <application
         android:name="com.inmap.InMapApplication"
         android:icon="@drawable/ic_launcher"
+        android:logo="@drawable/img_marca_inmap"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.inmap.activities.MainActivity"
-            android:label="@string/app_name"
+            android:label=""
             android:launchMode="singleTask" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

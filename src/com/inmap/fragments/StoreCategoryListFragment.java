@@ -4,6 +4,7 @@ import com.inmap.salvadorshop.R;
 import com.inmap.salvadorshop.applicationdata.StoreCategory;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -86,8 +87,12 @@ public class StoreCategoryListFragment extends Fragment {
 			if(convertView == null)
 				convertView = View.inflate(mContext, android.R.layout.simple_list_item_1, null);
 			
-			((TextView) convertView.findViewById(android.R.id.text1))
-				.setText(((StoreCategory)getItem(position)).getTitleRes());
+			TextView textView = (TextView) convertView.findViewById(android.R.id.text1);
+			StoreCategory storeCategory = (StoreCategory)getItem(position);
+			textView.setText(storeCategory.getTitleRes());
+			textView.setCompoundDrawablesWithIntrinsicBounds(storeCategory.getMenuIconResId(), 0, 0, 0);
+			textView.setBackgroundColor(storeCategory.getMenuColor());
+			textView.setTextColor(Color.WHITE);
 			
 			return convertView;
 		}

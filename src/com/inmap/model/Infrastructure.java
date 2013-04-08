@@ -1,7 +1,5 @@
 package com.inmap.model;
 
-import android.graphics.Bitmap;
-
 import com.inmap.interfaces.MapItem;
 import com.inmap.salvadorshop.applicationdata.InfrastructureCategory;
 
@@ -35,8 +33,8 @@ public class Infrastructure implements MapItem{
 	}
 
 	@Override
-	public Bitmap getMapIconBitmap() {
-		return category.getMapIconBitmap();
+	public int getMapIconResId() {
+		return category.getMapIconResId();
 	}
 
 }

@@ -70,7 +70,7 @@ public class InfrastructureBarFragment extends Fragment implements OnGestureList
 		for(int i = 0; i < cats.length; i++){
 			mInfraButtons[i] = new ImageButton(context);
 			mInfraButtons[i].setBackgroundResource(android.R.color.transparent);
-			mInfraButtons[i].setImageResource(cats[i].getMenuIconRes());
+			mInfraButtons[i].setImageResource(cats[i].getMenuIconResId());
 			mInfraIds[i] = cats[i].getId();
 			mInfraButtons[i].setOnClickListener(listener);
 			layout.addView(mInfraButtons[i]);
@@ -211,6 +211,6 @@ public class InfrastructureBarFragment extends Fragment implements OnGestureList
 	}
 	
 	public interface OnInfrastructureCategoryChangedListener {
-		public void onInfrastructureCategoryChanged(int id);
+		void onInfrastructureCategoryChanged(int id);
 	}
 }

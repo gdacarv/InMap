@@ -75,7 +75,6 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 	private LevelPickerFragment mLevelPickerFragment;
 	private boolean isShowingStoreList = false,
 		isShowingLevelPicker = false;
-	private FrameLayout mLayoutLists;
 	private InMapViewController mInMapViewController;
 	private OnLevelSelectedListener[] mLevelSelectedListeners;
 	private OnInfrastructureCategoryChangedListener[] mInfrastructureCategoryChangedListeners;
@@ -84,9 +83,6 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 	private View mClearMarkersButton;
 
 	private GoogleMap mMap;
-
-	private LevelInformation mLevelInformation;
-
 
 	private SlidingMenu mSlidingMenu;
 
@@ -166,7 +162,7 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 			mInMapViewController.moveMapViewToPlacePosition();
 			break;
 
-		case R.id.menu_refresh:
+		case R.id.menu_categories:
 			toggleList();
 			break;
 
@@ -275,7 +271,6 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 	private void configureAllLayout() {
 		configureLayoutCategoryList();
 		configureLayoutStoreList();
-		mLayoutLists = (FrameLayout) findViewById(R.id.layout_lists);
 		mClearMarkersButton = findViewById(R.id.btn_clear_markers);
 		configureLayoutLevelPicker();
 	}
@@ -324,7 +319,6 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 		mInfrastructureCategoryChangedListeners = mApplicationDataFacade.getOnInfrastructureCategoryChangedListeners();
 		mStoreOnMapController = mApplicationDataFacade.getStoreOnMapController();
 		mInMapViewController.setMapController(mApplicationDataFacade.getMapController());
-		mLevelInformation = mApplicationDataFacade.getLevelInformation();
 	}
 
 	private void toggleLevelPicker() {

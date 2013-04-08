@@ -2,13 +2,10 @@
 <resources>
 
     <string name="app_name">In Map</string>
-    <string name="alternate_title">An alternate title that is long</string>
-    <string name="toggle_title">Toggle title</string>
-    <string name="menu_refresh">Refresh</string>
-    <string name="menu_search">Search</string>
+    <string name="menu_search">Pesquisar</string>
     <string name="menu_levels">Andar</string>
-    <string name="title_clothing_man">Roupa Masculina</string>
-    <string name="title_clothing_woman">Roupa Feminina</string>
+    <string name="title_clothing_man">Moda Masculina</string>
+    <string name="title_clothing_woman">Moda Feminina</string>
     <string name="title_gifts">Presentes</string>
     <string name="title_shoes">Calçados/Acessórios/Bolsas</string>
     <string name="title_eletronics">Eletrônicos</string>
@@ -46,5 +43,6 @@
     <string name="search_hint">Digite o que deseja...</string>
     <string name="message_noitems_list_store">Ops, nada foi encontrado.</string>
     <string name="msg_error_server">Erro ao atualizar informações. Avise ao desenvolvedor.</string>
+    <string name="ver_lojas">Ver lojas</string>
 
 </resources>

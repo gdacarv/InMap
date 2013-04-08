@@ -81,7 +81,6 @@ public class UpdateDataService extends Service { // TODO Check internet, if offl
 				e.printStackTrace();
 			}
 			mDbHelper = new DatabaseHelper(UpdateDataService.this);
-			mDb = mDbHelper.getWritableDatabase();
 			try {
 				Log.i("UpdateDataService.UpdateDataAsyncTask", "doInBackground "
 						+ "start.");
@@ -94,9 +93,7 @@ public class UpdateDataService extends Service { // TODO Check internet, if offl
 			}catch(Exception e) {
 				e.printStackTrace();
 				// TODO if offline scheduale to future
-			} finally {
-				mDb.close();
-			}
+			} 
 			return null;
 		}
 
@@ -113,6 +110,7 @@ public class UpdateDataService extends Service { // TODO Check internet, if offl
 				@Override
 				protected void handleXml(XmlPullParser xpp) {
 					if(xpp != null) {
+						mDb = mDbHelper.getWritableDatabase();
 						try {
 							mDbHelper.populateInfrastructures(mDb, xpp);
 						} catch (XmlPullParserException e) {
@@ -121,6 +119,8 @@ public class UpdateDataService extends Service { // TODO Check internet, if offl
 						} catch (IOException e) {
 							Toast.makeText(UpdateDataService.this, R.string.msg_error_server, Toast.LENGTH_SHORT).show();
 							e.printStackTrace();
+						} finally {
+							mDb.close();
 						}
 					}
 				}
@@ -134,6 +134,7 @@ public class UpdateDataService extends Service { // TODO Check internet, if offl
 				@Override
 				protected void handleXml(XmlPullParser xpp) {
 					if(xpp != null) {
+						mDb = mDbHelper.getWritableDatabase();
 						try {
 							mDbHelper.populateStores(mDb, xpp);
 						} catch (XmlPullParserException e) {
@@ -142,6 +143,8 @@ public class UpdateDataService extends Service { // TODO Check internet, if offl
 						} catch (IOException e) {
 							Toast.makeText(UpdateDataService.this, R.string.msg_error_server, Toast.LENGTH_SHORT).show();
 							e.printStackTrace();
+						} finally {
+							mDb.close();
 						}
 					}
 				}

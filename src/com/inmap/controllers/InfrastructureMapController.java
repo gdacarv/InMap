@@ -70,8 +70,6 @@ public class InfrastructureMapController implements MapController,
 	}
 
 	private MapItem[] convertInfrastructuresInMapItems(Infrastructure[] infras) {
-		if(infras != null && infras.length > 0)
-			infras[0].getCategory().loadMapIconBitmap(mContext.getResources());
 		return infras;
 	}
 

@@ -76,8 +76,8 @@ public class Store implements StoreMapItem, Serializable{
 	}
 
 	@Override
-	public Bitmap getMapIconBitmap() {
-		return mCategory.getMapIconBitmap();
+	public int getMapIconResId() {
+		return mCategory.getMapIconResId();
 	}
 
 	/*@Override // Useful only when using InMapImageView to determinate clickable area of marker

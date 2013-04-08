@@ -142,7 +142,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 					break;
 				case XmlPullParser.END_TAG:
 					if(xpp.getName().equals("store")){
-						db.insertWithOnConflict(DATABASE_TABLE_STORE, null, values, SQLiteDatabase.CONFLICT_REPLACE);
+						if(values.containsKey("deleted"))
+							db.delete(DATABASE_TABLE_STORE, KEY_ID + " = " + values.getAsString(KEY_ID), null);
+						else
+							db.insertWithOnConflict(DATABASE_TABLE_STORE, null, values, SQLiteDatabase.CONFLICT_REPLACE);
 					}
 					break;
 				}
@@ -180,7 +183,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 				break;
 			case XmlPullParser.END_TAG:
 				if(xpp.getName().equals("infrastructure")){
-					db.insertWithOnConflict(DATABASE_TABLE_INFRASTRUCTURE, null, values, SQLiteDatabase.CONFLICT_REPLACE);
+					if(values.containsKey("deleted"))
+						db.delete(DATABASE_TABLE_INFRASTRUCTURE, KEY_ID + " = " + values.getAsString(KEY_ID), null);
+					else
+						db.insertWithOnConflict(DATABASE_TABLE_INFRASTRUCTURE, null, values, SQLiteDatabase.CONFLICT_REPLACE);
 				}
 				break;
 			}
