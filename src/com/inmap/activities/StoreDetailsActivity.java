@@ -9,14 +9,17 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
+import com.inmap.InMapApplication;
 import com.inmap.salvadorshop.R;
 import com.inmap.actionbar.ActionBarActivity;
+import com.inmap.interfaces.ApplicationDataFacade;
 import com.inmap.model.Store;
 
 public class StoreDetailsActivity extends ActionBarActivity {
 
 	public static final String STORE = "store";
 	private Store mStore;
+	private ApplicationDataFacade mApplicationDataFacade;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +33,7 @@ public class StoreDetailsActivity extends ActionBarActivity {
 		else
 			mStore = (Store) getIntent().getSerializableExtra(STORE);
 		
+		mApplicationDataFacade = ((InMapApplication)getApplication()).getApplicationDataFacade();
 		setActionBarTitle(mStore.getTitle());
 		populateViews();
 		
@@ -41,7 +45,7 @@ public class StoreDetailsActivity extends ActionBarActivity {
 		((TextView)findViewById(R.id.txt_details_phone)).setText(getString(R.string.telefone_) + " " + mStore.getPhone());
 		((TextView)findViewById(R.id.txt_details_website)).setText(getString(R.string.site_) + " " + mStore.getWebsite());
 		((TextView)findViewById(R.id.txt_details_category)).setText(getString(R.string.categoria_) + " " + getString(mStore.getCategory().getTitleRes()));
-		((TextView)findViewById(R.id.txt_details_level)).setText(getString(R.string.andar_) + " " + mStore.getLevel());
+		((TextView)findViewById(R.id.txt_details_level)).setText(getString(R.string.andar_) + " " + mApplicationDataFacade.getLevelInformation().getTitle(mStore.getLevel()));
 	}
 
 	private void setActionBarTitle(String title) {

@@ -1,5 +1,10 @@
 package com.inmap.model;
 
+import java.io.IOException;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -109,6 +114,17 @@ public class DbAdapter {
 		return cursor != null ? getStoresFromCursor(cursor) : null;
 	}
 
+	public void getStoresCountByCategory(int[] storesCount) {
+		Cursor cursor = mDb.query(DatabaseHelper.DATABASE_TABLE_STORE, new String[]{ DatabaseHelper.KEY_STORECATEGORY, "COUNT(*) as storecount" } , null, null, DatabaseHelper.KEY_STORECATEGORY, null, null);
+		if(cursor != null && cursor.moveToFirst()) {
+			int countColumn = cursor.getColumnIndex("storecount"),
+				idColumn = cursor.getColumnIndex(DatabaseHelper.KEY_STORECATEGORY);
+			do {
+				storesCount[cursor.getInt(idColumn)-1] = cursor.getInt(countColumn);
+			} while(cursor.moveToNext());
+		}
+	}
+
 	private Store[] getStoresFromCursor(Cursor cursor) {
 		Store[] stores;
 		if(cursor.moveToFirst()){
@@ -161,13 +177,13 @@ public class DbAdapter {
 				cursor.getColumnIndex(DatabaseHelper.KEY_AREAR2P2X), 
 				cursor.getColumnIndex(DatabaseHelper.KEY_AREAR2P2Y)};
 		int idColumn = cursor.getColumnIndex(DatabaseHelper.KEY_ID),
-			nameColumn = cursor.getColumnIndex(DatabaseHelper.KEY_NAME),
-			descriptionColumn = cursor.getColumnIndex(DatabaseHelper.KEY_DESCRIPTION),
-			phoneColumn = cursor.getColumnIndex(DatabaseHelper.KEY_PHONE),
-			websiteColumn = cursor.getColumnIndex(DatabaseHelper.KEY_WEBSITE),
-			levelColumn = cursor.getColumnIndex(DatabaseHelper.KEY_LEVEL),
-			categoryColumn = cursor.getColumnIndex(DatabaseHelper.KEY_STORECATEGORY),
-			tagsColumn = cursor.getColumnIndex(DatabaseHelper.KEY_TAGS);
+		nameColumn = cursor.getColumnIndex(DatabaseHelper.KEY_NAME),
+		descriptionColumn = cursor.getColumnIndex(DatabaseHelper.KEY_DESCRIPTION),
+		phoneColumn = cursor.getColumnIndex(DatabaseHelper.KEY_PHONE),
+		websiteColumn = cursor.getColumnIndex(DatabaseHelper.KEY_WEBSITE),
+		levelColumn = cursor.getColumnIndex(DatabaseHelper.KEY_LEVEL),
+		categoryColumn = cursor.getColumnIndex(DatabaseHelper.KEY_STORECATEGORY),
+		tagsColumn = cursor.getColumnIndex(DatabaseHelper.KEY_TAGS);
 		StoreCategory[] categorys = StoreCategory.values();
 		int[] areaIntArray = new int[pointsColumn.length];
 		for(int l = 0; l < areaIntArray.length; l++)
@@ -211,6 +227,11 @@ public class DbAdapter {
 		return infras;
 	}
 
+	public void populateInfrastructures(XmlPullParser xpp) throws XmlPullParserException, IOException {
+		mDbHelper.populateInfrastructures(mDb, xpp);
+	}
 
-
+	public void populateStores(XmlPullParser xpp) throws XmlPullParserException, IOException {
+		mDbHelper.populateStores(mDb, xpp);
+	}
 }

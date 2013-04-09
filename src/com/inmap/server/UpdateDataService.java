@@ -19,7 +19,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
 import android.os.Build;
@@ -29,7 +28,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.inmap.model.DatabaseHelper;
+import com.inmap.model.DbAdapter;
 import com.inmap.salvadorshop.R;
 
 public class UpdateDataService extends Service { // TODO Check internet, if offline, create a broadcast receiver
@@ -68,8 +67,7 @@ public class UpdateDataService extends Service { // TODO Check internet, if offl
 		private SharedPreferences mSharedPreferences;
 		private JSONObject mInfoObject;
 		private Bundle mManifestMetaData;
-		private DatabaseHelper mDbHelper;
-		private SQLiteDatabase mDb;
+		private DbAdapter mDb;
 
 		@Override
 		protected Void doInBackground(Void... params) {
@@ -80,7 +78,6 @@ public class UpdateDataService extends Service { // TODO Check internet, if offl
 			} catch (NameNotFoundException e) {
 				e.printStackTrace();
 			}
-			mDbHelper = new DatabaseHelper(UpdateDataService.this);
 			try {
 				Log.i("UpdateDataService.UpdateDataAsyncTask", "doInBackground "
 						+ "start.");
@@ -110,9 +107,11 @@ public class UpdateDataService extends Service { // TODO Check internet, if offl
 				@Override
 				protected void handleXml(XmlPullParser xpp) {
 					if(xpp != null) {
-						mDb = mDbHelper.getWritableDatabase();
+						if(mDb == null)
+							mDb = DbAdapter.getInstance(getApplicationContext());
+						mDb.open();
 						try {
-							mDbHelper.populateInfrastructures(mDb, xpp);
+							mDb.populateInfrastructures(xpp);
 						} catch (XmlPullParserException e) {
 							Toast.makeText(UpdateDataService.this, R.string.msg_error_server, Toast.LENGTH_SHORT).show();
 							e.printStackTrace();
@@ -134,9 +133,11 @@ public class UpdateDataService extends Service { // TODO Check internet, if offl
 				@Override
 				protected void handleXml(XmlPullParser xpp) {
 					if(xpp != null) {
-						mDb = mDbHelper.getWritableDatabase();
+						if(mDb == null)
+							mDb = DbAdapter.getInstance(getApplicationContext());
+						mDb.open();
 						try {
-							mDbHelper.populateStores(mDb, xpp);
+							mDb.populateStores(xpp);
 						} catch (XmlPullParserException e) {
 							Toast.makeText(UpdateDataService.this, R.string.msg_error_server, Toast.LENGTH_SHORT).show();
 							e.printStackTrace();

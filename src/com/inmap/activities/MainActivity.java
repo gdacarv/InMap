@@ -29,11 +29,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
-import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.inmap.InMapApplication;
 import com.inmap.actionbar.ActionBarActivity;
 import com.inmap.controllers.GoogleMapInMapController;
 import com.inmap.fragments.InfrastructureBarFragment;
@@ -47,7 +47,6 @@ import com.inmap.fragments.StoreListFragment.OnStoreSelectedListener;
 import com.inmap.fragments.StoreListFragment.StoreListController;
 import com.inmap.interfaces.ApplicationDataFacade;
 import com.inmap.interfaces.InMapViewController;
-import com.inmap.interfaces.LevelInformation;
 import com.inmap.interfaces.OnAnimationEnd;
 import com.inmap.interfaces.OnStoreBallonClickListener;
 import com.inmap.interfaces.StoreMapItem;
@@ -56,7 +55,6 @@ import com.inmap.model.DbAdapter;
 import com.inmap.model.Store;
 import com.inmap.model.StoreParameters;
 import com.inmap.salvadorshop.R;
-import com.inmap.salvadorshop.applicationdata.SalvadorShopApplicationDataFacade;
 import com.inmap.views.AnimateFrameLayout;
 import com.slidingmenu.lib.SlidingMenu;
 
@@ -65,7 +63,7 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 	protected static final String SHOW_STORE_INMAP = "show_store_inmap";
 
 
-	private ApplicationDataFacade mApplicationDataFacade = SalvadorShopApplicationDataFacade.getInstance(this);
+	private ApplicationDataFacade mApplicationDataFacade;
 
 
 	private AnimateFrameLayout mLayoutStoreList, mLayoutCategoryList, mLayoutLevelPicker;
@@ -97,7 +95,7 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 			getActionBar().setHomeButtonEnabled(true);
 		
-		mDbAdapter = DbAdapter.getInstance(this);
+		mDbAdapter = DbAdapter.getInstance(getApplicationContext());
 		
 		fixZoomButtons();
 		
@@ -311,6 +309,7 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 	}
 
 	private void loadInformationFromApplicationDataFacade() {
+		mApplicationDataFacade = ((InMapApplication)getApplication()).getApplicationDataFacade();
 		if(mMap == null)
 			throw new IllegalStateException("GoogleMap should not be null.");
 		mInMapViewController = new GoogleMapInMapController(/*Context*/ this, mMap, mApplicationDataFacade);

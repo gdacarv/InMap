@@ -1,10 +1,16 @@
 package com.inmap.fragments;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
+import com.inmap.model.DbAdapter;
+import com.inmap.model.Store;
 import com.inmap.salvadorshop.R;
 import com.inmap.salvadorshop.applicationdata.StoreCategory;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -61,10 +67,27 @@ public class StoreCategoryListFragment extends Fragment {
 	private class StoreCategoryListAdapter extends BaseAdapter{
 		private Context mContext;
 		private StoreCategory[] mStoreCategorys;
+		private int[] mStoresCount;
+		private Comparator<StoreCategory> comparator = new Comparator<StoreCategory>() {
+			
+			@Override
+			public int compare(StoreCategory lhs, StoreCategory rhs) {
+				return mStoresCount[rhs.getId()-1] - mStoresCount[lhs.getId()-1];
+			}
+		};
 		
 		public StoreCategoryListAdapter(Context context){
 			mContext = context;
 			mStoreCategorys = StoreCategory.values();
+			mStoresCount = new int[mStoreCategorys.length];
+			Arrays.fill(mStoresCount, -1);
+			new getStoresCountAsyncTask(mStoresCount, this).execute();
+		}
+		
+		@Override
+		public void notifyDataSetChanged() {
+			Arrays.sort(mStoreCategorys, comparator );
+			super.notifyDataSetChanged();
 		}
 
 		@Override
@@ -85,17 +108,42 @@ public class StoreCategoryListFragment extends Fragment {
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			if(convertView == null)
-				convertView = View.inflate(mContext, android.R.layout.simple_list_item_1, null);
+				convertView = View.inflate(mContext, R.layout.listitem_category, null);
 			
-			TextView textView = (TextView) convertView.findViewById(android.R.id.text1);
+			TextView textView = (TextView) convertView.findViewById(R.id.txt_list_category_name);
 			StoreCategory storeCategory = (StoreCategory)getItem(position);
 			textView.setText(storeCategory.getTitleRes());
 			textView.setCompoundDrawablesWithIntrinsicBounds(storeCategory.getMenuIconResId(), 0, 0, 0);
-			textView.setBackgroundColor(storeCategory.getMenuColor());
-			textView.setTextColor(Color.WHITE);
+			convertView.setBackgroundColor(storeCategory.getMenuColor());
+			int count = mStoresCount[storeCategory.getId()-1];
+			((TextView) convertView.findViewById(R.id.txt_list_category_qt)).setText(count == -1 ? "" : String.valueOf(count));
 			
 			return convertView;
 		}
 		
+		private class getStoresCountAsyncTask extends AsyncTask<Void, Void, Void>{
+			
+			private int[] storesCount;
+			private BaseAdapter adapter;
+
+			public getStoresCountAsyncTask(int[] storesCount, BaseAdapter adapter) {
+				this.storesCount = storesCount;
+				this.adapter = adapter;
+			}
+
+			@Override
+			protected Void doInBackground(Void... params) {
+				DbAdapter dbAdapter = DbAdapter.getInstance(mContext).open();
+				dbAdapter.getStoresCountByCategory(storesCount);
+				dbAdapter.close();
+				return null;
+			}
+			
+			@Override
+			protected void onPostExecute(Void result) {
+				super.onPostExecute(result);
+				adapter.notifyDataSetChanged();
+			}
+		}
 	}
 }

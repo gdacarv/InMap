@@ -7,7 +7,7 @@
     <string name="title_clothing_man">Moda Masculina</string>
     <string name="title_clothing_woman">Moda Feminina</string>
     <string name="title_gifts">Presentes</string>
-    <string name="title_shoes">Calçados/Acessórios/Bolsas</string>
+    <string name="title_shoes">Calçados/Bolsas</string>
     <string name="title_eletronics">Eletrônicos</string>
     <string name="title_food">Alimentação</string>
     <string name="title_entertainment">Entretenimento</string>
@@ -19,7 +19,7 @@
     <string name="title_health">Saúde</string>
     <string name="title_unissex">Unissex</string>
     <string name="title_underwear">Moda Íntima</string>
-    <string name="title_cosmetic">Cosméticos/Estética/Perfumaria</string>
+    <string name="title_cosmetic">Cosméticos/Perfumaria</string>
     <string name="title_sports">Artigos Esportivos</string>
     <string name="title_baby">Artigos infantis/Bebê</string>
     <string name="title_street">Moda Street/Surf/Praia</string>
