@@ -1,8 +1,10 @@
 package com.inmap.activities;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,10 +12,10 @@ import android.view.View.OnClickListener;
 import android.widget.TextView;
 
 import com.inmap.InMapApplication;
-import com.inmap.salvadorshop.R;
 import com.inmap.actionbar.ActionBarActivity;
 import com.inmap.interfaces.ApplicationDataFacade;
 import com.inmap.model.Store;
+import com.inmap.salvadorshop.R;
 
 public class StoreDetailsActivity extends ActionBarActivity {
 
@@ -21,31 +23,38 @@ public class StoreDetailsActivity extends ActionBarActivity {
 	private Store mStore;
 	private ApplicationDataFacade mApplicationDataFacade;
 
+	@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_store_details);
-		// Show the Up button in the action bar.
-		//getActionBar().setDisplayHomeAsUpEnabled(true);
-		
+
+		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+			getActionBar().setHomeButtonEnabled(true);
+
 		if(savedInstanceState != null)
 			mStore = (Store) savedInstanceState.getSerializable(STORE);
 		else
 			mStore = (Store) getIntent().getSerializableExtra(STORE);
-		
+
 		mApplicationDataFacade = ((InMapApplication)getApplication()).getApplicationDataFacade();
-		setActionBarTitle(mStore.getTitle());
+		setActionBarTitle("  " + mStore.getTitle());
 		populateViews();
-		
+
 		findViewById(R.id.btn_details_map).setOnClickListener(onMapButtonClick);
 	}
 
 	private void populateViews() {
 		((TextView)findViewById(R.id.txt_details_description)).setText(getString(R.string.descricao_) + " " + mStore.getDescription());
-		((TextView)findViewById(R.id.txt_details_phone)).setText(getString(R.string.telefone_) + " " + mStore.getPhone());
-		((TextView)findViewById(R.id.txt_details_website)).setText(getString(R.string.site_) + " " + mStore.getWebsite());
+		TextView phoneTextView = (TextView)findViewById(R.id.txt_details_phone);
+		phoneTextView.setText(getString(R.string.telefone_) + " " + mStore.getPhone());
+		TextView websiteTextView = (TextView)findViewById(R.id.txt_details_website);
+		websiteTextView.setText(getString(R.string.site_) + " " + mStore.getWebsite());
 		((TextView)findViewById(R.id.txt_details_category)).setText(getString(R.string.categoria_) + " " + getString(mStore.getCategory().getTitleRes()));
 		((TextView)findViewById(R.id.txt_details_level)).setText(getString(R.string.andar_) + " " + mApplicationDataFacade.getLevelInformation().getTitle(mStore.getLevel()));
+
+		phoneTextView.setOnClickListener(onPhoneClickListener);
+		websiteTextView.setOnClickListener(onWebsiteClickListener);
 	}
 
 	private void setActionBarTitle(String title) {
@@ -70,14 +79,16 @@ public class StoreDetailsActivity extends ActionBarActivity {
 			//
 			// http://developer.android.com/design/patterns/navigation.html#up-vs-back
 			//
-			NavUtils.navigateUpFromSameTask(this);
+			// NavUtils.navigateUpFromSameTask(this);
+			startActivity(new Intent(StoreDetailsActivity.this, MainActivity.class));
+			finish();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
 
 	private OnClickListener onMapButtonClick = new OnClickListener() {
-		
+
 		@Override
 		public void onClick(View v) {
 			Intent i = new Intent(StoreDetailsActivity.this, MainActivity.class);
@@ -85,4 +96,34 @@ public class StoreDetailsActivity extends ActionBarActivity {
 			startActivity(i);
 		}
 	};
+
+	private OnClickListener onPhoneClickListener = new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			dialPhone(mStore.getPhone());
+		}
+	};
+
+	private OnClickListener onWebsiteClickListener = new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			openUrl(mStore.getWebsite());
+		}
+	};
+
+	private void dialPhone(String number) {
+		Intent intent = new Intent(Intent.ACTION_DIAL);
+		intent.setData(Uri.parse("tel:" + number.trim()));
+		startActivity(intent);
+	}
+	
+	private void openUrl(String url) {
+		if(!url.startsWith("http://"))
+			url = "http://" + url;
+		Intent i = new Intent(Intent.ACTION_VIEW);
+		i.setData(Uri.parse(url));
+		startActivity(i);
+	}
 }

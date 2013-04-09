@@ -91,6 +91,8 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		setTitle("");
 
 		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 			getActionBar().setHomeButtonEnabled(true);
