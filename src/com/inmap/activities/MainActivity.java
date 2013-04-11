@@ -57,6 +57,7 @@ import com.inmap.model.StoreParameters;
 import com.inmap.salvadorshop.R;
 import com.inmap.views.AnimateFrameLayout;
 import com.slidingmenu.lib.SlidingMenu;
+import com.slidingmenu.lib.SlidingMode;
 
 public class MainActivity extends ActionBarActivity implements OnInfrastructureCategoryChangedListener, OnStoreCategoryChangedListener, OnStoreSelectedListener, OnLevelSelectedListener, StoreListController, OnStoreBallonClickListener {
 
@@ -242,13 +243,16 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 	
 	private void configureSlidingMenu() {
 		mSlidingMenu = new SlidingMenu(this);
+		mSlidingMenu.setMode(SlidingMode.LEFT_RIGHT);
 		mSlidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
 		mSlidingMenu.setShadowWidthRes(R.dimen.shadow_width);
 		mSlidingMenu.setShadowDrawable(R.drawable.shadow);
-		mSlidingMenu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
+		mSlidingMenu.setBehindOffsetRes(R.dimen.slidingmenu_offset_left, SlidingMode.LEFT);
+		mSlidingMenu.setBehindWidthRes(R.dimen.slidingmenu_width_right, SlidingMode.RIGHT);
 		mSlidingMenu.setFadeDegree(0.35f);
 		mSlidingMenu.attachToActivity(this, SlidingMenu.SLIDING_WINDOW);
-		mSlidingMenu.setMenu(R.layout.layout_lists);
+		mSlidingMenu.setMenu(R.layout.layout_lists, SlidingMode.LEFT);
+		mSlidingMenu.setMenu(R.layout.layout_levelpicker, SlidingMode.RIGHT);
 	}
 
 	private void configureFragments() {
@@ -323,19 +327,23 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 	}
 
 	private void toggleLevelPicker() {
-		isShowingLevelPicker = !isShowingLevelPicker;
+		/*isShowingLevelPicker = !isShowingLevelPicker;
 		if(isShowingLevelPicker){
 			mLayoutLevelPicker.setVisibility(View.VISIBLE);
-			mLayoutLevelPicker.startAnimation(AnimationUtils.loadAnimation(this, R.anim.to_down_from__100_to_0));
-		}else {
+			mLayoutLevelPicker.startAnimation(AnimationUtils.loadAnimation(this, R.anim.to_down_from__100_to_0));*/
+		if(mSlidingMenu.isSecondaryMenuShowing())
+			mSlidingMenu.showContent();
+		else 
+			mSlidingMenu.showSecondaryMenu();
+		/*}else {
 			mLayoutLevelPicker.startAnimation(AnimationUtils.loadAnimation(this, R.anim.to_up_100));
-		}
+		}*/
 	}
 
 	protected void toggleList() {
 		if(mSlidingMenu.isMenuShowing())
 			mSlidingMenu.showContent();
-		else
+		else 
 			mSlidingMenu.showMenu();
 	}
 

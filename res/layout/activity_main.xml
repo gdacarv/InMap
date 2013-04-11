@@ -24,11 +24,11 @@
             android:layout_weight="1"
             android:visibility="invisible" >
 
-            <fragment
+            <!-- <fragment
                 android:id="@+id/fragment_levelpicker"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                class="com.inmap.fragments.LevelPickerFragment" />
+                class="com.inmap.fragments.LevelPickerFragment" /> -->
         </com.inmap.views.AnimateFrameLayout>
 
         <fragment

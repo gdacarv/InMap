@@ -146,6 +146,7 @@ public class GoogleMapInMapController implements InMapViewController, MapItemsLi
 			it.next().remove();
 			it.remove();
 		}
+		if(mCurrentLevel < 3) // XXX Remove when map L2 and L3 are ready
 		for(MapItem item : mapItems) {
 			createMarker(item); 
 		} // XXX Might use optimizations

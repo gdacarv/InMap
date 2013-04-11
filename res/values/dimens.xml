@@ -20,5 +20,6 @@
     <dimen name="actionbar_compat_button_home_width">56dp</dimen>
     
     <dimen name="shadow_width">15dp</dimen>
-    <dimen name="slidingmenu_offset">60dp</dimen>
+    <dimen name="slidingmenu_offset_left">60dp</dimen>
+    <dimen name="slidingmenu_width_right">60dp</dimen>
 </resources>

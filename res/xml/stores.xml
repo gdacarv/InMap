@@ -6,7 +6,7 @@
         <description>A Só Saúde é uma loja especializada em produtos médico-hospitalares com uma excelente qualidade em seus produtos na área hospitalar.</description>
         <phone>(71) 3019-8558</phone>
         <website>www.sosaudebrasil.com.br/</website>
-        <tags>saude,corpo,saudavel,postura,massageador</tags>
+        <tags>saúde,corpo,saudavel,postura,massageador,produtos médico-hospitalar,médico,G1</tags>
         <id_storecategory>13</id_storecategory>
         <level>0</level>
         <area>65,265,82,313</area> <!-- LOJA 01 -->
@@ -17,9 +17,9 @@
         <name>Mega Pixel</name>
         <description>Mega Pixel é uma  loja de revelação de fotos e vendas de maquinas fotográficas com qualidade no seus produtos e agilidade.</description>
         <phone></phone>
-        <website>foto,revelação,maquina,fotografica</website>
-        <tags>comida,sanduiche</tags>
-        <id_storecategory>6</id_storecategory>
+        <website></website>
+        <tags>foto,revelação,maquina,fotografica,fotos,máquinas,revelação,G1</tags>
+        <id_storecategory>10</id_storecategory>
         <level>0</level>
         <area>88,264,103,313</area> <!-- LOJA 02 -->
     </store>
@@ -30,7 +30,7 @@
         <description>Clinica odontológica moderna, com equipamentos de ponta, com os serviços de ortodontia, implante, estética, endodontia, prótese, cirurgia, clareamento.</description>
         <phone>71 34142318</phone>
         <website>www.clinicadentalwhite.com.br/salvador/</website>
-        <tags>Dente,clinica,dentaria,dentes,clinicas</tags>
+        <tags>Dente,clinica,dentaria,dentes,clinicas,boca,odontológica,odontologia,implante,estética,endodontia,prótese,cirurgia,clareamento,G1</tags>
         <id_storecategory>13</id_storecategory>
         <level>0</level>
         <area>108,264,146,314</area> <!-- LOJA 03 -->
@@ -43,7 +43,7 @@
         <description>Clinica especializada em tratamento do bem estar dos pés, com diversas técnicas de massagem e relaxamento para os pés e mãos, tratando de calosidades, calos, unhas encravadas entre outros serviços de qualidade.</description>
         <phone>71 33411919</phone>
         <website>http://bamboopodologia.blogspot.com.br/</website>
-        <tags>pe,clinica,pes,clinicas,podologia</tags>
+        <tags>pe,clinica,pes,clinicas,podologia,bem estar,massagem,relaxamento,mãos,calos,calosidades,unha,unhas encravadas,G1</tags>
         <id_storecategory>13</id_storecategory>
         <level>0</level>
         <area>231,291,268,311</area> <!-- LOJA 04 -->
@@ -56,7 +56,7 @@
         <description>Rede de lojas especializada no tratamento de roupas, por meio de um sistema profissional para limpeza a seco e a água, que utiliza equipamentos e produtos de alta tecnologia, sem qualquer prejuízo ao meio ambiente.</description>
         <phone>71 30196666</phone>
         <website>http://www.5asec.com.br/Novo2012/pt/index.php?id=02</website>
-        <tags>roupa,lavanderia,lavagem</tags>
+        <tags>roupaS,lavanderiaS,lavagem,secagem,lavar,limpeza,passar roupa,G1</tags>
         <id_storecategory>10</id_storecategory>
         <level>0</level>
         <area>272,292,353,313,315,265,352,286</area> <!-- LOJA 05 -->
@@ -66,11 +66,11 @@
 <store>
         <id>6</id>
         <name>Multicoisas</name>
-        <description>Loja de utilidades para o lar onde você pode encontrar materiais de segurança e lazer, informática, ferramentas, ferragens, hidráulica, elétrica e químicoscom as melhores marcas do mercado.</description>
+        <description>Loja de utilidades para o lar onde você pode encontrar materiais de segurança e lazer, informática, ferramentas, ferragens, hidráulica, elétrica e químicos com as melhores marcas do mercado.</description>
         <phone>71 32720340</phone>
         <website>http://www.multicoisas.com.br/</website>
-        <tags>ferramentas,acessorios,peças</tags>
-        <id_storecategory>10</id_storecategory>
+        <tags>ferramentas,acessorios,peças,chave de fenda,lanterna,lar,casa,utilidades,acessórios,informática,ferragens,hidráulica,elétrica,encanamento,G1</tags>
+        <id_storecategory>24</id_storecategory>
         <level>0</level>
         <area>357,265,394,313</area> <!-- LOJA 06 -->
     </store>
@@ -82,7 +82,7 @@
         <description>Espaço reservado para fazer anúncios no jornal, utilizar lan house  e fazer assinaturas de jornais com serviços rápidos e com ótima qualidade.</description>
         <phone></phone>
         <website></website>
-        <tags>jornal,jornalismo,notícias</tags>
+        <tags>jornal,jornalismo,notícias,informações,lan house,anúncios,assinaturas,G1</tags>
         <id_storecategory>10</id_storecategory>
         <level>0</level>
         <area>241,261,290,287</area> <!-- LOJA 07 -->
@@ -92,10 +92,10 @@
 <store>
         <id>8</id>
         <name>Zitto</name>
-        <description>Loja que oferece a seus clientes concertos de óculos de grau e solar com venda de acessórios, troca de armações entre outros com ótimos preços e excelente qualidade nos serviços oferecidos.</description>
+        <description>Loja que oferece a seus clientes consertos de óculos de grau e solar com venda de acessórios, troca de armações entre outros com ótimos preços e excelente qualidade nos serviços oferecidos.</description>
         <phone>71 30197312</phone>
         <website></website>
-        <tags>óculos,armação,lentes</tags>
+        <tags>óculos,armação,armações,lentes,consertos,grau,acessórios,lupas,G1</tags>
         <id_storecategory>20</id_storecategory>
         <level>0</level>
         <area>293,265,311,286</area> <!-- LOJA 08 -->
@@ -108,8 +108,8 @@
         <description>Loja de recarga e venda de cartuchos para impressoras e tonner com agilidade e qualidade no seu atendimento.</description>
         <phone>71 30225200</phone>
         <website></website>
-        <tags>informática,computador,pc,cartuchos,recarga</tags>
-        <id_storecategory>10</id_storecategory>
+        <tags>informática,computadores,pc,cartuchos,recarga,impressoras,impressão,carga,venda de cartuchos,impressões,G1</tags>
+        <id_storecategory>5</id_storecategory>
         <level>0</level>
         <area>305,203,337,219</area> <!-- LOJA 09 -->
     </store>
@@ -121,7 +121,7 @@
         <description>Loja de restauração de jeans com duas décadas no mercado oferecendo seus melhores serviços onde você pode obter os serviços de tingimento, lavanderia, costura e reforma sob medida, renovação de couro  tudo isso em um só lugar.</description>
         <phone>71 32723336</phone>
         <website>http://www.restaurajeans.com/</website>
-        <tags>restauração,roupas,jeans,tingimento,lavanderia</tags>
+        <tags>restauração,roupas,jeans,tingimento,lavanderia,tingimento,lavanderia,costura,reforma,couro,renovação de couro,renovações,restaurações,G1</tags>
         <id_storecategory>10</id_storecategory>
         <level>0</level>
         <area>341,185,357,219</area> <!-- LOJA 10 -->
@@ -134,7 +134,7 @@
         <description>Pensou Chocolate? Os mais deliciosos chocolates, sorvetes, e doces estão aqui.</description>
         <phone>71 3019-5221</phone>
         <website>http://www.chocolatesbrasilcacau.com.br/</website>
-        <tags>chocolate,cacau,sorvete,cafe,cha,doce</tags>
+        <tags>chocolates,cacau,sorvetes,cafe,cha,doce,café,chá,G1</tags>
         <id_storecategory>6</id_storecategory>
         <level>0</level>
         <area>305,165,336,198</area> <!-- LOJA 11 -->
@@ -144,10 +144,10 @@
 <store>
         <id>12</id>
         <name>Colonézi Service</name>
-        <description>Loja especializada em concertos de celulares e venda de artigos para celular com diversas opções e muita qualidade.</description>
+        <description>Loja especializada em consertos de celulares e venda de artigos para celular com diversas opções e muita qualidade.</description>
         <phone>71 30162569</phone>
         <website>http://www.iphoneclub.com.br/</website>
-        <tags>iphone,celulares,assistência técnica,acessórios</tags>
+        <tags>G1,iphone,celulares,assistência técnica,acessórios,consertos,celular,smartphone,apple,android</tags>
         <id_storecategory>10</id_storecategory>
         <level>0</level> 
         <area>341,145,356,180</area> <!-- LOJA 12 -->
@@ -160,7 +160,7 @@
         <description>Venda de bolsas, carteiras, bijuterias, lenços e todo artigo de presentes com qualidade que só a acessorium tem.  </description>
         <phone>71 33421842</phone>
         <website></website>
-        <tags>bijouterias,acessórios</tags>
+        <tags>G1,bijuterias,acessórios,bolsas,carteiras,lenços</tags>
         <id_storecategory>23</id_storecategory>
         <level>0</level>
         <area>302,143,336,160</area> <!-- LOJA 13 -->
@@ -173,7 +173,7 @@
         <description>Centro médico de vacinas para crianças que segue recomendações do Programa de Imunização da Organização Mundial de Saúde e no Programa Nacional de Imunizações e da Academia Americana de Pediatria.</description>
         <phone>0800 401 2000</phone>
         <website>http://www.vacinaslouispasteur.com.br/</website>
-        <tags>vacinas,saúde,doenças,qualidade de vida,medicação</tags>
+        <tags>G1,vacinas,saúde,doenças,qualidade de vida,medicação,crianças,imunização,pediatria,médico</tags>
         <id_storecategory>13</id_storecategory>
         <level>0</level>
         <area>66,51,82,99</area> <!-- LOJA N 14) -->
@@ -185,7 +185,7 @@
         <description>Venda de salgados e empadas que é o seu diferencial no mercado com diversos sabores e variados salgados.      </description>
         <phone>71 30195170</phone>
         <website>http://www.empadacarioca.com/</website>
-        <tags>lanches,empada,salgados,lanchonete</tags>
+        <tags>G1,lanches,empadas,salgados,lanchonetes</tags>
         <id_storecategory>6</id_storecategory>
         <level>0</level>
         <area>88,51,104,98</area> <!-- LOJA N 15) -->
@@ -197,7 +197,7 @@
         <description>Artigos do time do Bahia para todas as idades em diversos materiais e excelente preço.</description>
         <phone>71 30234302</phone>
         <website>http://borabaheastore.com/</website>
-        <tags>Bahia,time,torcida,Bahêa,Bahêêa,futebol</tags>
+        <tags>G1,Bahia,time,torcida,Bahêa,Bahêêa,futebol,roupas,acessórios,camisas,shorts,bermudas,bolas,bandeiras,esporte,artigos esportivos</tags>
         <id_storecategory>17</id_storecategory>
         <level>0</level>
         <area>109,51,143,98</area> <!-- LOJA N 16) -->
@@ -210,7 +210,7 @@
         <phone>71 30234302</phone>
         <website>http://borabaheastore.com/</website>
         <tags></tags>
-        <id_storecategory>25</id_storecategory>
+        <id_storecategory>1</id_storecategory> <!-- <id_storecategory>25 -->
         <level>0</level>
         <area>155,50,226,89</area> <!-- LOJA N 16.1) -->
     </store>
@@ -221,7 +221,7 @@
         <description>Vendas de artigos para costura, lá você pode encontrar laços, linhas, agulhas, zíper com atendimento rápido e de boa qualidade.</description>
         <phone>71 30197470</phone>
         <website></website>
-        <tags>armarinho,acessórios,papelaria</tags>
+        <tags>G1,armarinho,acessórios,papelaria,costuras,laços,linhas,agulhas,zíper</tags>
         <id_storecategory>10</id_storecategory>
         <level>0</level>
         <area>275,54,291,100</area> <!-- LOJA N 17) -->
@@ -233,8 +233,8 @@
         <description>Loja de serviços especializados  onde suas ideias são  transformar em material físico, seja banner, cartaz, adesivo, cartão de apresentação ou digitalização, até o formato A0.</description>
         <phone>71 30134520</phone>
         <website>http://www.casadacopia.com.br/</website>
-        <tags>cópias,copiadora,impressão,cartucho,copiadoras</tags>
-        <id_storecategory>3</id_storecategory>
+        <tags>G1,cópias,copiadora,impressão,cartucho,copiadoras,banner,cartaz,adesivo,cartão de visitas,cartão de apresentação,digitalização,a0,a1,a2,a3,a4,design,gráfica</tags>
+        <id_storecategory>10</id_storecategory>
         <level>0</level>
         <area>295,53,312,100</area> <!-- LOJA N 18) -->
     </store>
@@ -242,10 +242,10 @@
 <store>
         <id>20</id>
 <name>Mundo do iPhone e Blackberry</name>
-        <description>Loja especializada em concertos de celulares e venda de fones, carregadores, vidro, touch, baterias, películas protetoras, carcaça completa, capas.</description>
+        <description>Loja especializada em consertos de celulares e venda de fones, carregadores, vidro, touch, baterias, películas protetoras, carcaça completa, capas.</description>
         <phone>71 30221337</phone>
         <website>http://www.iphonebahia.com.br/blackberry.asp</website>
-        <tags>iphone,celulares,blackberry,ipad,ipod</tags>
+        <tags>G1,iphone,celulares,blackberry,ipad,ipod,consertos,fones,carregadores,touch,tela,baterias,películas,capas,películas protetoras,carcaça completa,smartphone</tags>
         <id_storecategory>10</id_storecategory>
         <level>0</level>
         <area>316,53,332,99</area> <!-- LOJA N 19) -->
@@ -257,8 +257,8 @@
         <description>Serviço de envio de correspondências nacionais, serviço internacional , telegrama, mala direta, malotes com menor preço do mercado.</description>
         <phone>71 31132766</phone>
         <website>http://www.correios.com.br/</website>
-        <tags>correios,correspondência,encomendas,sedex,cartas,entregas </tags>
-        <id_storecategory>3</id_storecategory>
+        <tags>G1,correios,correspondência,encomendas,sedex,cartas,entregas,pac,telegrama,nacional,internacional,mala direta,malotes</tags>
+        <id_storecategory>10</id_storecategory>
         <level>0</level>
         <area>337,54,354,99</area> <!-- LOJA N 20) -->
     </store>
@@ -269,8 +269,8 @@
         <description>Loja que propicia realização de operações bancárias com muita comodidade,fazer apostas,pagamento, deposito, consultas e saques.</description>
         <phone>71 30191314</phone>
         <website></website>
-        <tags>loteria,mega-sena,quina,loteria esportiva,quadra,prêmio,sorteio</tags>
-        <id_storecategory>3</id_storecategory>
+        <tags>G1,loteria,mega-sena,quina,loteria esportiva,quadra,prêmio,sorteio,pagamentos,conta de luz,pagar contas,contas</tags>
+        <id_storecategory>10</id_storecategory>
         <level>0</level>
         <area>358,54,374,99,377,54,394,70</area> <!-- LOJA N 21) -->
     </store>
@@ -290,10 +290,10 @@
 <store>
         <id>24</id>
 <name>Chang</name>
-        <description>Loja especializada em concerto de celulares e venda de acessórios.</description>
+        <description>Loja especializada em conserto de celulares e venda de acessórios.</description>
         <phone>71 33421040</phone>
         <website></website>
-        <tags>eletrônicos,celulares,consertosr,acessórios,relógios</tags>
+        <tags>G1,eletrônicos,celulares,consertos,acessórios,relógios,smartphone,acessórios,capas,película</tags>
         <id_storecategory>10</id_storecategory>
         <level>0</level>
         <area>378,75,394,100</area> <!-- LOJA N 22) -->
@@ -305,8 +305,8 @@
         <description>Loja de eletrodomésticos que vende uma variedade de artigos para o lar, cama, mesa e banho,ferramentas com excelente qualidade.</description>
         <phone>71 31145651</phone>
         <website>http://www.casasbahia.com.br/</website>
-        <tags>eletrônicos,eletrodomésticos,móveis,utilidades para o lar,</tags>
-        <id_storecategory>10</id_storecategory>
+        <tags>G2,eletrônicos,eletrodomésticos,móveis,utilidades para o lar,geladeiras,fogão,lcd,tv,microondas,som,televisão,lar,cama,mesa,banho,ferramentas</tags>
+        <id_storecategory>12</id_storecategory>
         <level>1</level>
         <area>23,2,115,149</area> <!-- LOJA N 23) -->
     </store>
@@ -319,7 +319,7 @@
 </description>
         <phone>0800 071 5353</phone>
         <website>http://www.sac.ba.gov.br/index.php/SALVADOR-SHOPPING.html</website>
-        <tags>Serviços,SAC,CPF,RG,CNPJ,SAJ,CNH,documentos</tags>
+        <tags>G2,Serviços,SAC,CPF,RG,CNPJ,SAJ,CNH,documentos</tags>
         <id_storecategory>10</id_storecategory>
         <level>1</level>
         <area>123,132,166,309</area> <!-- LOJA N 24) -->
@@ -331,7 +331,7 @@
         <description>Loja de grande qualidade no mercado com anos de serviços, oferecendo produtos de cama, mesa e banho, eletrodomésticos, beleza e saúde, brinquedos, roupas unissex.</description>
         <phone>71 4003 4848</phone>
         <website>http://www.americanas.com.br/</website>
-        <tags>eletrônicos,doces,eletrodomésticos,acessórios,brinquedos,lar,americanas,lojas americanas</tags>
+        <tags>L1,eletrônicos,doces,eletrodomésticos,acessórios,brinquedos,lar,americanas,lojas americanas</tags>
         <id_storecategory>12</id_storecategory>
         <level>2</level>
         <area>15,1774,292,2016</area> <!-- LOJA N 25) -->
@@ -343,7 +343,7 @@
         <description>Loja especializada em artigos de informática e suprimento de informática, além de ter lançado a sua própria linha de cartuchos remanufaturados levando a marca da empresa, assim adquirir apenas cartuchos com o selo da marca que possuem custo muito menor e qualidade semelhante ao produto original.</description>
         <phone>71 38782090</phone>
         <website>http://www.casadocartucho.com/</website>
-        <tags>cartucho,recarga,tonner,Casa do Cartucho</tags>
+        <tags>L1,cartucho,recarga,tonner,Casa do Cartucho</tags>
         <id_storecategory>5</id_storecategory>
         <level>2</level>
         <area>15,1722,68,1748,74,1696,132,1752</area> <!-- LOJA N 26) -->
@@ -355,7 +355,7 @@
         <description>Loja especializada em produtos do lar, beleza, eletrônicos, bem estar, cozinha, esportes tudo isso com a qualidade dos importados da polishop. </description>
         <phone>71 30116674</phone>
         <website>http://www.polishop.com.br/</website>
-        <tags>eletrodomésticos,eletrônicos,móveis,aparelhos,utilidades</tags>
+        <tags>L1,eletrodomésticos,eletrônicos,móveis,aparelhos,utilidades</tags>
         <id_storecategory>12</id_storecategory>
         <level>2</level>
         <area>15,1577,65,1713,72,1617,111,1661</area> <!-- LOJA N 27) -->
@@ -367,7 +367,7 @@
         <description>Loja especializada em computadores, notebooks, contando com assistência técnica especializada de excelente qualidade.</description>
         <phone>71 33421070</phone>
         <website>http://www.login-informatica.pt/</website>
-        <tags>informática,peças,acessórios,computadores,pc,Login,Login Informática</tags>
+        <tags>L1,informática,peças,acessórios,computadores,pc,Login,Login Informática</tags>
         <id_storecategory>5</id_storecategory>
         <level>2</level>
         <area>17,1487,60,1540,64,1512,129,1555</area> <!-- LOJA N 28) -->
@@ -379,7 +379,7 @@
         <description>Yoggi Mania é uma loja especializada Yoggis azedinhos doces feitos à perfeição, num ambiente aconchegante e uma loja super tropical tendo um sabor natural, Jabuticaba e Chocolate Belga, assim tendo deliciosos sabores da estação e uma ótima qualidade.</description>
         <phone>71 30131344</phone>
         <website>http://www.yoggi.com.br/</website>
-        <tags>Frozen Yogurt,iogurte,sorvetes,lanches,fast food,Yoggi</tags>
+        <tags>L1,Frozen Yogurt,iogurte,sorvetes,lanches,fast food,Yoggis,smoothies,blends,toppings,açaí</tags>
         <id_storecategory>6</id_storecategory>
         <level>2</level>
         <area>16,1381,45,1479,50,1411,96,1452</area> <!-- LOJA N 29) -->
@@ -391,7 +391,7 @@
         <description>Loja especializada em looks femininos super sofisticados, com o modelos contemporâneos e foco na linha workwear.</description>
         <phone>71 30196692</phone>
         <website>http://www.madamems.com.br/</website>
-        <tags>roupas,moda,roupas femininas,mulher,look,coleção,desfile,Madame MS</tags>
+        <tags>L1,roupas,moda,roupas femininas,mulher,look,coleção,desfile,Madame MS</tags>
         <id_storecategory>2</id_storecategory>
         <level>2</level>
         <area>16,1355,88,1376</area> <!-- LOJA N 30) -->
@@ -416,7 +416,7 @@
         <phone>71 30111810</phone>
         <website></website>
         <tags>casa,lar,decoração,objetos de decoração,utilidades para o lar</tags>
-        <id_storecategory>10</id_storecategory>
+        <id_storecategory>24</id_storecategory>
         <level>2</level>
         <area>18,1205,90,1249</area> <!-- LOJA N 32) -->
     </store>
@@ -427,7 +427,7 @@
         <description>Loja de telefonia celular que além que oferece os serviços de telefone móvel e fixo, internet, aparelhos de celular de ultima geração com melhores preços do mercado. </description>
         <phone>71 32711406</phone>
         <website>www.tim.com.br</website>
-        <tags>telefonia,celulares,iphone,ipad,telefones,TIM,telecom</tags>
+        <tags>telefonia,celulares,iphone,ipad,telefones,TIM,telecom,ipad,tablet,smartphones,conta,beta,infinity,aparelhos</tags>
         <id_storecategory>11</id_storecategory>
         <level>2</level>
         <area>18,1151,91,1198</area> <!-- LOJA N 33) -->
@@ -439,7 +439,7 @@
         <description>Venda de roupas femininas e masculinas com variados acessórios para fazer combinações perfeitas com excelentes preços.</description>
         <phone>71 30195261</phone>
         <website>http://www.taco.com.br/loja/default.aspx</website>
-        <tags>moda,moda masculina,roupas masculinas,roupas,camisas</tags>
+        <tags>moda,moda masculina,roupas masculinas,roupas,camisas,vestidos,calças,look,jaqueta,cintos</tags>
         <id_storecategory>14</id_storecategory>
         <level>2</level>
         <area>18,1100,91,1144</area> <!-- LOJA N 34) -->
@@ -463,7 +463,7 @@
         <description>Loja de roupas infantis e adulto, com peças diferenciadas pelo seu estilo brasileirinho de ser, cores quentes e inovadoras.</description>
         <phone>71 30377200</phone>
         <website>http://www.malwee.com.br/</website>
-        <tags>roupas,moda,moda infantil,teen</tags>
+        <tags>roupas,moda,moda infantil,teen,camisa,short,bermuda,jaqueta,saia,casaco,calça,blusa</tags>
         <id_storecategory>18</id_storecategory>
         <level>2</level>
         <area>16,1045,67,1067</area> <!-- LOJA N 36) -->
@@ -484,10 +484,10 @@
 <store>
         <id>40</id>
 <name>Planet Girls</name>
-        <description>Loja de roupas feminina que possui um look perfeito para seu dia- a - dia deixando você mais bonita e charmosa para qualquer ocasião.</description>
+        <description>Loja de roupas feminina que possui um look perfeito para seu dia-a-dia deixando você mais bonita e charmosa para qualquer ocasião.</description>
         <phone>71 33412380</phone>
         <website>http://www.planetgirls.com.br/</website>
-        <tags>roupas,moda,moda feminina,coleções,desfile</tags>
+        <tags>roupas,moda,moda feminina,coleções,desfile,calça,saia,cinto,vestido,camisa,blusa</tags>
         <id_storecategory>2</id_storecategory>
         <level>2</level>
         <area>17,967,70,1015</area> <!-- LOJA N 38) -->
@@ -499,7 +499,7 @@
         <description>Loja voltada para artigos de beleza e cosméticos com melhores marcas e preço. </description>
         <phone>71 33414575</phone>
         <website>http://www.belsalvador.com.br/</website>
-        <tags>cosméticos,produtos de beleza,beleza,estética</tags>
+        <tags>cosméticos,produtos de beleza,beleza,estética,creme</tags>
         <id_storecategory>16</id_storecategory>
         <level>2</level>
         <area>17,902,43,962,46,917,82,962</area> <!-- LOJA N 39) -->
@@ -512,7 +512,7 @@
         <phone>71 38782280</phone>
         <website>http://www.speedtechshop.com.br/</website>
         <tags>jogos,games,tecnologia,videogames,tech</tags>
-        <id_storecategory>10</id_storecategory>
+        <id_storecategory>5</id_storecategory>
         <level>2</level>
         <area>20,655,89,675</area> <!-- LOJA N 40) -->
     </store>
@@ -523,7 +523,7 @@
         <description>Loja de roupas infantis e adulto, com peças diferenciadas pelo seu estilo brasileirinho de ser, cores quentes e inovadoras.</description>
         <phone>71 30377200</phone>
         <website>http://www.malwee.com.br/</website>
-        <tags>roupas,moda,coleção,masculino,feminino</tags>
+        <tags>roupas,moda,coleção,masculino,feminino,calça,camisa,bermuda,short,saia,vestido,casaco,jaqueta</tags>
         <id_storecategory>14</id_storecategory>
         <level>2</level>
         <area>22,543,81,574,84,556,110,575</area> <!-- LOJA N 41) -->
@@ -536,7 +536,7 @@
         <phone>71 33426828</phone>
         <website>http://www.rihappy.com.br/</website>
         <tags>brinquedos,jogos,games,crianças,infatil,infantis,meninos,meninas,bonecos,bonecas</tags>
-        <id_storecategory>7</id_storecategory>
+        <id_storecategory>3</id_storecategory>
         <level>2</level>
         <area>22,382,81,537,85,427,132,470</area> <!-- LOJA N 42) -->
     </store>
@@ -556,11 +556,11 @@
 <store>
         <id>46</id>
 <name>B Mart Baby Kids</name>
-        <description>Loja de brinquedos e artigos para bebê tendo com diferencia a venda de brinquedos importados, carrinhos eletrônicos, quebra- cabeça, roupa, peças para quarto infantil com anos no mercado e excelente qualidade de seus produtos. </description>
+        <description>Loja de brinquedos e artigos para bebê tendo com diferencia a venda de brinquedos importados, carrinhos eletrônicos, quebra-cabeça, roupa, peças para quarto infantil com anos no mercado e excelente qualidade de seus produtos. </description>
         <phone>71 33412101</phone>
         <website>http://www.bmart.com.br/</website>
         <tags>brinquedos,baby,kids,crianças,jogos,games</tags>
-        <id_storecategory>12</id_storecategory>
+        <id_storecategory>18</id_storecategory>
         <level>2</level>
         <area>64,285,131,338</area> <!-- LOJA N 44) -->
     </store>
@@ -585,7 +585,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <description>Loja de sapatos com modelos para todas as idades e diversos tamanhos, lá você encontra o modelo de sapato que você deseja e que te deixa super elegante.</description>
         <phone>71 32722642</phone>
         <website>http://www.gratscalcados.com.br/</website>
-        <tags>sapatos,calçados,tênis,acessórios,carteiras,sandálias</tags>
+        <tags>sapatos,calçados,tênis,acessórios,carteiras,sandálias,tamanco,salto,scarpin,sandália,cinto</tags>
         <id_storecategory>4</id_storecategory>
         <level>2</level>
         <area>88,373,131,418</area> <!-- LOJA N 46) -->
@@ -609,7 +609,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <description>Loja de moda infantil tendo como grande diferencial a preocupação com os pequeninos assim lançando peças criativas para desenvolver a imaginação e deixar seu filho mais bonito.</description>
         <phone>71 30193967</phone>
         <website>http://www.daducha.com.br/</website>
-        <tags>moda infantil,roupas,crianças,moda,coleção</tags>
+        <tags>moda infantil,roupas,crianças,moda,coleção,camisa,short,blusa,bermuda,vestido,saia</tags>
         <id_storecategory>18</id_storecategory>
         <level>2</level>
         <area>87,527,131,549</area> <!-- LOJA N 48) -->
@@ -645,8 +645,8 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <description>Loja especializada em telefonia que oferece aos seus clientes uma grande variedade de serviços e tecnologia.</description>
         <phone>71 33284267</phone>
         <website>http://www.nelinhotelefones.com/</website>
-        <tags>celular,tablet,galaxy,telefones,telefone,celulares,telefonia,telecomunicações</tags>
-        <id_storecategory>10</id_storecategory>
+        <tags>celular,tablet,galaxy,telefones,telefone,celulares,telefonia,telecomunicações,smartphone</tags>
+        <id_storecategory>5</id_storecategory>
         <level>2</level>
         <area>50,680,88,698</area> <!-- LOJA N 51) -->
     </store>
@@ -942,7 +942,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
 <store>
         <id>78</id>
 <name>Spicy</name>
-        <description>Descrição: loja especializada em produtos de utilidade para o lar que oferece aos seus clientes uma grande variedade de peças para cama, mesa e banho.</description>
+        <description>Loja que oferece uma variedade de marcas para cozinha, mesa e bar com alta qualidade e design exclusivo</description>
         <phone>71 33410555</phone>
         <website>http://www.spicy.com.br/Default.aspx</website>
         <tags>cozinha,panelas,talheres,forno,canecas,adega,taça,cooler</tags>
@@ -1017,8 +1017,8 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <description>Loja especializada em joias que oferece aos seus clientes uma grande variedade de peças com diversos modelos e pedras.</description>
         <phone>71 3019-0727</phone>
         <website>http://www.laprincesajoia.com.br/</website>
-        <tags>jóias,relógios,acessórios,moda,fashion</tags>
-        <id_storecategory>3</id_storecategory>
+        <tags>jóias,relógios,acessórios,moda,fashion,anel,aliança,bracelete,colar</tags>
+        <id_storecategory>22</id_storecategory>
         <level>2</level>
         <area>132,626,199,648</area> <!-- LOJA N 82) -->
     </store>
@@ -1026,10 +1026,10 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
 <store>
         <id>85</id>
 <name>Banco Itaú</name>
-        <description>Loja especializada em transação bancaria que oferece aos seus clientes uma grande variedade de formas de pagamento.</description>
+        <description>Caixas eletrônicos do Banco Itaú</description>
         <phone>71 36161450</phone>
         <website>http://www.itau.com.br/index.htm</website>
-        <tags>bancos,serivços financeiros,finanças,financiamento,poupança,banco</tags>
+        <tags>bancos,serivços financeiros,finanças,financiamento,poupança,banco,caixa eletrônico,conta,investimento,saque,extrato,depósito</tags>
         <id_storecategory>9</id_storecategory>
         <level>2</level>
         <area>217,1700,259,1752,257,1722,295,1752</area> <!-- LOJA N 83) -->
@@ -1062,10 +1062,10 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
 <store>
         <id>88</id>
 <name>Banco do Brasil</name>
-        <description>Loja especializada em transação bancaria que oferece aos seus clientes uma grande variedade de formas de pagamento.</description>
+        <description>Caixas eletrônicos do Banco do Brasil</description>
         <phone>71 33418522</phone>
         <website>http://www.bb.com.br/portalbb/home/geral/index.bb</website>
-        <tags>bancos,serivços financeiros,finanças,financiamento,poupança,banco</tags>
+        <tags>bancos,serivços financeiros,finanças,financiamento,poupança,banco,pagamentos,saque,depósito,extrato</tags>
         <id_storecategory>9</id_storecategory>
         <level>2</level>
         <area>218,1473,303,1562,259,1564,302,1619,308,1474,337,1506,307,1580,334,1610</area> <!-- LOJA N 86) -->
@@ -1242,10 +1242,10 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
 <store>
         <id>103</id>
 <name>HSBC</name>
-        <description>Loja especializada em transação bancaria que oferece aos seus clientes uma grande variedade de formas de pagamento.</description>
+        <description>Caixas eletrônicos do banco HSBC</description>
         <phone>71 33413339</phone>
         <website>http://www.hsbc.com.br/1/2/portal/pt/para-voce</website>
-        <tags>bancos,serivços financeiros,finanças,financiamento,poupança,banco</tags>
+        <tags>bancos,serivços financeiros,finanças,financiamento,poupança,saque,extrato,depósito</tags>
         <id_storecategory>9</id_storecategory>
         <level>2</level>
         <area>222,887,335,986</area> <!-- LOJA N 101) -->
@@ -1326,10 +1326,10 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
 <store>
         <id>110</id>
 <name>Glow Reef</name>
-        <description>Loja especializada em roupas moda praia  que oferece aos seus clientes uma grande variedade de produtos para ambos os sexos.</description>
+        <description>Marca com perfil único, que visa à quebra de paradigmas do marcado, inventando e reinventando a moda, transformando agulhas, linhas, tecidos e aviamentos em obras de arte.</description>
         <phone>71 30351924</phone>
         <website>http://www.glowreef.com.br/</website>
-        <tags>roupas,moda,tendência,fashion</tags>
+        <tags>roupas,moda,tendência,fashion,calças,bermudas,camisas,blusas,shorts,cintos</tags>
         <id_storecategory>14</id_storecategory>
         <level>2</level>
         <area>281,326,301,373</area> <!-- LOJA N 108) -->
@@ -1362,10 +1362,10 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
 <store>
         <id>113</id>
 <name>Carolina Costa</name>
-        <description>Loja especializada em joias que oferece aos seus clientes uma grande variedade de alianças, relógios entre outros.</description>
+        <description>Moderna e sofisticada a Carolina Costa traz as joias mais inovadoras e exclusivas da moda nacional e internacional.</description>
         <phone>71 33410274</phone>
         <website>http://www.carolinacosta.com.br/</website>
-        <tags>bijuterias,acessórios,colares,pulseiras,anéis,jóias</tags>
+        <tags>bijuterias,acessórios,colares,pulseiras,anéis,jóias,bracelete,anel</tags>
         <id_storecategory>23</id_storecategory>
         <level>2</level>
         <area>305,326,340,369</area> <!-- LOJA N 111) -->
@@ -1425,7 +1425,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <description>Loja especializada em telefonia que oferece aos seus clientes uma grande variedade de serviços e tecnologia.</description>
         <phone>71 34142149</phone>
         <website>http://www.vivo.com.br/</website>
-        <tags>telefonia,telefones,celular,celulares,ipad,iphone,tablets,operadoras</tags>
+        <tags>telefonia,telefones,celular,celulares,ipad,iphone,tablets,operadoras,tablet,smartphone</tags>
         <id_storecategory>11</id_storecategory>
         <level>2</level>
         <area>359,1565,419,1584</area> <!-- LOJA N 116) -->
@@ -1629,7 +1629,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <description>Loja especializada em telefonia que oferece aos seus clientes uma grande variedade de serviços e tecnologia.</description>
         <phone>71 34142149</phone>
         <website>http://www.vivo.com.br/</website>
-        <tags>telefonia,celulares,ipad,iphone,tablets</tags>
+        <tags>telefonia,celulares,ipad,iphone,tablets,smartphones</tags>
         <id_storecategory>11</id_storecategory>
         <level>2</level>
         <area>396,680,463,702</area> <!-- LOJA N 133) -->
@@ -1662,11 +1662,11 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
 <store>
         <id>138</id>
 <name>Deny Sports</name>
-        <description>Loja de sapatos com modelos para todas as idades e diversos tamanhos, lá você encontra o modelo de sapato que você deseja e que te deixa super elegante.</description>
+        <description>Loja com foco em artigos esportivos, que vão de chuteiras, camisas de clubes a sungas e mochilas.</description>
         <phone>71 30196638</phone>
         <website>http://www.denysports.com.br</website>
-        <tags>tênis,bola,chuteira,camisa,roupas,meias,esporte</tags>
-        <id_storecategory>14</id_storecategory>
+        <tags>tênis,bola,chuteiras,camisas,roupas,meias,esportes,agasalhos,clubes,calção,camisetas,shorts,sunga,calças,bonés,mochilas,bolsas</tags>
+        <id_storecategory>17</id_storecategory>
         <level>2</level>
         <area>396,577,505,620</area> <!-- LOJA N 136) -->
     </store>
@@ -1797,8 +1797,8 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <description>Loja especializada em colchões que oferece aos seus clientes uma grande qualidade de mercado.</description>
         <phone>71 32724331</phone>
         <website>http://www.reconflex.com.br/</website>
-        <tags>colchões,cama,travesseiros</tags>
-        <id_storecategory>12</id_storecategory>
+        <tags>colchões,cama,travesseiros,king size,queen size</tags>
+        <id_storecategory>24</id_storecategory>
         <level>2</level>
         <area>435,280,512,310</area>  <!-- LOJA N 147) -->
     </store>
@@ -2202,13 +2202,13 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
 <store>
         <id>183</id>
 <name>Galeria Arte Viva</name>
-        <description>Loja especializada em artigos para presente que oferece aos seus clientes uma grande variedade de produtos.</description>
+        <description>Arte Viva se destaca como fabricante de molduras exclusivas tipo caixas especiais modernas, com design próprio e molduras da linha industrial, tanto em madeira como em PVC.</description>
         <phone>71 38781363</phone>
         <website>http://www.galeriaarteviva.com.br/</website>
-        <tags></tags>
-        <id_storecategory>10</id_storecategory>
+        <tags>molduras,quadros</tags>
+        <id_storecategory>3</id_storecategory>
         <level>2</level>
-        <area>551,1322,566,1356</area> <!-- LOJA N 181) -->
+        <area>570,1321,588,1359</area> <!-- LOJA N 181) -->
     </store>
 
 <store>
@@ -2218,9 +2218,9 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <phone></phone>
         <website></website>
         <tags>naosei</tags>
-        <id_storecategory>25</id_storecategory>
+        <id_storecategory>1</id_storecategory> <!-- <id_storecategory>25 -->
         <level>2</level>
-        <area>570,1321,588,1359</area> <!-- LOJA N 182) -->
+        <area>551,1322,566,1356</area> <!-- LOJA N 182) -->
     </store>
 
 <store>
@@ -2338,7 +2338,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <phone></phone>
         <website></website>
         <tags></tags>
-        <id_storecategory>25</id_storecategory>
+        <id_storecategory>1</id_storecategory> <!-- <id_storecategory>25 -->
         <level>2</level>
         <area>593,347,658,365</area> <!-- LOJA N 192) -->
     </store>
@@ -2406,7 +2406,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
 <store>
         <id>200</id>
 <name>A Diamantina </name>
-        <description>Loja especializada em artigos esportivos e cirúrgicos  que oferece aos seus clientes uma grande variedade de produtos com diversas marcas.</description>
+        <description>Loja com foco em artigos esportivos e cirúrgicos que oferece aos seus clientes uma grande variedade de marcas.</description>
         <phone>71 30191728</phone>
         <website>http://www.adiamantina.com.br/</website>
         <tags></tags>
@@ -2430,10 +2430,10 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
 <store>
         <id>202</id>
 <name>Banco Bradesco</name>
-        <description>Loja especializada em transação bancaria que oferece aos seus clientes uma grande variedade de formas de pagamento.</description>
+        <description>Caixas eletrônicos do Banco Bradesco</description>
         <phone></phone>
         <website>http://www.bradesco.com.br/</website>
-        <tags></tags>
+        <tags>banco,saques,depósito,extrato,segunda via,pagamentos,poupança,investimento,conta</tags>
         <id_storecategory>9</id_storecategory>
         <level>2</level>
         <area>637,578,661,627</area> <!-- LOJA N 200) -->
@@ -2518,7 +2518,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <phone>71 33417010</phone>
         <website>http://www.nike.com/br/pt_br/</website>
         <tags></tags>
-        <id_storecategory>14</id_storecategory>
+        <id_storecategory>17</id_storecategory>
         <level>3</level>
         <area>207</area>
     </store>
@@ -2542,7 +2542,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <phone>71 30192487</phone>
         <website>http://www.billabong.com/br/</website>
         <tags></tags>
-        <id_storecategory>14</id_storecategory>
+        <id_storecategory>19</id_storecategory>
         <level>3</level>
         <area>209</area>
     </store>
@@ -2562,10 +2562,10 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
 <store>
         <id>213</id>
 <name>Trousseau</name>
-        <description>Loja especializada em looks femininos sofisticados, com  modelos contemporâneos.</description>
+        <description>Loja cujo o objetivo é atender a uma demanda exclusiva em artigos de cama, mesa e banho.</description>
         <phone>71 30232274</phone>
         <website>http://www.trousseau.com.br</website>
-        <tags></tags>
+        <tags>jogos de lençol,fronhas,duvets,cobertores,mantas,almofadas,travesseiros,toalhas de mesa,jogos americanos,toalhas de banho,toalhas de rosto,lavabo,praia,pisos,tapetes,roupões,</tags>
         <id_storecategory>21</id_storecategory>
         <level>3</level>
         <area>211</area>
@@ -2874,10 +2874,10 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
 <store>
         <id>239</id>
 <name>Calvin Klein Underwear</name>
-        <description>Loja especializada em looks femininos e masculinos sofisticados, com  modelos contemporâneos.</description>
+        <description>Referência mundial em moda, a Calvin Klein Underwear oferece diversos itens relacionados à moda íntima.</description>
         <phone>71 30191209</phone>
         <website>http://www.cku.com/home/index.jsp</website>
-        <tags></tags>
+        <tags>calcinha,sutiã,cueca,cueca boxer</tags>
         <id_storecategory>15</id_storecategory>
         <level>3</level>
         <area>237</area>
@@ -3066,10 +3066,10 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
 <store>
         <id>255</id>
 <name>Tânia Bulhões</name>
-        <description>Loja especializada em bijuterias que oferece aos seus clientes uma grande variedade de produtos para todos os gostos.</description>
+        <description>Loja da artista brasileira Tania Bulhões, onde é possível encontrar móveis, louças, pratarias, cristais, linhos e algodões.</description>
         <phone>71 30193568</phone>
         <website>http://www.taniabulhoes.com.br/</website>
-        <tags></tags>
+        <tags>brincos,colares,bijuterias,lista de casamento,perfumaria,louças,pratarias,cristais,linhos e algodões,bandejas,caixas,porta retrato,porta velas,taças,copos,jarras,talheres</tags>
         <id_storecategory>24</id_storecategory>
         <level>3</level>
         <area>253</area>
@@ -3814,7 +3814,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <phone></phone>
         <website></website>
         <tags></tags>
-        <id_storecategory>25</id_storecategory>
+        <id_storecategory>1</id_storecategory> <!-- <id_storecategory>25 -->
         <level>3</level>
         <area>315</area>
     </store>
@@ -3990,10 +3990,10 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
 <store>
         <id>332</id>
 <name>Mitchel</name>
-        <description></description>
+        <description>Marca cujo objetivo é fazer com que os clientes não só se conectem com a moda, como também sintam as roupas, refletindo nas criações dos designers da marca o conceito e o comportamento do homem contemporâneo.</description>
         <phone>71 30198881</phone>
         <website>http://www.mitchell.com.br/</website>
-        <tags></tags>
+        <tags>calças,jeans,casacos,camisas,blusas,cintos,bonés,sandálias,tênis,sapatenis,bermudas,shorts,jaquetas</tags>
         <id_storecategory>1</id_storecategory>
         <level>3</level>
         <area>330</area>
@@ -4773,7 +4773,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <description>Loja especializada em comida árabe que oferece aos seus clientes uma grande variedade de pratos e sabores.</description>
         <phone>71 30199928</phone>
         <website>http://www.faridrestaurante.com.br/</website>
-        <tags></tags>
+        <tags>kibe,sfiha,esfirra,beirute,kebab,</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
         <area>396</area>
@@ -4797,7 +4797,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <description>Loja especializada em fast food, onde é oferecido aos clientes, os mais diversos cardápios para seu lanche.</description>
         <phone>71 33428202</phone>
         <website>http://www.mcdonalds.com.br/</website>
-        <tags></tags>
+        <tags>hamburguer,cheeseburguer,coca-cola,mc cheddar,big mac,mcmelt,batata frita,salada, mac lanche</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
         <area>398</area>
@@ -4809,7 +4809,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <description>Loja especializada em massas que oferece aos seus clientes uma grande variedade de prato da cozinha italiana.</description>
         <phone>71 30191607</phone>
         <website>http://www.pastafast.com.br/</website>
-        <tags></tags>
+        <tags>massas,macarrão,macarronada,pizza,salada,pastel,risotto,picanha,filé,fillet,fillet mignon</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
         <area>399</area>
@@ -4845,7 +4845,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <description>Loja especializada em fast food onde é oferecido aos seus clientes os mais diversos cardápios para seu lanche.</description>
         <phone>71 38782333</phone>
         <website>http://www.bobs.com.br/</website>
-        <tags></tags>
+        <tags>hamburguer,cheeseburguer,ovomaltine,big bob,bobs pícanha,trikids,salada,bacon,picanha</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
         <area>402</area>
@@ -4857,7 +4857,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <description>Loja especializada em comida oriental que oferece aos seus clientes uma grande variedade de pratos e sabores.</description>
         <phone>71 30161572</phone>
         <website>http://www1.maotai.com.br/cms/opencms/maotai/pt/home/</website>
-        <tags>comida chinesa,sushi,temaki,almoço</tags>
+        <tags>comida chinesa,sushi,temaki,almoço,yakissoba,carne acebolada,shake couve,uramaki shake gril,teriyaki,shoyo</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
         <area>403</area>
@@ -4868,8 +4868,8 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
 <name>Meu Chapa</name>
         <description>Loja especializada em comidas na chapa que oferece aos seus clientes uma grande variedade de carnes e mariscos na chapa.</description>
         <phone>http://www.meuchapa.com.br/</phone>
-        <website></website>
-        <tags></tags>
+        <website>http://www.meuchapa.com.br/</website>
+        <tags>camarão,alho,óleo,bacalhau,bolinho,escondidinho,pastel,pizza,picanha argentina,camarão a milanesa</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
         <area>404</area>
@@ -4881,7 +4881,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <description>Loja especializada em fast food onde é oferecido aos seus clientes os mais diversos cardápios para seu lanche.</description>
         <phone>71 32726146</phone>
         <website>http://www.burgerking.com.br/</website>
-        <tags>hamburger,lanches,comida,fast food</tags>
+        <tags>hamburger,lanches,comida,fast food,big king,bk cheddar duplo,cheeseburguer,refrigerante,refil,whopper</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
         <area>405</area>
@@ -4901,12 +4901,11 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
 
 <store>
         <id>408</id>
-
 <name>Game Station</name>
         <description>Rede de parques compactos para shoppings centers que oferece aos seus clientes uma grande variedade de brinquedos para o lazer de seu filho.</description>
         <phone>71 33427691</phone>
         <website>http://www1.gamestation.com.br/cms/opencms/gamestation/pt/parques/salvador.html</website>
-        <tags>jogos,video game,games,diversão,brincar</tags>
+        <tags>jogos,video game,games,diversão,brincar,jogar,festas,sinuca,aniversário</tags>
         <id_storecategory>7</id_storecategory>
         <level>4</level>
         <area>407</area>
@@ -4918,7 +4917,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <description>Rede de Cinemas onde é possível a compra e venda de ingresso, além de oferecer aos seus clientes uma grande variedade de filmes e salas climatizadas.</description>
         <phone>71 30233916</phone>
         <website>http://www.cinemark.com.br/</website>
-        <tags>Cinema,filmes,estréias,pipoca</tags>
+        <tags>Cinema,filmes,estréias,pipoca,lançamentos</tags>
         <id_storecategory>7</id_storecategory>
         <level>4</level>
         <area>408</area>

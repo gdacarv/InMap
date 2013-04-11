@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,8 @@ import com.inmap.salvadorshop.applicationdata.StoreCategory;
 
 public class StoreListFragment extends Fragment {
 
+	private static final int MAX_DESCRIPTION_LENGHT = 140;
+	
 	private View mRoot, mViewNoItemList;
 	private ListView mStoreList;
 	private Button mBackToCategoryButton, mShowOnMapButton;
@@ -94,6 +97,7 @@ public class StoreListFragment extends Fragment {
 	}
 	
 	public void setStoreParameters(StoreParameters parameters){
+		mStoreList.smoothScrollToPosition(0);
 		mStoreListAdapter.setStoreParameters(parameters);
 	}
 	
@@ -146,22 +150,33 @@ public class StoreListFragment extends Fragment {
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			if(convertView == null)
-				convertView = View.inflate(mContext, android.R.layout.simple_list_item_2, null);
+				convertView = View.inflate(mContext, R.layout.listitem_store, null);
 			
 			Store store = (Store)getItem(position);
-			TextView textView = (TextView) convertView.findViewById(android.R.id.text1);
-			textView.setText(store.getName());
+			TextView nameTextView = (TextView) convertView.findViewById(R.id.txt_store_name);
+			nameTextView.setText(store.getName());
 			StoreCategory storeCategory = store.getCategory();
-			textView.setCompoundDrawablesWithIntrinsicBounds(storeCategory.getMenuIconResId(), 0, 0, 0);
-			textView.setBackgroundColor(storeCategory.getMenuColor());
-			textView.setTextColor(Color.WHITE);
-			((TextView) convertView.findViewById(android.R.id.text2))
-				.setText(getString(R.string.andar_) + " " + 
-						mApplicationDataFacade.getLevelInformation().getTitle(store.getLevel()) + '\n' + store.getDescription());
+			nameTextView.setCompoundDrawablesWithIntrinsicBounds(storeCategory.getMenuIconResId(), 0, 0, 0);
+			nameTextView.setBackgroundColor(storeCategory.getMenuColor());
+			
+			((TextView) convertView.findViewById(R.id.txt_store_description))
+				.setText(formatDescription(store.getDescription()));
+			
+			((TextView) convertView.findViewById(R.id.txt_store_level))
+				.setText(mApplicationDataFacade.getLevelInformation().getTitle(store.getLevel()));
 			
 			return convertView;
 		}
 		
+		private CharSequence formatDescription(String description) {
+			if(description == null || description.length() <= MAX_DESCRIPTION_LENGHT)
+				return description;
+			int index = description.indexOf(' ', MAX_DESCRIPTION_LENGHT);
+			if(index < MAX_DESCRIPTION_LENGHT)
+				return description;
+			return Html.fromHtml(description.substring(0, index) + "... <font color='red'><i>(Leia Mais)</i></font>");
+		}
+
 		private class getStoresAsyncTask extends AsyncTask<Void, Void, Store[]>{
 			
 			private View loadingView;

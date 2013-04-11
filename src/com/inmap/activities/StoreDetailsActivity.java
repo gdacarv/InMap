@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.inmap.InMapApplication;
 import com.inmap.actionbar.ActionBarActivity;
@@ -91,6 +92,10 @@ public class StoreDetailsActivity extends ActionBarActivity {
 
 		@Override
 		public void onClick(View v) {
+			if(mStore.getLevel() >= 3) {// XXX Take it off when maps L2 and L3 are ready
+				Toast.makeText(StoreDetailsActivity.this, String.format(getString(R.string.msg_mapanaodisponivel), mApplicationDataFacade.getLevelInformation().getTitle(mStore.getLevel())), Toast.LENGTH_SHORT).show();
+				return;
+			}
 			Intent i = new Intent(StoreDetailsActivity.this, MainActivity.class);
 			i.putExtra(MainActivity.SHOW_STORE_INMAP, mStore);
 			startActivity(i);
