@@ -102,7 +102,7 @@ public class UpdateDataService extends Service { // TODO Check internet, if offl
 		}
 
 		private void updateInfraFromServer() throws IOException {
-			loadURL(mManifestMetaData.getString("url_infra"), new XMLInputStreamHandler() {
+			Utils.loadURL(mManifestMetaData.getString("url_infra"), new XMLInputStreamHandler() {
 				
 				@Override
 				protected void handleXml(XmlPullParser xpp) {
@@ -128,7 +128,7 @@ public class UpdateDataService extends Service { // TODO Check internet, if offl
 		}
 
 		private void updateStoresFromServer() throws IOException {
-			loadURL(mManifestMetaData.getString("url_stores"), new XMLInputStreamHandler() {
+			Utils.loadURL(mManifestMetaData.getString("url_stores"), new XMLInputStreamHandler() {
 				
 				@Override
 				protected void handleXml(XmlPullParser xpp) {
@@ -155,7 +155,7 @@ public class UpdateDataService extends Service { // TODO Check internet, if offl
 
 		private void loadInfoObjectIfNeeded() throws IOException {
 			if(mInfoObject == null)
-				loadURL(mManifestMetaData.getString("url_info"), new StringInputStreamHandler() {
+				Utils.loadURL(mManifestMetaData.getString("url_info"), new StringInputStreamHandler() {
 					
 					@Override
 					protected void handleString(String string) {
@@ -213,16 +213,6 @@ public class UpdateDataService extends Service { // TODO Check internet, if offl
 				return mDateFormat.parse(mSharedPreferences.getString(STORES_LAST_UPDATE_KEY, "2000/01/01 00:00:00")); // TODO Change default date to actual last update
 			} catch (ParseException e) {
 				throw new RuntimeException(e);
-			}
-		}
-
-		private void loadURL(String urlString, InputStreamHandler handler) throws IOException {
-			URL url = new URL(urlString);
-			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-			try {
-				handler.handleInputStream(urlConnection.getInputStream());
-			} finally {
-					urlConnection.disconnect();
 			}
 		}
 

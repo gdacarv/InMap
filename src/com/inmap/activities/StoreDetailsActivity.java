@@ -9,6 +9,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
+import android.webkit.WebView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +20,7 @@ import com.inmap.actionbar.ActionBarActivity;
 import com.inmap.interfaces.ApplicationDataFacade;
 import com.inmap.model.Store;
 import com.inmap.salvadorshop.R;
+import com.inmap.views.EventosCulturaView;
 
 public class StoreDetailsActivity extends ActionBarActivity {
 
@@ -43,6 +47,9 @@ public class StoreDetailsActivity extends ActionBarActivity {
 		populateViews();
 
 		findViewById(R.id.btn_details_map).setOnClickListener(onMapButtonClick);
+		
+		checkAndConfigureCinema();
+		checkAndConfigureLivrariaCultura();
 	}
 
 	private void populateViews() {
@@ -130,5 +137,20 @@ public class StoreDetailsActivity extends ActionBarActivity {
 		Intent i = new Intent(Intent.ACTION_VIEW);
 		i.setData(Uri.parse(url));
 		startActivity(i);
+	}
+
+	private void checkAndConfigureCinema() {
+		if(mStore.getId() == 409) {
+			WebView webView = new WebView(this);
+			((ViewGroup) findViewById(R.id.layout_root)).addView(webView, new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+			webView.loadUrl("http://www.cinemark.com.br/programacao/bolso/salvador/salvador/26/785");
+		}
+	}
+	
+	private void checkAndConfigureLivrariaCultura() {
+		if(mStore.getId() == 207) {
+			View view = new EventosCulturaView(this);
+			((ViewGroup) findViewById(R.id.layout_root)).addView(view, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+		}
 	}
 }

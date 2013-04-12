@@ -45,5 +45,6 @@
     <string name="msg_error_server">Erro ao atualizar informações. Avise ao desenvolvedor.</string>
     <string name="ver_lojas">Ver lojas</string>
     <string name="msg_mapanaodisponivel">Mapa %s não disponível ainda. Aguarde próximas atualizações...</string>
+    <string name="eventos_">Eventos:</string>
 
 </resources>
