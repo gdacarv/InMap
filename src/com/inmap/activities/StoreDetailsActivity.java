@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,12 +47,19 @@ public class StoreDetailsActivity extends ActionBarActivity {
 
 		mApplicationDataFacade = ((InMapApplication)getApplication()).getApplicationDataFacade();
 		setActionBarTitle("  " + mStore.getTitle());
+		getActionBar().setIcon(R.drawable.img_marca_inmap);
 		populateViews();
 
 		findViewById(R.id.btn_details_map).setOnClickListener(onMapButtonClick);
 		
 		checkAndConfigureCinema();
 		checkAndConfigureLivrariaCultura();
+	}
+	
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putSerializable(STORE, mStore);
 	}
 
 	private void populateViews() {
@@ -161,6 +169,9 @@ public class StoreDetailsActivity extends ActionBarActivity {
 	private void checkAndConfigureCinema() {
 		if(mStore.getId() == 409) {
 			WebView webView = new WebView(this);
+			WebSettings settings = webView.getSettings();
+			settings.setSupportZoom(true);
+			settings.setBuiltInZoomControls(true);
 			((ViewGroup) findViewById(R.id.layout_root)).addView(webView, new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 			webView.loadUrl("http://www.cinemark.com.br/programacao/bolso/salvador/salvador/26/785");
 		}

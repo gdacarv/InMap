@@ -7,6 +7,7 @@ import java.util.Map;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -17,6 +18,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.inmap.model.Store;
 import com.inmap.salvadorshop.R;
@@ -48,6 +50,7 @@ public class ProblemasDialogFragment extends DialogFragment {
 	public View getView() {
 		FragmentActivity activity = getActivity();
 		ListView list = new ListView(activity);
+		list.setCacheColorHint(Color.TRANSPARENT);
 		list.setAdapter(new SimpleAdapter(activity, getData(), android.R.layout.simple_list_item_1, new String[] {""}, new int[] {android.R.id.text1}));
 		list.setOnItemClickListener(onItemClickListener);
 		return list;
@@ -69,6 +72,7 @@ public class ProblemasDialogFragment extends DialogFragment {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
+			Toast.makeText(getActivity(), R.string.aguarde_, Toast.LENGTH_SHORT).show();
 			String msg = ((TextView) view.findViewById(android.R.id.text1)).getText().toString() + "\n\n";
 			if(mStore != null)
 				msg += getString(R.string.loja_) + mStore.getName() + "\n\n";

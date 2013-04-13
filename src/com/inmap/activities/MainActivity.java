@@ -96,6 +96,7 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 		setContentView(R.layout.activity_main);
 		
 		setTitle("");
+		getActionBar().setIcon(R.drawable.img_marca_inmap);
 
 		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 			getActionBar().setHomeButtonEnabled(true);
@@ -125,7 +126,7 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 		View root = getChildAt(getChildAt(getChildAt(findViewById(android.R.id.content))));
 		View view = root.findViewById(1);
 		if (view != null){
-	        int actionBarHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 15, getResources().getDisplayMetrics());
+	        int actionBarHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 18, getResources().getDisplayMetrics());
 	        
 	        // Sets the margin of the button
 	        ViewGroup.MarginLayoutParams marginParams = new ViewGroup.MarginLayoutParams(view.getLayoutParams());

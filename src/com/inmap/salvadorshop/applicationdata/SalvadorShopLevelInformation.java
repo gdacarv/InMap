@@ -10,24 +10,24 @@ public class SalvadorShopLevelInformation implements LevelInformation {
 	private int [] maps = {R.drawable.mapg1, R.drawable.mapg2, R.drawable.mapl1, R.drawable.mapl2, R.drawable.mapl3};
 	
 	private LatLng[][] levelsBounds = {
-			{new LatLng(-12.978040608785639d,-38.455534391105175d), new LatLng(-12.979154367169741d,-38.45446050167084d)}, // G1
-			{new LatLng(-12.977770417894650d,-38.455814346671104d), new LatLng(-12.979030870592828d,-38.45444340258837d)}, // G2
+			{new LatLng(-12.977679918582552d,-38.455763384699820d), new LatLng(-12.979128883754134d,-38.45436695963144d)}, // G1
+			{new LatLng(-12.977589092525022d,-38.455971255898476d), new LatLng(-12.979127250201760d,-38.45429621636867d)}, // G2
 			{new LatLng(-12.976628229215127d,-38.456756472587585d), new LatLng(-12.979861040846481d,-38.45281630754471d)}, // L1
 			{new LatLng(-12.976628229215127d,-38.456756472587585d), new LatLng(-12.979861040846481d,-38.45281630754471d)}, // L2 TODO Right bounds
 			{new LatLng(-12.976628229215127d,-38.456756472587585d), new LatLng(-12.979861040846481d,-38.45281630754471d)}  // L3 TODO Right bounds
 	};
 	
 	private double[][] levelsPosition = {
-			{-12.978595704875309d, -38.454998320435420d},  // G1             
-			{-12.978399991619712d, -38.455129712820005d},  // G2 
+			{-12.978403585445427d, -38.455065675079820},  // G1             
+			{-12.978357845841520d, -38.455133736133575d},  // G2 
 			{-12.978243170083285d, -38.454786825342274d},  // L1                  
 			{-12.978243170083285d, -38.454786825342274d},  // L2 TODO Right position
 			{-12.978243170083285d, -38.454786825342274d}   // L3 TODO Right position
 	};
 	
 	private float[] levelsWidth = { // In meters
-			100f,  // G1       
-			90f,   // G2    
+			130f,  // G1       
+			110f,   // G2    
 			170f,  // L1            
 			170f,  // L2 TODO Right position
 			170f,  // L3 TODO Right position

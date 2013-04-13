@@ -51,7 +51,7 @@ public class GoogleMapInMapController implements InMapViewController, MapItemsLi
 	private Map<Marker, MapItem> mMapItemsMarkers = new HashMap<Marker, MapItem>();
 	private MapLatLngConverter mMapLatLngConverter;
 	private Context mContext;
-	private Marker mMarkerLatLng1, mMarkerLatLng2;
+	private Marker mMarkerLatLng1, mMarkerLatLng2, mMarkerLatLngLevel;
 
 	public GoogleMapInMapController(Context context, GoogleMap map, ApplicationDataFacade applicationDataFacade) {
 		mContext = context;
@@ -70,9 +70,9 @@ public class GoogleMapInMapController implements InMapViewController, MapItemsLi
 		mMap.setOnInfoWindowClickListener(onInfoWindowClickListener);
 		mMap.setMyLocationEnabled(true);
 
-		//configureMarkerLatLng();
-		
 		configureLevels(mContext.getResources());
+		
+		configureMarkerLatLng();
 
 		mMap.setOnMapClickListener(onMapClickListener);
 
@@ -81,6 +81,7 @@ public class GoogleMapInMapController implements InMapViewController, MapItemsLi
 	private void configureMarkerLatLng() {
 		mMarkerLatLng1 = mMap.addMarker(new MarkerOptions().draggable(true).position(new LatLng(mLevelInformation.getLevelLatitude(0), mLevelInformation.getLevelLongitude(0))).title("Click to see position"));
 		mMarkerLatLng2 = mMap.addMarker(new MarkerOptions().draggable(true).position(new LatLng(mLevelInformation.getLevelLatitude(0), mLevelInformation.getLevelLongitude(0))).title("Click to see position"));
+		mMarkerLatLngLevel = mMap.addMarker(new MarkerOptions().draggable(true).position(new LatLng(mLevelInformation.getLevelLatitude(mCurrentLevel), mLevelInformation.getLevelLongitude(mCurrentLevel))).title("Click to see position"));
 	}
 
 	public void configureLevels(Resources resources) {
@@ -89,9 +90,6 @@ public class GoogleMapInMapController implements InMapViewController, MapItemsLi
 		mCurrentLevel = mLevelInformation.getInitLevel();
 		mLevelGroundOverlay = addLevelGroundOverlay(mCurrentLevel);
 		
-
-		setMarkersToLevelBounds(mCurrentLevel);
-
 		/*LatLngBounds bounds = mGroundOverlays[2].getBounds(); Probably useless
 		mMap.addMarker(new MarkerOptions().position(bounds.northeast));
 		mMap.addMarker(new MarkerOptions().position(bounds.southwest));
@@ -106,15 +104,13 @@ public class GoogleMapInMapController implements InMapViewController, MapItemsLi
 			mCurrentLevel = level;
 			mLevelGroundOverlay.remove();
 			mLevelGroundOverlay = addLevelGroundOverlay(level);
-			//setMarkersToLevelBounds(level);
+			setMarkerToLevelPosition(level);
 		}
 	}
 
-	private void setMarkersToLevelBounds(int level) {
-		if(mMarkerLatLng1 != null)
-			mMarkerLatLng1.setPosition(mLevelInformation.getNorthwestBound(level));
-		if(mMarkerLatLng2 != null)
-			mMarkerLatLng2.setPosition(mLevelInformation.getSoutheastBound(level));
+	private void setMarkerToLevelPosition(int level) {
+		if(mMarkerLatLngLevel != null)
+			mMarkerLatLngLevel.setPosition(new LatLng(mLevelInformation.getLevelLatitude(mCurrentLevel), mLevelInformation.getLevelLongitude(mCurrentLevel)));
 	}
 
 	@Override
@@ -189,7 +185,7 @@ public class GoogleMapInMapController implements InMapViewController, MapItemsLi
 
 		@Override
 		public void onInfoWindowClick(Marker marker) {
-			if((mMarkerLatLng1 != null && mMarkerLatLng1.equals(marker)) || mMarkerLatLng2 != null && mMarkerLatLng2.equals(marker)) {
+			if((mMarkerLatLng1 != null && mMarkerLatLng1.equals(marker)) || mMarkerLatLng2 != null && mMarkerLatLng2.equals(marker) || mMarkerLatLngLevel != null && mMarkerLatLngLevel.equals(marker)) {
 				LatLng pos = marker.getPosition();
 				String text = "onInfoWindowClick " + "lat: " + pos.latitude + " long: " + pos.longitude;
 				Log.i("OnInfoWindowClickListener", text);

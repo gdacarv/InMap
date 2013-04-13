@@ -27,7 +27,7 @@ public class InfrastructureBarFragment extends Fragment implements OnGestureList
 	private Animation mAnimExpand, mAnimCollapse;
 	private int mWidth = 0;
 	private GestureDetector mGestureDetector;
-	private ImageButton mInfraButtons[];
+	private ImageButton mInfraButtons[], mInfraControl;
 	private int mInfraIds[];
 	private OnInfrastructureCategoryChangedListener mOnInfrastructureChangeListener;
 
@@ -37,6 +37,8 @@ public class InfrastructureBarFragment extends Fragment implements OnGestureList
 		mRoot = (AnimateFrameLayout) inflater.inflate(R.layout.fragment_infrastructure_bar, null);
 		mLayoutButtons = mRoot.findViewById(R.id.layout_infra);
 		mGestureDetector = new GestureDetector(context, this);
+		
+		mInfraControl = (ImageButton) mRoot.findViewById(R.id.btn_infra_control);
 
 		mLayoutControl = mRoot.findViewById(R.id.layout_btn_infra);
 		mLayoutControl.setOnTouchListener(new View.OnTouchListener() {
@@ -131,6 +133,7 @@ public class InfrastructureBarFragment extends Fragment implements OnGestureList
 						@Override
 						public void onAnimationEnd(Animation animation) {
 							isPerformingAnimation = false;
+							mInfraControl.setImageResource(R.drawable.bt_infraestrutura_out);
 						}
 					});
 				}
@@ -161,6 +164,7 @@ public class InfrastructureBarFragment extends Fragment implements OnGestureList
 						@Override
 						public void onAnimationEnd(Animation animation) {
 							isPerformingAnimation = false;
+							mInfraControl.setImageResource(R.drawable.bt_infraestrutura_in);
 						}
 					});
 				}

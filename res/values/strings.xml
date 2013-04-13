@@ -54,5 +54,8 @@
     <string name="mandar_e_mail_por_">Mandar E-mail por:</string>
     <string name="problemas_">Problemas?</string>
     <string name="reportar_problema">Reportar Problema</string>
+    <string name="aguarde_">Aguarde...</string>
+    <string name="atualizando_">Atualizando...</string>
+    <string name="atualiza_o_completa_">Atualização completa.</string>
 
 </resources>

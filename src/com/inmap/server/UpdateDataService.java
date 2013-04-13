@@ -52,6 +52,7 @@ public class UpdateDataService extends Service { // TODO Check internet, if offl
 		else
 
 			mAsyncTask.execute();
+		Toast.makeText(UpdateDataService.this, R.string.atualizando_, Toast.LENGTH_SHORT).show();
 		return START_STICKY;
 	}
 
@@ -79,8 +80,6 @@ public class UpdateDataService extends Service { // TODO Check internet, if offl
 				e.printStackTrace();
 			}
 			try {
-				Log.i("UpdateDataService.UpdateDataAsyncTask", "doInBackground "
-						+ "start.");
 				Date lastUpdate = getStoresLastUpdateLocal();
 				if(lastUpdate == null || lastUpdate.before(getStoresLastUpdateServer()))
 					updateStoresFromServer();
@@ -97,8 +96,7 @@ public class UpdateDataService extends Service { // TODO Check internet, if offl
 		@Override
 		protected void onPostExecute(Void result) {
 			stopSelf();
-			Log.i("UpdateDataService.UpdateDataAsyncTask", "onPostExecute "
-					+ "stopService.");
+			Toast.makeText(UpdateDataService.this, R.string.atualiza_o_completa_, Toast.LENGTH_SHORT).show();
 		}
 
 		private void updateInfraFromServer() throws IOException {
