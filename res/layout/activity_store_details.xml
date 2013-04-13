@@ -37,5 +37,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/apontar_no_mapa"/>
+    
+    <TextView
+        android:id="@+id/txt_problemas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/problemas_"
+        android:layout_gravity="right" />
 
 </LinearLayout>

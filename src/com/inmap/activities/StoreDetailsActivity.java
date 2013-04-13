@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import com.inmap.InMapApplication;
 import com.inmap.actionbar.ActionBarActivity;
+import com.inmap.fragments.ProblemasDialogFragment;
 import com.inmap.interfaces.ApplicationDataFacade;
 import com.inmap.model.Store;
 import com.inmap.salvadorshop.R;
@@ -63,6 +65,7 @@ public class StoreDetailsActivity extends ActionBarActivity {
 
 		phoneTextView.setOnClickListener(onPhoneClickListener);
 		websiteTextView.setOnClickListener(onWebsiteClickListener);
+		findViewById(R.id.txt_problemas).setOnClickListener(onProblemasClickListener);
 	}
 
 	private void setActionBarTitle(String title) {
@@ -91,6 +94,10 @@ public class StoreDetailsActivity extends ActionBarActivity {
 			startActivity(new Intent(StoreDetailsActivity.this, MainActivity.class));
 			finish();
 			return true;
+			
+		case R.id.menu_problemas:
+			onProblemasClickListener.onClick(null);
+			break;
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -122,6 +129,18 @@ public class StoreDetailsActivity extends ActionBarActivity {
 		@Override
 		public void onClick(View v) {
 			openUrl(mStore.getWebsite());
+		}
+	};
+
+	private OnClickListener onProblemasClickListener = new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			DialogFragment dialog = new ProblemasDialogFragment();
+			Bundle args = new Bundle();
+			args.putSerializable(ProblemasDialogFragment.STORE_KEY, mStore);
+			dialog.setArguments(args);
+			dialog.show(getSupportFragmentManager(), "ProblemasDialogFragment");
 		}
 	};
 

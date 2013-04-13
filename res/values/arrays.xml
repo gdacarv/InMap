@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="problem_options">
+        <item>Descrição de loja</item>
+        <item>Localização de loja</item>
+        <item>Localização de infraestrutura</item>
+        <item>Sugestões</item>
+        <item>Bug/Erros</item>
+        <item>Sou lojista</item>
+    </string-array>
+    
+</resources>

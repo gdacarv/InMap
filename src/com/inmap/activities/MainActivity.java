@@ -21,6 +21,7 @@ import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.util.TypedValue;
 import android.view.Menu;
@@ -37,6 +38,7 @@ import com.inmap.InMapApplication;
 import com.inmap.actionbar.ActionBarActivity;
 import com.inmap.controllers.GoogleMapInMapController;
 import com.inmap.fragments.InfrastructureBarFragment;
+import com.inmap.fragments.ProblemasDialogFragment;
 import com.inmap.fragments.InfrastructureBarFragment.OnInfrastructureCategoryChangedListener;
 import com.inmap.fragments.LevelPickerFragment;
 import com.inmap.fragments.LevelPickerFragment.OnLevelSelectedListener;
@@ -173,6 +175,10 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 
 		case R.id.menu_levels:
 			toggleLevelPicker();
+			break;
+			
+		case R.id.menu_problemas:
+			new ProblemasDialogFragment().show(getSupportFragmentManager(), "ProblemasDialogFragment");
 			break;
 		}
 		return super.onOptionsItemSelected(item);

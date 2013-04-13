@@ -32,4 +32,10 @@
         android:icon="@drawable/bt_niveis"
         android:orderInCategory="2"
         android:showAsAction="always" />
+
+    <item android:id="@+id/menu_problemas"
+        android:title="@string/reportar_problema"
+        android:icon="@android:drawable/ic_menu_help"
+        android:orderInCategory="3"
+        android:showAsAction="never" />
 </menu>

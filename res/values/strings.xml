@@ -46,5 +46,13 @@
     <string name="ver_lojas">Ver lojas</string>
     <string name="msg_mapanaodisponivel">Mapa %s não disponível ainda. Aguarde próximas atualizações...</string>
     <string name="eventos_">Eventos:</string>
+    <string name="reporte_um_problema">Reporte um problema</string>
+    <string name="loja_">"Loja: "</string>
+    <string name="msg_detalhe">Detalhe o problema, sugestões e comentários abaixo (opcional).\n\n\n</string>
+    <string name="email_problems">contralabs@gmail.com</string>
+    <string name="reporte_de_problema">Reporte de problema</string>
+    <string name="mandar_e_mail_por_">Mandar E-mail por:</string>
+    <string name="problemas_">Problemas?</string>
+    <string name="reportar_problema">Reportar Problema</string>
 
 </resources>
