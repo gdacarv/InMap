@@ -165,6 +165,8 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 			break;
 
 		case R.id.menu_categories:
+			if(isShowingStoreList)
+				returnToCategoryList();
 			toggleList();
 			break;
 
@@ -237,6 +239,13 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 		mStoreOnMapController.setStores(stores);
 		storesHasMarkers = stores != null && stores.length > 0;
 		updateClearMarkersVisibility();
+	}
+
+	@Override
+	public void onSearchClicked() {
+		returnToCategoryList();
+		toggleList();
+		onSearchRequested();
 	}
 
 	@Override

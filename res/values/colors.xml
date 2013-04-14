@@ -16,4 +16,5 @@
 
 <resources>
     <color name="actionbar_title_color">#ffffff</color>
+    <color name="gray_text">#333333</color>
 </resources>

@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -27,10 +29,11 @@ public class StoreListFragment extends Fragment {
 
 	private static final int MAX_DESCRIPTION_LENGHT = 140;
 	
-	private View mRoot, mViewNoItemList;
+	private View mRoot, mViewNoItemList, mViewHeader;
 	private ListView mStoreList;
-	private Button mBackToCategoryButton, mShowOnMapButton;
+	private ImageButton mBackToCategoryButton, mShowOnMapButton;
 	private Context mContext;
+	private TextView mTitleTextView;
 	
 	private StoreListAdapter mStoreListAdapter;
 	
@@ -56,22 +59,28 @@ public class StoreListFragment extends Fragment {
 				selectStore((Store) mStoreListAdapter.getItem(position));
 			}
 		});
+		mTitleTextView = (TextView) mRoot.findViewById(R.id.txt_storelist_title);
+		mViewHeader = mRoot.findViewById(R.id.layout_storelist_header);
 		
 		configureButtons();
 		return mRoot;
 	}
 	
 	private void configureButtons() {
-		mBackToCategoryButton = (Button) mRoot.findViewById(R.id.btn_backtocategorys);
+		mBackToCategoryButton = (ImageButton) mRoot.findViewById(R.id.btn_backtocategorys);
 		mBackToCategoryButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				if(mStoreListController != null)
-					mStoreListController.onBackToCategorysClicked();
+				if(mStoreListController != null) {
+					if(mStoreListAdapter.isSearch())
+						mStoreListController.onSearchClicked();
+					else
+						mStoreListController.onBackToCategorysClicked();
+				}
 			}
 		});
-		mShowOnMapButton = (Button) mRoot.findViewById(R.id.btn_showonmap);
+		mShowOnMapButton = (ImageButton) mRoot.findViewById(R.id.btn_showonmap);
 		mShowOnMapButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -106,6 +115,18 @@ public class StoreListFragment extends Fragment {
 	public void setStoreParameters(StoreParameters parameters){
 		mStoreList.smoothScrollToPosition(0);
 		mStoreListAdapter.setStoreParameters(parameters);
+		if(mStoreListAdapter.isSearch()) {
+			mBackToCategoryButton.setImageResource(R.drawable.bt_pesquisar);
+			mTitleTextView.setText(mStoreListAdapter.getSearchQuery());
+			mViewHeader.setBackgroundColor(0xff0b6897);
+			mShowOnMapButton.setImageResource(R.drawable.pin_cat_pesquisa_all);
+		}else {
+			StoreCategory category = mStoreListAdapter.getStoreCategory();
+			mBackToCategoryButton.setImageResource(category.getMenuIconResId());
+			mTitleTextView.setText(category.getTitleRes());
+			mViewHeader.setBackgroundColor(category.getMenuColor());
+			mShowOnMapButton.setImageResource(R.drawable.pin_cat_alimentos_all); // TODO right icon
+		}
 	}
 	
 	public interface OnStoreSelectedListener {
@@ -115,19 +136,39 @@ public class StoreListFragment extends Fragment {
 	public interface StoreListController {
 		void onBackToCategorysClicked();
 		void onShowOnMapClicked(Store[] stores);
+		void onSearchClicked();
 	}
 	
 	private class StoreListAdapter extends BaseAdapter{
 		private Context mContext;
 		private Store[] mStores;
 		private StoreParameters mParameters;
+		private boolean mIsSearch;
 		
 		public StoreListAdapter(Context context){
 			mContext = context;
 		}
 		
+		public StoreCategory getStoreCategory() {
+			if(mIsSearch)
+				return null;
+			return StoreCategory.getStoreCategoryById(Integer.valueOf(mParameters.getCategoryString().split(",")[0]));
+		}
+
+		public boolean isSearch() {
+			return mIsSearch;
+		}
+
 		public void setStoreParameters(StoreParameters parameters){
 			mParameters = parameters;
+			String categoryId = mParameters.getCategoryString().split(",")[0];
+			if(categoryId.equals("")) { // Is Search
+				mIsSearch = true;
+				// TODO
+			}else { // Is category
+				mIsSearch = false;
+				// TODO
+			}
 			refreshStores();
 		}
 		
@@ -167,8 +208,15 @@ public class StoreListFragment extends Fragment {
 			TextView nameTextView = (TextView) convertView.findViewById(R.id.txt_store_name);
 			nameTextView.setText(store.getName());
 			StoreCategory storeCategory = store.getCategory();
-			nameTextView.setCompoundDrawablesWithIntrinsicBounds(storeCategory.getMenuIconResId(), 0, 0, 0);
-			nameTextView.setBackgroundColor(storeCategory.getMenuColor());
+			ImageView imgCategory = (ImageView) convertView.findViewById(R.id.img_store_category);
+			View layout = convertView.findViewById(R.id.layout_listitem_store_category);
+			if(isSearch()) {
+				imgCategory.setImageResource(storeCategory.getMenuIconResId());
+				layout.setBackgroundColor(storeCategory.getMenuColor());
+				layout.setVisibility(View.VISIBLE);
+			} else
+				layout.setVisibility(View.GONE);
+			nameTextView.setTextColor(storeCategory.getMenuColor());
 			
 			((TextView) convertView.findViewById(R.id.txt_store_description))
 				.setText(formatDescription(store.getDescription()));
@@ -218,6 +266,5 @@ public class StoreListFragment extends Fragment {
 				//mStoreList.setVisibility(View.VISIBLE);
 			}
 		}
-		
 	}
 }

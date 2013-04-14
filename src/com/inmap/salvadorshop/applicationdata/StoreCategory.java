@@ -59,4 +59,11 @@ public enum StoreCategory {
 	public int getMenuColor() {
 		return menuColor;
 	}
+
+	public static StoreCategory getStoreCategoryById(int id) {
+		StoreCategory storeCategory = values()[id-1];
+		if(storeCategory.getId() != id)
+			throw new RuntimeException("getStoreCategoryById erro!");
+		return storeCategory;
+	}
 }
