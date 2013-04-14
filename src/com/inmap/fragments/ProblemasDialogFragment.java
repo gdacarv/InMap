@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -18,7 +19,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.inmap.model.Store;
 import com.inmap.salvadorshop.R;
@@ -67,24 +67,34 @@ public class ProblemasDialogFragment extends DialogFragment {
 		return fillMaps;
 	}
 
+	private static void sendEmail(Context context, String msg, String subject) {
+		Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+		        "mailto", context.getString(R.string.email_problems), null));
+		intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+		intent.putExtra(Intent.EXTRA_TEXT, msg);
+
+		context.startActivity(Intent.createChooser(intent, context.getString(R.string.mandar_e_mail_por_)));
+	}
+
 	private OnItemClickListener onItemClickListener = new OnItemClickListener() {
 
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
-			Toast.makeText(getActivity(), R.string.aguarde_, Toast.LENGTH_SHORT).show();
 			String msg = ((TextView) view.findViewById(android.R.id.text1)).getText().toString() + "\n\n";
 			if(mStore != null)
 				msg += getString(R.string.loja_) + mStore.getName() + "\n\n";
 			msg += getString(R.string.msg_detalhe);
-			Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
-		            "mailto", getString(R.string.email_problems), null));
-			intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.reporte_de_problema) + (mStore != null ? " - " + mStore.getName() : ""));
-			intent.putExtra(Intent.EXTRA_TEXT, msg);
-
-			startActivity(Intent.createChooser(intent, getString(R.string.mandar_e_mail_por_)));
+			String subject = getString(R.string.reporte_de_problema) + (mStore != null ? " - " + mStore.getName() : "");
+			sendEmail(getActivity(), msg, subject);
 		}
 	
 	};
+
+	public static void sendSearchQueryNotFound(Context context, String searchQuery) {
+		String subject = String.format(context.getString(R.string.msg_subject_querynotfound), searchQuery);
+		String msg = String.format(context.getString(R.string.msg_body_querynotfound), searchQuery);
+		sendEmail(context, msg, subject);
+	}
 	
 }

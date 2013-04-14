@@ -98,7 +98,7 @@ public class ActionBarHelperBase extends ActionBarHelper {
         SimpleMenu tempMenu = new SimpleMenu(mActivity);
         SimpleMenuItem homeItem = new SimpleMenuItem(
                 tempMenu, android.R.id.home, 0, mActivity.getString(R.string.app_name));
-        homeItem.setIcon(R.drawable.ic_home);
+        homeItem.setIcon(R.drawable.img_marca_inmap);
         addActionItemCompatFromMenuItem(homeItem);
 
         // Add title text
@@ -183,10 +183,11 @@ public class ActionBarHelperBase extends ActionBarHelper {
                         ? R.attr.actionbarCompatItemHomeStyle
                         : R.attr.actionbarCompatItemStyle);
         actionButton.setLayoutParams(new ViewGroup.LayoutParams(
+        		itemId == android.R.id.home ? ViewGroup.LayoutParams.WRAP_CONTENT : 
                 (int) mActivity.getResources().getDimension(
-                        itemId == android.R.id.home
-                                ? R.dimen.actionbar_compat_button_home_width
-                                : R.dimen.actionbar_compat_button_width),
+                        //itemId == android.R.id.home
+                                //? R.dimen.actionbar_compat_button_home_width :
+                                R.dimen.actionbar_compat_button_width),
                 ViewGroup.LayoutParams.FILL_PARENT));
         if (itemId == R.id.menu_refresh) {
             actionButton.setId(R.id.actionbar_compat_item_refresh);

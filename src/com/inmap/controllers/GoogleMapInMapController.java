@@ -72,7 +72,7 @@ public class GoogleMapInMapController implements InMapViewController, MapItemsLi
 
 		configureLevels(mContext.getResources());
 		
-		configureMarkerLatLng();
+		//configureMarkerLatLng();
 
 		mMap.setOnMapClickListener(onMapClickListener);
 

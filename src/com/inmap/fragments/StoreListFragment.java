@@ -1,7 +1,6 @@
 package com.inmap.fragments;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -45,7 +44,7 @@ public class StoreListFragment extends Fragment {
 		mContext = activity;
 		mApplicationDataFacade = ((InMapApplication) activity.getApplication()).getApplicationDataFacade();
 		mRoot = inflater.inflate(R.layout.fragment_liststore, null);
-		mViewNoItemList = mRoot.findViewById(R.id.txt_list_store_empty);
+		mViewNoItemList = mRoot.findViewById(R.id.view_list_store_empty);
 		mStoreList = (ListView) mRoot.findViewById(R.id.list_store);
 		mStoreListAdapter = new StoreListAdapter(mContext);
 		mStoreList.setAdapter(mStoreListAdapter);
@@ -79,6 +78,14 @@ public class StoreListFragment extends Fragment {
 			public void onClick(View v) {
 				if(mStoreListController != null)
 					mStoreListController.onShowOnMapClicked(mStoreListAdapter.getStores());
+			}
+		});
+		
+		mRoot.findViewById(R.id.btn_sugira_loja).setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				ProblemasDialogFragment.sendSearchQueryNotFound(mContext, mStoreListAdapter.getSearchQuery());
 			}
 		});
 	}
@@ -122,6 +129,10 @@ public class StoreListFragment extends Fragment {
 		public void setStoreParameters(StoreParameters parameters){
 			mParameters = parameters;
 			refreshStores();
+		}
+		
+		public String getSearchQuery() {
+			return mParameters.getAnytext();
 		}
 
 		private void refreshStores() {
@@ -203,7 +214,7 @@ public class StoreListFragment extends Fragment {
 				mStores = result;
 				notifyDataSetChanged();
 				loadingView.setVisibility(View.GONE);
-				mViewNoItemList.setVisibility(result.length == 0 ? View.VISIBLE : View.GONE);
+				mViewNoItemList.setVisibility(result.length == 0 ? View.VISIBLE : View.INVISIBLE);
 				//mStoreList.setVisibility(View.VISIBLE);
 			}
 		}

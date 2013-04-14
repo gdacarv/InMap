@@ -16,17 +16,17 @@ public enum StoreCategory {
 	CARRIER(11, R.string.title_carrier, R.drawable.pin_cat_operadoras_telefonicas, R.drawable.img_cat_operadoras_telefonicas, 0xff006f9d), 
 	DEPARTMENT(12, R.string.title_department, R.drawable.pin_cat_lojas_departamentos, R.drawable.img_cat_lojas_departamentos, 0xff7a521e), 
 	HEALTH(13, R.string.title_health, R.drawable.pin_cat_saude, R.drawable.img_cat_saude, 0xffa01211), 
-	UNISSEX(14, R.string.title_unissex, R.drawable.pin_cat_unisex, R.drawable.img_cat_unisex, 0xffea6b00), 
+	UNISSEX(14, R.string.title_unissex, R.drawable.pin_cat_unisex, R.drawable.img_cat_unisex, 0xff760229), 
 	UNDERWEAR(15, R.string.title_underwear, R.drawable.pin_cat_moda_intima, R.drawable.img_cat_moda_intima, 0xffe77bad), 
 	COSMETIC(16, R.string.title_cosmetic, R.drawable.pin_cat_cosmeticos, R.drawable.img_cat_cosmeticos, 0xff8a66a4), 
 	SPORTS(17, R.string.title_sports, R.drawable.pin_cat_artigos_esportivos, R.drawable.img_cat_artigos_esportivos, 0xff016b2b), 
 	BABY(18, R.string.title_baby, R.drawable.pin_cat_artigos_infantis, R.drawable.img_cat_artigos_infantis, 0xff55c686), 
 	STREET(19, R.string.title_street, R.drawable.pin_cat_moda_street, R.drawable.img_cat_moda_street, 0xff353c2c), 
-	OPTICS(20, R.string.title_optics, R.drawable.pin_cat_otica, R.drawable.img_cat_otica, 0xffdf8200), 
+	OPTICS(20, R.string.title_optics, R.drawable.pin_cat_otica, R.drawable.img_cat_otica, 0xfff6b65d), 
 	BEDBATHTABLE(21, R.string.title_bedbathtable, R.drawable.pin_cat_cama_mesa, R.drawable.img_cat_cama_mesa, 0xff8dcacb), 
 	JEWELRY(22, R.string.title_jewelry, R.drawable.pin_cat_joalheria, R.drawable.img_cat_joalheria, 0xff910280), 
 	ACCESSORIES(23, R.string.title_accessories, R.drawable.pin_cat_bijouteria, R.drawable.img_cat_bijouteria, 0xff846427), 
-	HOME(24, R.string.title_home, R.drawable.pin_cat_utilidades_casa, R.drawable.img_cat_utilidades_casa, 0xff006f9d);
+	HOME(24, R.string.title_home, R.drawable.pin_cat_utilidades_casa, R.drawable.img_cat_utilidades_casa, 0xff663333);
 	
 	private int id, titleRes, mapIconRes, menuIconRes, menuColor;
 	

@@ -47,7 +47,7 @@ public class StoreDetailsActivity extends ActionBarActivity {
 
 		mApplicationDataFacade = ((InMapApplication)getApplication()).getApplicationDataFacade();
 		setActionBarTitle("  " + mStore.getTitle());
-		getActionBar().setIcon(R.drawable.img_marca_inmap);
+
 		populateViews();
 
 		findViewById(R.id.btn_details_map).setOnClickListener(onMapButtonClick);

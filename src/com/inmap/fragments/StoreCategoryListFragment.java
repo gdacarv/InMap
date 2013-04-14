@@ -3,13 +3,8 @@ package com.inmap.fragments;
 import java.util.Arrays;
 import java.util.Comparator;
 
-import com.inmap.model.DbAdapter;
-import com.inmap.model.Store;
-import com.inmap.salvadorshop.R;
-import com.inmap.salvadorshop.applicationdata.StoreCategory;
-
 import android.content.Context;
-import android.graphics.Color;
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -20,6 +15,10 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.inmap.model.DbAdapter;
+import com.inmap.salvadorshop.R;
+import com.inmap.salvadorshop.applicationdata.StoreCategory;
 
 public class StoreCategoryListFragment extends Fragment {
 
@@ -72,7 +71,8 @@ public class StoreCategoryListFragment extends Fragment {
 			
 			@Override
 			public int compare(StoreCategory lhs, StoreCategory rhs) {
-				return mStoresCount[rhs.getId()-1] - mStoresCount[lhs.getId()-1];
+				//return mStoresCount[rhs.getId()-1] - mStoresCount[lhs.getId()-1];
+				return getString(lhs.getTitleRes()).compareTo(getString(rhs.getTitleRes()));
 			}
 		};
 		
