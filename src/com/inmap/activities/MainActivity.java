@@ -412,6 +412,8 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 	private void verifyIntentSearch(Intent intent) {
 		if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
 			String query = intent.getStringExtra(SearchManager.QUERY);
+			if(query.length() > 2 && query.endsWith("s")) // To search plurals as singular (pt)
+				query = query.substring(0, query.length()-1);
 			mStoreListFragment.setStoreParameters(new StoreParameters().setText(query));
 			if(!mSlidingMenu.isMenuShowing())
 				toggleList();

@@ -31,6 +31,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	static final String KEY_LEVEL = "level";
 	static final String KEY_STORECATEGORY = "id_storecategory";
 	static final String KEY_TAGS = "tags";
+	static final String KEY_EXTRAS = "extras";
 	static final String KEY_AREAR1P1X = "arear1p1x";
 	static final String KEY_AREAR1P1Y = "arear1p1y";
 	static final String KEY_AREAR1P2X = "arear1p2x";
@@ -59,6 +60,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			+ KEY_LEVEL + " integer not null, "
 			+ KEY_STORECATEGORY + " integer not null, "
 			+ KEY_TAGS + " text, "
+			+ KEY_EXTRAS + " text, "
 			+ KEY_AREAR1P1X + " integer, "
 			+ KEY_AREAR1P1Y + " integer, "
 			+ KEY_AREAR1P2X + " integer, "

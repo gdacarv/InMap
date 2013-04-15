@@ -11,13 +11,13 @@ public class Store implements StoreMapItem, Serializable{
 	
 	private static final long serialVersionUID = 2516026149726961993L; 
 	
-	private String name, description, phone, website, tags[];
+	private String name, description, phone, website, tags[], extra;
 	private StoreCategory mCategory;
 	private int level;
 	private int area[];
 	private long id;
 	
-	public Store(long id, String name, String description, String phone, String website, StoreCategory mCategory, int level, String[] tags, int[] area) {
+	public Store(long id, String name, String description, String phone, String website, StoreCategory mCategory, int level, String[] tags, int[] area, String extra) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
@@ -27,6 +27,7 @@ public class Store implements StoreMapItem, Serializable{
 		this.mCategory = mCategory;
 		this.level = level;
 		this.area = area;
+		this.extra = extra;
 	}
 
 	public String getName() {
@@ -104,5 +105,7 @@ public class Store implements StoreMapItem, Serializable{
 		return description;// XXX Not the best choice...
 	}
 	
-
+	public String getExtra() {
+		return extra;
+	}
 }

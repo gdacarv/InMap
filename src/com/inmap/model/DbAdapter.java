@@ -9,7 +9,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.inmap.salvadorshop.applicationdata.InfrastructureCategory;
 import com.inmap.salvadorshop.applicationdata.StoreCategory;
@@ -144,7 +143,8 @@ public class DbAdapter {
 			websiteColumn = cursor.getColumnIndex(DatabaseHelper.KEY_WEBSITE),
 			levelColumn = cursor.getColumnIndex(DatabaseHelper.KEY_LEVEL),
 			categoryColumn = cursor.getColumnIndex(DatabaseHelper.KEY_STORECATEGORY),
-			tagsColumn = cursor.getColumnIndex(DatabaseHelper.KEY_TAGS);
+			tagsColumn = cursor.getColumnIndex(DatabaseHelper.KEY_TAGS),
+			extrasColumn = cursor.getColumnIndex(DatabaseHelper.KEY_EXTRAS);
 			StoreCategory[] categorys = StoreCategory.values();
 			for(int i = 0; i < stores.length; i++){
 				int[] areaIntArray = new int[pointsColumn.length];
@@ -155,7 +155,9 @@ public class DbAdapter {
 						cursor.getString(descriptionColumn), cursor.getString(phoneColumn), 
 						cursor.getString(websiteColumn), categorys[cursor.getInt(categoryColumn)-1], 
 						cursor.getInt(levelColumn), tagsString == null ? new String[0] : tagsString.split(","),
-								areaIntArray);
+						areaIntArray,
+						cursor.getString(extrasColumn)
+						);
 				cursor.moveToNext();
 			}
 		}else
@@ -183,7 +185,8 @@ public class DbAdapter {
 		websiteColumn = cursor.getColumnIndex(DatabaseHelper.KEY_WEBSITE),
 		levelColumn = cursor.getColumnIndex(DatabaseHelper.KEY_LEVEL),
 		categoryColumn = cursor.getColumnIndex(DatabaseHelper.KEY_STORECATEGORY),
-		tagsColumn = cursor.getColumnIndex(DatabaseHelper.KEY_TAGS);
+		tagsColumn = cursor.getColumnIndex(DatabaseHelper.KEY_TAGS),
+		extrasColumn = cursor.getColumnIndex(DatabaseHelper.KEY_EXTRAS);
 		StoreCategory[] categorys = StoreCategory.values();
 		int[] areaIntArray = new int[pointsColumn.length];
 		for(int l = 0; l < areaIntArray.length; l++)
@@ -193,7 +196,8 @@ public class DbAdapter {
 				cursor.getString(descriptionColumn), cursor.getString(phoneColumn), 
 				cursor.getString(websiteColumn), categorys[cursor.getInt(categoryColumn)-1], 
 				cursor.getInt(levelColumn), tagsString == null ? new String[0] : tagsString.split(","),
-						areaIntArray);
+				areaIntArray,
+				cursor.getString(extrasColumn));
 		cursor.close();
 		return store;
 	}

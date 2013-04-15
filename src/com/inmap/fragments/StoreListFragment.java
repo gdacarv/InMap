@@ -1,5 +1,8 @@
 package com.inmap.fragments;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -164,10 +167,8 @@ public class StoreListFragment extends Fragment {
 			String categoryId = mParameters.getCategoryString().split(",")[0];
 			if(categoryId.equals("")) { // Is Search
 				mIsSearch = true;
-				// TODO
 			}else { // Is category
 				mIsSearch = false;
-				// TODO
 			}
 			refreshStores();
 		}
@@ -226,6 +227,20 @@ public class StoreListFragment extends Fragment {
 			
 			return convertView;
 		}
+		
+		@Override
+		public void notifyDataSetChanged() {
+			Arrays.sort(mStores, comparator);
+			super.notifyDataSetChanged();
+		}
+		
+		private Comparator<Store> comparator = new Comparator<Store>() {
+
+			@Override
+			public int compare(Store lhs, Store rhs) {
+				return lhs.getTitle().compareTo(rhs.getTitle());
+			}
+		};
 		
 		private CharSequence formatDescription(String description) {
 			if(description == null || description.length() <= MAX_DESCRIPTION_LENGHT)

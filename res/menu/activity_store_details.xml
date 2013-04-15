@@ -11,4 +11,9 @@
         android:icon="@android:drawable/ic_menu_help"
         android:showAsAction="never" />
 
+    <item android:id="@+id/menu_show_on_map"
+        android:title="@string/apontar_no_mapa"
+        android:icon="@drawable/bt_pin_loja_mapa"
+        android:showAsAction="always" />
+
 </menu>

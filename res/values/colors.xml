@@ -17,4 +17,5 @@
 <resources>
     <color name="actionbar_title_color">#ffffff</color>
     <color name="gray_text">#333333</color>
+    <color name="details_tab_border">#1c6487</color>
 </resources>

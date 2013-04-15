@@ -45,7 +45,7 @@
         android:layout_height="46dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:src="@drawable/ic_action_refresh"
+        android:src="@drawable/bt_delete_pins_mapa"
         android:layout_marginTop="8dp"
         android:layout_marginRight="58dp"
         android:onClick="onClearMarkersButtonClick"

@@ -1,48 +1,124 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_root"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_gravity="center"
     tools:context=".StoreDetailsActivity" >
+    
+    <!-- <View 
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/> -->
 
-    <TextView
-        android:id="@+id/txt_details_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <ImageView
+        android:id="@+id/img_details_logo"
+        android:layout_width="270dp"
+        android:layout_height="105dp"
+        android:layout_gravity="center"
+        android:layout_margin="15dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/img_no_brands_descricao" />
+    
+    
+    <!-- <View 
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/> -->
 
     <TextView
         android:id="@+id/txt_details_phone"
+        style="@style/descriptionInfo"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ico_telefone_descricao_loja" />
 
     <TextView
         android:id="@+id/txt_details_website"
+        style="@style/descriptionInfo"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ico_site_descricao_loja" />
 
     <TextView
         android:id="@+id/txt_details_category"
+        style="@style/descriptionInfo"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ico_categoria_lojas" />
 
     <TextView
         android:id="@+id/txt_details_level"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    
-    <Button 
-        android:id="@+id/btn_details_map"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/apontar_no_mapa"/>
-    
-    <TextView
-        android:id="@+id/txt_problemas"
+        style="@style/descriptionInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/problemas_"
-        android:layout_gravity="right" />
+        android:drawableLeft="@drawable/ico_niveis_lojas" />
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+        
+        <TextView
+            android:id="@+id/txt_problemas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:drawableRight="@drawable/bt_error_descricao_loja"
+            android:padding="5dp"
+            android:text="@string/problemas_"
+            android:textColor="#666"
+            android:textStyle="italic"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true" />
+
+        <TextView
+            android:id="@+id/tab_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/aba_primeira"
+            android:text="@string/descricao"
+            android:gravity="center"
+            android:drawableLeft="@drawable/ico_descricao_lojas"/>
+
+        <TextView
+            android:id="@+id/tab_extra"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/aba_primeira"
+            android:gravity="center"
+            android:layout_toRightOf="@id/tab_description"
+            android:layout_alignBottom="@id/tab_description"
+            android:paddingLeft="30dp"
+            android:layout_marginLeft="-35dp"
+            android:visibility="invisible"/>
+        
+        <View 
+            android:id="@+id/view_tab_line"
+            android:layout_width="match_parent"
+            android:layout_height="1.5dp"
+            android:background="@color/details_tab_border"
+            android:layout_below="@id/txt_problemas"
+            android:layout_marginTop="-2dp"/>
+
+        <TextView
+            android:id="@+id/txt_details_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tab_description"
+            android:layout_margin="15dp" />
+        
+        <FrameLayout 
+            android:id="@+id/layout_details_extra"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/tab_description"
+            android:visibility="invisible" />
+            
+    </RelativeLayout>
+
+    <!-- <View 
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/> -->
 </LinearLayout>

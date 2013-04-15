@@ -34,31 +34,28 @@
     <string name="mapa_">Mapa ></string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_store_details">StoreDetailsActivity</string>
-    <string name="descricao_">"Descrição: "</string>
-    <string name="telefone_">Telefone:</string>
-    <string name="site_">Site:</string>
-    <string name="categoria_">Categoria:</string>
-    <string name="andar_">Andar:</string>
+    <string name="descricao">Descrição</string>
     <string name="apontar_no_mapa">Apontar no Mapa</string>
     <string name="search_hint">Digite o que deseja...</string>
     <string name="message_noitems_list_store">Ops, nada foi encontrado.\n\nConhece alguma loja que deveria aparecer aqui? Conte para gente!</string>
     <string name="msg_error_server">Erro ao atualizar informações. Avise ao desenvolvedor.</string>
     <string name="ver_lojas">Ver lojas</string>
     <string name="msg_mapanaodisponivel">Mapa %s não disponível ainda. Aguarde próximas atualizações...</string>
-    <string name="eventos_">Eventos:</string>
+    <string name="eventos">Eventos</string>
     <string name="reporte_um_problema">Reporte um problema</string>
     <string name="loja_">"Loja: "</string>
     <string name="msg_detalhe">Detalhe o problema, sugestões e comentários abaixo (opcional).\n\n\n</string>
     <string name="email_problems">contralabs@gmail.com</string>
     <string name="reporte_de_problema">Reporte de problema</string>
     <string name="mandar_e_mail_por_">Mandar E-mail por:</string>
-    <string name="problemas_">Problemas?</string>
+    <string name="problemas_"><u>Problemas?</u></string>
     <string name="reportar_problema">Reportar Problema</string>
     <string name="aguarde_">Aguarde...</string>
     <string name="atualizando_">Atualizando...</string>
     <string name="atualiza_o_completa_">Atualização completa.</string>
     <string name="sugerir_loja">Sugerir loja</string>
     <string name="msg_subject_querynotfound">Pesquisei \"%s\" e nada encontrei</string>
-    <string name="msg_body_querynotfound">Realizei uma busca por %s e esperava encontrar:\n\n</string>
+    <string name="msg_body_querynotfound">Realizei uma busca por %s e esperava encontrar:\n\n</string>
+    <string name="filmes_e_hor_rios">Filmes</string>
 
 </resources>

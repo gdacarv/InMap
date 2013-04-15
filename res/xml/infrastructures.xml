@@ -5,8 +5,8 @@
         <id>1</id>
         <id_infracategory>1</id_infracategory>
         <level>0</level>
-        <x>117</x>
-        <y>181</y>
+        <x>62</x>
+        <y>182</y>
     </infrastructure>
     
     <infrastructure>
@@ -61,32 +61,32 @@
         <id>8</id>
         <id_infracategory>6</id_infracategory>
         <level>1</level>
-        <x>0</x>
-        <y>0</y>
+        <x>99</x>
+        <y>167</y>
     </infrastructure>
       
     <infrastructure>
         <id>9</id>
         <id_infracategory>6</id_infracategory>
         <level>1</level>
-        <x>0</x>
-        <y>0</y>
+        <x>118</x>
+        <y>173</y>
     </infrastructure>
       
     <infrastructure>
         <id>10</id>
-        <id_infracategory>4</id_infracategory>
+        <id_infracategory>3</id_infracategory>
         <level>1</level>
-        <x>0</x>
-        <y>0</y>
+        <x>95</x>
+        <y>284</y>
     </infrastructure>
       
     <infrastructure>
         <id>11</id>
-        <id_infracategory>3</id_infracategory>
+        <id_infracategory>4</id_infracategory>
         <level>1</level>
-        <x>0</x>
-        <y>0</y>
+        <x>111</x>
+        <y>269</y>
     </infrastructure>
       
     <infrastructure>
@@ -148,7 +148,7 @@
     <infrastructure>
         <id>19</id>
         <id_infracategory>6</id_infracategory>
-        <level>3</level>
+        <level>2</level>
         <x>498</x>
         <y>1667</y>
     </infrastructure>
@@ -299,16 +299,16 @@
       
     <infrastructure>
         <id>38</id>
-        <id_infracategory>4</id_infracategory>
-        <level>3</level>
+        <id_infracategory>5</id_infracategory>
+        <level>2</level>
         <x>628</x>
         <y>1111</y>
     </infrastructure>
       
     <infrastructure>
         <id>39</id>
-        <id_infracategory>3</id_infracategory>
-        <level>3</level>
+        <id_infracategory>7</id_infracategory>
+        <level>2</level>
         <x>652</x>
         <y>1088</y>
     </infrastructure>
@@ -616,5 +616,165 @@
         <x>0</x>
         <y>0</y>
     </infrastructure>
+
+  <infrastructure>
+        <id>78</id>
+        <id_infracategory>2</id_infracategory>
+        <level>0</level>
+        <x>405</x>
+        <y>115</y>
+    </infrastructure> <!--ESTACIONAMENTO -->
+
+ <infrastructure>
+        <id>79</id>
+        <id_infracategory>2</id_infracategory>
+        <level>0</level>
+        <x>406</x>
+        <y>243</y>
+    </infrastructure> <!-- ESTACIONAMENTO -->
+
+ <infrastructure>
+        <id>80</id>
+        <id_infracategory>2</id_infracategory>
+        <level>0</level>
+        <x>182</x>
+        <y>320</y>
+    </infrastructure> <!-- ESTACIONAMENTO -->
+
+<infrastructure>
+        <id>81</id>
+        <id_infracategory>1</id_infracategory>
+        <level>2</level>
+        <x>572</x>
+        <y>1996</y>
+    </infrastructure> <!-- ENTRADA -->
+    
+<infrastructure>
+        <id>82</id>
+        <id_infracategory>2</id_infracategory>
+        <level>2</level>
+        <x>572</x>
+        <y>1996</y>
+    </infrastructure> <!-- ESTACIONAMENTO-->
+    
+<infrastructure>
+        <id>83</id>
+        <id_infracategory>1</id_infracategory>
+        <level>2</level>
+        <x>644</x>
+        <y>1379</y>
+    </infrastructure> <!-- ENTRADA-->
+    
+<infrastructure>
+        <id>84</id>
+        <id_infracategory>2</id_infracategory>
+        <level>2</level>
+        <x>644</x>
+        <y>1379</y>
+    </infrastructure> <!-- ESTACIONAMENTO -->
+    
+<infrastructure>
+        <id>85</id>
+        <id_infracategory>1</id_infracategory>
+        <level>2</level>
+        <x>818</x>
+        <y>1243</y>
+    </infrastructure> <!-- ENTRADA -->
+    
+<infrastructure>
+        <id>86</id>
+        <id_infracategory>2</id_infracategory>
+        <level>2</level>
+        <x>818</x>
+        <y>1243</y>
+    </infrastructure> <!-- ESTACIONAMENTO -->
+    
+<infrastructure>
+        <id>87</id>
+        <id_infracategory>2</id_infracategory>
+        <level>2</level>
+        <x>765</x>
+        <y>1040</y>
+    </infrastructure> <!-- ESTACIONAMENTO -->
+    
+<infrastructure>
+        <id>88</id>
+        <id_infracategory>1</id_infracategory>
+        <level>2</level>
+        <x>821</x>
+        <y>791</y>
+    </infrastructure> <!-- ENTRADA -->
+    
+<infrastructure>
+        <id>89</id>
+        <id_infracategory>2</id_infracategory>
+        <level>2</level>
+        <x>821</x>
+        <y>791</y>
+    </infrastructure> <!--ESTACIONAMENTO -->
+    
+<infrastructure>
+        <id>90</id>
+        <id_infracategory>1</id_infracategory>
+        <level>2</level>
+        <x>682</x>
+        <y>648</y>
+    </infrastructure> <!--ENTRADA -->
+    
+<infrastructure>
+        <id>91</id>
+        <id_infracategory>2</id_infracategory>
+        <level>2</level>
+        <x>682</x>
+        <y>648</y>
+    </infrastructure> <!--ESTACIONAMENTO -->
+       
+<infrastructure>
+        <id>92</id>
+        <id_infracategory>1</id_infracategory>
+        <level>2</level>
+        <x>703</x>
+        <y>250</y>
+    </infrastructure> <!--ENTRADA -->
+       
+<infrastructure>
+        <id>93</id>
+        <id_infracategory>2</id_infracategory>
+        <level>2</level>
+        <x>703</x>
+        <y>250</y>
+    </infrastructure> <!--ESTACIONAMENTO -->
+         
+<infrastructure>
+        <id>94</id>
+        <id_infracategory>2</id_infracategory>
+        <level>2</level>
+        <x>204</x>
+        <y>411</y>
+    </infrastructure> <!--ESTACIONAMENTO -->
+         
+<infrastructure>
+        <id>95</id>
+        <id_infracategory>2</id_infracategory>
+        <level>2</level>
+        <x>559</x>
+        <y>404</y>
+    </infrastructure> <!--ESTACIONAMENTO -->
+             
+<infrastructure>
+        <id>96</id>
+        <id_infracategory>2</id_infracategory>
+        <level>2</level>
+        <x>187</x>
+        <y>1642</y>
+    </infrastructure> <!--ESTACIONAMENTO -->
+             
+<infrastructure>
+        <id>97</id>
+        <id_infracategory>2</id_infracategory>
+        <level>2</level>
+        <x>498</x>
+        <y>1665</y>
+    </infrastructure> <!--ESTACIONAMENTO -->
     
 </infrastructures>
