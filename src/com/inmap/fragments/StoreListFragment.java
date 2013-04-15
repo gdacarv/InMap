@@ -282,4 +282,8 @@ public class StoreListFragment extends Fragment {
 			}
 		}
 	}
+
+	public boolean isSearch() {
+		return mStoreListAdapter.isSearch();
+	}
 }

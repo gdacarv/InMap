@@ -25,4 +25,6 @@ public interface LevelInformation {
 
 	LatLng getSoutheastBound(int level);
 
+	int getMenuIconResId(int level);
+
 }

@@ -188,9 +188,12 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 	@Override
 	public void onBackPressed() {
 		if(mSlidingMenu.isMenuShowing()){
-			if(isShowingStoreList)
-				returnToCategoryList();
-			else
+			if(isShowingStoreList) {
+				if(mStoreListFragment.isSearch())
+					onSearchClicked();
+				else
+					returnToCategoryList();
+			}else
 				toggleList();
 		}
 		else
@@ -263,7 +266,7 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 		mSlidingMenu.setShadowDrawable(R.drawable.shadow);
 		mSlidingMenu.setBehindOffsetRes(R.dimen.slidingmenu_offset_left, SlidingMode.LEFT);
 		mSlidingMenu.setBehindWidthRes(R.dimen.slidingmenu_width_right, SlidingMode.RIGHT);
-		mSlidingMenu.setFadeDegree(0.35f);
+		mSlidingMenu.setFadeDegree(0.00f);
 		mSlidingMenu.attachToActivity(this, SlidingMenu.SLIDING_WINDOW);
 		mSlidingMenu.setMenu(R.layout.layout_lists, SlidingMode.LEFT);
 		mSlidingMenu.setMenu(R.layout.layout_levelpicker, SlidingMode.RIGHT);

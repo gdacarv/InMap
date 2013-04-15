@@ -1,10 +1,5 @@
 package com.inmap.fragments;
 
-import com.inmap.salvadorshop.R;
-import com.inmap.salvadorshop.applicationdata.SalvadorShopApplicationDataFacade;
-import com.inmap.interfaces.ApplicationDataFacade;
-import com.inmap.interfaces.LevelInformation;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,13 +8,20 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
+
+import com.inmap.interfaces.ApplicationDataFacade;
+import com.inmap.interfaces.LevelInformation;
+import com.inmap.salvadorshop.R;
+import com.inmap.salvadorshop.applicationdata.SalvadorShopApplicationDataFacade;
 
 public class LevelPickerFragment extends Fragment {
 	
 	private OnLevelSelectedListener mOnLevelSelectedListener;
 	private LevelInformation mLevelInformation;
-	private Button[] mLevelButtons;
+	private ImageButton[] mLevelButtons;
 	private Context mContext;
 
 	@Override
@@ -34,18 +36,25 @@ public class LevelPickerFragment extends Fragment {
 				for(int i = 0; i < mLevelButtons.length; i++)
 					if(mLevelButtons[i] == v){
 						mOnLevelSelectedListener.onLevelSelected(i);
-						break;
-					}
+						v.setSelected(true);
+					} else
+						mLevelButtons[i].setSelected(false);
 			}
 		};
 		LinearLayout root = (LinearLayout) inflater.inflate(R.layout.fragment_levelpicker, null);
 		LinearLayout.LayoutParams layoutParamsButton = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 0, 1);
-		mLevelButtons = new Button[mLevelInformation.getLevelsCount()];
-		for(int i = 0; i < mLevelButtons.length; i++){
-			mLevelButtons[i] = new Button(mContext);
+		mLevelButtons = new ImageButton[mLevelInformation.getLevelsCount()];
+		int initLevel = mLevelInformation.getInitLevel();
+		for(int i = mLevelButtons.length-1; i >= 0 ; i--){
+			mLevelButtons[i] = new ImageButton(mContext);
 			mLevelButtons[i].setLayoutParams(layoutParamsButton);
-			mLevelButtons[i].setText(mLevelInformation.getTitle(i));
+			mLevelButtons[i].setImageResource(mLevelInformation.getMenuIconResId(i));
 			mLevelButtons[i].setOnClickListener(listener);
+			mLevelButtons[i].setBackgroundResource(0);
+			mLevelButtons[i].setScaleType(ScaleType.FIT_CENTER);
+			mLevelButtons[i].setPadding(0, 0, 0, 0);
+			if(initLevel == i)
+				mLevelButtons[i].setSelected(true);
 			root.addView(mLevelButtons[i]);
 		}
 			

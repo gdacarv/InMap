@@ -8,6 +8,7 @@ public class SalvadorShopLevelInformation implements LevelInformation {
 
 	private String[] levelTitles = {"G1", "G2", "L1", "L2", "L3"};
 	private int [] maps = {R.drawable.mapg1, R.drawable.mapg2, R.drawable.mapl1, R.drawable.mapl2, R.drawable.mapl3};
+	private int [] menuIcons = {R.drawable.bt_level_g1, R.drawable.bt_level_g2, R.drawable.bt_level_l1, R.drawable.bt_level_l2, R.drawable.bt_level_l3};
 	
 	private LatLng[][] levelsBounds = {
 			{new LatLng(-12.977679918582552d,-38.455763384699820d), new LatLng(-12.979128883754134d,-38.45436695963144d)}, // G1
@@ -76,6 +77,11 @@ public class SalvadorShopLevelInformation implements LevelInformation {
 	@Override
 	public LatLng getSoutheastBound(int level) {
 		return levelsBounds[level][1];
+	}
+
+	@Override
+	public int getMenuIconResId(int level) {
+		return menuIcons[level];
 	}
 
 }

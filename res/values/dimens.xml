@@ -21,5 +21,6 @@
     
     <dimen name="shadow_width">15dp</dimen>
     <dimen name="slidingmenu_offset_left">60dp</dimen>
-    <dimen name="slidingmenu_width_right">60dp</dimen>
+    <dimen name="slidingmenu_width_right">50dp</dimen>
+    
 </resources>
