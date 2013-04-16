@@ -205,9 +205,9 @@ public class StoreDetailsActivity extends ActionBarActivity {
 			v.bringToFront();
 			if(v == mTabDescription) {
 				mViewDescription.setVisibility(View.VISIBLE);
-				mLayoutExtra.setVisibility(View.INVISIBLE);
+				mLayoutExtra.setVisibility(View.GONE);
 			} else {
-				mViewDescription.setVisibility(View.INVISIBLE);
+				mViewDescription.setVisibility(View.GONE);
 				mLayoutExtra.setVisibility(View.VISIBLE);
 			}
 			((View) v.getParent()).invalidate();

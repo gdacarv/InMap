@@ -23,4 +23,7 @@
     <dimen name="slidingmenu_offset_left">60dp</dimen>
     <dimen name="slidingmenu_width_right">50dp</dimen>
     
+    <dimen name="cinemark_height">220dp</dimen>
+    <dimen name="culturaevents_height">220dp</dimen>
+    
 </resources>
