@@ -59,5 +59,17 @@
         android:gravity="center_vertical"
         android:padding="10dp"
         android:textColor="@color/gray_text" />
+    
+    <TextView
+        android:id="@+id/txt_store_extra"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:textColor="@color/red_text"
+        android:visibility="gone"
+        android:textStyle="italic" />
 
 </LinearLayout>

@@ -8,8 +8,13 @@ public abstract class ExtraFragment extends Fragment {
 	private OnReadyChangeListener mListener;
 
 	public abstract String getTitle();
-
+	
 	public abstract int getIconResId();
+
+	/* Subclasses should implemente those static methods:
+	 * public static int getIconResIdStatic();
+	 * public static String getDescription(Resources res);
+	 */
 	
 	public boolean isReady() {
 		return isReady;

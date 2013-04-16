@@ -57,5 +57,11 @@
     <string name="msg_subject_querynotfound">Pesquisei \"%s\" e nada encontrei</string>
     <string name="msg_body_querynotfound">Realizei uma busca por %s e esperava encontrar:\n\n</string>
     <string name="filmes_e_hor_rios">Filmes</string>
+    <string name="title_activity_splash">InMap</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="salvador_shopping">Salvador Shopping</string>
+    <string name="msg_description_cinemark">Confira a programação deste cinema aqui!</string>
+    <string name="msg_description_cultura">Confira a programação de eventos aqui!</string>
 
 </resources>

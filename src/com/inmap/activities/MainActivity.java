@@ -440,6 +440,7 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 		mStoreOnMapController.clearMarkers();
 		storesHasMarkers = false;
 		onInfrastructureCategoryChanged(0);
+		mInfrastructureBarFragment.clearSelection();
 	}
 
 	public void updateClearMarkersVisibility() {

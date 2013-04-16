@@ -64,8 +64,9 @@ public class InfrastructureBarFragment extends Fragment implements OnGestureList
 				for(int i = 0; i < mInfraButtons.length; i++)
 					if(mInfraButtons[i] == v){
 						selectInfrastructure(mInfraIds[i]);
-						break;
-					}
+						v.setSelected(true);
+					} else
+						mInfraButtons[i].setSelected(false);
 			}
 		};
 		LinearLayout layout = (LinearLayout) mRoot.findViewById(R.id.layout_infra_btns);
@@ -216,5 +217,10 @@ public class InfrastructureBarFragment extends Fragment implements OnGestureList
 	
 	public interface OnInfrastructureCategoryChangedListener {
 		void onInfrastructureCategoryChanged(int id);
+	}
+
+	public void clearSelection() {
+		for(View view : mInfraButtons)
+			view.setSelected(false);
 	}
 }

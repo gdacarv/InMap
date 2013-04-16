@@ -1,9 +1,12 @@
 package com.inmap.fragments;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Comparator;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,7 +17,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -128,7 +130,7 @@ public class StoreListFragment extends Fragment {
 			mBackToCategoryButton.setImageResource(category.getMenuIconResId());
 			mTitleTextView.setText(category.getTitleRes());
 			mViewHeader.setBackgroundColor(category.getMenuColor());
-			mShowOnMapButton.setImageResource(R.drawable.pin_cat_alimentos_all); // TODO right icon
+			mShowOnMapButton.setImageResource(category.getBtAllIconResId());
 		}
 	}
 	
@@ -224,6 +226,23 @@ public class StoreListFragment extends Fragment {
 			
 			((TextView) convertView.findViewById(R.id.txt_store_level))
 				.setText(mApplicationDataFacade.getLevelInformation().getTitle(store.getLevel()));
+			
+			TextView extraTextView = (TextView) convertView.findViewById(R.id.txt_store_extra);
+			String extra = store.getExtra();
+			if(extra != null && extra.length() > 0) {
+				try {
+					Class<? extends ExtraFragment> cls = (Class<? extends ExtraFragment>) Class.forName(extra);
+					Method methodDescription = cls.getMethod("getDescription", Resources.class);
+					Method methodIcon = cls.getMethod("getIconResIdStatic");
+					extraTextView.setText(methodDescription.invoke(null, getResources()).toString());
+					extraTextView.setCompoundDrawablesWithIntrinsicBounds((Integer) methodIcon.invoke(null), 0, 0, 0);
+					extraTextView.setVisibility(View.VISIBLE);
+				} catch (Exception e) {
+					extraTextView.setVisibility(View.GONE);
+					e.printStackTrace();
+				} 
+			} else
+				extraTextView.setVisibility(View.GONE);
 			
 			return convertView;
 		}

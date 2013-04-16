@@ -1,5 +1,6 @@
 package com.inmap.fragments;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +21,15 @@ public class CinemarkExtraFragment extends ExtraFragment {
 
 	@Override
 	public int getIconResId() {
+		return getIconResIdStatic();
+	}
+
+	public static int getIconResIdStatic() {
 		return R.drawable.ico_eventos_lojas;
+	}
+	
+	public static String getDescription(Resources res) {
+		return res.getString(R.string.msg_description_cinemark);
 	}
 
 	@Override
