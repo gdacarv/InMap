@@ -37,7 +37,7 @@ public class InfrastructureBarFragment extends Fragment implements OnGestureList
 		mRoot = (AnimateFrameLayout) inflater.inflate(R.layout.fragment_infrastructure_bar, null);
 		mLayoutButtons = mRoot.findViewById(R.id.layout_infra);
 		mGestureDetector = new GestureDetector(context, this);
-		
+
 		mInfraControl = (ImageButton) mRoot.findViewById(R.id.btn_infra_control);
 
 		mLayoutControl = mRoot.findViewById(R.id.layout_btn_infra);
@@ -48,25 +48,29 @@ public class InfrastructureBarFragment extends Fragment implements OnGestureList
 				return mGestureDetector.onTouchEvent(event);
 			}
 		});
-		
+
 		if(savedInstanceState != null && savedInstanceState.getBoolean("isExpanded")){
 			isBarVisible = true;
 			mLayoutButtons.setVisibility(View.VISIBLE);
 		}
-		
+
 		final InfrastructureCategory cats[] = InfrastructureCategory.values();
 		mInfraButtons = new ImageButton[cats.length];
 		mInfraIds = new int[cats.length];
 		View.OnClickListener listener = new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				for(int i = 0; i < mInfraButtons.length; i++)
-					if(mInfraButtons[i] == v){
-						selectInfrastructure(mInfraIds[i]);
-						v.setSelected(true);
-					} else
-						mInfraButtons[i].setSelected(false);
+				if(v.isSelected()) {
+					selectInfrastructure(0);
+					v.setSelected(false);
+				}else
+					for(int i = 0; i < mInfraButtons.length; i++)
+						if(mInfraButtons[i] == v){
+							selectInfrastructure(mInfraIds[i]);
+							v.setSelected(true);
+						} else
+							mInfraButtons[i].setSelected(false);
 			}
 		};
 		LinearLayout layout = (LinearLayout) mRoot.findViewById(R.id.layout_infra_btns);
@@ -78,24 +82,30 @@ public class InfrastructureBarFragment extends Fragment implements OnGestureList
 			mInfraButtons[i].setOnClickListener(listener);
 			layout.addView(mInfraButtons[i]);
 		}
-			
+
 		mRoot.setOnAnimationEnd(new OnAnimationEnd() {
-			
+
 			@Override
 			public void onAnimationEnded() {
 				if(!isBarVisible)
 					mLayoutButtons.setVisibility(View.GONE);
 			}
 		});
-		
+
 		return mRoot;
 	}
 	
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		toggleBar();
+	}
+
 	protected void selectInfrastructure(int id) {
 		if(mOnInfrastructureChangeListener != null)
 			mOnInfrastructureChangeListener.onInfrastructureCategoryChanged(id);
 	}
-	
+
 	public void setOnInfrastructureCategoryChangeListener(OnInfrastructureCategoryChangedListener listener){
 		mOnInfrastructureChangeListener = listener;
 	}
@@ -177,7 +187,7 @@ public class InfrastructureBarFragment extends Fragment implements OnGestureList
 	@Override
 	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
 		float distancy = e2.getX(),
-			distancyY = e2.getY();
+		distancyY = e2.getY();
 		if(distancyY > -mLayoutControl.getHeight() && ((isBarVisible && distancy > mLayoutControl.getWidth() && distancy < mLayoutControl.getWidth()*6) || (!isBarVisible && distancy < 0  && distancy > mLayoutControl.getWidth()*-5f))){
 			toggleBar();
 			return true;
@@ -214,7 +224,7 @@ public class InfrastructureBarFragment extends Fragment implements OnGestureList
 		if(isBarVisible)
 			toggleBar();
 	}
-	
+
 	public interface OnInfrastructureCategoryChangedListener {
 		void onInfrastructureCategoryChanged(int id);
 	}

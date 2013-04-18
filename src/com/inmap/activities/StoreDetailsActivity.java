@@ -230,7 +230,7 @@ public class StoreDetailsActivity extends ActionBarActivity {
 	}
 
 	public void showOnMap() {
-		if(mStore.getLevel() >= 3) {// XXX Take it off when maps L2 and L3 are ready
+		if(mStore.getLevel() == 3) {// XXX Take it off when map L2 is ready
 			Toast.makeText(StoreDetailsActivity.this, String.format(getString(R.string.msg_mapanaodisponivel), mApplicationDataFacade.getLevelInformation().getTitle(mStore.getLevel())), Toast.LENGTH_SHORT).show();
 			return;
 		}

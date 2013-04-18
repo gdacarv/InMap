@@ -15,23 +15,23 @@ public class SalvadorShopLevelInformation implements LevelInformation {
 			{new LatLng(-12.977589092525022d,-38.455971255898476d), new LatLng(-12.979127250201760d,-38.45429621636867d)}, // G2
 			{new LatLng(-12.976628229215127d,-38.456756472587585d), new LatLng(-12.979861040846481d,-38.45281630754471d)}, // L1
 			{new LatLng(-12.976628229215127d,-38.456756472587585d), new LatLng(-12.979861040846481d,-38.45281630754471d)}, // L2 TODO Right bounds
-			{new LatLng(-12.976628229215127d,-38.456756472587585d), new LatLng(-12.979861040846481d,-38.45281630754471d)}  // L3 TODO Right bounds
+			{new LatLng(-12.977214353008742d,-38.455904871225360d), new LatLng(-12.979239311869557d,-38.45373999327421d)}  // L3 
 	};
 	
 	private double[][] levelsPosition = {
-			{-12.978403585445427d, -38.455065675079820},  // G1             
+			{-12.978403585445427d, -38.455065675079820d},  // G1             
 			{-12.978357845841520d, -38.455133736133575d},  // G2 
 			{-12.978243170083285d, -38.454786825342274d},  // L1                  
 			{-12.978243170083285d, -38.454786825342274d},  // L2 TODO Right position
-			{-12.978243170083285d, -38.454786825342274d}   // L3 TODO Right position
+			{-12.978225854365903d, -38.454822599887850d}   // L3 
 	};
 	
 	private float[] levelsWidth = { // In meters
 			130f,  // G1       
-			110f,   // G2    
+			110f,  // G2    
 			170f,  // L1            
-			170f,  // L2 TODO Right position
-			170f,  // L3 TODO Right position
+			170f,  // L2 TODO Right width
+			150f,  // L3 
 	};
 	
 	@Override

@@ -6,7 +6,6 @@ import java.util.Map;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
 import android.location.Location;
 import android.os.Handler;
 import android.util.Log;
@@ -142,7 +141,7 @@ public class GoogleMapInMapController implements InMapViewController, MapItemsLi
 			it.next().remove();
 			it.remove();
 		}
-		if(mCurrentLevel < 3) // XXX Remove when map L2 and L3 are ready
+		if(mCurrentLevel != 3) // XXX Remove when map L2 is ready
 		for(MapItem item : mapItems) {
 			createMarker(item); 
 		} // XXX Might use optimizations
