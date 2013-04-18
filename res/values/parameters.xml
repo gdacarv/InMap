@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="maps_api_key">AIzaSyDHvHD363yqOrL2mjVReFQI0zGuKZrwrVs</string>
+    <string name="imgs_url" formatted="false">https://dl.dropboxusercontent.com/u/39878264/GoLogo%%20Brasil/que_marca_e_essa_%d.png</string>
 </resources>

@@ -15,6 +15,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +28,7 @@ import com.inmap.interfaces.ApplicationDataFacade;
 import com.inmap.model.Store;
 import com.inmap.salvadorshop.R;
 import com.inmap.views.EventosCulturaView;
+import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 
 public class StoreDetailsActivity extends ActionBarActivity {
 
@@ -109,6 +111,10 @@ public class StoreDetailsActivity extends ActionBarActivity {
 				mExtraFragment.setOnReadyChangeListener(onExtraReadyChangeListener);
 			}
 		}
+		
+		String imageUrl = getImageUrl();
+		if(imageUrl != null)
+			UrlImageViewHelper.setUrlDrawable((ImageView) findViewById(R.id.img_details_logo), imageUrl, R.drawable.img_no_brands_descricao);
 	}
 
 	private OnReadyChangeListener onExtraReadyChangeListener = new OnReadyChangeListener() {
@@ -237,5 +243,10 @@ public class StoreDetailsActivity extends ActionBarActivity {
 		Intent i = new Intent(StoreDetailsActivity.this, MainActivity.class);
 		i.putExtra(MainActivity.SHOW_STORE_INMAP, mStore);
 		startActivity(i);
+	}
+
+	private String getImageUrl() {
+		String string = getString(R.string.imgs_url);
+		return String.format(string, mStore.getId());
 	}
 }
