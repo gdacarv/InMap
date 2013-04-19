@@ -10,15 +10,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.analytics.tracking.android.EasyTracker;
 import com.inmap.InMapApplication;
 import com.inmap.actionbar.ActionBarActivity;
 import com.inmap.fragments.ExtraFragment.OnReadyChangeListener;
@@ -27,7 +24,6 @@ import com.inmap.fragments.ProblemasDialogFragment;
 import com.inmap.interfaces.ApplicationDataFacade;
 import com.inmap.model.Store;
 import com.inmap.salvadorshop.R;
-import com.inmap.views.EventosCulturaView;
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 
 public class StoreDetailsActivity extends ActionBarActivity {
@@ -56,6 +52,18 @@ public class StoreDetailsActivity extends ActionBarActivity {
 		setActionBarTitle("  " + mStore.getTitle());
 
 		populateViews();
+	}
+	
+	@Override
+	protected void onStart() {
+		super.onStart();
+		EasyTracker.getInstance().activityStart(this);
+	}
+	
+	@Override
+	protected void onStop() {
+		super.onStop();
+		EasyTracker.getInstance().activityStop(this);
 	}
 
 	@Override
@@ -215,6 +223,7 @@ public class StoreDetailsActivity extends ActionBarActivity {
 			} else {
 				mViewDescription.setVisibility(View.GONE);
 				mLayoutExtra.setVisibility(View.VISIBLE);
+				EasyTracker.getTracker().sendView(String.format(getString(R.string.view_detailsextra), mStore.getId()));
 			}
 			((View) v.getParent()).invalidate();
 		}
@@ -236,10 +245,10 @@ public class StoreDetailsActivity extends ActionBarActivity {
 	}
 
 	public void showOnMap() {
-		if(mStore.getLevel() == 3) {// XXX Take it off when map L2 is ready
+		/*if(mStore.getLevel() == 3) {
 			Toast.makeText(StoreDetailsActivity.this, String.format(getString(R.string.msg_mapanaodisponivel), mApplicationDataFacade.getLevelInformation().getTitle(mStore.getLevel())), Toast.LENGTH_SHORT).show();
 			return;
-		}
+		}*/
 		Intent i = new Intent(StoreDetailsActivity.this, MainActivity.class);
 		i.putExtra(MainActivity.SHOW_STORE_INMAP, mStore);
 		startActivity(i);

@@ -31,16 +31,17 @@ import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
 
+import com.google.analytics.tracking.android.EasyTracker;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.inmap.InMapApplication;
 import com.inmap.actionbar.ActionBarActivity;
 import com.inmap.controllers.GoogleMapInMapController;
 import com.inmap.fragments.InfrastructureBarFragment;
-import com.inmap.fragments.ProblemasDialogFragment;
 import com.inmap.fragments.InfrastructureBarFragment.OnInfrastructureCategoryChangedListener;
 import com.inmap.fragments.LevelPickerFragment;
 import com.inmap.fragments.LevelPickerFragment.OnLevelSelectedListener;
+import com.inmap.fragments.ProblemasDialogFragment;
 import com.inmap.fragments.StoreCategoryListFragment;
 import com.inmap.fragments.StoreCategoryListFragment.OnStoreCategoryChangedListener;
 import com.inmap.fragments.StoreListFragment;
@@ -58,6 +59,7 @@ import com.inmap.model.StoreParameters;
 import com.inmap.salvadorshop.R;
 import com.inmap.views.AnimateFrameLayout;
 import com.slidingmenu.lib.SlidingMenu;
+import com.slidingmenu.lib.SlidingMenu.OnOpenedListener;
 import com.slidingmenu.lib.SlidingMode;
 
 public class MainActivity extends ActionBarActivity implements OnInfrastructureCategoryChangedListener, OnStoreCategoryChangedListener, OnStoreSelectedListener, OnLevelSelectedListener, StoreListController, OnStoreBallonClickListener {
@@ -118,6 +120,18 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 		verifyIntentShowStoreOnMap(intent);
 		verifyIntentSearch(intent);
 		
+	}
+	
+	@Override
+	protected void onStart() {
+		super.onStart();
+		EasyTracker.getInstance().activityStart(this);
+	}
+	
+	@Override
+	protected void onStop() {
+		super.onStop();
+		EasyTracker.getInstance().activityStop(this);
 	}
 
 	public void fixZoomButtons() {
@@ -258,6 +272,12 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 			listener.onLevelSelected(level);
 	}
 	
+	@Override
+	public boolean onSearchRequested() {
+		EasyTracker.getTracker().sendView(getString(R.string.view_search));
+		return super.onSearchRequested();
+	}
+	
 	private void configureSlidingMenu() {
 		mSlidingMenu = new SlidingMenu(this);
 		mSlidingMenu.setMode(SlidingMode.LEFT_RIGHT);
@@ -270,7 +290,16 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 		mSlidingMenu.attachToActivity(this, SlidingMenu.SLIDING_WINDOW);
 		mSlidingMenu.setMenu(R.layout.layout_lists, SlidingMode.LEFT);
 		mSlidingMenu.setMenu(R.layout.layout_levelpicker, SlidingMode.RIGHT);
+		mSlidingMenu.setOnOpenedListener(onOpenedListener);
 	}
+	
+	private OnOpenedListener onOpenedListener = new OnOpenedListener() {
+		
+		@Override
+		public void onOpened() {
+			EasyTracker.getTracker().sendView(getString(mSlidingMenu.isMenuShowing() ? isShowingStoreList ? R.string.view_storelist : R.string.view_storecategories : mSlidingMenu.isSecondaryMenuShowing() ? R.string.view_levelpicker : R.string.view_error));
+		}
+	};
 
 	private void configureFragments() {
 		FragmentManager fm = getSupportFragmentManager();
@@ -415,6 +444,7 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 	private void verifyIntentSearch(Intent intent) {
 		if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
 			String query = intent.getStringExtra(SearchManager.QUERY);
+			EasyTracker.getTracker().sendEvent("UserAction", "Search", query, 0l);
 			if(query.length() > 2 && query.endsWith("s")) // To search plurals as singular (pt)
 				query = query.substring(0, query.length()-1);
 			mStoreListFragment.setStoreParameters(new StoreParameters().setText(query));
