@@ -30,6 +30,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
+import android.widget.ImageView.ScaleType;
+import android.widget.TableLayout.LayoutParams;
 
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.android.gms.maps.GoogleMap;
@@ -42,6 +44,7 @@ import com.inmap.fragments.InfrastructureBarFragment.OnInfrastructureCategoryCha
 import com.inmap.fragments.LevelPickerFragment;
 import com.inmap.fragments.LevelPickerFragment.OnLevelSelectedListener;
 import com.inmap.fragments.ProblemasDialogFragment;
+import com.inmap.fragments.SplashDialogFragment;
 import com.inmap.fragments.StoreCategoryListFragment;
 import com.inmap.fragments.StoreCategoryListFragment.OnStoreCategoryChangedListener;
 import com.inmap.fragments.StoreListFragment;
@@ -58,6 +61,10 @@ import com.inmap.model.Store;
 import com.inmap.model.StoreParameters;
 import com.inmap.salvadorshop.R;
 import com.inmap.views.AnimateFrameLayout;
+import com.inmap.views.SplashImageView;
+import com.nineoldandroids.animation.Animator;
+import com.nineoldandroids.animation.ObjectAnimator;
+import com.nineoldandroids.animation.Animator.AnimatorListener;
 import com.slidingmenu.lib.SlidingMenu;
 import com.slidingmenu.lib.SlidingMenu.OnOpenedListener;
 import com.slidingmenu.lib.SlidingMode;
@@ -120,8 +127,9 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 		verifyIntentShowStoreOnMap(intent);
 		verifyIntentSearch(intent);
 		
+		showSplash();		
 	}
-	
+
 	@Override
 	protected void onStart() {
 		super.onStart();
@@ -480,5 +488,9 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 
 	public void updateClearMarkersVisibility(int visible) {
 		mClearMarkersButton.setVisibility(visible);
+	}
+	
+	private void showSplash() {
+		new SplashDialogFragment().show(getSupportFragmentManager(), "SplashDialogFragment");
 	}
 }

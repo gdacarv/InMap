@@ -50,5 +50,10 @@
         android:layout_marginRight="58dp"
         android:onClick="onClearMarkersButtonClick"
         android:visibility="invisible" />
+    
+    <FrameLayout 
+        android:id="@+id/layout_splash"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </RelativeLayout>
