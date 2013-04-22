@@ -7,11 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 
+import com.google.analytics.tracking.android.EasyTracker;
 import com.inmap.interfaces.ApplicationDataFacade;
 import com.inmap.interfaces.LevelInformation;
 import com.inmap.salvadorshop.R;
@@ -33,12 +33,7 @@ public class LevelPickerFragment extends Fragment {
 			
 			@Override
 			public void onClick(View v) {
-				for(int i = 0; i < mLevelButtons.length; i++)
-					if(mLevelButtons[i] == v){
-						mOnLevelSelectedListener.onLevelSelected(i);
-						v.setSelected(true);
-					} else
-						mLevelButtons[i].setSelected(false);
+				selectLevel(-1, v);
 			}
 		};
 		LinearLayout root = (LinearLayout) inflater.inflate(R.layout.fragment_levelpicker, null);
@@ -67,5 +62,20 @@ public class LevelPickerFragment extends Fragment {
 	
 	public interface OnLevelSelectedListener {
 		public void onLevelSelected(int level);
+	}
+
+	public void selectLevel(int level) {
+		selectLevel(level, null);
+	}
+
+	private void selectLevel(int level, View v) {
+		for(int i = 0; i < mLevelButtons.length; i++)
+			if(i == level || mLevelButtons[i] == v){
+				mOnLevelSelectedListener.onLevelSelected(i);
+				mLevelButtons[i].setSelected(true);
+				EasyTracker.getInstance().setContext(mContext.getApplicationContext());
+				EasyTracker.getTracker().sendView(String.format(getString(R.string.view_level), mLevelInformation.getTitle(i)));
+			} else
+				mLevelButtons[i].setSelected(false);
 	}
 }

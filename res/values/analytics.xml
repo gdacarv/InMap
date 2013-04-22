@@ -16,4 +16,6 @@ tools:ignore="TypographyDashes">
   <string name="view_error">SlidingMenuError</string>
   <string name="view_detailsextra">Details Extra Id %d</string>
   <string name="view_search">Search</string>
+  <string name="view_category">StoreCategory Id %d</string>
+  <string name="view_level">MapLevel %s</string>
 </resources>

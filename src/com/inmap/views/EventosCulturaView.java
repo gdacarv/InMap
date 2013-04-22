@@ -39,11 +39,11 @@ public class EventosCulturaView extends LinearLayout {
 	}
 	
 	private class Evento{
-		String atividade, titulo, datahora, id;
+		String atividade, titulo, data, hora, id;
 		
 		@Override
 		public String toString() {
-			return "Evento id: " + id + " atividade: " + atividade + " titulo: " + titulo + " datahora: " + datahora;
+			return "Evento id: " + id + " atividade: " + atividade + " titulo: " + titulo + " data: " + data + "hora: " + hora;
 		}
 	}
 
@@ -127,15 +127,26 @@ public class EventosCulturaView extends LinearLayout {
 			while((index = string.indexOf("listaEventos_interno", index)) != -1) {
 				Evento evento = new Evento();
 				index = string.indexOf("nevento=", index) + 8;
-				evento.id = string.substring(index, string.indexOf('"', index)); 
+				evento.id = string.substring(index, string.indexOf('"', index)).trim(); 
 				index = string.indexOf("atividade\">", index) + 11;
-				evento.atividade = string.substring(index, string.indexOf('<', index));
+				evento.atividade = string.substring(index, string.indexOf('<', index)).trim();
 				index = string.indexOf("<h4>", index) + 4;
 				index = string.indexOf('>', index) + 1;
-				evento.titulo = string.substring(index, string.indexOf('<', index)); 
+				evento.titulo = string.substring(index, string.indexOf('<', index)).trim(); 
 				index = string.indexOf("Data", index) + 4;
 				index = string.indexOf('>', index) + 1;
-				evento.datahora = string.substring(index, string.indexOf('<', index)).replace("&agrave;", "à").replace("&atilde;", "ã"); 
+				String datehour = string.substring(index, string.indexOf('<', index)).trim().replace("&agrave;", "à").replace("&atilde;", "ã");
+				int asIndex = datehour.indexOf("às");
+				if(asIndex != -1) {
+					evento.data = datehour.substring(0, asIndex).trim();
+					evento.hora = datehour.substring(asIndex + 2, datehour.length()).trim();
+				} else {
+					int lastSpaceIndex = datehour.lastIndexOf(' ');
+					if(datehour.length() - lastSpaceIndex <= 3)
+						lastSpaceIndex = datehour.substring(0, lastSpaceIndex).lastIndexOf(' ');
+					evento.data = datehour.substring(0, lastSpaceIndex).trim();
+					evento.hora = datehour.substring(lastSpaceIndex, datehour.length()).trim();
+				}
 				mList.add(evento);
 			}
 		}
@@ -150,10 +161,12 @@ public class EventosCulturaView extends LinearLayout {
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			if(convertView == null)
-				convertView = inflate(getContext(), android.R.layout.simple_list_item_2, null);
+				convertView = inflate(getContext(), R.layout.listitem_eventos, null);
 			Evento evento = getItem(position);
-			((TextView) convertView.findViewById(android.R.id.text1)).setText(evento.titulo);
-			((TextView) convertView.findViewById(android.R.id.text2)).setText(evento.atividade + '\n' + evento.datahora);
+			((TextView) convertView.findViewById(R.id.txt_event_title)).setText(evento.titulo);
+			((TextView) convertView.findViewById(R.id.txt_event_type)).setText(evento.atividade);
+			((TextView) convertView.findViewById(R.id.txt_event_date)).setText(evento.data);
+			((TextView) convertView.findViewById(R.id.txt_event_hour)).setText(evento.hora);
 			return convertView;
 		}
 	}

@@ -424,7 +424,7 @@
 <store>
         <id>36</id>
 <name>Taco</name>
-        <description>Venda de roupas femininas e masculinas com variados acessórios para fazer combinações perfeitas com excelentes preços.</description>
+        <description>Venda de roupas femininas e masculinas com vários acessórios com excelentes preços.</description>
         <phone>71 30195261</phone>
         <website>http://www.taco.com.br/loja/default.aspx</website>
         <tags>L1,moda,moda masculina,roupas masculinas,roupas,camisas,vestidos,calças,look,jaqueta,cintos</tags>
@@ -535,7 +535,7 @@
         <description>Grande loja de departamentos com venda de produtos para cama, mesa e banho, além de eletrodomésticos, casa, moda e lazer. </description>
         <phone>71 32730040</phone>
         <website>http://www.leader.com.br</website>
-        <tags>L1,loja de departamento,cama,mesa,banho,brinquedo,roupas,utilidades para o lar</tags>
+        <tags>L1,loja de departamento,cama,mesa,banho,brinquedo,roupas,utilidades para o lar,brinquedos,tecnologia,outlet,secadoras,enxovais,jogos de cama</tags>
         <id_storecategory>12</id_storecategory>
         <level>2</level>
         <area>60,17,335,265</area> <!-- LOJA N 43) -->
@@ -544,7 +544,7 @@
 <store>
         <id>46</id>
 <name>B Mart Baby Kids</name>
-        <description>Loja de brinquedos e artigos para bebê tendo com diferencia a venda de brinquedos importados, carrinhos eletrônicos, quebra-cabeça, roupa, peças para quarto infantil com anos no mercado e excelente qualidade de seus produtos. </description>
+        <description>Loja de brinquedos e artigos para bebê tendo com diferenca a venda de brinquedos importados, carrinhos eletrônicos, quebra-cabeça, roupa, peças para quarto infantil com anos no mercado e excelente qualidade de seus produtos. </description>
         <phone>71 33412101</phone>
         <website>http://www.bmart.com.br/</website>
         <tags>L1,brinquedos,baby,kids,crianças,jogos,games,bonecos,bonecas,montar,quebra-cabeça,tabuleiro,casinha,montar,elétricos,hot wheels,bebês</tags>
@@ -810,7 +810,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
 <store>
         <id>68</id>
 <name>Opção Differ</name>
-        <description>Ótica inovadora com um conceito diferenciando no atendimento e produtos</description>
+        <description>Ótica inovadora com um conceito diferenciando no atendimento e produtos.</description>
         <phone>71 33416282</phone>
         <website>http://www.oticasopcao.com/</website>
         <tags>L1,óculos,armações,armação,grifes,ótica,lentes</tags>
@@ -882,7 +882,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
 <store>
         <id>74</id>
 <name>M Martan</name>
-        <description>Loja especializada em produtos de casa oferecendo aos seus clientes uma grande variedade de peças para cama, mesa e banho.</description>
+        <description>Maior rede especializada em produtos exclusivos de cama, mesa e banho do país e possui um mix de produtos que combinam cores e texturas, coordenabilidade e versatilidade, modernidade e tradição, conforto e elegância.</description>
         <phone>71 30162840</phone>
         <website>http://www.mmartan.com.br/Home.html</website>
         <tags>L1,cama,mesa,banho,toalhas,colcha,edredom,lençol,roupão,capas,king size,água,passar,caixa decorativa,enchimento,travesseiro,pijama,necessaire,colchão,protetor,vapt,pet,avental,guardanapo,jogo americano,kit mesa,pano de copa,toalha de mesa,jogo de toalhas,banho,piso,rosto,gigante,lavabo,hidratante,sabonete,líquido,chinelo</tags>
@@ -969,7 +969,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <description>Loja especializada em bijuterias que oferece aos seus clientes uma grande variedade de produtos para todos os gostos.</description>
         <phone>71 32729720</phone>
         <website>http://tuttibijoux.lojavirtual.maxihost.com.br/</website>
-        <tags>L1,bijoux,acessórios,brincos,colares,bolsas,aneis,bolsas,carteira,cintos</tags>
+        <tags>L1,bijoux,acessórios,brincos,colares,bolsas,aneis,bolsas,carteira,cintos,colar,presilha,aneis,anel,bolsas de festa,acessorios,cabelo,carteiras,chapeu,lenços,cintos</tags>
         <id_storecategory>23</id_storecategory>
         <level>2</level>
         <area>134,732,199,752</area> <!-- LOJA N 79) -->
@@ -1029,7 +1029,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <description>Loja especializada em moda masculina que oferece aos seus clientes uma grande variedade de looks para o dia a dia.</description>
         <phone>71 33651490</phone>
         <website>http://www.skyler.com.br/2012/</website>
-        <tags>L1,moda masculina,roupas,menswear,moda,grife,tendência,coleção</tags>
+        <tags>L1,moda masculina,roupas,menswear,moda,grife,tendência,coleção,calças,camisas,blusas,cintos,carteiras,jaquetas,moletom</tags>
         <id_storecategory>1</id_storecategory>
         <level>2</level>
         <area>216,1662,258,1694</area> <!-- LOJA N 84) -->
@@ -1041,7 +1041,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <description>Loja especializada em moda masculina que oferece aos seus clientes uma grande variedade de roupas para estilo esporte fino.</description>
         <phone>71 33412160</phone>
         <website>http://mmasculina.blogspot.com.br/</website>
-        <tags>L1,moda masculina,roupas,moda,tendências,fashion,calças,estilo</tags>
+        <tags>L1,moda masculina,roupas,moda,tendências,fashion,calças,estilo,camisas,blusas,shorts,bermudas,carteiras,cintos,jaquetas</tags>
         <id_storecategory>1</id_storecategory>
         <level>2</level>
         <area>217,1564,253,1617</area> <!-- LOJA N 85) -->
@@ -1101,7 +1101,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <description>Loja especializada em óculos escuros que oferece aos seus clientes uma grande variedade de modelos com diversas cores.</description>
         <phone>71 38782265</phone>
         <website>http://www.tritoneyewear.com.br/</website>
-        <tags>L1,óculos,relógios,eyewear,lentes,armações</tags>
+        <tags>L1,óculos,relógios,eyewear,lentes,armações,lupa,lente</tags>
         <id_storecategory>20</id_storecategory>
         <level>2</level>
         <area>187,834,209,878</area> <!-- LOJA N 90) -->
@@ -1149,7 +1149,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <description>Loja especializada em perfumes que oferece aos seus clientes uma grande variedade de fragrâncias importadas para todas as idades.</description>
         <phone>71 30191874</phone>
         <website>http://www.lukparfums.com.br/</website>
-        <tags>L1,perfumes,perfumaria,fragrâncias,perfume</tags>
+        <tags>L1,perfumes,perfumaria,fragrâncias,perfume,eau de toilet,aromatizantes</tags>
         <id_storecategory>16</id_storecategory>
         <level>2</level>
         <area>262,1665,274,1703</area> <!-- LOJA N 94) -->
@@ -1161,7 +1161,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <description>Loja de calçados  para todos os segmentos com modelos arrojados que te deixa elegante e confortável.</description>
         <phone>71 34500380</phone>
         <website>http://www.reddog.com.br:980/reddog/inicio.nsf</website>
-        <tags>L1,calçados,sapatos,tênis,moda,sapatenis</tags>
+        <tags>L1,calçados,sapatos,tênis,moda,sapatenis,mocassim</tags>
         <id_storecategory>4</id_storecategory>
         <level>2</level>
         <area>216,416,256,470</area> <!-- LOJA N 95) -->
@@ -1197,7 +1197,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <description>Loja especializada em produtos de presente  que oferece aos seus clientes uma grande variedade de cigarros , charutos entre outros.</description>
         <phone>71 30120515</phone>
         <website></website>
-        <tags>L1,coleção,objetos,facas,presentes,canecas,charutos,miniaturas,narquilé</tags>
+        <tags>L1,coleção,objetos,facas,presentes,canecas,charutos,miniaturas,narguilé</tags>
         <id_storecategory>3</id_storecategory>
         <level>2</level>
         <area>278,1664,298,1703</area> <!-- LOJA N 98) -->
@@ -1257,7 +1257,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <description>Loja especializada em produtos de couro que oferece aos seus clientes uma grande variedade de cintos, carteiras, bolsas e malas em geral.</description>
         <phone>71 30356524</phone>
         <website></website>
-        <tags>L1,calçados,bolsas,acessórios,cintos</tags>
+        <tags>L1,calçados,bolsas,acessórios,cintos,sapatos,sapatenis,pasta</tags>
         <id_storecategory>4</id_storecategory>
         <level>2</level>
         <area>263,417,298,470</area> <!-- LOJA N 103) -->
@@ -1662,7 +1662,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
 <store>
         <id>139</id>
 <name>Papel &amp; Cia</name>
-        <description>Loja especializada em artigos de informática e suprimento de informática, além de produtos eletrônicos.</description>
+        <description>Loja especializada em artigos e suprimentos de informática, além de produtos eletrônicos.</description>
         <phone>71 33436455</phone>
         <website>http://www.papelecia.com.br/</website>
         <tags>L1,papelaria,impressoras,papel,lápis,acessórios,notebooks,eletrônicos</tags>
@@ -1902,7 +1902,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
 <store>
         <id>159</id>
 <name>Fotótica</name>
-        <description>Loja que oferece a seus clientes concertos de óculos de grau e solar com venda de acessórios, troca de armações entre outros com ótimos preços e excelente qualidade nos serviços oferecidos.</description>
+        <description>Loja que oferece a seus clientes consertos de óculos de grau e solar com venda de acessórios, troca de armações entre outros com ótimos preços e excelente qualidade nos serviços oferecidos.</description>
         <phone>71 32738457</phone>
         <website>http://www.fototica.com.br/</website>
         <tags>L1,óculos,lentes,armações,óculos de sol,lentes de grau</tags>
@@ -1998,7 +1998,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
 <store>
         <id>167</id>
 <name>Ótica Ernesto</name>
-        <description>Loja que oferece a seus clientes concertos de óculos de grau e solar com venda de acessórios, troca de armações entre outros com ótimos preços e excelente qualidade nos serviços oferecidos.</description>
+        <description>Loja que oferece a seus clientes consertos de óculos de grau e solar com venda de acessórios, troca de armações entre outros com ótimos preços e excelente qualidade nos serviços oferecidos.</description>
         <phone>71 33428048</phone>
         <website></website>
         <tags>L1,óculos,lentes,armações,câmeras digitais,óculos de grau,óculos de sol</tags>
@@ -2037,7 +2037,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <description>Loja especializada em looks femininos descolados com grande variedade em seus modelos.</description>
         <phone>71 33429630</phone>
         <website>http://site.opcaojeans.com.br/</website>
-        <tags>L1,bermudas,blusas,vestidos,calças,tops,camisa</tags>
+        <tags>L1,bermudas,blusas,vestidos,calças,tops,camisas,saias</tags>
         <id_storecategory>14</id_storecategory>
         <level>2</level>
         <area>512,863,566,897</area>  <!-- LOJA N 168) -->
@@ -2082,7 +2082,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
 <store>
         <id>174</id>
 <name>Ótica da gente </name>
-        <description>Loja que oferece a seus clientes concertos de óculos de grau e solar, com venda de acessórios, troca de armações entre outros com ótimos preços e excelente qualidade nos serviços oferecidos.</description>
+        <description>Loja que oferece a seus clientes consertos de óculos de grau e solar, com venda de acessórios, troca de armações entre outros com ótimos preços e excelente qualidade nos serviços oferecidos.</description>
         <phone>71 33406888</phone>
         <website>http://www.oticadagente.com.br/</website>
         <tags>L1,óculos de grau,óculos de sol,armação,lentes,armações</tags>
@@ -2166,10 +2166,10 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
 <store>
         <id>181</id>
 <name>Sapataria do futuro</name>
-        <description>Loja especializada em serviços para sapatos que oferece aos seus clientes os melhores produtos deixando seu sapato brilhando.</description>
+        <description>Maior renovadora de sapatos, tênis, bolsas e malas do Brasil.</description>
         <phone>71 33411022</phone>
         <website>http://www.sapatariadofuturo.com.br/</website>
-        <tags>L1</tags>
+        <tags>L1,serviços em sapatos,serviços em tênis,malas,mochilas,bolsas,pastas,troca de salto,sola,meia-sola,lasseamento,lavagem,higienização,renovação,botas,consertos,costuras,colagens,reforços,remendos,troca de forro,troca de zíper</tags>
         <id_storecategory>10</id_storecategory>
         <level>2</level>
         <area>571,1404,587,1455</area>  <!-- LOJA N 179) -->
@@ -2181,7 +2181,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <description>Loja especializada em artigos para presente que oferece aos seus clientes uma grande variedade de produtos.</description>
         <phone>71 30146401</phone>
         <website></website>
-        <tags>L1,</tags>
+        <tags>L1</tags>
         <id_storecategory>3</id_storecategory>
         <level>2</level>
         <area>529,1322,547,1356</area>  <!-- LOJA N 180) -->
@@ -2194,7 +2194,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <description>Arte Viva se destaca como fabricante de molduras exclusivas tipo caixas especiais modernas, com design próprio e molduras da linha industrial, tanto em madeira como em PVC.</description>
         <phone>71 38781363</phone>
         <website>http://www.galeriaarteviva.com.br/</website>
-        <tags>L1,molduras,quadros</tags>
+        <tags>L1,molduras,quadros,artes,artes plásticas,pinturas,moldes</tags>
         <id_storecategory>3</id_storecategory>
         <level>2</level>
         <area>570,1321,588,1359</area> <!-- LOJA N 181) -->
@@ -2206,7 +2206,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <description>Loja especializada em artigos para presente que oferece aos seus clientes uma grande variedade de produtos.</description>
         <phone>71 30146401</phone>
         <website></website>
-        <tags>L1,</tags>
+        <tags>L1,consertos,relógios,troca de bateria,manutenção</tags>
         <id_storecategory>3</id_storecategory>
         <level>2</level>
         <area>552,1321,566,1356</area>  <!-- LOJA N 180) -->
@@ -2218,7 +2218,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <description>Loja de moda infantil-juvenil tendo como grande diferencial a preocupação com os pequeninos assim lançando peças criativas para desenvolver a imaginação e deixar seu filho mais bonito.</description>
         <phone>71 30151889</phone>
         <website>http://www.miausalao.com.br/</website>
-        <tags>L1</tags>
+        <tags>L1,shampoo,condicionador,maquiagem,salão movel,corte para bebês,corte para meninos e meninas,corte,cabelo,manicure,penteados,penteados estilizados</tags>
         <id_storecategory>16</id_storecategory>
         <level>2</level>
         <area>592,1321,619,1357</area> <!-- LOJA N 183) -->
@@ -2230,7 +2230,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <description>Loja especializada em bolsas e malas que oferece aos seus clientes uma grande variedade de produtos para diversas ocasiões do seu dia.</description>
         <phone>71 30235002</phone>
         <website>http://www.lepostiche.com.br/ch/index.aspx</website>
-        <tags>L1</tags>
+        <tags>L1,malas,bolsas,frasqueira,carteira,carteira feminina,sacolas,necessaires,carteiras,mochiletes,lancheiras,estojo,cintos,pastas,cases,calçados,sapatos,tênis,sandália,rasteira,sapato,sapatilha</tags>
         <id_storecategory>4</id_storecategory>
         <level>2</level>
         <area>602,1039,631,1092</area> <!-- LOJA N 184) -->
@@ -2242,7 +2242,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <description>Loja especializada em roupas moda praia que oferece aos seus clientes uma grande variedade de acessórios para surf.</description>
         <phone>71 32723483</phone>
         <website>http://www.kikorpo.com.br/</website>
-        <tags>L1</tags>
+        <tags>L1,biquini,biquinis,sungas,roupa de banho,shorts,bermudas,saída de praia,tangas,maios,maiô</tags>
         <id_storecategory>19</id_storecategory>
         <level>2</level>
         <area>611,941,630,994</area> <!-- LOJA N 185) -->
@@ -2266,7 +2266,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <description>Loja especializada em serviços turísticos que oferece aos seus clientes uma grande variedade de pacotes e guias de locais para viagens.</description>
         <phone>71 30826200</phone>
         <website>http://www.cvc.com.br/</website>
-        <tags>L1</tags>
+        <tags>L1,passagem,passagens,hoteis,hotel,resorts,resort,cruzeiros,viagem,viagens,guias,guia,pacotes,pacotes de viagem,hotel,hoteis,destinos,lua de mel</tags>
         <id_storecategory>10</id_storecategory>
         <level>2</level>
         <area>591,675,611,730</area> <!-- LOJA N 187) -->
@@ -2287,10 +2287,10 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
 <store>
         <id>191</id>
 <name>Mahogany</name>
-        <description>Loja especializada em produtos importados  que oferece aos seus clientes uma grande variedade de perfumes e sabonetes para cuidar de sus beleza.</description>
+        <description>Empresa fabricante de cosméticos premium, a Mahogany se diferencia pelo alto padrão de qualidade, com produtos de acordo com as mais recentes tendências e conceitos internacionais.</description>
         <phone>71 30193309</phone>
         <website>http://www.mahogany.com.br/</website>
-        <tags>L1</tags>
+        <tags>L1,shampoos,shampoo,condicionadores,máscaras,tônicos,cremes,creme para pentear,dermocosméticos,difusores de ambientes,difusor,aromatizadores,aromatizador,ambiente,sabonetes,sabonetes líquidos,sabonetes em mousse,óleo,banho,esfoliantes,hidratantes,desodorantes,rosto,maquiagem,corpo,cabelos,barbas,pés,perfumaria,estojos,necessaires</tags>
         <id_storecategory>16</id_storecategory>
         <level>2</level>
         <area>593,447,641,460</area> <!-- LOJA N 189) -->
@@ -2299,10 +2299,10 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
 <store>
         <id>192</id>
 <name>Mito</name>
-        <description>Loja especializada em looks femininos e masculinos  sofisticados, com o modelos contemporâneo e foco na linha workwear.</description>
+        <description>Marca de moda moderna, alegre e criativa, desenvolvida com design original e exclusivo.</description>
         <phone>71 33411699</phone>
         <website>http://www.sejamito.com.br/</website>
-        <tags>L1</tags>
+        <tags>L1,camisas,blusas,jaquetas,casacos,bermudas,shorts,camisetas,vestidos,saias,calças,bata,colete</tags>
         <id_storecategory>14</id_storecategory>
         <level>2</level>
         <area>593,423,659,440</area> <!-- LOJA N 190) -->
@@ -2311,10 +2311,10 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
 <store>
         <id>193</id>
 <name>A...Z</name>
-        <description>Loja especializada em artigos para presente que oferece aos seus clientes uma grande variedade de produtos.</description>
+        <description>Loja especializada em artigos para presentes que oferece aos seus clientes uma grande variedade de produtos.</description>
         <phone>71 30199615</phone>
         <website></website>
-        <tags>L1</tags>
+        <tags>L1,presentes,caixas,canecas,almofadas,pijamas,mouse pad,bonés,lembranças</tags>
         <id_storecategory>3</id_storecategory>
         <level>2</level>
         <area>593,374,658,416</area> <!-- LOJA N 191) -->
@@ -2338,7 +2338,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <description>Loja especializada em cuidados com os cabelos que oferece aos seus clientes uma grande variedade de cortes e produtos para cabelos em geral.</description>
         <phone>71 33428147</phone>
         <website>http://www.barbercity.com.br/</website>
-        <tags>L1</tags>
+        <tags>L1,cortes,estilo,cremes,hidratantes,tratamento capilar,tintura,manicure,pedicure,tingimento,pintar cabelo,relaxamento,alisamento,escova</tags>
         <id_storecategory>16</id_storecategory>
         <level>2</level>
         <area>594,321,658,339</area> <!-- LOJA N 193) -->
@@ -2350,7 +2350,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <description>Loja de sapatos com modelos para todas as idades e diversos tamanhos, lá você encontra o modelo de sapato que você deseja e que te deixa  você elegante. </description>
         <phone>71 33427303</phone>
         <website>http://www.borgescalcados.com.br/</website>
-        <tags>L1,sapatos,tênis,sapatênis,botas,sandálias</tags>
+        <tags>L1,sapatos,tênis,sapatênis,botas,sandálias,mocassim,botas,saltos,peep toe</tags>
         <id_storecategory>4</id_storecategory>
         <level>2</level>
         <area>594,268,671,315</area> <!-- LOJA N 194) -->
@@ -2362,7 +2362,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <description>Loja especializada em venda de alimentos  que oferece aos seus clientes uma grande variedade de produtos para o lar.</description>
         <phone>71 32732350</phone>
         <website>www.bompreco.com.br</website>
-        <tags>L1,carnes,comidas,saladas,legumes,frutas,verduras,bebidas</tags>
+        <tags>L1,carnes,comidas,saladas,legumes,frutas,verduras,bebidas,eletro,eletrônicos,automotivo,cama,mesa,banho,casa,dvds,eletroportateis,esporte,lazer,ferramentas,games,informáticas,telefones</tags>
         <id_storecategory>12</id_storecategory>
         <level>2</level>
         <area>387,7,753,259</area> <!-- LOJA N 195) -->
@@ -2398,7 +2398,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <description>Loja com foco em artigos esportivos e cirúrgicos que oferece aos seus clientes uma grande variedade de marcas.</description>
         <phone>71 30191728</phone>
         <website>http://www.adiamantina.com.br/</website>
-        <tags>L1</tags>
+        <tags>L1,meia calça,tensor</tags>
         <id_storecategory>17</id_storecategory>
         <level>2</level>
         <area>613,675,630,716</area> <!-- LOJA N 198) -->
@@ -2410,7 +2410,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <description>Loja especializada em produtos para seu animal que oferece aos seus clientes uma grande variedade de produtos e cuidados com seu bichinho.</description>
         <phone>71 38781516</phone>
         <website>http://www.planetaanimalvet.com.br/</website>
-        <tags>L1</tags>
+        <tags>L1,clinica 24 horas,internamento,eletrocardiografia,cardiologia,ultra-sonografia,pet,cirurgia,cirurgia ortopedica,hotel,internamento gatil,hotel gatil,salao de beleza,escola de adestramento,pet car,transporte,filhotes,odontologia,raio-x,dermatologia,exames laboratoriais,dermatologia,pet shop</tags>
         <id_storecategory>10</id_storecategory>
         <level>2</level>
         <area>636,676,661,713</area> <!-- LOJA N 199) -->
@@ -2485,7 +2485,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L2,livros,dvds,coleções,teatro,revistas,cds</tags>
         <id_storecategory>8</id_storecategory>
         <level>3</level>
-        <area>0,0,0,0</area> <!-- LOJA N 205) -->
+        <area>19,1815,297,2006</area> <!-- LOJA N 205) -->
         <extras>com.inmap.fragments.LivrariaCulturaExtraFragment</extras>
     </store>
 
@@ -2495,10 +2495,10 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <description>Loja especializada em remédios que oferece aos seus clientes uma grande variedade de produtos de diversas marcas.</description>
         <phone></phone>
         <website>https://www.granado.com.br/</website>
-        <tags>L2</tags>
+        <tags>L2,cremes,cuticulas,unhas,assaduras,desodorante,esfoliante,manteiga emoliente,oleo,sabonete,lanolina,enxofre,sabão,antisséptico,glicerina,sabonete liquido,talco,protetor capilar,protetor solar,proteção,facial,gloss,barbearia</tags>
         <id_storecategory>13</id_storecategory>
         <level>3</level>
-        <area>206</area>
+        <area>37,1768,111,1810</area> <!-- LOJA N 206) -->
     </store>
 
 <store>
@@ -2507,10 +2507,10 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <description>Loja de sapatos e itens esportivos com modelos para todas as idades e diversos tamanhos.</description>
         <phone>71 33417010</phone>
         <website>http://www.nike.com/br/pt_br/</website>
-        <tags>L2</tags>
+        <tags>L2,tenis,camisas,seleção,camisetas,moletom,jaquetas,futebol,relógios,corrida,chuteiras,dri-fit,</tags>
         <id_storecategory>17</id_storecategory>
         <level>3</level>
-        <area>207</area>
+        <area>22,1687,101,1743</area> <!-- LOJA N 207) -->
     </store>
 
 <store>
@@ -2519,10 +2519,10 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <description>Loja especializada em looks masculinos sofisticados, com  modelos contemporâneos.</description>
         <phone>71 33412158</phone>
         <website>http://loja.limits.com.br/</website>
-        <tags>L2</tags>
+        <tags>L2,camisas,bermudas,calças,casacos,calçados,underwear,sungas,jaquetas,tenis,chinelos,sandálias,cargo,praia,casual,batas,regata,camisetas,polo,blazer,tenis,cuecas,mochilas,carteiras,porta cartao,vale presente</tags>
         <id_storecategory>1</id_storecategory>
         <level>3</level>
-        <area>208</area>
+        <area>21,1662,90,1680</area> <!-- LOJA N 208) -->
     </store>
 
 <store>
@@ -2531,22 +2531,22 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <description>Loja especializada em looks femininos e masculinos sofisticados, com  modelos contemporâneos.</description>
         <phone>71 30192487</phone>
         <website>http://www.billabong.com/br/</website>
-        <tags>L2</tags>
+        <tags>L2,roupas,biquinis,sungas,boardshorts,carteiras,bones,bermudas,short,camiseta,calças,sungas,moletons,jaquetas,regatas,underwear,cintos,mochilas,malas,saias,vestidos,macacões</tags>
         <id_storecategory>19</id_storecategory>
         <level>3</level>
-        <area>209</area>
+        <area>22,1613,91,1655</area> <!-- LOJA N 209) -->
     </store>
 
 <store>
         <id>212</id>
 <name>Jorge Bischoff</name>
-        <description>Loja especializada em looks femininos sofisticados, com  modelos contemporâneos.</description>
+        <description>Os sapatos, bolsas e acessórios Jorge Bischoff dirigem-se a um público que valoriza o luxo e a sofisticação.</description>
         <phone>71 30192019</phone>
         <website>http://www.jorgebischoff.com.br/</website>
-        <tags>L2</tags>
-        <id_storecategory>2</id_storecategory>
+        <tags>L2,sapatos,bolsas,acessórios,mocassim,botas,saltos,scarpin,rasteira,sapatilha,carteiras,peep toe,tamancos,plataforma</tags>
+        <id_storecategory>4</id_storecategory>
         <level>3</level>
-        <area>210</area>
+        <area>20,1572,91,1606</area> <!-- LOJA N 210) -->
     </store>
 
 <store>
@@ -2558,19 +2558,19 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L2,jogos de lençol,fronhas,duvets,cobertores,mantas,almofadas,travesseiros,toalhas de mesa,jogos americanos,toalhas de banho,toalhas de rosto,lavabo,praia,pisos,tapetes,roupões,</tags>
         <id_storecategory>21</id_storecategory>
         <level>3</level>
-        <area>211</area>
+        <area>22,1506,90,1552</area>  <!-- LOJA N 211) -->
     </store>
 
 <store>
         <id>214</id>
 <name>Track e field</name>
-        <description>Loja especializada em looks masculinos sofisticados, com  modelos contemporâneos.</description>
+        <description>Loja especializada em looks masculinos e femininos, com  modelos variados e contemporâneos.</description>
         <phone>71 32713056</phone>
         <website>http://www.tf.com.br/</website>
-        <tags>L2</tags>
-        <id_storecategory>1</id_storecategory>
+        <tags>L2,óculos,saia,calças,camisetas,camisas,coletes,legging,bermuda skin,bermuda,bata,top,blusão,jaqueta,regata,calção,bermudão,bermudas,shorts,meias,t-shirts,vestidos</tags>
+        <id_storecategory>14</id_storecategory>
         <level>3</level>
-        <area>212</area>
+        <area>22,1457,92,1498</area>  <!-- LOJA N 212) -->
     </store>
 
 <store>
@@ -2579,58 +2579,58 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <description>Loja especializada em looks femininos e masculinos sofisticados, com  modelos contemporâneos.</description>
         <phone>71 33419821</phone>
         <website>http://www.levi.com.br/brasil/</website>
-        <tags>L2</tags>
+        <tags>L2,saia,calças,camisetas,camisas,coletes,legging,bermuda skin,bermuda,bata,top,blusão,jaqueta,regata,calção,bermudão,bermudas,shorts,meias</tags>
         <id_storecategory>14</id_storecategory>
         <level>3</level>
-        <area>213</area>
+        <area>22,1405,73,1449</area>  <!-- LOJA N 213) -->
     </store>
 
 <store>
         <id>216</id>
 <name>Tommy Hilfiger</name>
-        <description>Loja especializada em looks masculinos sofisticados, com  modelos contemporâneos.</description>
+        <description>Loja especializada em looks femininos e masculinos sofisticados, com  modelos contemporâneos.</description>
         <phone>71 32727453</phone>
         <website>http://global.tommy.com/int/en/Collections/start</website>
-        <tags>L2</tags>
-        <id_storecategory>1</id_storecategory>
+        <tags>L2,saia,calças,camisetas,camisas,coletes,legging,bermuda skin,bermuda,bata,top,blusão,jaqueta,regata,calção,bermudão,bermudas,shorts</tags>
+        <id_storecategory>14</id_storecategory>
         <level>3</level>
-        <area>214</area>
+        <area>22,1379,75,1398</area>  <!-- LOJA N 214) -->
     </store>
 
 <store>
         <id>217</id>
 <name>Aleatory</name>
-        <description>Loja especializada em looks masculinos sofisticados, com  modelos contemporâneos.</description>
-        <phone>71 32727453</phone>
-        <website>http://global.tommy.com/int/en/Collections/start</website>
-        <tags>L2</tags>
-        <id_storecategory>1</id_storecategory>
+        <description>Marca desenvolvida numa moda casual esportiva, dinâmica e jovem.</description>
+        <phone>71 30356420</phone>
+        <website>http://www.aleatory.com.br/</website>
+        <tags>L2,pólos fio tinto,pólos básicas,t-shirts,camisas,jeanswear,tinturados,sweaters,jaquetas,acessórios,underwear</tags>
+        <id_storecategory>14</id_storecategory>
         <level>3</level>
-        <area>215</area>
+        <area>21,1352,75,1372</area>  <!-- LOJA N 215) -->
     </store>
 
 <store>
         <id>218</id>
 <name>Dumond </name>
-        <description>Loja de sapatos com modelos para todas as idades e diversos tamanhos.</description>
+        <description>A Dumond é feita para mulheres contemporâneas, que têm estilo e são apaixonadas por moda e sapatos.</description>
         <phone>71 30334283</phone>
         <website>http://www.dumond.com.br/</website>
-        <tags>L2</tags>
+        <tags>L2,sapatos,botas,boyish,saltos,rasteiras,scarpin,plataformas,tamancos,peep toe,sandálias,sapatilhas,bolsas,acessorios,cintos,carteiras</tags>
         <id_storecategory>4</id_storecategory>
         <level>3</level>
-        <area>216</area>
+        <area>50,1303,93,1333</area>  <!-- LOJA N 216) -->
     </store>
 
 <store>
         <id>219</id>
 <name>Shop 126</name>
-        <description>Loja especializada em looks femininos sofisticados, com  modelos contemporâneos.</description>
+        <description>Marca voltada para a consumidora urbana, fashion, bem informada e, principalmente, de espírito jovem.</description>
         <phone>71 33413533</phone>
         <website>http://www.shop126.com.br/</website>
-        <tags>L2</tags>
+        <tags>L2,calças,vestidos,saias,camisas,blusas,camisetas,shorts,vestidos,casacos,batas,top,cintos,regata</tags>
         <id_storecategory>2</id_storecategory>
         <level>3</level>
-        <area>217</area>
+        <area>51,1250,91,1294</area>  <!-- LOJA N 217) -->
     </store>
 
 <store>
@@ -2642,7 +2642,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L2</tags>
         <id_storecategory>2</id_storecategory>
         <level>3</level>
-        <area>218</area>
+        <area>50,1214,90,1244</area>  <!-- LOJA N 218) -->
     </store>
 
 <store>
@@ -2654,7 +2654,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L2</tags>
         <id_storecategory>18</id_storecategory>
         <level>3</level>
-        <area>219</area>
+        <area>50,1173,91,1191</area>  <!-- LOJA N 219) -->
     </store>
 
 <store>
@@ -2666,7 +2666,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L2</tags>
         <id_storecategory>23</id_storecategory>
         <level>3</level>
-        <area>220</area>
+        <area>51,1146,90,1165</area>  <!-- LOJA N 220) -->
     </store>
 
 <store>
@@ -2678,7 +2678,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L2</tags>
         <id_storecategory>19</id_storecategory>
         <level>3</level>
-        <area>221</area>
+        <area>11,1070,91,1138</area>  <!-- LOJA N 221) -->
     </store>
 
 <store>
@@ -2690,7 +2690,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L2</tags>
         <id_storecategory>1</id_storecategory>
         <level>3</level>
-        <area>222</area>
+        <area>11,888,95,959</area>  <!-- LOJA N 222) -->
     </store>
 
 <store>
@@ -2702,7 +2702,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L2</tags>
         <id_storecategory>4</id_storecategory>
         <level>3</level>
-        <area>223</area>
+        <area>47,836,92,880</area>  <!-- LOJA N 223) -->
     </store>
 
 <store>
@@ -2714,7 +2714,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L2</tags>
         <id_storecategory>2</id_storecategory>
         <level>3</level>
-        <area>224</area>
+        <area>10,785,75,826</area>  <!-- LOJA N 224) -->
     </store>
 
 <store>
@@ -2726,7 +2726,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L2</tags>
         <id_storecategory>1</id_storecategory>
         <level>3</level>
-        <area>225</area>
+        <area>5,729,72,776</area>  <!-- LOJA N 225) -->
     </store>
 
 <store>
@@ -2738,7 +2738,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L2</tags>
         <id_storecategory>4</id_storecategory>
         <level>3</level>
-        <area>226</area>
+        <area>10,707,75,725</area>  <!-- LOJA N 226) -->
     </store>
 
 <store>
@@ -2750,7 +2750,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L2</tags>
         <id_storecategory>15</id_storecategory>
         <level>3</level>
-        <area>227</area>
+        <area>10,682,74,700</area>  <!-- LOJA N 227) -->
     </store>
 
 <store>
@@ -2762,7 +2762,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L2</tags>
         <id_storecategory>1</id_storecategory>
         <level>3</level>
-        <area>228</area>
+        <area>9,641,36,674,39,655,73,674</area>  <!-- LOJA N 228) -->
     </store>
 
 <store>
@@ -2774,7 +2774,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L2</tags>
         <id_storecategory>1</id_storecategory>
         <level>3</level>
-        <area>229</area>
+        <area>42,593,74,647</area>  <!-- LOJA N 229) -->
     </store>
 
 <store>
@@ -2786,7 +2786,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L2</tags>
         <id_storecategory>22</id_storecategory>
         <level>3</level>
-        <area>230</area>
+        <area>26,525,114,568</area>  <!-- LOJA N 230) -->
     </store>
 
 <store>
@@ -2798,7 +2798,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L2</tags>
         <id_storecategory>2</id_storecategory>
         <level>3</level>
-        <area>231</area>
+        <area>81,477,114,517</area>  <!-- LOJA N 231) -->
     </store>
 
 <store>
@@ -2810,7 +2810,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L2</tags>
         <id_storecategory>14</id_storecategory>
         <level>3</level>
-        <area>232</area>
+        <area></area>  <!-- LOJA N 232) -->
     </store>
 
 <store>
@@ -2822,7 +2822,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L2</tags>
         <id_storecategory>19</id_storecategory>
         <level>3</level>
-        <area>233</area>
+        <area></area>  <!-- LOJA N 233) -->
     </store>
 
 <store>
@@ -2834,7 +2834,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L2</tags>
         <id_storecategory>14</id_storecategory>
         <level>3</level>
-        <area>234</area>
+        <area></area>  <!-- LOJA N 234) -->
     </store>
 
 <store>
@@ -2846,7 +2846,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L2</tags>
         <id_storecategory>16</id_storecategory>
         <level>3</level>
-        <area>235</area>
+        <area></area>  <!-- LOJA N 235) -->
     </store>
 
 <store>
@@ -2858,7 +2858,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L2</tags>
         <id_storecategory>21</id_storecategory>
         <level>3</level>
-        <area>236</area>
+        <area>236</area>  <!-- LOJA N 236) -->
     </store>
 
 <store>
@@ -2870,31 +2870,31 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L2,calcinha,sutiã,cueca,cueca boxer</tags>
         <id_storecategory>15</id_storecategory>
         <level>3</level>
-        <area>237</area>
+        <area>237</area>  <!-- LOJA N 237) -->
     </store>
 
 <store>
         <id>240</id>
 <name>Prisma vision</name>
-        <description>Loja que oferece a seus clientes concertos de óculos de grau e solar com venda de acessórios, troca de armações entre outros com ótimos preços e excelente qualidade nos serviços oferecidos.</description>
+        <description>Loja que oferece a seus clientes consertos de óculos de grau e solar com venda de acessórios, troca de armações entre outros com ótimos preços e excelente qualidade nos serviços oferecidos.</description>
         <phone>71 34610362</phone>
         <website></website>
         <tags>L2</tags>
         <id_storecategory>20</id_storecategory>
         <level>3</level>
-        <area>238</area>
+        <area>238</area>  <!-- LOJA N 238) -->
     </store>
 
 <store>
         <id>241</id>
 <name>Triton</name>
-        <description>Loja que oferece a seus clientes concertos de óculos solares com venda de acessórios, troca de armações entre outros com ótimos preços e excelente qualidade nos serviços oferecidos.</description>
+        <description>Loja que oferece a seus clientes consertos de óculos solares com venda de acessórios, troca de armações entre outros com ótimos preços e excelente qualidade nos serviços oferecidos.</description>
         <phone>71 32723345</phone>
         <website>http://www.tritoneyewear.com.br/</website>
         <tags>L2</tags>
         <id_storecategory>20</id_storecategory>
         <level>3</level>
-        <area>239</area>
+        <area>239</area>  <!-- LOJA N 239) -->
     </store>
 
 <store>
@@ -2906,7 +2906,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L2</tags>
         <id_storecategory>2</id_storecategory>
         <level>3</level>
-        <area>240</area>
+        <area>240</area>  <!-- LOJA N 240) -->
     </store>
 
 <store>
@@ -3014,7 +3014,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L2</tags>
         <id_storecategory>14</id_storecategory>
         <level>3</level>
-        <area>249</area>
+        <area>244,1766,299,1810</area>  <!-- LOJA 249 -->
     </store>
 
 <store>
@@ -3236,10 +3236,10 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
 <store>
         <id>270</id>
 <name>Container Home</name>
-        <description></description>
-        <phone></phone>
+        <description>Loja com grande variedade de itens para o lar</description>
+        <phone>71 32724018</phone>
         <website></website>
-        <tags>L2</tags>
+        <tags>L2,utilidades para o lar,jarras,travesseiros,bandeijas,decoração,moda para casa,mesa,abaju,peças decorativas</tags>
         <id_storecategory>24</id_storecategory>
         <level>3</level>
         <area>268</area>
@@ -3440,7 +3440,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
 <store>
         <id>287</id>
 <name>Londres</name>
-        <description></description>
+        <description>Loja especializada em looks masculinos sofisticados, com  modelos contemporâneos.</description>
         <phone>71 33406459</phone>
         <website></website>
         <tags>L2</tags>
@@ -3807,6 +3807,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <id_storecategory>1</id_storecategory> <!-- <id_storecategory>25 -->
         <level>3</level>
         <area>315</area>
+<deleted>true</deleted>
     </store>
 
 <store>
@@ -4286,7 +4287,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,lasanhas,saladas,carnes,risotto,molhos,sobremesas,macarrão,macarronada,cappeletti,ravioli</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>356</area>
+        <area>19,691,50,728</area>  <!-- LOJA N 356) -->
     </store>
 
 <store>
@@ -4298,7 +4299,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,arroz,comida chinesa,sushi,temaki,almoço,yakissoba,carne acebolada,shake couve,uramaki shake gril,teriyaki,shoyo</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>357</area>
+        <area>19,627,46,685</area> <!-- LOJA N 357) -->
     </store>
 
 <store>
@@ -4310,7 +4311,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,carnes,almoço,jantar,picanha,baby beef,churrascos,picanha,filet,filé,file mignon,refeições,churrascos</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>358</area>
+        <area>20,421,62,468</area> <!-- LOJA N 358) -->
     </store>
 
 <store>
@@ -4322,7 +4323,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,carnes,espetos,saladas,bebidas,almoço,jantar,refeições,refeição,arroz,</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>359</area>
+        <area>32,222,51,258</area> <!-- LOJA N 359) -->
     </store>
 
 <store>
@@ -4334,7 +4335,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,sushis,sashimis,yakissoba,temakis,temakeria,camarões,camarão,salmões,salmão,polvo,cream cheese,pimenta rubra,cebolinha</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>360</area>
+        <area>60,844,82,866</area> <!-- LOJA N 360) -->
     </store>
 
 <store>
@@ -4346,7 +4347,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,tacos,nachos,soft tacos,burritos,quesadillas,flautas,enchiladas,fajitas,wraps,saladas,sobremesas</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>361</area>
+        <area>56,807,82,838</area> <!-- LOJA N 361) -->
     </store>
 
 <store>
@@ -4358,7 +4359,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,carnes,ovinos,suínos,peixes,frutos do mar,sobremesas,queijo coalho,codornas,carne de sol,filé mignon,bife,baby beef,frangos</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>362</area>
+        <area>51,370,74,414</area> <!-- LOJA N 362) -->
     </store>
 
 <store>
@@ -4370,7 +4371,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,massas,macarrão,ravioli,raviolloni,molhos,spaghetti,bolonhesa,penne,pesto</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>363</area>
+        <area>57,222,77,258</area> <!-- LOJA N 363) -->
     </store>
 
 <store>
@@ -4382,7 +4383,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,hamburgueres,contrafilé,steak,frango,calabresa,bisteca,parmegiana,almondegas,pernil,picanha,file mignon,fraldinha,baby beef,milanesa,sobrecoxa,salmão,talharine,nhoque,capelleti,lasanhas,tabuas,batata frita,smilles,polenta,mandioca,nuggets,strogonoff,camarão,tatuzinho</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>364</area>
+        <area>107,888,129,924</area> <!-- LOJA N 364) -->
     </store>
 
 <store>
@@ -4394,7 +4395,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,feijão,arroz,carnes,sobremesas,almoço,feijoada,leitão a pururuca</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>365</area>
+        <area>106,638,131,687</area> <!-- LOJA N 365) -->
     </store>
 
 <store>
@@ -4406,19 +4407,19 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,feijão,arroz,carnes,sobremesas,almoço,feijoada,leitão a pururuca</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>366</area>
+        <area>101,572,130,623</area> <!-- LOJA N 366) -->
     </store>
 
 <store>
         <id>368</id>
-<name>Pavarotti</name>
-        <description>Loja especializada em Buffet a quilo italiano e mediterrâneo que oferece aos seus clientes uma grande variedade de pratos típicos.</description>
-        <phone>71 34941622</phone>
-        <website></website>
-        <tags>L3,buffet,a quilo,italiano,mediterrâneo,almoço,refeições,massas,macarrão,penni</tags>
+<name>Hamburguer gourmet</name>
+        <description>A h3 new hamburgology é uma marca especializada em hambúrgueres gourmet, com alto padrão de qualidade e preços acessíveis.</description>
+        <phone>71 30133439</phone>
+        <website>http://h3.com/br.html</website>
+        <tags>L3,hamburguer,hamburgueres,batatas fritas,acompanhamentos,batatas frescas,batatas,arroz,salada,alface,salada de alface,rucula,tomate,cebola roxa,catupiry</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>367</area>
+        <area>107,474,133,518</area> <!-- LOJA N 367) -->
     </store>
 
 <store>
@@ -4430,7 +4431,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,refrigerantes,milk shakes,cane,feijão,batata,fritas,bisteca,maminha,ovos,empanados,costela,strogonoffs,estrogonofes,suina,bovina,picanha,contrafilé,mandioca,parmeggianas,saladas,sanduiches,giraprato,giralanches</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>368</area>
+        <area>102,409,133,466</area> <!-- LOJA N 368) -->
     </store>
 
 <store>
@@ -4442,7 +4443,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,fillet,file,arroz,feijão,batatas,panquecas,legumes,risones,berinjela,pasteis,rolinhos,pernil,pure,coxa,tilapia,coscuz,massas,quibe,kibe,strogonoff,estrogonoffes,medalhões,lasanhas</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>369</area>
+        <area>83,222,102,259</area> <!-- LOJA N 369) -->
     </store>
 
 <store>
@@ -4454,7 +4455,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,calzones,pizzas,doces,saladas,scalinatas,massas,panninis</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>370</area>
+        <area>109,221,129,259</area> <!-- LOJA N 370) -->
     </store>
 
 <store>
@@ -4466,7 +4467,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,refrigerantes,agua,sucos,bebidas,camarão,frango,peixe,galinha,frango,lasanhas,massas,sobremesas,espetinhos,pasteis,pastel,bolinhos,saladas,bacalhau,parmegiana</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>371</area>
+        <area>137,663,196,690</area> <!-- LOJA N 371) -->
     </store>
 
 <store>
@@ -4478,7 +4479,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,baby beef,picanha,maminha,carnes,carnes,cordeiro,caça,camarão,picanha,salmão,suino,bovino,frango,salada,massas,lasanhas,refrigerantes,sobremesas</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>372</area>
+        <area>137,629,193,656</area> <!-- LOJA N 372) -->
     </store>
 
 <store>
@@ -4490,7 +4491,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,filet,file,poivre,picanha,strogonoff,estrogonofe,canelloni,crepe,camarao,quatro queijos,lasanha,risoto,carne seca,bacalhau,rondelli,coq au vin,paillard,carpaccio,quiche,saladas,caesar,éclair,sobremesas,croque,madame,monsieur,arroz,batatas,polenta,ratatouille</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>373</area>
+        <area>137,603,192,622</area> <!-- LOJA N 373) -->
     </store>
 
 <store>
@@ -4502,7 +4503,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,tortas,doces,salgadas,salgados,casadinho,cupcake,brigadeiro,bombom,chocolate,bulgara,trufa,camarão,catupiry,frango,saltenha,empanada,empanado</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>374</area>
+        <area>138,574,193,596</area> <!-- LOJA N 374) -->
     </store>
 
 <store>
@@ -4514,7 +4515,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,batatas,frango,carne,queijo,frutos do mar,light,kids,sobremesas,strogonoff,carne seca,calabresa,bacalhau,camarão,tomate seco,salada,vegetariano,rucula,waffles</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>375</area>
+        <area>139,504,187,525</area> <!-- LOJA N 375) -->
     </store>
 
 <store>
@@ -4526,7 +4527,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,carta de vinhos,massas,saladas,grelhados,filet mignon,picanha,file,salmão,camarão,pizzas,sobremesas,ravioli,spagueti,talharine,risotos,saladas,ceasar,caprese</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>376</area>
+        <area>139,409,209,497</area> <!-- LOJA N 376) -->
     </store>
 
 <store>
@@ -4538,7 +4539,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,tortas,doces,salgadas,chocolate,nozes,maca,morango,flocos,ameixas,maracujá,camarão,siri,frango,catupiry,frutos do mar,quindim,brownie,brigadeiro,amora,sonho de valsa</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>377</area>
+        <area>136,222,158,259</area> <!-- LOJA N 377) -->
     </store>
 
 <store>
@@ -4550,7 +4551,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,pizzas,mussarela,calabresa,camarão,massas,lasanhas,rodizios,quatro queijos,frango,catupiry,tomates</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>378</area>
+        <area>164,221,224,294</area> <!-- LOJA N 378) -->
     </store>
 
 <store>
@@ -4562,7 +4563,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,tortas,docesas,salgados,salgada,chocolates,brigadeiro,prestigio,folhada,floresta negra,morango,mousses,tratoria,atum,aspargos,alho,bacalhau</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>379</area>
+        <area>135,888,156,924</area> <!-- LOJA N 379) -->
     </store>
 
 <store>
@@ -4574,7 +4575,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,cervejas,pasteis,tira gosto,frango,bolinho,bacalhau,batata,smille,aipim,calabresa,frango,file,filet,picanha,queijo coalho,escondidinho</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>380</area>
+        <area>163,888,183,925</area> <!-- LOJA N 380) -->
     </store>
 
 <store>
@@ -4586,7 +4587,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,carnes,picanha,file,filet,maminha,fraldinha,calabresa,frango,filet mignon</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>381</area>
+        <area>189,914,237,984</area> <!-- LOJA N 381) -->
     </store>
 
 <store>
@@ -4598,7 +4599,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,carnes,frango,camarão,calabresa,batatas,massas,macarrão,bolinhos,saladas</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>382</area>
+        <area>227,776,262,822</area> <!-- LOJA N 382) -->
     </store>
 
 <store>
@@ -4610,7 +4611,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,rosbife,file,filet,filet mignon,file mignon,picanha argentina,peixe grelhado,maminha,isca de peixe,empanado,filet mignon,camarão,fritas</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>383</area>
+        <area>227,733,243,769</area> <!-- LOJA N 383) -->
     </store>
 
 <store>
@@ -4622,7 +4623,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,saduiches,almondegas,baratissimo,do dia,saladas,frango,carne,bebida,refrigerantes</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>384</area>
+        <area>216,446,249,470</area> <!-- LOJA N 384) -->
     </store>
 
 <store>
@@ -4634,7 +4635,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,sashimi,temaki,saladas,sushis,yakissobas,yakissoba,rolinho primavera,arroz,frango,frango xadrez</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>385</area>
+        <area>216,410,247,438</area> <!-- LOJA N 385) -->
     </store>
 
 <store>
@@ -4646,7 +4647,19 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,buffet,carnes,saladas,queijos,frios,sushis,sashimis,salmão,calabresa,picanha,sobremesas,arroz,batata frita,carne,macarrão,macarronada</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>386</area>
+        <area>231,265,299,301,232,295,294,322,232,318,273,362</area> <!-- LOJA N 386) -->
+    </store>
+
+<store>
+        <id>413</id>
+<name>Vivenda do Camarão</name>
+        <description>A Vivenda do Camarão surgiu com o intuito de oferecer a sofisticação e a qualidade do camarão a um preço acessível.</description>
+        <phone>71 34940099</phone>
+        <website>http://www.vivendadocamarao.com.br/home/</website>
+        <tags>L3,bolinhos,bacalhau,camarão,medalhão,carnes,calabresa,torta de brigadeiro, mousse de chocolate,sorvetes,almoço, como picanha na chapa, carne do sol,farofa de banana,carne fumeiro,moqueca de camarão,bobó de camarão,lasanha,camarão</tags>
+        <id_storecategory>6</id_storecategory>
+        <level>4</level>
+        <area>302,732,322,770</area> <!-- LOJA N 413) -->
     </store>
 
 <store>
@@ -4658,7 +4671,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,bolinhos,bacalhau,camarão,medalhão,carnes,calabresa,torta de brigadeiro, mousse de chocolate,sorvetes,almoço, como picanha na chapa, carne do sol,farofa de banana,carne fumeiro,moqueca de camarão,bobó de camarão,lasanha,camarão</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>409</area>
+        <area>242,929,294,976</area> <!-- LOJA N 409) -->
     </store>
 
 <store>
@@ -4670,7 +4683,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,carnes,saladas,risotos,massas,crevetes,desserts,peixes,file,filet,volailes</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>388</area>
+        <area>269,784,304,842</area> <!-- LOJA N 388) -->
     </store>
 
 <store>
@@ -4682,7 +4695,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,camarão,saladas,aves,frango,pescados,salmão,bacalhau,bobo,risoto,fettuccine</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>389</area>
+        <area>249,732,263,769</area>  <!-- LOJA N 389) -->
     </store>
 
 <store>
@@ -4694,7 +4707,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,carnes,maminhas,medalhoes,medalhao,picanhas,frango,saladas,peixe</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>390</area>
+        <area>269,732,296,770</area>  <!-- LOJA N 390) -->
     </store>
 
 <store>
@@ -4706,7 +4719,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,pasteis,queijo,calabresa,carne,pastel,frango</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>391</area>
+        <area>278,329,294,362</area> <!-- LOJA N 391) -->
     </store>
 
 <store>
@@ -4718,7 +4731,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,pizzas,quatro queijos,calabresa,massas,lasanhas,frango com catupiry,frango,camarão</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>392</area>
+        <area>300,317,323,362</area> <!-- LOJA N 392) -->
     </store>
 
 <store>
@@ -4730,7 +4743,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,sushi,sashimi,yakissoba,temaki,yakissobas,salmão,salmões,rolinho,rolinho primavera,yakimeshi</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>393</area>
+        <area>301,929,346,977</area> <!-- LOJA N 393) -->
     </store>
 
 <store>
@@ -4742,7 +4755,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,crepes,saladas,sanduiches,doces,sobremesas,wraps,tapiocas,bebidas,sucos,refrigerantes,temakis,</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>394</area>
+        <area>311,784,343,831,342,805,370,836</area> <!-- LOJA N 394) -->
     </store>
 
 <store>
@@ -4754,11 +4767,24 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>395</area>
+        <area>328,732,350,770</area> <!-- LOJA N 395) -->
+    </store>
+
+
+<store>
+        <id>415</id>
+<name>Beach Stop</name>
+        <description>Loja especializada em pasteis oferecendo aos seus clientes uma grande variedade de pasteis e petiscos.</description>
+        <phone>71 38781980</phone>
+        <website>http://www.beachstop.com.br/</website>
+        <tags>L3,pasteis,queijo,calabresa,carne,pastel,frango</tags>
+        <id_storecategory>6</id_storecategory>
+        <level>4</level>
+        <area>329,308,351,365</area> <!-- LOJA N 415) -->
     </store>
 
 <store>
-        <id>397</id>
+        <id>414</id>
 <name>Farid Cozinha Árabe</name>
         <description>Loja especializada em comida árabe que oferece aos seus clientes uma grande variedade de pratos e sabores.</description>
         <phone>71 30199928</phone>
@@ -4766,7 +4792,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,kibe,sfiha,esfirra,beirute,kebab,grelhados,kibes,quibes,picanha,kafta,filet,file,mignon,arroz,sobremesas</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>396</area>
+        <area>370,921,405,985</area> <!-- LOJA N 414) -->
     </store>
 
 <store>
@@ -4778,7 +4804,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,saladas</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>397</area>
+        <area>356,733,393,770</area> <!-- LOJA N 397) -->
     </store>
 
 <store>
@@ -4790,7 +4816,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,hamburguer,cheeseburguer,coca-cola,mc cheddar,big mac,mcmelt,batata frita,salada, mac lanche</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>398</area>
+        <area>370,317,416,363</area> <!-- LOJA N 398) -->
     </store>
 
 <store>
@@ -4802,7 +4828,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,massas,macarrão,macarronada,pizza,salada,pastel,risotto,picanha,filé,fillet,fillet mignon</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>399</area>
+        <area>398,265,457,316,421,311,458,363</area> <!-- LOJA N 399) -->
     </store>
 
 <store>
@@ -4814,7 +4840,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>400</area>
+        <area>589,742,640,771</area> <!-- LOJA N 400) -->
     </store>
 
 <store>
@@ -4826,7 +4852,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,pizzas,lasanhas,medalhões,medalhão,frango,carne</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>401</area>
+        <area>585,706,629,726</area> <!-- LOJA N 401) -->
     </store>
 
 <store>
@@ -4838,7 +4864,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,hamburguer,cheeseburguer,ovomaltine,big bob,bobs pícanha,trikids,salada,bacon,picanha</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>402</area>
+        <area>583,683,629,700</area> <!-- LOJA N 402) -->
     </store>
 
 <store>
@@ -4850,7 +4876,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,comida chinesa,sushi,temaki,almoço,yakissoba,carne acebolada,shake couve,uramaki shake gril,teriyaki,shoyo</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>403</area>
+        <area>600,644,629,677</area> <!-- LOJA N 403) -->
     </store>
 
 <store>
@@ -4862,7 +4888,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,camarão,alho,óleo,bacalhau,bolinho,escondidinho,pastel,pizza,picanha argentina,camarão a milanesa</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>404</area>
+        <area>597,609,640,638</area> <!-- LOJA N 404) -->
     </store>
 
 <store>
@@ -4874,7 +4900,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,hamburger,lanches,comida,fast food,big king,bk cheddar duplo,cheeseburguer,refrigerante,refil,whopper</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>405</area>
+        <area>607,413,636,482</area> <!-- LOJA N 405) -->
     </store>
 
 <store>
@@ -4886,7 +4912,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,kalzone,smoothies,sucos,cookies,lanches,lanche natural</tags>
         <id_storecategory>6</id_storecategory>
         <level>4</level>
-        <area>406</area>
+        <area>607,369,626,390</area> <!-- LOJA N 406) -->
     </store>
 
 <store>
@@ -4898,7 +4924,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,jogos,video game,games,diversão,brincar,jogar,festas,sinuca,aniversário</tags>
         <id_storecategory>7</id_storecategory>
         <level>4</level>
-        <area>407</area>
+        <area>582,2,683,294,534,212,625,361</area> <!-- LOJA N 407) -->
     </store>
 
 <store>
@@ -4910,7 +4936,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L3,Cinema,filmes,estréias,pipoca,lançamentos</tags>
         <id_storecategory>7</id_storecategory>
         <level>4</level>
-        <area>408</area>
+        <area>645,317,849,780,630,489,666,605,599,777,649,784</area> <!-- LOJA N 408) -->
         <extras>com.inmap.fragments.CinemarkExtraFragment</extras>
     </store>
 
@@ -4937,4 +4963,17 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <level>2</level>
         <area>395,1253,421,1271</area> <!-- LOJA N 411) -->
     </store>
+
+<store>
+        <id>412</id>
+<name>Salad Creations</name>
+        <description>A 1ª e maior rede de saladas do mundo. Experimente nosso cardápio saudável com mais de 17.000 possíveis combinações de saladas.</description>
+        <phone>71 38781234</phone>
+        <website>http://www.saladcreations.com.br/</website>
+        <tags>L3</tags>
+        <id_storecategory>6</id_storecategory>
+        <level>4</level>
+        <area>20,786,50,819</area> <!-- LOJA N 412) -->
+    </store>
+
 </stores>

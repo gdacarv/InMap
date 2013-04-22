@@ -13,7 +13,6 @@ import android.view.View.OnClickListener;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.analytics.tracking.android.EasyTracker;
 import com.inmap.InMapApplication;
@@ -52,6 +51,9 @@ public class StoreDetailsActivity extends ActionBarActivity {
 		setActionBarTitle("  " + mStore.getTitle());
 
 		populateViews();
+
+		EasyTracker.getInstance().setContext(getApplicationContext());
+		EasyTracker.getTracker().sendEvent("UserAction", "StoreDetails", "StoreView", mStore.getId());
 	}
 	
 	@Override

@@ -1,5 +1,6 @@
 package com.inmap.fragments;
 
+import com.google.analytics.tracking.android.EasyTracker;
 import com.inmap.salvadorshop.R;
 import com.inmap.salvadorshop.applicationdata.InfrastructureCategory;
 import com.inmap.interfaces.OnAnimationEnd;
@@ -104,6 +105,8 @@ public class InfrastructureBarFragment extends Fragment implements OnGestureList
 	protected void selectInfrastructure(int id) {
 		if(mOnInfrastructureChangeListener != null)
 			mOnInfrastructureChangeListener.onInfrastructureCategoryChanged(id);
+		if(id != 0)
+			EasyTracker.getTracker().sendEvent("UserAction", "InfrastructurePick", "Show Infra", (long) id);
 	}
 
 	public void setOnInfrastructureCategoryChangeListener(OnInfrastructureCategoryChangedListener listener){

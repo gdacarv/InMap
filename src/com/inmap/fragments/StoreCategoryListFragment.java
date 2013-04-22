@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,6 +15,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.analytics.tracking.android.EasyTracker;
 import com.inmap.model.DbAdapter;
 import com.inmap.salvadorshop.R;
 import com.inmap.salvadorshop.applicationdata.StoreCategory;
@@ -57,6 +57,7 @@ public class StoreCategoryListFragment extends Fragment {
 	private void selectStoreCategory(int id){
 		if(mOnStoreCategoryChangedListener != null)
 			mOnStoreCategoryChangedListener.onStoreCategoryChanged(id);
+		EasyTracker.getTracker().sendView(String.format(getString(R.string.view_category), id));
 	}
 	
 	public interface OnStoreCategoryChangedListener {

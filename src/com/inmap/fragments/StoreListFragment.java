@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.analytics.tracking.android.EasyTracker;
 import com.inmap.InMapApplication;
 import com.inmap.interfaces.ApplicationDataFacade;
 import com.inmap.model.DbAdapter;
@@ -298,6 +299,8 @@ public class StoreListFragment extends Fragment {
 				loadingView.setVisibility(View.GONE);
 				mViewNoItemList.setVisibility(result.length == 0 ? View.VISIBLE : View.INVISIBLE);
 				//mStoreList.setVisibility(View.VISIBLE);
+				if(result.length == 0)
+					EasyTracker.getTracker().sendEvent("UserAction", "SearchWithoutResults", mParameters.getAnytext(), 0l);
 			}
 		}
 	}

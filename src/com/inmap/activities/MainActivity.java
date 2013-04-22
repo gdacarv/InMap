@@ -419,7 +419,8 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 	}
 
 	private void showStoreOnMap(Store store) {
-		onLevelSelected(store.getLevel());
+		//onLevelSelected(store.getLevel());
+		mLevelPickerFragment.selectLevel(store.getLevel());
 		mStoreOnMapController.setStores(store);
 		mInMapViewController.openStoreBallon(store);
 		storesHasMarkers = store != null;

@@ -76,7 +76,8 @@
                     android:background="@drawable/aba_primeira"
                     android:drawableLeft="@drawable/ico_descricao_lojas"
                     android:gravity="center"
-                    android:text="@string/descricao" />
+                    android:text="@string/descricao"
+                    android:textColor="@color/blue" />
 
                 <TextView
                     android:id="@+id/tab_extra"
@@ -88,7 +89,8 @@
                     android:background="@drawable/aba_primeira"
                     android:gravity="center"
                     android:paddingLeft="30dp"
-                    android:visibility="invisible" />
+                    android:visibility="invisible"
+                    android:textColor="@color/blue" />
 
                 <View
                     android:id="@+id/view_tab_line"
