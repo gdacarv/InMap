@@ -28,23 +28,53 @@
                 android:background="@android:color/black" />
         </LinearLayout>
 
-        <HorizontalScrollView
+        <LinearLayout
             android:id="@+id/layout_infra"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scrollbars="none"
-            android:visibility="gone"
-            android:background="@drawable/infraestrutura_bar" >
-
-            <LinearLayout
-                android:id="@+id/layout_infra_btns"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/infraestrutura_bar"
+            android:visibility="gone" >
+            
+            <ImageView 
+                android:id="@+id/img_infra_more_left"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingLeft="3dp" >
-            </LinearLayout>
-        </HorizontalScrollView>
+                android:layout_height="match_parent"
+                android:scaleType="center"
+                android:src="@drawable/img_more_left"
+                android:background="@drawable/gradient_white_left"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:visibility="invisible"/>
+
+            <com.inmap.views.OverScrollHorizontalScrollView
+                android:id="@+id/scrollview_infra"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:scrollbars="none" >
+
+                <LinearLayout
+                    android:id="@+id/layout_infra_btns"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="3dp" >
+                </LinearLayout>
+            </com.inmap.views.OverScrollHorizontalScrollView>
+            
+            <ImageView 
+                android:id="@+id/img_infra_more_right"
+               android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:scaleType="center"
+                android:background="@drawable/gradient_white_right"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:src="@drawable/img_more_right"/>
+        </LinearLayout>
     </LinearLayout>
 
 </com.inmap.views.AnimateFrameLayout>

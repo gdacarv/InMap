@@ -8,14 +8,21 @@
         android:id="@+id/layout_storelist_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:gravity="center_vertical" >
+        
+        <ImageView
+            android:id="@+id/btn_backtocategorys_arrow"
+            android:layout_width="13dp"
+            android:layout_height="18dp"
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/bt_voltar_categorias"
+            android:background="@null"/>
 
         <ImageButton
             android:id="@+id/btn_backtocategorys"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="5dp"
             android:background="@null"/>
         
         <TextView 
@@ -33,9 +40,8 @@
             android:id="@+id/btn_showonmap"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/pin_cat_alimentos_all"
             android:background="@null"
-            android:layout_marginRight="10dp" />
+            android:layout_marginRight="13dp" />
     </LinearLayout>
 
     <RelativeLayout

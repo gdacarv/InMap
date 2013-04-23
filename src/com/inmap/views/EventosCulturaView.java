@@ -14,8 +14,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.inmap.salvadorshop.R;
@@ -23,19 +23,15 @@ import com.inmap.server.InputStreamHandler;
 import com.inmap.server.StringInputStreamHandler;
 import com.inmap.server.Utils;
 
-public class EventosCulturaView extends LinearLayout {
+public class EventosCulturaView extends RelativeLayout {
 	
 	private ListView mListView;
 
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	public EventosCulturaView(Context context) {
 		super(context);
-		setOrientation(VERTICAL);
-		EventsHandlerAsyncTask task = new EventsHandlerAsyncTask();
-		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
-			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-		else
-			task.execute();
+		buildViews();
+		com.inmap.utils.Utils.executeInParallel(new EventsHandlerAsyncTask());
 	}
 	
 	private class Evento{
@@ -85,8 +81,7 @@ public class EventosCulturaView extends LinearLayout {
 
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	public void onNewEventsReceived(Evento[] values) {
-		if(mListView == null)
-			buildViews();
+		findViewById(R.id.layout_loading_cultura).setVisibility(View.INVISIBLE);
 		@SuppressWarnings("unchecked")
 		ArrayAdapter<Evento> adapter = (ArrayAdapter<Evento>)mListView.getAdapter();
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) 
@@ -95,6 +90,8 @@ public class EventosCulturaView extends LinearLayout {
             for(Evento item : values)
                 adapter.add(item);
 		adapter.notifyDataSetChanged();
+		if(adapter.getCount() == 0)
+			findViewById(R.id.layout_error_cultura).setVisibility(View.VISIBLE);
 	}
 	
 	private void buildViews() {
@@ -109,6 +106,15 @@ public class EventosCulturaView extends LinearLayout {
 				Intent i = new Intent(Intent.ACTION_VIEW);
 				i.setData(Uri.parse("http://www.livrariacultura.com.br/scripts/eventos/resenha/resenha.asp?nevento="+item.id));
 				getContext().startActivity(i);
+			}
+		});
+		findViewById(R.id.btn_cultura_tryagain).setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				findViewById(R.id.layout_loading_cultura).setVisibility(View.VISIBLE);
+				findViewById(R.id.layout_error_cultura).setVisibility(View.INVISIBLE);
+				com.inmap.utils.Utils.executeInParallel(new EventsHandlerAsyncTask());
 			}
 		});
 	}

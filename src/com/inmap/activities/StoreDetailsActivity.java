@@ -1,7 +1,9 @@
 package com.inmap.activities;
 
 import android.annotation.TargetApi;
+import android.app.ActionBar;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -39,13 +41,18 @@ public class StoreDetailsActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_store_details);
 
-		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH)
-			getActionBar().setHomeButtonEnabled(true);
 
 		if(savedInstanceState != null)
 			mStore = (Store) savedInstanceState.getSerializable(STORE);
 		else
 			mStore = (Store) getIntent().getSerializableExtra(STORE);
+		
+		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+			ActionBar actionBar = getActionBar();
+			actionBar.setHomeButtonEnabled(true);
+			actionBar.setDisplayHomeAsUpEnabled(true);
+			actionBar.setBackgroundDrawable(new ColorDrawable(mStore.getCategory().getMenuColor()));
+		}
 
 		mApplicationDataFacade = ((InMapApplication)getApplication()).getApplicationDataFacade();
 		setActionBarTitle("  " + mStore.getTitle());

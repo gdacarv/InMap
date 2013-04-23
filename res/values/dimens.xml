@@ -24,10 +24,10 @@
     <dimen name="slidingmenu_offset_left">60dp</dimen>
     <dimen name="slidingmenu_width_right">50dp</dimen>
     <dimen name="cinemark_height">220dp</dimen>
-    <dimen name="culturaevents_height">220dp</dimen>
+    <dimen name="culturaevents_height">250dp</dimen>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="txt_event_date_max_width">200dp</dimen>
-    <dimen name="cinemarkmovie_height">220dp</dimen>
+    <dimen name="cinemarkmovie_height">250dp</dimen>
 
 </resources>

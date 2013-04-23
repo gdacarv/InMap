@@ -51,6 +51,7 @@
         <item name="android:paddingRight">6dp</item>
         <item name="android:singleLine">true</item>
         <item name="android:ellipsize">marquee</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="ActionBarCompatTitle" parent="style/ActionBarCompatTitleBase">
@@ -61,6 +62,7 @@
     </style>
 
     <style name="ActionBarCompatHomeItem" parent="style/ActionBarCompatItemBase">
+        <item name="android:paddingLeft">3dp</item>
     </style>
 
     <style name="descriptionInfo" parent="android:Widget.Holo.Light.TextView">

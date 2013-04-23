@@ -1,14 +1,9 @@
 package com.inmap.fragments;
 
-import com.google.analytics.tracking.android.EasyTracker;
-import com.inmap.salvadorshop.R;
-import com.inmap.salvadorshop.applicationdata.InfrastructureCategory;
-import com.inmap.interfaces.OnAnimationEnd;
-import com.inmap.views.AnimateFrameLayout;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.LayoutInflater;
@@ -20,9 +15,17 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
+import com.google.analytics.tracking.android.EasyTracker;
+import com.inmap.interfaces.OnAnimationEnd;
+import com.inmap.salvadorshop.R;
+import com.inmap.salvadorshop.applicationdata.InfrastructureCategory;
+import com.inmap.views.AnimateFrameLayout;
+import com.inmap.views.OverScrollHorizontalScrollView;
+import com.inmap.views.OverScrollHorizontalScrollView.OnEdgeScrollListener;
+
 public class InfrastructureBarFragment extends Fragment implements OnGestureListener {
 
-	private View mLayoutButtons, mLayoutControl;
+	private View mLayoutButtons, mLayoutControl, mViewMoreLeft, mViewMoreRight;
 	private AnimateFrameLayout mRoot;
 	private boolean isBarVisible = false, isPerformingAnimation = false;
 	private Animation mAnimExpand, mAnimCollapse;
@@ -92,6 +95,10 @@ public class InfrastructureBarFragment extends Fragment implements OnGestureList
 					mLayoutButtons.setVisibility(View.GONE);
 			}
 		});
+
+		mViewMoreLeft = mRoot.findViewById(R.id.img_infra_more_left);
+		mViewMoreRight = mRoot.findViewById(R.id.img_infra_more_right);
+		((OverScrollHorizontalScrollView)mRoot.findViewById(R.id.scrollview_infra)).setOnEdgeScrollListener(onEdgeScrollListener);
 
 		return mRoot;
 	}
@@ -236,4 +243,13 @@ public class InfrastructureBarFragment extends Fragment implements OnGestureList
 		for(View view : mInfraButtons)
 			view.setSelected(false);
 	}
+	
+	private OnEdgeScrollListener onEdgeScrollListener = new OnEdgeScrollListener() {
+		
+		@Override
+		public void onEdgeScrollChange(boolean leftEdge, boolean rightEdge) {
+			mViewMoreLeft.setVisibility(leftEdge ? View.INVISIBLE : View.VISIBLE);
+			mViewMoreRight.setVisibility(rightEdge ? View.INVISIBLE : View.VISIBLE);
+		}
+	};
 }

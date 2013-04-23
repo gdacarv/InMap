@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">In Map</string>
+    <string name="app_name">InMap - Salvador Shopping</string>
     <string name="menu_search">Pesquisar</string>
     <string name="menu_levels">Andar</string>
     <string name="title_clothing_man">Moda Masculina</string>
@@ -68,5 +68,7 @@
     <string name="tentar_novamente">Tentar novamente</string>
     <string name="legendas">Legendas</string>
     <string name="msg_movie_valid">Programação válida de %s</string>
+    <string name="carregando_eventos_">Carregando eventos....</string>
+    <string name="error_cultura">Não foi possível obter os eventos.</string>
 
 </resources>

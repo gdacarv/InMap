@@ -1,6 +1,5 @@
 package com.inmap.fragments;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -74,7 +73,7 @@ public class StoreListFragment extends Fragment {
 	
 	private void configureButtons() {
 		mBackToCategoryButton = (ImageButton) mRoot.findViewById(R.id.btn_backtocategorys);
-		mBackToCategoryButton.setOnClickListener(new View.OnClickListener() {
+		View.OnClickListener backClickListener = new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -85,7 +84,9 @@ public class StoreListFragment extends Fragment {
 						mStoreListController.onBackToCategorysClicked();
 				}
 			}
-		});
+		};
+		mBackToCategoryButton.setOnClickListener(backClickListener);
+		mRoot.findViewById(R.id.btn_backtocategorys_arrow).setOnClickListener(backClickListener);
 		mShowOnMapButton = (ImageButton) mRoot.findViewById(R.id.btn_showonmap);
 		mShowOnMapButton.setOnClickListener(new View.OnClickListener() {
 			
@@ -125,7 +126,7 @@ public class StoreListFragment extends Fragment {
 			mBackToCategoryButton.setImageResource(R.drawable.bt_pesquisar);
 			mTitleTextView.setText(mStoreListAdapter.getSearchQuery());
 			mViewHeader.setBackgroundColor(0xff0b6897);
-			mShowOnMapButton.setImageResource(R.drawable.pin_cat_pesquisa_all);
+			mShowOnMapButton.setImageResource(R.drawable.pin_cat_pesquisas_all);
 		}else {
 			StoreCategory category = mStoreListAdapter.getStoreCategory();
 			mBackToCategoryButton.setImageResource(category.getMenuIconResId());

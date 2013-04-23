@@ -43,7 +43,8 @@
                 style="@style/descriptionInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ico_categoria_lojas" />
+                android:drawableLeft="@drawable/ico_categoria_lojas"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/txt_details_level"
@@ -77,7 +78,8 @@
                     android:drawableLeft="@drawable/ico_descricao_lojas"
                     android:gravity="center"
                     android:text="@string/descricao"
-                    android:textColor="@color/blue" />
+                    android:textColor="@color/blue"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tab_extra"
@@ -90,7 +92,8 @@
                     android:gravity="center"
                     android:paddingLeft="30dp"
                     android:visibility="invisible"
-                    android:textColor="@color/blue" />
+                    android:textColor="@color/blue"
+                    android:textStyle="bold" />
 
                 <View
                     android:id="@+id/view_tab_line"
