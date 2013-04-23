@@ -61,7 +61,12 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="salvador_shopping">Salvador Shopping</string>
-    <string name="msg_description_cinemark">Confira a programação deste cinema aqui!</string>
-    <string name="msg_description_cultura">Confira a programação de eventos aqui!</string>
+    <string name="msg_description_cinemark">Confira a programação deste cinema!</string>
+    <string name="msg_description_cultura">Confira a programação de eventos!</string>
+    <string name="carregando_filmes_">Carregando filmes...</string>
+    <string name="error_cinemark">Não foi possível obter os filmes.</string>
+    <string name="tentar_novamente">Tentar novamente</string>
+    <string name="legendas">Legendas</string>
+    <string name="msg_movie_valid">Programação válida de %s</string>
 
 </resources>

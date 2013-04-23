@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/cinemarkmovie_height" >
+    
+    <ListView 
+        android:id="@+id/list_cinemark"
+        android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+    	android:cacheColorHint="@android:color/transparent"/>
+
+    <LinearLayout
+        android:id="@+id/layout_loading_cinemark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:gravity="center" >
+
+        <ProgressBar
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/carregando_filmes_" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_error_cinemark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:visibility="invisible"
+        android:gravity="center" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/error_cinemark" />
+        
+        <Button 
+            android:id="@+id/btn_cinemark_tryagain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tentar_novamente"/>
+
+    </LinearLayout>
+    
+</RelativeLayout>

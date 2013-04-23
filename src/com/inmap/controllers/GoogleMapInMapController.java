@@ -64,7 +64,7 @@ public class GoogleMapInMapController implements InMapViewController, MapItemsLi
 			public void run() {
 				moveMapViewToPlacePosition();
 			}
-		}, 5200);
+		}, 7000);
 		//mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 		mMap.setOnInfoWindowClickListener(onInfoWindowClickListener);
 		mMap.setMyLocationEnabled(true);

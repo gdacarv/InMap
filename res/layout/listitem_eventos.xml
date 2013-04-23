@@ -30,7 +30,7 @@
             android:id="@+id/txt_event_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:maxWidth="200dp"
+            android:maxWidth="@dimen/txt_event_date_max_width"
         	android:textColor="@color/blue_light"
         	android:drawableLeft="@drawable/ico_calendar_loja"
         	android:drawablePadding="7dp"
