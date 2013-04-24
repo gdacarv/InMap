@@ -58,13 +58,6 @@ public class GoogleMapInMapController implements InMapViewController, MapItemsLi
 		mApplicationDataFacade = applicationDataFacade;
 		mLevelInformation = mApplicationDataFacade.getLevelInformation();
 		moveMapViewToInitialPosition();
-		new Handler().postDelayed(new Runnable() {
-
-			@Override
-			public void run() {
-				moveMapViewToPlacePosition();
-			}
-		}, 7000);
 		//mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 		mMap.setOnInfoWindowClickListener(onInfoWindowClickListener);
 		mMap.setMyLocationEnabled(true);
@@ -171,12 +164,12 @@ public class GoogleMapInMapController implements InMapViewController, MapItemsLi
 		.build()));
 	}
 
-	public void moveMapViewToPlacePosition() {
+	public void moveMapViewToPlacePosition(boolean instant) {
 		mMap.animateCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder()
 		.target(new LatLng(mApplicationDataFacade.getLatitude(), mApplicationDataFacade.getLongitude()))
 		.zoom(mApplicationDataFacade.getMapZoom())
 		.bearing(mApplicationDataFacade.getMapRotation())
-		.build()), 2000, null);
+		.build()), instant ? 1 : 2000, null);
 	}
 
 	private OnInfoWindowClickListener onInfoWindowClickListener = new OnInfoWindowClickListener() {

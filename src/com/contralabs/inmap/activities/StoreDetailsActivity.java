@@ -30,11 +30,13 @@ import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 
 public class StoreDetailsActivity extends ActionBarActivity {
 
+	private static final String SHOWING_EXTRA = "showingExtra";
 	public static final String STORE = "store";
 	private Store mStore;
 	private ApplicationDataFacade mApplicationDataFacade;
 	private View mTabDescription, mTabExtra, mTabLine, mViewDescription;
 	private FrameLayout mLayoutExtra;
+	private boolean mShowingExtra = false;
 
 	@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 	@Override
@@ -47,7 +49,7 @@ public class StoreDetailsActivity extends ActionBarActivity {
 			mStore = (Store) savedInstanceState.getSerializable(STORE);
 		else
 			mStore = (Store) getIntent().getSerializableExtra(STORE);
-		
+
 		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
 			ActionBar actionBar = getActionBar();
 			actionBar.setHomeButtonEnabled(true);
@@ -58,18 +60,18 @@ public class StoreDetailsActivity extends ActionBarActivity {
 		mApplicationDataFacade = ((InMapApplication)getApplication()).getApplicationDataFacade();
 		setActionBarTitle("  " + mStore.getTitle());
 
-		populateViews();
+		populateViews(savedInstanceState);
 
 		EasyTracker.getInstance().setContext(getApplicationContext());
 		EasyTracker.getTracker().sendEvent("UserAction", "StoreDetails", "StoreView", mStore.getId());
 	}
-	
+
 	@Override
 	protected void onStart() {
 		super.onStart();
 		EasyTracker.getInstance().activityStart(this);
 	}
-	
+
 	@Override
 	protected void onStop() {
 		super.onStop();
@@ -80,9 +82,10 @@ public class StoreDetailsActivity extends ActionBarActivity {
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putSerializable(STORE, mStore);
+		outState.putBoolean(SHOWING_EXTRA, mShowingExtra);
 	}
 
-	private void populateViews() {
+	private void populateViews(Bundle savedInstanceState) {
 		TextView phoneTextView = (TextView)findViewById(R.id.txt_details_phone);
 		String phone = mStore.getPhone();
 		if(phone == null || phone.length() < 3)
@@ -110,10 +113,14 @@ public class StoreDetailsActivity extends ActionBarActivity {
 		mTabExtra = findViewById(R.id.tab_extra);
 		mTabLine = findViewById(R.id.view_tab_line);
 
+
 		String extra = mStore.getExtra();
 		if(extra != null && extra.length() > 0) {
 			try {
-				mExtraFragment = (ExtraFragment) Class.forName(extra).newInstance();
+				if(savedInstanceState == null)
+					mExtraFragment = (ExtraFragment) Class.forName(extra).newInstance();
+				else
+					mExtraFragment = (ExtraFragment) getSupportFragmentManager().findFragmentByTag("mExtraFragment");
 			} catch (InstantiationException e) {
 				e.printStackTrace();
 			} catch (IllegalAccessException e) {
@@ -123,16 +130,19 @@ public class StoreDetailsActivity extends ActionBarActivity {
 			}
 			if(mExtraFragment != null) {
 				mLayoutExtra = (FrameLayout) findViewById(R.id.layout_details_extra);
-				getSupportFragmentManager().beginTransaction().add(R.id.layout_details_extra, mExtraFragment).commit();
+				if(savedInstanceState == null) 
+					getSupportFragmentManager().beginTransaction().add(R.id.layout_details_extra, mExtraFragment, "mExtraFragment").commit();
 				if(mExtraFragment.isReady())
 					onExtraReadyChangeListener.onReadyChanged(true);
 				mExtraFragment.setOnReadyChangeListener(onExtraReadyChangeListener);
+				if(savedInstanceState != null && savedInstanceState.getBoolean(SHOWING_EXTRA, false))
+					onTabClickListener.onClick(mTabExtra);
 			}
+
+			String imageUrl = getImageUrl();
+			if(imageUrl != null)
+				UrlImageViewHelper.setUrlDrawable((ImageView) findViewById(R.id.img_details_logo), imageUrl, R.drawable.img_no_brands_descricao);
 		}
-		
-		String imageUrl = getImageUrl();
-		if(imageUrl != null)
-			UrlImageViewHelper.setUrlDrawable((ImageView) findViewById(R.id.img_details_logo), imageUrl, R.drawable.img_no_brands_descricao);
 	}
 
 	private OnReadyChangeListener onExtraReadyChangeListener = new OnReadyChangeListener() {
@@ -189,7 +199,7 @@ public class StoreDetailsActivity extends ActionBarActivity {
 		case R.id.menu_show_on_map:
 			showOnMap();
 			break;
-			
+
 		case R.id.menu_sobre:
 			new InfoDialogFragment().show(getSupportFragmentManager(), "InfoDialogFragment");
 			break;
@@ -234,10 +244,12 @@ public class StoreDetailsActivity extends ActionBarActivity {
 			if(v == mTabDescription) {
 				mViewDescription.setVisibility(View.VISIBLE);
 				mLayoutExtra.setVisibility(View.GONE);
+				mShowingExtra = false;
 			} else {
 				mViewDescription.setVisibility(View.GONE);
 				mLayoutExtra.setVisibility(View.VISIBLE);
 				EasyTracker.getTracker().sendView(String.format(getString(R.string.view_detailsextra), mStore.getId()));
+				mShowingExtra = true;
 			}
 			((View) v.getParent()).invalidate();
 		}

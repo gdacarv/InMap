@@ -1,6 +1,5 @@
 package com.contralabs.inmap.fragments;
 
-import android.app.Dialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -13,12 +12,15 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.FrameLayout;
 import android.widget.ImageView.ScaleType;
 
+import com.contralabs.inmap.interfaces.OnAnimationEnd;
 import com.contralabs.inmap.views.SplashImageView;
 import com.contralabs.inmap.R;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.Animator.AnimatorListener;
 
 public class SplashDialogFragment extends DialogFragment {
+
+	private OnAnimationEnd mOnAnimationEndListener;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,8 @@ public class SplashDialogFragment extends DialogFragment {
 			public void onAnimationEnd(Animator animation) {
 				if(isVisible())
 					dismiss();
+				if(mOnAnimationEndListener != null)
+					mOnAnimationEndListener.onAnimationEnded();
 			}
 			
 			@Override
@@ -63,5 +67,9 @@ public class SplashDialogFragment extends DialogFragment {
 			}
 		}, R.drawable.img_splashscreen_01, R.drawable.img_splashscreen_02);
 		return layout;
+	}
+	
+	public void setOnAnimationEnd(OnAnimationEnd listener) {
+		mOnAnimationEndListener = listener;
 	}
 }

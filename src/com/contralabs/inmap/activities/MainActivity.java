@@ -120,10 +120,13 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 
 		Intent intent = getIntent();
 
-		verifyIntentShowStoreOnMap(intent);
-		verifyIntentSearch(intent);
+		boolean intentShowOnMap = verifyIntentShowStoreOnMap(intent);
+		boolean intentSearch = verifyIntentSearch(intent);
 		
-		showSplash();		
+		if(!intentSearch && !intentShowOnMap && savedInstanceState == null)
+			showSplash();
+		else
+			mInMapViewController.moveMapViewToPlacePosition(true);
 	}
 
 	@Override
@@ -179,7 +182,7 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
-			mInMapViewController.moveMapViewToPlacePosition();
+			mInMapViewController.moveMapViewToPlacePosition(false);
 			break;
 
 		case R.id.menu_categories:
@@ -447,11 +450,14 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 	@Override
 	protected void onNewIntent(Intent intent) {
 		super.onNewIntent(intent);
-		verifyIntentShowStoreOnMap(intent);
-		verifyIntentSearch(intent);
+		boolean intentShowOnMap = verifyIntentShowStoreOnMap(intent);
+		boolean intentSearch = verifyIntentSearch(intent);
+		
+		if(intentSearch || intentShowOnMap)
+			mInMapViewController.moveMapViewToPlacePosition(true);
 	}
 
-	private void verifyIntentSearch(Intent intent) {
+	private boolean verifyIntentSearch(Intent intent) {
 		if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
 			String query = intent.getStringExtra(SearchManager.QUERY);
 			EasyTracker.getTracker().sendEvent("UserAction", "Search", query, 0l);
@@ -462,6 +468,7 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 				toggleList();
 			if(!isShowingStoreList)
 				showStoreList();
+			return true;
 		}else if (Intent.ACTION_VIEW.equals(intent.getAction())) {
 		    // Handle a suggestions click (because the suggestions all use ACTION_VIEW)
 		    long id = Long.parseLong(intent.getDataString());
@@ -473,7 +480,9 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 		    	mDbAdapter.close();
 		    }
 		    onStoreSelected(store);
+		    return true;
 		}
+		return false;
 	}
 	
 	public void onClearMarkersButtonClick(View v) {
@@ -492,6 +501,14 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 	}
 	
 	private void showSplash() {
-		new SplashDialogFragment().show(getSupportFragmentManager(), "SplashDialogFragment");
+		SplashDialogFragment splashDialogFragment = new SplashDialogFragment();
+		splashDialogFragment.setOnAnimationEnd(new OnAnimationEnd() {
+			
+			@Override
+			public void onAnimationEnded() {
+				mInMapViewController.moveMapViewToPlacePosition(false);
+			}
+		});
+		splashDialogFragment.show(getSupportFragmentManager(), "SplashDialogFragment");
 	}
 }
