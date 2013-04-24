@@ -8,6 +8,6 @@
         android:id="@+id/fragment_levelpicker"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        class="com.inmap.fragments.LevelPickerFragment" />
+        class="com.contralabs.inmap.fragments.LevelPickerFragment" />
 
 </LinearLayout>

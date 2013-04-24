@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <com.inmap.views.AnimateFrameLayout
+    <com.contralabs.inmap.views.AnimateFrameLayout
         android:id="@+id/layout_categorylist"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
@@ -14,10 +14,10 @@
             android:id="@+id/fragment_categorylist"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            class="com.inmap.fragments.StoreCategoryListFragment" />
-    </com.inmap.views.AnimateFrameLayout>
+            class="com.contralabs.inmap.fragments.StoreCategoryListFragment" />
+    </com.contralabs.inmap.views.AnimateFrameLayout>
 
-    <com.inmap.views.AnimateFrameLayout
+    <com.contralabs.inmap.views.AnimateFrameLayout
         android:id="@+id/layout_storelist"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -27,7 +27,7 @@
             android:id="@+id/fragment_storelist"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            class="com.inmap.fragments.StoreListFragment" />
-    </com.inmap.views.AnimateFrameLayout>
+            class="com.contralabs.inmap.fragments.StoreListFragment" />
+    </com.contralabs.inmap.views.AnimateFrameLayout>
 
 </FrameLayout>

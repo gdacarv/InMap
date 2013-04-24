@@ -16,7 +16,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical" >
 
-        <com.inmap.views.AnimateFrameLayout
+        <com.contralabs.inmap.views.AnimateFrameLayout
             android:id="@+id/layout_levels"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
@@ -29,14 +29,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 class="com.inmap.fragments.LevelPickerFragment" /> -->
-        </com.inmap.views.AnimateFrameLayout>
+        </com.contralabs.inmap.views.AnimateFrameLayout>
 
         <fragment
             android:id="@+id/fragment_infrabar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right|bottom"
-            class="com.inmap.fragments.InfrastructureBarFragment" />
+            class="com.contralabs.inmap.fragments.InfrastructureBarFragment" />
     </LinearLayout>
 
     <ImageButton
@@ -49,7 +49,8 @@
         android:layout_marginTop="8dp"
         android:layout_marginRight="58dp"
         android:onClick="onClearMarkersButtonClick"
-        android:visibility="invisible" />
+        android:visibility="invisible"
+        android:background="@null" />
     
     <FrameLayout 
         android:id="@+id/layout_splash"

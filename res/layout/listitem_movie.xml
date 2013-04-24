@@ -19,8 +19,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/blue"
-            android:textStyle="bold"
-            android:textIsSelectable="true" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/txt_movie_rating"

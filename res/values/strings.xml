@@ -70,5 +70,14 @@
     <string name="msg_movie_valid">Programação válida de %s</string>
     <string name="carregando_eventos_">Carregando eventos....</string>
     <string name="error_cultura">Não foi possível obter os eventos.</string>
+    <string name="msg_ratedialog_title">Precisamos da sua ajuda!</string>
+    <string name="msg_ratedialog_msg">Queremos ouvir sua opinião. Dê uma nota, comente, sugira, e critique. Sua opinião é muito importante para nós.\n\nObrigado! =]</string>
+    <string name="msg_ratedialog_positive">Opinar</string>
+    <string name="msg_ratedialog_neutral">Agora não</string>
+    <string name="msg_ratedialog_negative">Nunca</string>
+    <string name="sobre">Sobre</string>
+    <string name="versao">Versão</string>
+    <string name="voltar">Voltar</string>
+    <string name="sobre_texto">InMap - Tudo em um só Lugar!\n\nAplicativo em fase beta, desenvolvido pela Contra Labs ( http://www.contralabs.com ).\nEsse aplicativo irá evoluir com o tempo, e queremos que você faça parte disso. Dê seu feedback comentando na página do InMap no Google Play ou por e-mail (contralabs@gmail.com).</string>
 
 </resources>

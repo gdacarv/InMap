@@ -317,200 +317,200 @@
         <id>40</id>
         <id_infracategory>6</id_infracategory>
         <level>3</level>
-        <x>0</x>
-        <y>0</y>
+        <x>190</x>
+        <y>1723</y>
     </infrastructure>
       
     <infrastructure>
         <id>41</id>
         <id_infracategory>2</id_infracategory>
         <level>3</level>
-        <x>0</x>
-        <y>0</y>
+        <x>349</x>
+        <y>1802</y>
     </infrastructure>
       
     <infrastructure>
         <id>42</id>
         <id_infracategory>2</id_infracategory>
-        <level>5</level>
-        <x>0</x>
-        <y>0</y>
+        <level>3</level>
+        <x>346</x>
+        <y>1758</y>
     </infrastructure>
       
     <infrastructure>
         <id>43</id>
         <id_infracategory>7</id_infracategory>
         <level>3</level>
-        <x>0</x>
-        <y>0</y>
+        <x>393</x>
+        <y>1761</y>
     </infrastructure>
       
     <infrastructure>
         <id>44</id>
         <id_infracategory>6</id_infracategory>
         <level>3</level>
-        <x>0</x>
-        <y>0</y>
+        <x>455</x>
+        <y>1724</y>
     </infrastructure>
       
     <infrastructure>
         <id>45</id>
         <id_infracategory>3</id_infracategory>
         <level>3</level>
-        <x>0</x>
-        <y>0</y>
+        <x>533</x>
+        <y>1749</y>
     </infrastructure>
       
     <infrastructure>
         <id>46</id>
         <id_infracategory>4</id_infracategory>
         <level>3</level>
-        <x>0</x>
-        <y>0</y>
+        <x>569</x>
+        <y>1752</y>
     </infrastructure>
       
     <infrastructure>
         <id>47</id>
         <id_infracategory>5</id_infracategory>
         <level>3</level>
-        <x>0</x>
-        <y>0</y>
+        <x>46</x>
+        <y>1202</y>
     </infrastructure>
       
     <infrastructure>
         <id>48</id>
         <id_infracategory>5</id_infracategory>
         <level>3</level>
-        <x>0</x>
-        <y>0</y>
+        <x>566</x>
+        <y>1189</y>
     </infrastructure>
       
     <infrastructure>
         <id>49</id>
         <id_infracategory>7</id_infracategory>
         <level>3</level>
-        <x>0</x>
-        <y>0</y>
+        <x>563</x>
+        <y>1154</y>
     </infrastructure>
       
     <infrastructure>
         <id>50</id>
         <id_infracategory>6</id_infracategory>
         <level>3</level>
-        <x>0</x>
-        <y>0</y>
+        <x>123</x>
+        <y>1014</y>
     </infrastructure>
       
     <infrastructure>
         <id>51</id>
         <id_infracategory>3</id_infracategory>
         <level>3</level>
-        <x>0</x>
-        <y>0</y>
+        <x>208</x>
+        <y>1110</y>
     </infrastructure>
       
     <infrastructure>
         <id>52</id>
         <id_infracategory>4</id_infracategory>
         <level>3</level>
-        <x>0</x>
-        <y>0</y>
+        <x>239</x>
+        <y>1085</y>
     </infrastructure>
       
     <infrastructure>
         <id>53</id>
         <id_infracategory>6</id_infracategory>
         <level>3</level>
-        <x>0</x>
-        <y>0</y>
+        <x>277</x>
+        <y>1008</y>
     </infrastructure>
       
     <infrastructure>
         <id>54</id>
         <id_infracategory>4</id_infracategory>
         <level>3</level>
-        <x>0</x>
-        <y>0</y>
+        <x>535</x>
+        <y>1073</y>
     </infrastructure>
       
     <infrastructure>
         <id>55</id>
         <id_infracategory>3</id_infracategory>
         <level>3</level>
-        <x>0</x>
-        <y>0</y>
+        <x>407</x>
+        <y>951</y>
     </infrastructure>
       
     <infrastructure>
         <id>56</id>
         <id_infracategory>6</id_infracategory>
         <level>3</level>
-        <x>0</x>
-        <y>0</y>
+        <x>491</x>
+        <y>933</y>
     </infrastructure>
       
     <infrastructure>
         <id>57</id>
         <id_infracategory>4</id_infracategory>
         <level>3</level>
-        <x>0</x>
-        <y>0</y>
+        <x>89</x>
+        <y>270</y>
     </infrastructure>
       
     <infrastructure>
         <id>58</id>
         <id_infracategory>3</id_infracategory>
         <level>3</level>
-        <x>0</x>
-        <y>0</y>
+        <x>134</x>
+        <y>273</y>
     </infrastructure>
       
     <infrastructure>
         <id>59</id>
         <id_infracategory>6</id_infracategory>
         <level>3</level>
-        <x>0</x>
-        <y>0</y>
+        <x>191</x>
+        <y>300</y>
     </infrastructure>
       
     <infrastructure>
         <id>60</id>
         <id_infracategory>5</id_infracategory>
         <level>3</level>
-        <x>0</x>
-        <y>0</y>
+        <x>364</x>
+        <y>271</y>
     </infrastructure>
       
     <infrastructure>
         <id>61</id>
         <id_infracategory>7</id_infracategory>
         <level>3</level>
-        <x>0</x>
-        <y>0</y>
+        <x>405</x>
+        <y>273</y>
     </infrastructure>
       
     <infrastructure>
         <id>62</id>
         <id_infracategory>4</id_infracategory>
         <level>3</level>
-        <x>0</x>
-        <y>0</y>
+        <x>443</x>
+        <y>271</y>
     </infrastructure>
       
     <infrastructure>
         <id>63</id>
         <id_infracategory>3</id_infracategory>
         <level>3</level>
-        <x>0</x>
-        <y>0</y>
+        <x>477</x>
+        <y>270</y>
     </infrastructure>
       
     <infrastructure>
         <id>64</id>
         <id_infracategory>6</id_infracategory>
         <level>3</level>
-        <x>0</x>
-        <y>0</y>
+        <x>562</x>
+        <y>299</y>
     </infrastructure>
       
     <infrastructure>

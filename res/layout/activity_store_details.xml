@@ -5,7 +5,7 @@
     android:orientation="vertical"
     tools:context=".StoreDetailsActivity" >
 
-    <com.inmap.views.SpecialScrollview
+    <com.contralabs.inmap.views.SpecialScrollview
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
@@ -116,7 +116,8 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
-                        android:padding="15dp" />
+                        android:padding="15dp"
+                        android:textIsSelectable="true" />
 
                     <FrameLayout
                         android:id="@+id/layout_details_extra"
@@ -128,7 +129,7 @@
                 </RelativeLayout>
             </RelativeLayout>
         </LinearLayout>
-    </com.inmap.views.SpecialScrollview>
+    </com.contralabs.inmap.views.SpecialScrollview>
 
     <View
         android:layout_width="match_parent"
