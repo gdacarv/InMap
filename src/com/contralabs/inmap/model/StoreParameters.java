@@ -1,9 +1,16 @@
 package com.contralabs.inmap.model;
 
+import java.io.Serializable;
+
 import com.contralabs.inmap.salvadorshop.applicationdata.StoreCategory;
 
-public class StoreParameters {
+public class StoreParameters implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3156944549918749802L;
+	
 	private String name, description, phone, website, tags[], anytext;
 	private int[] mCategorys = new int[StoreCategory.length];
 	private int categoryCounter = 0;

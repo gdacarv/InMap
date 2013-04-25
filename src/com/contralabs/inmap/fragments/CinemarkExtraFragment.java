@@ -85,8 +85,9 @@ public class CinemarkExtraFragment extends ExtraFragment {
 						index = string.indexOf("href", index + 20);
 						index = getNextTextWithoutMark(string, index);
 						date = string.substring(index, string.indexOf('<', index));
+						int legendasIndex = string.indexOf("legendas", index) + 8;
 						int temp;
-						while(index > 0 && (temp = string.indexOf("class=\"movie-info\"", index)) > 0) {
+						while(index > 0 && (temp = string.indexOf("class=\"movie-info\"", index)) > 0 && temp < legendasIndex) {
 							Movie movie = new Movie();
 							index = string.indexOf("exibicao/", temp+17) + 9;
 							index = string.indexOf("title=\"", index) + 7;
@@ -106,8 +107,9 @@ public class CinemarkExtraFragment extends ExtraFragment {
 							movies.add(movie);
 						}
 						legendas = "";
-						index = string.indexOf("legendas", index) + 8;
-						while((index = string.indexOf("letra-legenda", index)) > 0) {
+						int endLegendasIndex = string.indexOf("</div>", legendasIndex);
+						index = legendasIndex;
+						while((index = string.indexOf("letra-legenda", index)) > 0 && index < endLegendasIndex) {
 							index = getNextTextWithoutMark(string, index);
 							legendas += string.substring(index, string.indexOf('<', index)) + " - ";
 							index = getNextTextWithoutMark(string, index);
@@ -203,3 +205,43 @@ public class CinemarkExtraFragment extends ExtraFragment {
 		}
 	}
 }
+
+/* Old Parser:
+ * 
+					protected void handleString(String string) {
+						int index = string.indexOf("class=\"datas-filmes\"");
+						if(index < 0)
+							return;
+						index = string.indexOf("href", index + 20);
+						index = getNextTextWithoutMark(string, index);
+						date = string.substring(index, string.indexOf('<', index));
+						int temp;
+						while(index > 0 && (temp = string.indexOf("class=\"movie-info\"", index)) > 0) {
+							Movie movie = new Movie();
+							index = string.indexOf("exibicao/", temp+17) + 9;
+							index = string.indexOf("title=\"", index) + 7;
+							movie.audio = string.substring(index, string.indexOf('"', index));
+							index = string.indexOf("censura/", index) + 8;
+							index = string.indexOf("title=\"", index) + 7;
+							movie.rating = string.substring(index, string.indexOf('"', index));
+							index = string.indexOf("href=\"", index) + 6;
+							movie.link = "http://www.cinemark.com.br" + string.substring(index, string.indexOf('"', index));
+							index = getNextTextWithoutMark(string, index);
+							movie.name = string.substring(index, string.indexOf('<', index)).replace("&nbsp;", "");
+							int endTime = string.indexOf("</div>", index);
+							movie.time = "";
+							while((index = getNextTextWithoutMark(string, index)) > 0 && index < endTime) {
+								movie.time += string.substring(index, string.indexOf('<', index));
+							}
+							movies.add(movie);
+						}
+						legendas = "";
+						index = string.indexOf("legendas", index) + 8;
+						while((index = string.indexOf("letra-legenda", index)) > 0) {
+							index = getNextTextWithoutMark(string, index);
+							legendas += string.substring(index, string.indexOf('<', index)) + " - ";
+							index = getNextTextWithoutMark(string, index);
+							legendas += string.substring(index, string.indexOf('<', index)).trim() + '\n';
+						}
+					}
+					*/

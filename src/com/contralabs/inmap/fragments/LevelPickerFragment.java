@@ -19,16 +19,29 @@ import com.contralabs.inmap.R;
 
 public class LevelPickerFragment extends Fragment {
 	
+	private static final String LEVEL_SELECTED = "LevelSelected";
 	private OnLevelSelectedListener mOnLevelSelectedListener;
 	private LevelInformation mLevelInformation;
 	private ImageButton[] mLevelButtons;
 	private Context mContext;
+	private int mLevelSelected;
 
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setRetainInstance(true);
+		ApplicationDataFacade dataFacade = SalvadorShopApplicationDataFacade.getInstance(getActivity());
+		mLevelInformation = dataFacade.getLevelInformation();
+		if(savedInstanceState == null)
+			mLevelSelected = mLevelInformation.getInitLevel();
+		else
+			mLevelSelected = savedInstanceState.getInt(LEVEL_SELECTED, mLevelInformation.getInitLevel());
+	}
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		mContext = getActivity();
-		ApplicationDataFacade dataFacade = SalvadorShopApplicationDataFacade.getInstance(mContext);
-		mLevelInformation = dataFacade.getLevelInformation();
+		
 		OnClickListener listener = new OnClickListener() {
 			
 			@Override
@@ -39,7 +52,6 @@ public class LevelPickerFragment extends Fragment {
 		LinearLayout root = (LinearLayout) inflater.inflate(R.layout.fragment_levelpicker, null);
 		LinearLayout.LayoutParams layoutParamsButton = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 0, 1);
 		mLevelButtons = new ImageButton[mLevelInformation.getLevelsCount()];
-		int initLevel = mLevelInformation.getInitLevel();
 		for(int i = mLevelButtons.length-1; i >= 0 ; i--){
 			mLevelButtons[i] = new ImageButton(mContext);
 			mLevelButtons[i].setLayoutParams(layoutParamsButton);
@@ -48,12 +60,18 @@ public class LevelPickerFragment extends Fragment {
 			mLevelButtons[i].setBackgroundResource(0);
 			mLevelButtons[i].setScaleType(ScaleType.FIT_CENTER);
 			mLevelButtons[i].setPadding(0, 0, 0, 0);
-			if(initLevel == i)
+			if(mLevelSelected == i)
 				mLevelButtons[i].setSelected(true);
 			root.addView(mLevelButtons[i]);
 		}
 			
 		return root;
+	}
+	
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putInt(LEVEL_SELECTED, mLevelSelected);
 	}
 	
 	public void setOnLevelSelectedListener(OnLevelSelectedListener listener){
@@ -75,6 +93,7 @@ public class LevelPickerFragment extends Fragment {
 				mLevelButtons[i].setSelected(true);
 				EasyTracker.getInstance().setContext(mContext.getApplicationContext());
 				EasyTracker.getTracker().sendView(String.format(getString(R.string.view_level), mLevelInformation.getTitle(i)));
+				mLevelSelected = i;
 			} else
 				mLevelButtons[i].setSelected(false);
 	}

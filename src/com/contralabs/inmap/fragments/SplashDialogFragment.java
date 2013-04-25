@@ -57,7 +57,7 @@ public class SplashDialogFragment extends DialogFragment {
 			@Override
 			public void onAnimationEnd(Animator animation) {
 				if(isVisible())
-					dismiss();
+					dismissAllowingStateLoss();
 				if(mOnAnimationEndListener != null)
 					mOnAnimationEndListener.onAnimationEnded();
 			}

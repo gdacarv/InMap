@@ -22,29 +22,26 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
-import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
-import android.widget.RelativeLayout;
-
 import com.contralabs.inmap.InMapApplication;
+import com.contralabs.inmap.R;
 import com.contralabs.inmap.actionbar.ActionBarActivity;
-import com.contralabs.inmap.controllers.GoogleMapInMapController;
+import com.contralabs.inmap.fragments.InMapFragment;
 import com.contralabs.inmap.fragments.InfoDialogFragment;
 import com.contralabs.inmap.fragments.InfrastructureBarFragment;
+import com.contralabs.inmap.fragments.InfrastructureBarFragment.OnInfrastructureCategoryChangedListener;
 import com.contralabs.inmap.fragments.LevelPickerFragment;
+import com.contralabs.inmap.fragments.LevelPickerFragment.OnLevelSelectedListener;
 import com.contralabs.inmap.fragments.ProblemasDialogFragment;
 import com.contralabs.inmap.fragments.RateDialogFragment;
 import com.contralabs.inmap.fragments.SplashDialogFragment;
 import com.contralabs.inmap.fragments.StoreCategoryListFragment;
-import com.contralabs.inmap.fragments.StoreListFragment;
-import com.contralabs.inmap.fragments.InfrastructureBarFragment.OnInfrastructureCategoryChangedListener;
-import com.contralabs.inmap.fragments.LevelPickerFragment.OnLevelSelectedListener;
 import com.contralabs.inmap.fragments.StoreCategoryListFragment.OnStoreCategoryChangedListener;
+import com.contralabs.inmap.fragments.StoreListFragment;
 import com.contralabs.inmap.fragments.StoreListFragment.OnStoreSelectedListener;
 import com.contralabs.inmap.fragments.StoreListFragment.StoreListController;
 import com.contralabs.inmap.interfaces.ApplicationDataFacade;
@@ -58,14 +55,11 @@ import com.contralabs.inmap.model.Store;
 import com.contralabs.inmap.model.StoreParameters;
 import com.contralabs.inmap.views.AnimateFrameLayout;
 import com.google.analytics.tracking.android.EasyTracker;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.contralabs.inmap.R;
 import com.slidingmenu.lib.SlidingMenu;
 import com.slidingmenu.lib.SlidingMenu.OnOpenedListener;
 import com.slidingmenu.lib.SlidingMode;
 
-public class MainActivity extends ActionBarActivity implements OnInfrastructureCategoryChangedListener, OnStoreCategoryChangedListener, OnStoreSelectedListener, OnLevelSelectedListener, StoreListController, OnStoreBallonClickListener {
+public class MainActivity extends SlidingActionBarActivity implements OnInfrastructureCategoryChangedListener, OnStoreCategoryChangedListener, OnStoreSelectedListener, OnLevelSelectedListener, StoreListController, OnStoreBallonClickListener {
 
 	protected static final String SHOW_STORE_INMAP = "show_store_inmap";
 
@@ -73,26 +67,27 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 	private ApplicationDataFacade mApplicationDataFacade;
 
 
-	private AnimateFrameLayout mLayoutStoreList, mLayoutCategoryList, mLayoutLevelPicker;
+	private AnimateFrameLayout mLayoutStoreList, mLayoutCategoryList;
 	private StoreCategoryListFragment mStoreCategoryListFragment;
 	private InfrastructureBarFragment mInfrastructureBarFragment;
 	private StoreListFragment mStoreListFragment;
 	private LevelPickerFragment mLevelPickerFragment;
-	private boolean isShowingStoreList = false,
-		isShowingLevelPicker = false;
+	private boolean isShowingStoreList = false;
 	private InMapViewController mInMapViewController;
 	private OnLevelSelectedListener[] mLevelSelectedListeners;
 	private OnInfrastructureCategoryChangedListener[] mInfrastructureCategoryChangedListeners;
 	private StoreOnMapController mStoreOnMapController;
 	private DbAdapter mDbAdapter;
 	private View mClearMarkersButton;
-
-	private GoogleMap mMap;
+	private boolean mShowingSplash = false;
 
 	private SlidingMenu mSlidingMenu;
 
 
 	private boolean infraHasMarkers, storesHasMarkers;
+
+
+	private Bundle mSavedInstanceState;
 
 	@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 	public void onCreate(Bundle savedInstanceState) {
@@ -106,18 +101,16 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 		
 		mDbAdapter = DbAdapter.getInstance(getApplicationContext());
 		
-		fixZoomButtons();
-		
 		configureSlidingMenu();
 
 		configureFragments();
 
 		configureAllLayout();
 
-		setUpMapIfNeeded();
-
 		loadInformationFromApplicationDataFacade();
-
+		
+		retrieveSavedState(savedInstanceState);
+		
 		Intent intent = getIntent();
 
 		boolean intentShowOnMap = verifyIntentShowStoreOnMap(intent);
@@ -125,8 +118,7 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 		
 		if(!intentSearch && !intentShowOnMap && savedInstanceState == null)
 			showSplash();
-		else
-			mInMapViewController.moveMapViewToPlacePosition(true);
+		
 	}
 
 	@Override
@@ -139,36 +131,6 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 	protected void onStop() {
 		super.onStop();
 		EasyTracker.getInstance().activityStop(this);
-	}
-
-	public void fixZoomButtons() {
-		View root = getChildAt(getChildAt(getChildAt(findViewById(android.R.id.content))));
-		View view = root.findViewById(1);
-		if (view != null){
-	        int actionBarHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 18, getResources().getDisplayMetrics());
-	        
-	        // Sets the margin of the button
-	        ViewGroup.MarginLayoutParams marginParams = new ViewGroup.MarginLayoutParams(view.getLayoutParams());
-	        marginParams.setMargins(0, 0, actionBarHeight, actionBarHeight*3);
-	        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(marginParams);
-	        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
-	        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
-	        view.setLayoutParams(layoutParams);
-	}
-	}
-
-	public View getChildAt(View view) {
-		return getChildAt(view, 0);
-	}
-
-	public View getChildAt(View view, int index) {
-		return ((ViewGroup)view).getChildAt(index);
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-		setUpMapIfNeeded();
 	}
 
 	@Override
@@ -212,7 +174,7 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 
 	@Override
 	public void onBackPressed() {
-		if(mSlidingMenu.isMenuShowing()){
+		if(isLeftMenuShowing()){
 			if(isShowingStoreList) {
 				if(mStoreListFragment.isSearch())
 					onSearchClicked();
@@ -290,8 +252,21 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 		return super.onSearchRequested();
 	}
 	
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putBoolean("isShowingStoreList", isShowingStoreList);
+	}
+
+	private void retrieveSavedState(Bundle savedInstanceState) {
+		if(savedInstanceState != null) {
+			if(savedInstanceState.getBoolean("isShowingStoreList", false))
+				showStoreList();
+		}
+	}
+	
 	private void configureSlidingMenu() {
-		mSlidingMenu = new SlidingMenu(this);
+		mSlidingMenu = getSlidingMenu();//new SlidingMenu(this);
 		mSlidingMenu.setMode(SlidingMode.LEFT_RIGHT);
 		mSlidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
 		mSlidingMenu.setShadowWidthRes(R.dimen.shadow_width);
@@ -299,8 +274,9 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 		mSlidingMenu.setBehindOffsetRes(R.dimen.slidingmenu_offset_left, SlidingMode.LEFT);
 		mSlidingMenu.setBehindWidthRes(R.dimen.slidingmenu_width_right, SlidingMode.RIGHT);
 		mSlidingMenu.setFadeDegree(0.00f);
-		mSlidingMenu.attachToActivity(this, SlidingMenu.SLIDING_WINDOW);
-		mSlidingMenu.setMenu(R.layout.layout_lists, SlidingMode.LEFT);
+		//mSlidingMenu.attachToActivity(this, SlidingMenu.SLIDING_WINDOW);
+		//mSlidingMenu.setMenu(R.layout.layout_lists, SlidingMode.LEFT);
+		setBehindContentView(R.layout.layout_lists);
 		mSlidingMenu.setMenu(R.layout.layout_levelpicker, SlidingMode.RIGHT);
 		mSlidingMenu.setOnOpenedListener(onOpenedListener);
 	}
@@ -309,7 +285,7 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 		
 		@Override
 		public void onOpened() {
-			EasyTracker.getTracker().sendView(getString(mSlidingMenu.isMenuShowing() ? isShowingStoreList ? R.string.view_storelist : R.string.view_storecategories : mSlidingMenu.isSecondaryMenuShowing() ? R.string.view_levelpicker : R.string.view_error));
+			EasyTracker.getTracker().sendView(getString(isLeftMenuShowing() ? isShowingStoreList ? R.string.view_storelist : R.string.view_storecategories : isRightMenuShowing() ? R.string.view_levelpicker : R.string.view_error));
 		}
 	};
 
@@ -334,7 +310,6 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 		configureLayoutCategoryList();
 		configureLayoutStoreList();
 		mClearMarkersButton = findViewById(R.id.btn_clear_markers);
-		configureLayoutLevelPicker();
 	}
 
 	
@@ -361,45 +336,27 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 		});
 	}
 
-	private void configureLayoutLevelPicker() {
-		mLayoutLevelPicker = (AnimateFrameLayout) findViewById(R.id.layout_levels);
-		mLayoutLevelPicker.setOnAnimationEnd(new OnAnimationEnd() {
-
-			@Override
-			public void onAnimationEnded() {
-				if(!isShowingLevelPicker) mLayoutLevelPicker.setVisibility(View.INVISIBLE);
-			}
-		});
-	}
-
 	private void loadInformationFromApplicationDataFacade() {
 		mApplicationDataFacade = ((InMapApplication)getApplication()).getApplicationDataFacade();
-		if(mMap == null)
-			throw new IllegalStateException("GoogleMap should not be null.");
-		mInMapViewController = new GoogleMapInMapController(/*Context*/ this, mMap, mApplicationDataFacade);
-		mInMapViewController.setOnStoreBallonClickListener(this);
 		mLevelSelectedListeners = mApplicationDataFacade.getOnLevelSelectedListeners();
 		mInfrastructureCategoryChangedListeners = mApplicationDataFacade.getOnInfrastructureCategoryChangedListeners();
 		mStoreOnMapController = mApplicationDataFacade.getStoreOnMapController();
+		InMapFragment inMapFragment = (InMapFragment) getSupportFragmentManager().findFragmentById(R.id.google_map);
+		inMapFragment.setApplicationDataFacade(mApplicationDataFacade);
+		mInMapViewController = inMapFragment;
+		mInMapViewController.setOnStoreBallonClickListener(this);
 		mInMapViewController.setMapController(mApplicationDataFacade.getMapController());
 	}
 
 	private void toggleLevelPicker() {
-		/*isShowingLevelPicker = !isShowingLevelPicker;
-		if(isShowingLevelPicker){
-			mLayoutLevelPicker.setVisibility(View.VISIBLE);
-			mLayoutLevelPicker.startAnimation(AnimationUtils.loadAnimation(this, R.anim.to_down_from__100_to_0));*/
-		if(mSlidingMenu.isSecondaryMenuShowing())
+		if(isRightMenuShowing())
 			mSlidingMenu.showContent();
 		else 
 			mSlidingMenu.showSecondaryMenu();
-		/*}else {
-			mLayoutLevelPicker.startAnimation(AnimationUtils.loadAnimation(this, R.anim.to_up_100));
-		}*/
 	}
 
 	protected void toggleList() {
-		if(mSlidingMenu.isMenuShowing())
+		if(isLeftMenuShowing())
 			mSlidingMenu.showContent();
 		else 
 			mSlidingMenu.showMenu();
@@ -421,7 +378,7 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 		if(i != null) {
 			Store store = (Store) i.getSerializableExtra(SHOW_STORE_INMAP);
 			if(store != null) {
-				if(mSlidingMenu.isMenuShowing())
+				if(isLeftMenuShowing())
 					toggleList();
 				showStoreOnMap(store);
 				return true;
@@ -431,30 +388,18 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 	}
 
 	private void showStoreOnMap(Store store) {
-		//onLevelSelected(store.getLevel());
 		mLevelPickerFragment.selectLevel(store.getLevel());
 		mStoreOnMapController.setStores(store);
 		mInMapViewController.openStoreBallon(store);
 		storesHasMarkers = store != null;
 		updateClearMarkersVisibility();
 	}
-
-	private void setUpMapIfNeeded() {
-		// Do a null check to confirm that we have not already instantiated the map.
-		if (mMap == null) {
-			// Try to obtain the map from the SupportMapFragment.
-			mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.google_map)).getMap();
-		}
-	}
-
+	
 	@Override
 	protected void onNewIntent(Intent intent) {
 		super.onNewIntent(intent);
-		boolean intentShowOnMap = verifyIntentShowStoreOnMap(intent);
-		boolean intentSearch = verifyIntentSearch(intent);
-		
-		if(intentSearch || intentShowOnMap)
-			mInMapViewController.moveMapViewToPlacePosition(true);
+		verifyIntentShowStoreOnMap(intent);
+		verifyIntentSearch(intent);
 	}
 
 	private boolean verifyIntentSearch(Intent intent) {
@@ -464,7 +409,7 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 			if(query.length() > 2 && query.endsWith("s")) // To search plurals as singular (pt)
 				query = query.substring(0, query.length()-1);
 			mStoreListFragment.setStoreParameters(new StoreParameters().setText(query));
-			if(!mSlidingMenu.isMenuShowing())
+			if(!isLeftMenuShowing())
 				toggleList();
 			if(!isShowingStoreList)
 				showStoreList();
@@ -507,8 +452,22 @@ public class MainActivity extends ActionBarActivity implements OnInfrastructureC
 			@Override
 			public void onAnimationEnded() {
 				mInMapViewController.moveMapViewToPlacePosition(false);
+				mShowingSplash = false;
 			}
 		});
 		splashDialogFragment.show(getSupportFragmentManager(), "SplashDialogFragment");
+		mShowingSplash = true;
+	}
+	
+	public boolean isShowingSplash() {
+		return mShowingSplash;
+	}
+
+	private boolean isLeftMenuShowing() {
+		return mSlidingMenu.isMenuShowing();
+	}
+
+	private boolean isRightMenuShowing() {
+		return mSlidingMenu.isSecondaryMenuShowing();
 	}
 }

@@ -2639,7 +2639,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <description>Loja especializada em looks femininos sofisticados, com  modelos contemporâneos.</description>
         <phone>71 32724231</phone>
         <website>http://www.barreds.com.br/</website>
-        <tags>L2</tags>
+        <tags>L2,blazers,blusas,calças,camisas,casacos,conjuntos,saia,jeans,macacao,tricot,vestidos,bolsas,cintos,lencos,pulseiras,sapatos,blusas,shorts</tags>
         <id_storecategory>2</id_storecategory>
         <level>3</level>
         <area>50,1214,90,1244</area>  <!-- LOJA N 218) -->
@@ -2651,7 +2651,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <description>Loja de moda infantil tendo como grande diferencial a preocupação com os pequeninos assim lançando peças criativas para desenvolver a imaginação e deixar seu filho mais bonito.</description>
         <phone>71 34503494</phone>
         <website>http://www.lilicaetigor.com/</website>
-        <tags>L2</tags>
+        <tags>L2,camisas,blusas,shorts,sapatos,bones,meias,calca,bermudas,camisetas,blusao,conjuntos,jaquetas,coletes,chinelo,sunga,regata</tags>
         <id_storecategory>18</id_storecategory>
         <level>3</level>
         <area>50,1173,91,1191</area>  <!-- LOJA N 219) -->
@@ -2663,7 +2663,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <description>Loja especializada em bijuterias que oferece aos seus clientes uma grande variedade de produtos para todos os gostos.</description>
         <phone>71 30193096</phone>
         <website>http://www.bellebijou.com.br/</website>
-        <tags>L2</tags>
+        <tags>L2,brincos,aneis,colares</tags>
         <id_storecategory>23</id_storecategory>
         <level>3</level>
         <area>51,1146,90,1165</area>  <!-- LOJA N 220) -->
@@ -2675,7 +2675,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <description>Loja especializada em roupas moda praia que oferece aos seus clientes uma grande variedade de acessórios.</description>
         <phone>71 30194922</phone>
         <website>http://www.oakley.com/</website>
-        <tags>L2</tags>
+        <tags>L2,bermudas,shorts,camisas,camisetas,regatas,oculos,calcas,jaquetas,blusao,cintos,bones</tags>
         <id_storecategory>19</id_storecategory>
         <level>3</level>
         <area>11,1070,91,1138</area>  <!-- LOJA N 221) -->
@@ -2687,7 +2687,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <description>Loja especializada em looks masculinos sofisticados, com  modelos contemporâneos.</description>
         <phone>71 34142262</phone>
         <website>http://www.armaniexchange.com/</website>
-        <tags>L2</tags>
+        <tags>L2,calcas,bermudas,shorts,blusas,camisas,jaquetas,blazers,vestidos</tags>
         <id_storecategory>1</id_storecategory>
         <level>3</level>
         <area>11,888,95,959</area>  <!-- LOJA N 222) -->
@@ -2699,7 +2699,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <description>Loja de sapatos com modelos para todas as idades e diversos tamanhos.</description>
         <phone>71 33413277</phone>
         <website>http://www.schutz.com.br/</website>
-        <tags>L2</tags>
+        <tags>L2,sapatos,botas,sandalias,saltos,ankle boot,rasteira,sapatilha,sneaker,scarpin,scarpins,peep toe,peep toes,cano alto,cano medio,cintos,colares,braceletes,pulseiras,bolsas</tags>
         <id_storecategory>4</id_storecategory>
         <level>3</level>
         <area>47,836,92,880</area>  <!-- LOJA N 223) -->
@@ -2711,7 +2711,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <description>Loja especializada em looks femininos sofisticados, com  modelos contemporâneos.</description>
         <phone>71 33413202</phone>
         <website>http://ellus.com/</website>
-        <tags>L2</tags>
+        <tags>L2,jaquetas,casacos,leather,stretch,shorts,camisas,saias,shorts,calcas,tricot,vestidos,bermudas</tags>
         <id_storecategory>2</id_storecategory>
         <level>3</level>
         <area>10,785,75,826</area>  <!-- LOJA N 224) -->
@@ -2990,7 +2990,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L2</tags>
         <id_storecategory>16</id_storecategory>
         <level>3</level>
-        <area>156,629,204,673</area> <!-- LOJA N 247) -->
+        <area>155,656,205,680</area> <!-- LOJA N 247) -->
     </store>
 
 <store>
@@ -3002,7 +3002,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
         <tags>L2</tags>
         <id_storecategory>22</id_storecategory>
         <level>3</level>
-        <area>173,625,205,651</area> <!-- LOJA N 248) -->
+        <area>156,629,204,673</area> <!-- LOJA N 248) -->
     </store>
 
 <store>
@@ -4930,7 +4930,7 @@ painel de parede e pinturas personalizadas,tapetes antialérgicos,kits de berço
 <store>
         <id>409</id>
 <name>Cinemark</name>
-        <description>Rede de Cinemas onde é possível a compra e venda de ingresso, além de oferecer aos seus clientes uma grande variedade de filmes e salas climatizadas.</description>
+        <description>Cinema com 8 salas de exibição, salas 3D e sala XD com grande variedade de filmes.</description>
         <phone>71 30233916</phone>
         <website>http://www.cinemark.com.br/</website>
         <tags>L3,Cinema,filmes,estréias,pipoca,lançamentos</tags>

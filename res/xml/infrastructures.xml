@@ -299,18 +299,18 @@
       
     <infrastructure>
         <id>38</id>
-        <id_infracategory>5</id_infracategory>
-        <level>2</level>
-        <x>628</x>
-        <y>1111</y>
+        <id_infracategory>4</id_infracategory>
+        <level>3</level>
+        <x>47</x>
+        <y>1748</y>
     </infrastructure>
       
     <infrastructure>
         <id>39</id>
-        <id_infracategory>7</id_infracategory>
-        <level>2</level>
-        <x>652</x>
-        <y>1088</y>
+        <id_infracategory>3</id_infracategory>
+        <level>3</level>
+        <x>87</x>
+        <y>1751</y>
     </infrastructure>
       
     <infrastructure>
@@ -323,7 +323,7 @@
       
     <infrastructure>
         <id>41</id>
-        <id_infracategory>2</id_infracategory>
+        <id_infracategory>5</id_infracategory>
         <level>3</level>
         <x>349</x>
         <y>1802</y>
@@ -331,7 +331,7 @@
       
     <infrastructure>
         <id>42</id>
-        <id_infracategory>2</id_infracategory>
+        <id_infracategory>5</id_infracategory>
         <level>3</level>
         <x>346</x>
         <y>1758</y>

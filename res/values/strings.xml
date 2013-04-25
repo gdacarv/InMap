@@ -79,5 +79,6 @@
     <string name="versao">Versão</string>
     <string name="voltar">Voltar</string>
     <string name="sobre_texto">InMap - Tudo em um só Lugar!\n\nAplicativo em fase beta, desenvolvido pela Contra Labs ( http://www.contralabs.com ).\nEsse aplicativo irá evoluir com o tempo, e queremos que você faça parte disso. Dê seu feedback comentando na página do InMap no Google Play ou por e-mail (contralabs@gmail.com).</string>
+    <string name="msg_nomaps">Você precisa atualizar o Google Play para exibir corretamente o mapa.</string>
 
 </resources>

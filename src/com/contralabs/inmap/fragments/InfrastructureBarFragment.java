@@ -27,14 +27,21 @@ public class InfrastructureBarFragment extends Fragment implements OnGestureList
 
 	private View mLayoutButtons, mLayoutControl, mViewMoreLeft, mViewMoreRight;
 	private AnimateFrameLayout mRoot;
-	private boolean isBarVisible = false, isPerformingAnimation = false;
+	private boolean isBarVisible = true, isPerformingAnimation = false;
 	private Animation mAnimExpand, mAnimCollapse;
 	private int mWidth = 0;
 	private GestureDetector mGestureDetector;
 	private ImageButton mInfraButtons[], mInfraControl;
 	private int mInfraIds[];
 	private OnInfrastructureCategoryChangedListener mOnInfrastructureChangeListener;
-
+	private int mInfraSelected = 0;
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setRetainInstance(true);
+	}
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		Context context = getActivity();
@@ -53,9 +60,14 @@ public class InfrastructureBarFragment extends Fragment implements OnGestureList
 			}
 		});
 
-		if(savedInstanceState != null && savedInstanceState.getBoolean("isExpanded")){
-			isBarVisible = true;
+		if(savedInstanceState != null){
+			isBarVisible = savedInstanceState.getBoolean("isExpanded", isBarVisible);
+			mInfraSelected = savedInstanceState.getInt("InfraSelected", mInfraSelected);
+		}
+		
+		if(isBarVisible) {
 			mLayoutButtons.setVisibility(View.VISIBLE);
+			mInfraControl.setImageResource(R.drawable.bt_infraestrutura_out);
 		}
 
 		final InfrastructureCategory cats[] = InfrastructureCategory.values();
@@ -84,6 +96,8 @@ public class InfrastructureBarFragment extends Fragment implements OnGestureList
 			mInfraButtons[i].setImageResource(cats[i].getMenuIconResId());
 			mInfraIds[i] = cats[i].getId();
 			mInfraButtons[i].setOnClickListener(listener);
+			if(mInfraIds[i] == mInfraSelected)
+				mInfraButtons[i].setSelected(true);
 			layout.addView(mInfraButtons[i]);
 		}
 
@@ -102,14 +116,9 @@ public class InfrastructureBarFragment extends Fragment implements OnGestureList
 
 		return mRoot;
 	}
-	
-	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
-		toggleBar();
-	}
 
 	protected void selectInfrastructure(int id) {
+		mInfraSelected = id;
 		if(mOnInfrastructureChangeListener != null)
 			mOnInfrastructureChangeListener.onInfrastructureCategoryChanged(id);
 		if(id != 0)
@@ -124,6 +133,11 @@ public class InfrastructureBarFragment extends Fragment implements OnGestureList
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putBoolean("isExpanded", isBarVisible);
+		outState.putInt("InfraSelected", getInfraSelected());
+	}
+
+	private int getInfraSelected() {
+		return mInfraSelected;
 	}
 
 	protected void toggleBar() {

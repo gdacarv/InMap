@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.text.Html;
@@ -32,6 +33,10 @@ import com.contralabs.inmap.R;
 
 public class StoreListFragment extends Fragment {
 
+	private static final String LIST_STATE = "ListState";
+
+	private static final String STORE_PARAMETERS = "StoreParameters";
+
 	private static final int MAX_DESCRIPTION_LENGHT = 140;
 	
 	private View mRoot, mViewNoItemList, mViewHeader;
@@ -46,6 +51,14 @@ public class StoreListFragment extends Fragment {
 	private StoreListController mStoreListController;
 	private ApplicationDataFacade mApplicationDataFacade;
 
+	private Bundle mSavedIntanceState;
+
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setRetainInstance(true);
+	}
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		FragmentActivity activity = getActivity();
@@ -68,7 +81,24 @@ public class StoreListFragment extends Fragment {
 		mViewHeader = mRoot.findViewById(R.id.layout_storelist_header);
 		
 		configureButtons();
+		
+		if(savedInstanceState == null) {
+			savedInstanceState = mSavedIntanceState;
+			mSavedIntanceState = null;
+		}
+		
+		if(savedInstanceState != null) {
+			setStoreParameters((StoreParameters) savedInstanceState.getSerializable(STORE_PARAMETERS), savedInstanceState.getParcelable(LIST_STATE));
+		}
 		return mRoot;
+	}
+	
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putSerializable(STORE_PARAMETERS, mStoreListAdapter.getStoreParameters());
+		outState.putParcelable(LIST_STATE, mStoreList.onSaveInstanceState());
+		mSavedIntanceState = outState;
 	}
 	
 	private void configureButtons() {
@@ -119,9 +149,13 @@ public class StoreListFragment extends Fragment {
 			mOnStoreSelectedListener.onStoreSelected(store);
 	}
 	
-	public void setStoreParameters(StoreParameters parameters){
+	public void setStoreParameters(StoreParameters parameters) {
+		setStoreParameters(parameters, null);
+	}
+	
+	protected void setStoreParameters(StoreParameters parameters, Parcelable listState){
 		mStoreList.smoothScrollToPosition(0);
-		mStoreListAdapter.setStoreParameters(parameters);
+		mStoreListAdapter.setStoreParameters(parameters, listState);
 		if(mStoreListAdapter.isSearch()) {
 			mBackToCategoryButton.setImageResource(R.drawable.bt_pesquisar);
 			mTitleTextView.setText(mStoreListAdapter.getSearchQuery());
@@ -151,6 +185,7 @@ public class StoreListFragment extends Fragment {
 		private Store[] mStores;
 		private StoreParameters mParameters;
 		private boolean mIsSearch;
+		private Parcelable mListState;
 		
 		public StoreListAdapter(Context context){
 			mContext = context;
@@ -166,7 +201,8 @@ public class StoreListFragment extends Fragment {
 			return mIsSearch;
 		}
 
-		public void setStoreParameters(StoreParameters parameters){
+		public void setStoreParameters(StoreParameters parameters, Parcelable listState){
+			mListState = listState;
 			mParameters = parameters;
 			String categoryId = mParameters.getCategoryString().split(",")[0];
 			if(categoryId.equals("")) { // Is Search
@@ -300,9 +336,15 @@ public class StoreListFragment extends Fragment {
 				loadingView.setVisibility(View.GONE);
 				mViewNoItemList.setVisibility(result.length == 0 ? View.VISIBLE : View.INVISIBLE);
 				//mStoreList.setVisibility(View.VISIBLE);
+				if(mListState != null)
+					mStoreList.onRestoreInstanceState(mListState);
 				if(result.length == 0)
 					EasyTracker.getTracker().sendEvent("UserAction", "SearchWithoutResults", mParameters.getAnytext(), 0l);
 			}
+		}
+		
+		public StoreParameters getStoreParameters() {
+			return mParameters;
 		}
 	}
 
