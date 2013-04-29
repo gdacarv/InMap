@@ -154,6 +154,8 @@ public class StoreListFragment extends Fragment {
 	}
 	
 	protected void setStoreParameters(StoreParameters parameters, Parcelable listState){
+		if(parameters == null)
+			return;
 		mStoreList.smoothScrollToPosition(0);
 		mStoreListAdapter.setStoreParameters(parameters, listState);
 		if(mStoreListAdapter.isSearch()) {
