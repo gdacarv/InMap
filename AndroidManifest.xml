@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.contralabs.inmap"
-    android:versionCode="3"
-    android:versionName="1.2 Beta" >
+    android:versionCode="4"
+    android:versionName="1.2.1 Beta" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -19,6 +19,8 @@
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <uses-feature
         android:glEsVersion="0x00020000"
@@ -30,16 +32,17 @@
         android:label="@string/app_name"
         android:logo="@drawable/img_marca_inmap"
         android:theme="@style/AppTheme" >
-        
         <activity
             android:name="com.contralabs.inmap.activities.MainActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask" >
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
+
                 <category android:name="android.intent.category.DEFAULT" />
-                
+
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
@@ -56,16 +59,36 @@
         </activity>
 
         <service android:name="com.contralabs.inmap.server.UpdateDataService" />
+        
+        <service android:name="com.contralabs.inmap.location.ProximityService" />
 
-        <meta-data
-            android:name="com.google.android.maps.v2.API_KEY"
-            android:value="@string/maps_api_key" />
-
+        <receiver
+            android:name="com.contralabs.inmap.location.ProximityReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.contralabs.inmap.location.PROXIMITY_EVENT" />
+            </intent-filter>
+        </receiver>
+        
         <provider
             android:name="com.contralabs.inmap.model.StoreContentProvider"
             android:authorities="com.contralabs.inmap.model.StoreContentProvider" >
         </provider>
 
+        <receiver
+            android:name="com.contralabs.inmap.OnBootReceiver"
+            android:enabled="true"
+            android:exported="false"
+            android:label="OnBootReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="@string/maps_api_key" />
         <meta-data
             android:name="url_info"
             android:value="https://dl.dropbox.com/s/awpi1m99j1m20c1/SalvadorShopInfo.json?dl=1" />

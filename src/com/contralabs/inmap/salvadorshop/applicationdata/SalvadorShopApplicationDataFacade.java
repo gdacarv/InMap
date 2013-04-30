@@ -42,40 +42,6 @@ public class SalvadorShopApplicationDataFacade implements ApplicationDataFacade 
 
 	@Override
 	public MapController getMapController() {
-		/*final Resources res = mContext.getResources();
-		MapController controller = new MapController() {
-			
-			private MapItem[] mMapItem = { new MapItem(){
-				
-				private Bitmap bitmap = BitmapFactory.decodeResource(res,R.drawable.marker);
-
-				@Override
-				public int getX() {
-					return 150;
-				}
-
-				@Override
-				public int getY() {
-					return 250;
-				}
-
-				@Override
-				public Bitmap getBitmap() {
-					return bitmap;
-				}
-				
-			}
-			};
-			
-			@Override
-			public void setMapItemsListener(MapItemsListener listener) {
-			}
-			
-			@Override
-			public MapItem[] getMapItems() {
-				return mMapItem;
-			}
-		};*/
 		if(mMapController == null)
 			mMapController = TwoMapController.createInstance(getInfrastructureMapController(), getStoreMapController());
 		return mMapController;
@@ -147,5 +113,10 @@ public class SalvadorShopApplicationDataFacade implements ApplicationDataFacade 
 	@Override
 	public float getInitialMapZoom() {
 		return 12f;
+	}
+
+	@Override
+	public String getPlaceName() {
+		return "Salvador Shopping";
 	}
 }

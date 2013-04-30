@@ -21,6 +21,7 @@ import com.contralabs.inmap.actionbar.ActionBarActivity;
 import com.contralabs.inmap.fragments.ExtraFragment;
 import com.contralabs.inmap.fragments.InfoDialogFragment;
 import com.contralabs.inmap.fragments.ProblemasDialogFragment;
+import com.contralabs.inmap.fragments.ProximityCheckDialogFragment;
 import com.contralabs.inmap.fragments.ExtraFragment.OnReadyChangeListener;
 import com.contralabs.inmap.interfaces.ApplicationDataFacade;
 import com.contralabs.inmap.model.Store;
@@ -32,6 +33,7 @@ public class StoreDetailsActivity extends ActionBarActivity {
 
 	private static final String SHOWING_EXTRA = "showingExtra";
 	public static final String STORE = "store";
+	public static final String SHOW_EXTRA = "com.contralabs.inmap.SHOW_EXTRA";
 	private Store mStore;
 	private ApplicationDataFacade mApplicationDataFacade;
 	private View mTabDescription, mTabExtra, mTabLine, mViewDescription;
@@ -44,11 +46,11 @@ public class StoreDetailsActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_store_details);
 
-
+		Intent intent = getIntent();
 		if(savedInstanceState != null)
 			mStore = (Store) savedInstanceState.getSerializable(STORE);
 		else
-			mStore = (Store) getIntent().getSerializableExtra(STORE);
+			mStore = (Store) intent.getSerializableExtra(STORE);
 
 		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
 			ActionBar actionBar = getActionBar();
@@ -64,6 +66,8 @@ public class StoreDetailsActivity extends ActionBarActivity {
 
 		EasyTracker.getInstance().setContext(getApplicationContext());
 		EasyTracker.getTracker().sendEvent("UserAction", "StoreDetails", "StoreView", mStore.getId());
+		
+		ProximityCheckDialogFragment.showIfAppropriate(intent, getSupportFragmentManager());
 	}
 
 	@Override
@@ -156,6 +160,8 @@ public class StoreDetailsActivity extends ActionBarActivity {
 				TextView textTabExtra = (TextView) mTabExtra;
 				textTabExtra.setText(mExtraFragment.getTitle());
 				textTabExtra.setCompoundDrawablesWithIntrinsicBounds(mExtraFragment.getIconResId(), 0, 0, 0);
+				if(getIntent().getBooleanExtra(SHOW_EXTRA, false))
+					onTabClickListener.onClick(mTabExtra);
 			} else {
 				onTabClickListener.onClick(mTabDescription);
 				mTabDescription.setOnClickListener(null);

@@ -80,5 +80,10 @@
     <string name="voltar">Voltar</string>
     <string name="sobre_texto">InMap - Tudo em um só Lugar!\n\nAplicativo em fase beta, desenvolvido pela Contra Labs ( http://www.contralabs.com ).\nEsse aplicativo irá evoluir com o tempo, e queremos que você faça parte disso. Dê seu feedback comentando na página do InMap no Google Play ou por e-mail (contralabs@gmail.com).</string>
     <string name="msg_nomaps">Você precisa atualizar o Google Play para exibir corretamente o mapa.</string>
+    <string name="msg_exit_area">Obrigado, e volte sempre ao %s!</string>
+    <string name="msg_enter_area">Bem vindo ao %s!</string>
+    <string name="pesquisar_lojas">Pesquisar</string>
+    <string name="programa_o_do_cinema">Filmes</string>
+    <string name="msg_notification_open">Toque para ver o mapa, lojas, informações e muito mais...</string>
 
 </resources>

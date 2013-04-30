@@ -37,6 +37,7 @@ import com.contralabs.inmap.fragments.InfrastructureBarFragment.OnInfrastructure
 import com.contralabs.inmap.fragments.LevelPickerFragment;
 import com.contralabs.inmap.fragments.LevelPickerFragment.OnLevelSelectedListener;
 import com.contralabs.inmap.fragments.ProblemasDialogFragment;
+import com.contralabs.inmap.fragments.ProximityCheckDialogFragment;
 import com.contralabs.inmap.fragments.RateDialogFragment;
 import com.contralabs.inmap.fragments.SplashDialogFragment;
 import com.contralabs.inmap.fragments.StoreCategoryListFragment;
@@ -53,6 +54,7 @@ import com.contralabs.inmap.interfaces.StoreOnMapController;
 import com.contralabs.inmap.model.DbAdapter;
 import com.contralabs.inmap.model.Store;
 import com.contralabs.inmap.model.StoreParameters;
+import com.contralabs.inmap.notifications.NotificationHelper;
 import com.contralabs.inmap.views.AnimateFrameLayout;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.slidingmenu.lib.SlidingMenu;
@@ -62,6 +64,9 @@ import com.slidingmenu.lib.SlidingMode;
 public class MainActivity extends SlidingActionBarActivity implements OnInfrastructureCategoryChangedListener, OnStoreCategoryChangedListener, OnStoreSelectedListener, OnLevelSelectedListener, StoreListController, OnStoreBallonClickListener {
 
 	protected static final String SHOW_STORE_INMAP = "show_store_inmap";
+
+
+	public static final String SHOW_SEARCH = "com.contralabs.inmap.SHOW_SEARCH";
 
 
 	private ApplicationDataFacade mApplicationDataFacade;
@@ -93,14 +98,14 @@ public class MainActivity extends SlidingActionBarActivity implements OnInfrastr
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+
 		setTitle("");
 
 		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 			getActionBar().setHomeButtonEnabled(true);
-		
+
 		mDbAdapter = DbAdapter.getInstance(getApplicationContext());
-		
+
 		configureSlidingMenu();
 
 		configureFragments();
@@ -108,17 +113,24 @@ public class MainActivity extends SlidingActionBarActivity implements OnInfrastr
 		configureAllLayout();
 
 		loadInformationFromApplicationDataFacade();
-		
+
 		retrieveSavedState(savedInstanceState);
-		
+
 		Intent intent = getIntent();
 
 		boolean intentShowOnMap = verifyIntentShowStoreOnMap(intent);
 		boolean intentSearch = verifyIntentSearch(intent);
-		
+
 		if(!intentSearch && !intentShowOnMap && savedInstanceState == null)
 			showSplash();
-		
+
+		boolean showIfAppropriate = ProximityCheckDialogFragment.showIfAppropriate(intent, getSupportFragmentManager());
+		/*if(!showIfAppropriate) {
+			Bundle extras = new Bundle(1);
+			extras.putBoolean(ProximityCheckDialogFragment.SHOW, true);
+			new NotificationHelper(this).showNotification(1, String.format(getString(R.string.msg_enter_area), mApplicationDataFacade.getPlaceName()), getString(R.string.msg_notification_open), extras, true, true);
+
+		}*/
 	}
 
 	@Override
@@ -126,7 +138,7 @@ public class MainActivity extends SlidingActionBarActivity implements OnInfrastr
 		super.onStart();
 		EasyTracker.getInstance().activityStart(this);
 	}
-	
+
 	@Override
 	protected void onStop() {
 		super.onStop();
@@ -160,11 +172,11 @@ public class MainActivity extends SlidingActionBarActivity implements OnInfrastr
 		case R.id.menu_levels:
 			toggleLevelPicker();
 			break;
-			
+
 		case R.id.menu_problemas:
 			new ProblemasDialogFragment().show(getSupportFragmentManager(), "ProblemasDialogFragment");
 			break;
-			
+
 		case R.id.menu_sobre:
 			new InfoDialogFragment().show(getSupportFragmentManager(), "InfoDialogFragment");
 			break;
@@ -245,13 +257,13 @@ public class MainActivity extends SlidingActionBarActivity implements OnInfrastr
 		for(OnLevelSelectedListener listener : mLevelSelectedListeners)
 			listener.onLevelSelected(level);
 	}
-	
+
 	@Override
 	public boolean onSearchRequested() {
 		EasyTracker.getTracker().sendView(getString(R.string.view_search));
 		return super.onSearchRequested();
 	}
-	
+
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
@@ -264,7 +276,7 @@ public class MainActivity extends SlidingActionBarActivity implements OnInfrastr
 				showStoreList();
 		}
 	}
-	
+
 	private void configureSlidingMenu() {
 		mSlidingMenu = getSlidingMenu();//new SlidingMenu(this);
 		mSlidingMenu.setMode(SlidingMode.LEFT_RIGHT);
@@ -280,9 +292,9 @@ public class MainActivity extends SlidingActionBarActivity implements OnInfrastr
 		mSlidingMenu.setMenu(R.layout.layout_levelpicker, SlidingMode.RIGHT);
 		mSlidingMenu.setOnOpenedListener(onOpenedListener);
 	}
-	
+
 	private OnOpenedListener onOpenedListener = new OnOpenedListener() {
-		
+
 		@Override
 		public void onOpened() {
 			EasyTracker.getTracker().sendView(getString(isLeftMenuShowing() ? isShowingStoreList ? R.string.view_storelist : R.string.view_storecategories : isRightMenuShowing() ? R.string.view_levelpicker : R.string.view_error));
@@ -312,7 +324,7 @@ public class MainActivity extends SlidingActionBarActivity implements OnInfrastr
 		mClearMarkersButton = findViewById(R.id.btn_clear_markers);
 	}
 
-	
+
 
 	private void configureLayoutCategoryList() {
 		mLayoutCategoryList = (AnimateFrameLayout) findViewById(R.id.layout_categorylist);
@@ -394,7 +406,7 @@ public class MainActivity extends SlidingActionBarActivity implements OnInfrastr
 		storesHasMarkers = store != null;
 		updateClearMarkersVisibility();
 	}
-	
+
 	@Override
 	protected void onNewIntent(Intent intent) {
 		super.onNewIntent(intent);
@@ -415,21 +427,24 @@ public class MainActivity extends SlidingActionBarActivity implements OnInfrastr
 				showStoreList();
 			return true;
 		}else if (Intent.ACTION_VIEW.equals(intent.getAction())) {
-		    // Handle a suggestions click (because the suggestions all use ACTION_VIEW)
-		    long id = Long.parseLong(intent.getDataString());
-		    mDbAdapter.open();
-		    Store store;
-		    try {
-		    	store = mDbAdapter.getStore(id);
-		    }finally {
-		    	mDbAdapter.close();
-		    }
-		    onStoreSelected(store);
-		    return true;
+			// Handle a suggestions click (because the suggestions all use ACTION_VIEW)
+			long id = Long.parseLong(intent.getDataString());
+			mDbAdapter.open();
+			Store store;
+			try {
+				store = mDbAdapter.getStore(id);
+			}finally {
+				mDbAdapter.close();
+			}
+			onStoreSelected(store);
+			return true;
+		}else if(intent.getBooleanExtra(SHOW_SEARCH, false)) {
+			onSearchClicked();
+			return true;
 		}
 		return false;
 	}
-	
+
 	public void onClearMarkersButtonClick(View v) {
 		mStoreOnMapController.clearMarkers();
 		storesHasMarkers = false;
@@ -444,11 +459,11 @@ public class MainActivity extends SlidingActionBarActivity implements OnInfrastr
 	public void updateClearMarkersVisibility(int visible) {
 		mClearMarkersButton.setVisibility(visible);
 	}
-	
+
 	private void showSplash() {
 		SplashDialogFragment splashDialogFragment = new SplashDialogFragment();
 		splashDialogFragment.setOnAnimationEnd(new OnAnimationEnd() {
-			
+
 			@Override
 			public void onAnimationEnded() {
 				mInMapViewController.moveMapViewToPlacePosition(false);
@@ -458,7 +473,7 @@ public class MainActivity extends SlidingActionBarActivity implements OnInfrastr
 		splashDialogFragment.show(getSupportFragmentManager(), "SplashDialogFragment");
 		mShowingSplash = true;
 	}
-	
+
 	public boolean isShowingSplash() {
 		return mShowingSplash;
 	}
