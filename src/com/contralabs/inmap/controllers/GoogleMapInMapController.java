@@ -159,12 +159,19 @@ public class GoogleMapInMapController implements InMapViewController, MapItemsLi
 
 	private void moveMapViewToInitialPosition() {
 		mMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder()
-		.target(new LatLng(mApplicationDataFacade.getInitialLatitude(), mApplicationDataFacade.getInitialLongitude()))
-		.zoom(mApplicationDataFacade.getInitialMapZoom())
+		.target(new LatLng(mApplicationDataFacade.getLatitude(), mApplicationDataFacade.getLongitude()))
+		.zoom(mApplicationDataFacade.getMapZoom())
+		.bearing(mApplicationDataFacade.getMapRotation())
 		.build()));
 	}
 
-	public void moveMapViewToPlacePosition(boolean instant) {
+	public void moveMapViewToPlacePosition(boolean instant, boolean fromInitial) {
+		if(fromInitial) {
+			mMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder()
+			.target(new LatLng(mApplicationDataFacade.getInitialLatitude(), mApplicationDataFacade.getInitialLongitude()))
+			.zoom(mApplicationDataFacade.getInitialMapZoom())
+			.build()));
+		}
 		mMap.animateCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder()
 		.target(new LatLng(mApplicationDataFacade.getLatitude(), mApplicationDataFacade.getLongitude()))
 		.zoom(mApplicationDataFacade.getMapZoom())

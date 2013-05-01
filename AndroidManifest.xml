@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.contralabs.inmap"
-    android:versionCode="4"
-    android:versionName="1.2.1 Beta" >
+    android:versionCode="5"
+    android:versionName="1.3 Beta" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -57,19 +57,22 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.contralabs.inmap.activities.MainActivity" />
         </activity>
+        <activity
+            android:name="com.contralabs.inmap.activities.SettingsActivity"
+            android:label="@string/settings" />
 
         <service android:name="com.contralabs.inmap.server.UpdateDataService" />
         
         <service android:name="com.contralabs.inmap.location.ProximityService" />
 
-        <receiver
+        <!-- <receiver
             android:name="com.contralabs.inmap.location.ProximityReceiver"
             android:enabled="true"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.contralabs.inmap.location.PROXIMITY_EVENT" />
             </intent-filter>
-        </receiver>
+        </receiver> -->
         
         <provider
             android:name="com.contralabs.inmap.model.StoreContentProvider"

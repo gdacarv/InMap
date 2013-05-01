@@ -85,5 +85,27 @@
     <string name="pesquisar_lojas">Pesquisar</string>
     <string name="programa_o_do_cinema">Filmes</string>
     <string name="msg_notification_open">Toque para ver o mapa, lojas, informações e muito mais...</string>
+    <string name="msg_no_internet_maps">Sem conexão com internet. O mapa pode não ser apresentado corretamente.</string>
+    <string name="settings">Configurações</string>
+    <string name="geral">Geral</string>
+    <string name="notificacoes">Notificações</string>
+    <string name="pref_key_notif_proximity">pref_key_notif_proximity</string>
+    <string name="pref_title_notif_proximity">Notificar ao entrar na área</string>
+    <string name="pred_summary_notif_proximity">Exibir notificação quando entrar no Shopping</string>
+    <string name="mapa">Mapa</string>
+
+    <string name="pref_key_maps_type">pref_key_maps_type</string>
+    <string-array name="pref_entries_maps_type">
+        <item>Mapa</item>
+        <item>Satélite</item>
+        <item>Híbrido</item>
+    </string-array>
+    <string-array name="pref_values_maps_type">
+        <item>Map</item>
+        <item>Satellite</item>
+        <item>Hibrid</item>
+    </string-array>
+    <string name="pref_title_maps_type">Tipo de mapa de fundo</string>
+    <string name="legal_notices">Avisos Legais</string>
 
 </resources>

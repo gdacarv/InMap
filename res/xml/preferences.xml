@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="@string/notificacoes" >
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_key_notif_proximity"
+            android:summary="@string/pred_summary_notif_proximity"
+            android:title="@string/pref_title_notif_proximity" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/mapa" >
+        <ListPreference 
+            android:entries="@array/pref_entries_maps_type"
+            android:entryValues="@array/pref_values_maps_type"
+            android:key="@string/pref_key_maps_type"
+            android:title="@string/pref_title_maps_type"/>
+    </PreferenceCategory>
+
+</PreferenceScreen>

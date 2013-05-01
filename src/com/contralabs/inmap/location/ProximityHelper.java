@@ -26,7 +26,7 @@ public class ProximityHelper {
 	public void setupProximityAlert() {
 		//Intent intent = new Intent(PROXIMITY_ACTION);
 		Intent intent = new Intent(mContext, ProximityService.class);
-		intent.putExtra(ProximityReceiver.PLACE_NAME, mApplicationDataFacade.getPlaceName());
+		intent.putExtra(ProximityService.PLACE_NAME, mApplicationDataFacade.getPlaceName());
 		//PendingIntent pendingIntent = PendingIntent.getBroadcast(mContext, REQUEST_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 		PendingIntent pendingIntent = PendingIntent.getService(mContext, REQUEST_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 		LocationManager locationManager = (LocationManager) mContext.getSystemService(Context.LOCATION_SERVICE);

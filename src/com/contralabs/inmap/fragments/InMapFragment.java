@@ -6,10 +6,12 @@ import java.util.Map;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -20,6 +22,7 @@ import android.widget.Toast;
 
 import com.contralabs.inmap.R;
 import com.contralabs.inmap.activities.MainActivity;
+import com.contralabs.inmap.activities.SettingsActivity;
 import com.contralabs.inmap.controllers.PreSettedMapLatLngConverter;
 import com.contralabs.inmap.interfaces.ApplicationDataFacade;
 import com.contralabs.inmap.interfaces.InMapViewController;
@@ -66,13 +69,13 @@ public class InMapFragment extends FixedSupportMapFragment implements InMapViewC
 		mApplicationDataFacade = applicationDataFacade;
 		mLevelInformation = mApplicationDataFacade.getLevelInformation();
 	}
-	
+
 	@Override
 	public void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		setRetainInstance(true);
 	}
-	
+
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -82,17 +85,18 @@ public class InMapFragment extends FixedSupportMapFragment implements InMapViewC
 			if(mMap != null) {
 				initialize();
 				if(!(mContext instanceof MainActivity) || !((MainActivity)mContext).isShowingSplash())
-					moveMapViewToPlacePosition(false);
+					moveMapViewToPlacePosition(false, true);
 			}
 			else {
 				Toast.makeText(mContext, R.string.msg_nomaps, Toast.LENGTH_LONG).show();
 			}
 		}
+		configureMapType();
 	}
 
 	private void initialize() {
 		moveMapViewToInitialPosition();
-		//mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+		configureMapType();
 		mMap.setOnInfoWindowClickListener(onInfoWindowClickListener);
 		mMap.setMyLocationEnabled(true);
 
@@ -102,14 +106,22 @@ public class InMapFragment extends FixedSupportMapFragment implements InMapViewC
 
 		mMap.setOnMapClickListener(onMapClickListener);
 	}
-	
+
+	private void configureMapType() {
+		if(mMap != null) {
+			String mapTypes[] = getResources().getStringArray(R.array.pref_values_maps_type);
+			String mapType = PreferenceManager.getDefaultSharedPreferences(mContext).getString(getString(R.string.pref_key_maps_type), mapTypes[0]);
+			mMap.setMapType(mapType.equals(mapTypes[0]) ? GoogleMap.MAP_TYPE_NORMAL : mapType.equals(mapTypes[1]) ? GoogleMap.MAP_TYPE_SATELLITE : GoogleMap.MAP_TYPE_HYBRID);
+		}
+	}
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		fixZoomButtons(view);
 		return view;
 	}
-	
+
 	private void configureMarkerLatLng() {
 		mMarkerLatLng1 = mMap.addMarker(new MarkerOptions().draggable(true).position(new LatLng(mLevelInformation.getLevelLatitude(0), mLevelInformation.getLevelLongitude(0))).title("Click to see position"));
 		mMarkerLatLng2 = mMap.addMarker(new MarkerOptions().draggable(true).position(new LatLng(mLevelInformation.getLevelLatitude(0), mLevelInformation.getLevelLongitude(0))).title("Click to see position"));
@@ -205,14 +217,21 @@ public class InMapFragment extends FixedSupportMapFragment implements InMapViewC
 		if(mMap == null)
 			return;
 		mMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder()
-		.target(new LatLng(mApplicationDataFacade.getInitialLatitude(), mApplicationDataFacade.getInitialLongitude()))
-		.zoom(mApplicationDataFacade.getInitialMapZoom())
+		.target(new LatLng(mApplicationDataFacade.getLatitude(), mApplicationDataFacade.getLongitude()))
+		.zoom(mApplicationDataFacade.getMapZoom())
+		.bearing(mApplicationDataFacade.getMapRotation())
 		.build()));
 	}
 
-	public void moveMapViewToPlacePosition(boolean instant) {
+	public void moveMapViewToPlacePosition(boolean instant, boolean fromInitial) {
 		if(mMap == null)
 			return;
+		if(fromInitial) {
+			mMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder()
+			.target(new LatLng(mApplicationDataFacade.getInitialLatitude(), mApplicationDataFacade.getInitialLongitude()))
+			.zoom(mApplicationDataFacade.getInitialMapZoom())
+			.build()));
+		}
 		mMap.animateCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder()
 		.target(new LatLng(mApplicationDataFacade.getLatitude(), mApplicationDataFacade.getLongitude()))
 		.zoom(mApplicationDataFacade.getMapZoom())

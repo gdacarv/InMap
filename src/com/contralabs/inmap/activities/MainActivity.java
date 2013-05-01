@@ -27,6 +27,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AnimationUtils;
+import android.widget.SeekBar;
+import android.widget.Toast;
+
 import com.contralabs.inmap.InMapApplication;
 import com.contralabs.inmap.R;
 import com.contralabs.inmap.actionbar.ActionBarActivity;
@@ -34,6 +37,7 @@ import com.contralabs.inmap.fragments.InMapFragment;
 import com.contralabs.inmap.fragments.InfoDialogFragment;
 import com.contralabs.inmap.fragments.InfrastructureBarFragment;
 import com.contralabs.inmap.fragments.InfrastructureBarFragment.OnInfrastructureCategoryChangedListener;
+import com.contralabs.inmap.fragments.LegalNoticesDialogFragment;
 import com.contralabs.inmap.fragments.LevelPickerFragment;
 import com.contralabs.inmap.fragments.LevelPickerFragment.OnLevelSelectedListener;
 import com.contralabs.inmap.fragments.ProblemasDialogFragment;
@@ -55,6 +59,7 @@ import com.contralabs.inmap.model.DbAdapter;
 import com.contralabs.inmap.model.Store;
 import com.contralabs.inmap.model.StoreParameters;
 import com.contralabs.inmap.notifications.NotificationHelper;
+import com.contralabs.inmap.server.Utils;
 import com.contralabs.inmap.views.AnimateFrameLayout;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.slidingmenu.lib.SlidingMenu;
@@ -79,6 +84,7 @@ public class MainActivity extends SlidingActionBarActivity implements OnInfrastr
 	private LevelPickerFragment mLevelPickerFragment;
 	private boolean isShowingStoreList = false;
 	private InMapViewController mInMapViewController;
+	private InMapFragment mInMapFragment;
 	private OnLevelSelectedListener[] mLevelSelectedListeners;
 	private OnInfrastructureCategoryChangedListener[] mInfrastructureCategoryChangedListeners;
 	private StoreOnMapController mStoreOnMapController;
@@ -124,13 +130,8 @@ public class MainActivity extends SlidingActionBarActivity implements OnInfrastr
 		if(!intentSearch && !intentShowOnMap && savedInstanceState == null)
 			showSplash();
 
-		boolean showIfAppropriate = ProximityCheckDialogFragment.showIfAppropriate(intent, getSupportFragmentManager());
-		/*if(!showIfAppropriate) {
-			Bundle extras = new Bundle(1);
-			extras.putBoolean(ProximityCheckDialogFragment.SHOW, true);
-			new NotificationHelper(this).showNotification(1, String.format(getString(R.string.msg_enter_area), mApplicationDataFacade.getPlaceName()), getString(R.string.msg_notification_open), extras, true, true);
-
-		}*/
+		ProximityCheckDialogFragment.showIfAppropriate(intent, getSupportFragmentManager());
+		
 	}
 
 	@Override
@@ -156,7 +157,7 @@ public class MainActivity extends SlidingActionBarActivity implements OnInfrastr
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
-			mInMapViewController.moveMapViewToPlacePosition(false);
+			mInMapViewController.moveMapViewToPlacePosition(false, false);
 			break;
 
 		case R.id.menu_categories:
@@ -179,6 +180,14 @@ public class MainActivity extends SlidingActionBarActivity implements OnInfrastr
 
 		case R.id.menu_sobre:
 			new InfoDialogFragment().show(getSupportFragmentManager(), "InfoDialogFragment");
+			break;
+
+		case R.id.menu_settings:
+			startActivity(new Intent(this, SettingsActivity.class));
+			break;
+
+		case R.id.menu_legal_notices:
+			new LegalNoticesDialogFragment().show(getSupportFragmentManager(), "LegalNoticesDialogFragment");
 			break;
 		}
 		return super.onOptionsItemSelected(item);
@@ -353,9 +362,9 @@ public class MainActivity extends SlidingActionBarActivity implements OnInfrastr
 		mLevelSelectedListeners = mApplicationDataFacade.getOnLevelSelectedListeners();
 		mInfrastructureCategoryChangedListeners = mApplicationDataFacade.getOnInfrastructureCategoryChangedListeners();
 		mStoreOnMapController = mApplicationDataFacade.getStoreOnMapController();
-		InMapFragment inMapFragment = (InMapFragment) getSupportFragmentManager().findFragmentById(R.id.google_map);
-		inMapFragment.setApplicationDataFacade(mApplicationDataFacade);
-		mInMapViewController = inMapFragment;
+		mInMapFragment = (InMapFragment) getSupportFragmentManager().findFragmentById(R.id.google_map);
+		mInMapFragment.setApplicationDataFacade(mApplicationDataFacade);
+		mInMapViewController = mInMapFragment;
 		mInMapViewController.setOnStoreBallonClickListener(this);
 		mInMapViewController.setMapController(mApplicationDataFacade.getMapController());
 	}
@@ -466,8 +475,10 @@ public class MainActivity extends SlidingActionBarActivity implements OnInfrastr
 
 			@Override
 			public void onAnimationEnded() {
-				mInMapViewController.moveMapViewToPlacePosition(false);
+				mInMapViewController.moveMapViewToPlacePosition(false, true);
 				mShowingSplash = false;
+				if(!Utils.isOnline(MainActivity.this))
+					Toast.makeText(MainActivity.this, R.string.msg_no_internet_maps, Toast.LENGTH_LONG).show();
 			}
 		});
 		splashDialogFragment.show(getSupportFragmentManager(), "SplashDialogFragment");

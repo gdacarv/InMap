@@ -10,7 +10,9 @@ public enum InfrastructureCategory {
 	TOILET(5, R.drawable.ic_infra_banheiro, R.drawable.pin_infra_banheiro), 
 	ESCALATOR(6, R.drawable.ic_infra_escada_rolante, R.drawable.pin_infra_escada_rolante), 
 	PHONES(7, R.drawable.ic_infra_telefone, R.drawable.pin_infra_telefone), 
-	BABY_FACILITIES(8, R.drawable.ic_infra_fraldario, R.drawable.pin_infra_fraldario);
+	BABY_FACILITIES(8, R.drawable.ic_infra_fraldario, R.drawable.pin_infra_fraldario),
+	TAXI(9, R.drawable.ic_infra_fraldario, R.drawable.pin_infra_fraldario), // TODO Change icons
+	INFO(10, R.drawable.ic_infra_fraldario, R.drawable.pin_infra_fraldario);
 	
 	private int id, menuIconRes, mapIconRes;
 

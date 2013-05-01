@@ -14,6 +14,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 
 import com.contralabs.inmap.R;
+import com.contralabs.inmap.server.Utils;
 
 public class RateDialogFragment extends DialogFragment {
 
@@ -66,7 +67,7 @@ public class RateDialogFragment extends DialogFragment {
 	}
 
 	public static boolean showIfAppropriate(Context context, FragmentManager manager) {
-		if(!PreferenceManager.getDefaultSharedPreferences(context).getBoolean(RATED_KEY, false)) {
+		if(Utils.isOnline(context) && !PreferenceManager.getDefaultSharedPreferences(context).getBoolean(RATED_KEY, false)) {
 			new RateDialogFragment().show(manager, "RateDialogFragment");
 			return true;
 		}

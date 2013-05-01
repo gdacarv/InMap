@@ -17,6 +17,7 @@ public class ProximityReceiver extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		if(intent.hasExtra(LocationManager.KEY_PROXIMITY_ENTERING)) {
+			String placeName = intent.getStringExtra(PLACE_NAME);
 			if(intent.getBooleanExtra(LocationManager.KEY_PROXIMITY_ENTERING, false)) {
 				/*LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 				Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
@@ -24,10 +25,10 @@ public class ProximityReceiver extends BroadcastReceiver {
 				if(isValid()) {
 					Bundle extras = new Bundle(1);
 					extras.putBoolean(ProximityCheckDialogFragment.SHOW, true);
-					new NotificationHelper(context).showNotification(1, String.format(context.getString(R.string.msg_enter_area), intent.getStringExtra(PLACE_NAME)), context.getString(R.string.msg_notification_open), extras, true, true);
+					new NotificationHelper(context).showNotification(1, String.format(context.getString(R.string.msg_enter_area), placeName), context.getString(R.string.msg_notification_open), extras, true, true);
 				}
 			} else {
-				new NotificationHelper(context).showNotification(1, String.format(context.getString(R.string.msg_exit_area), intent.getStringExtra(PLACE_NAME)), "", null, true, true);
+				new NotificationHelper(context).showNotification(1, String.format(context.getString(R.string.msg_exit_area), placeName), "", null, true, true);
 			}
 		}
 	}

@@ -9,10 +9,19 @@
         android:title="@string/apontar_no_mapa"
         android:icon="@drawable/bt_pin_loja_mapa"
         android:showAsAction="always" />
+
+    <item android:id="@+id/menu_settings"
+        android:title="@string/settings"
+        android:icon="@android:drawable/ic_menu_manage"
+        android:showAsAction="never" />
     
     <item android:id="@+id/menu_sobre"
         android:title="@string/sobre"
         android:icon="@android:drawable/ic_menu_info_details"
+        android:showAsAction="never" />
+
+    <item android:id="@+id/menu_legal_notices"
+        android:title="@string/legal_notices"
         android:showAsAction="never" />
 
 </menu>

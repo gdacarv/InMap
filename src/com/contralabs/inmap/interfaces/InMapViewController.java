@@ -10,7 +10,7 @@ public interface InMapViewController {
 	
 	void openStoreBallon(StoreMapItem storeMapItem);
 
-	void moveMapViewToPlacePosition(boolean instant);
+	void moveMapViewToPlacePosition(boolean instant, boolean fromInitial);
 	
 	int getLevel();
 

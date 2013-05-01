@@ -35,6 +35,7 @@ public class ProximityCheckDialogFragment extends DialogFragment {
 	public static boolean showIfAppropriate(Intent intent, FragmentManager supportFragmentManager) {
 		if(intent.getBooleanExtra(SHOW, false)) {
 			new ProximityCheckDialogFragment().show(supportFragmentManager, "ProximityCheckDialogFragment");
+			intent.getExtras().remove(SHOW);
 			return true;
 		}
 		return false;

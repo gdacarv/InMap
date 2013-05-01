@@ -20,6 +20,7 @@ import com.contralabs.inmap.InMapApplication;
 import com.contralabs.inmap.actionbar.ActionBarActivity;
 import com.contralabs.inmap.fragments.ExtraFragment;
 import com.contralabs.inmap.fragments.InfoDialogFragment;
+import com.contralabs.inmap.fragments.LegalNoticesDialogFragment;
 import com.contralabs.inmap.fragments.ProblemasDialogFragment;
 import com.contralabs.inmap.fragments.ProximityCheckDialogFragment;
 import com.contralabs.inmap.fragments.ExtraFragment.OnReadyChangeListener;
@@ -208,6 +209,14 @@ public class StoreDetailsActivity extends ActionBarActivity {
 
 		case R.id.menu_sobre:
 			new InfoDialogFragment().show(getSupportFragmentManager(), "InfoDialogFragment");
+			break;
+
+		case R.id.menu_settings:
+			startActivity(new Intent(this, SettingsActivity.class));
+			break;
+
+		case R.id.menu_legal_notices:
+			new LegalNoticesDialogFragment().show(getSupportFragmentManager(), "LegalNoticesDialogFragment");
 			break;
 		}
 		return super.onOptionsItemSelected(item);
