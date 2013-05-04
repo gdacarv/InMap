@@ -23,12 +23,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.contralabs.inmap.InMapApplication;
+import com.contralabs.inmap.activities.StoreDetailsActivity;
 import com.contralabs.inmap.interfaces.ApplicationDataFacade;
 import com.contralabs.inmap.model.DbAdapter;
 import com.contralabs.inmap.model.Store;
 import com.contralabs.inmap.model.StoreParameters;
 import com.contralabs.inmap.salvadorshop.applicationdata.StoreCategory;
 import com.google.analytics.tracking.android.EasyTracker;
+import com.helpshift.Helpshift;
 import com.contralabs.inmap.R;
 
 public class StoreListFragment extends Fragment {
@@ -52,6 +54,8 @@ public class StoreListFragment extends Fragment {
 	private ApplicationDataFacade mApplicationDataFacade;
 
 	private Bundle mSavedIntanceState;
+
+	private Helpshift mHelpshift;
 
 	
 	@Override
@@ -131,7 +135,10 @@ public class StoreListFragment extends Fragment {
 			
 			@Override
 			public void onClick(View v) {
-				ProblemasDialogFragment.sendSearchQueryNotFound(mContext, mStoreListAdapter.getSearchQuery());
+				//ProblemasDialogFragment.sendSearchQueryNotFound(mContext, mStoreListAdapter.getSearchQuery());
+				if(mHelpshift == null) mHelpshift = new Helpshift(mContext);
+				mHelpshift.leaveBreadCrumb("Search query: " + mStoreListAdapter.getSearchQuery());
+				mHelpshift.showReportIssue(getActivity());
 			}
 		});
 	}

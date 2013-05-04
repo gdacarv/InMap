@@ -33,10 +33,10 @@ public class ProximityService extends IntentService {
 						new NotificationHelper(this).showNotification(1, String.format(getString(R.string.msg_enter_area), intent.getStringExtra(PLACE_NAME)), getString(R.string.msg_notification_open), extras, true, true);
 					}
 				}
-			} else {
+			} /*else {
 				if(showNotification)
 					new NotificationHelper(this).showNotification(1, String.format(getString(R.string.msg_exit_area), intent.getStringExtra(PLACE_NAME)), "", null, true, true);
-			}
+			}*/
 		}
 	}
 

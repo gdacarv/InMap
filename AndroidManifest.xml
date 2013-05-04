@@ -62,18 +62,19 @@
             android:label="@string/settings" />
 
         <service android:name="com.contralabs.inmap.server.UpdateDataService" />
-        
         <service android:name="com.contralabs.inmap.location.ProximityService" />
 
-        <!-- <receiver
+        <!--
+        <receiver
             android:name="com.contralabs.inmap.location.ProximityReceiver"
             android:enabled="true"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.contralabs.inmap.location.PROXIMITY_EVENT" />
             </intent-filter>
-        </receiver> -->
-        
+        </receiver>
+        -->
+
         <provider
             android:name="com.contralabs.inmap.model.StoreContentProvider"
             android:authorities="com.contralabs.inmap.model.StoreContentProvider" >
@@ -101,6 +102,45 @@
         <meta-data
             android:name="url_stores"
             android:value="https://dl.dropbox.com/s/qcswd293z8f4386/stores.xml?dl=1" />
+
+        <!-- HelpShift start -->
+        <activity
+            android:name="com.helpshift.HelpshiftActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/HSThemeLight" />
+        <activity
+            android:name="com.helpshift.HSAddIssue"
+            android:theme="@style/HSThemeLight" />
+        <activity
+            android:name="com.helpshift.HSAddProfile"
+            android:theme="@style/HSThemeLight" />
+        <activity
+            android:name="com.helpshift.HSMessages"
+            android:theme="@style/HSThemeLight" />
+        <activity
+            android:name="com.helpshift.HSQuestionsList"
+            android:theme="@style/HSThemeLight" />
+        <activity
+            android:name="com.helpshift.HSQuestion"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:theme="@style/HSThemeLight" />
+        <activity
+            android:name="com.helpshift.HSSection"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:theme="@style/HSThemeLight" />
+        <activity
+            android:name="com.helpshift.HSInbox"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:theme="@style/HSThemeLight" />
+        <activity
+            android:name="com.helpshift.HSFaqs"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:theme="@style/HSThemeLight" />
+        <!-- Helpshift end -->
     </application>
 
 </manifest>

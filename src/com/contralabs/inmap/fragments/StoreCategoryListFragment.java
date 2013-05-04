@@ -93,7 +93,8 @@ public class StoreCategoryListFragment extends Fragment {
 		
 		@Override
 		public void notifyDataSetChanged() {
-			Arrays.sort(mStoreCategorys, comparator );
+			if(getActivity() != null)
+				Arrays.sort(mStoreCategorys, comparator );
 			super.notifyDataSetChanged();
 		}
 

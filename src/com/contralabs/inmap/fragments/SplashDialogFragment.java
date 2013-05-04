@@ -1,5 +1,7 @@
 package com.contralabs.inmap.fragments;
 
+import android.app.Activity;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -26,7 +28,7 @@ public class SplashDialogFragment extends DialogFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setStyle(STYLE_NO_FRAME, R.style.TransparentDialogTheme);
-		setCancelable(false);
+		setCancelable(true);
 	}
 
 	@Override
@@ -71,5 +73,13 @@ public class SplashDialogFragment extends DialogFragment {
 	
 	public void setOnAnimationEnd(OnAnimationEnd listener) {
 		mOnAnimationEndListener = listener;
+	}
+	
+	@Override
+	public void onCancel(DialogInterface dialog) {
+		Activity activity = getActivity();
+		if(activity != null && !activity.isFinishing())
+			activity.finish();
+		super.onCancel(dialog);
 	}
 }

@@ -7,7 +7,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,12 +20,12 @@ import com.contralabs.inmap.actionbar.ActionBarActivity;
 import com.contralabs.inmap.fragments.ExtraFragment;
 import com.contralabs.inmap.fragments.InfoDialogFragment;
 import com.contralabs.inmap.fragments.LegalNoticesDialogFragment;
-import com.contralabs.inmap.fragments.ProblemasDialogFragment;
 import com.contralabs.inmap.fragments.ProximityCheckDialogFragment;
 import com.contralabs.inmap.fragments.ExtraFragment.OnReadyChangeListener;
 import com.contralabs.inmap.interfaces.ApplicationDataFacade;
 import com.contralabs.inmap.model.Store;
 import com.google.analytics.tracking.android.EasyTracker;
+import com.helpshift.Helpshift;
 import com.contralabs.inmap.R;
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 
@@ -40,6 +39,7 @@ public class StoreDetailsActivity extends ActionBarActivity {
 	private View mTabDescription, mTabExtra, mTabLine, mViewDescription;
 	private FrameLayout mLayoutExtra;
 	private boolean mShowingExtra = false;
+	private Helpshift mHelpshift;
 
 	@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 	@Override
@@ -242,11 +242,14 @@ public class StoreDetailsActivity extends ActionBarActivity {
 
 		@Override
 		public void onClick(View v) {
-			DialogFragment dialog = new ProblemasDialogFragment();
+			/*DialogFragment dialog = new ProblemasDialogFragment();
 			Bundle args = new Bundle();
 			args.putSerializable(ProblemasDialogFragment.STORE_KEY, mStore);
 			dialog.setArguments(args);
-			dialog.show(getSupportFragmentManager(), "ProblemasDialogFragment");
+			dialog.show(getSupportFragmentManager(), "ProblemasDialogFragment");*/
+			if(mHelpshift == null) mHelpshift = new Helpshift(StoreDetailsActivity.this);
+			mHelpshift.leaveBreadCrumb("StoreDetails Id " + mStore.getId() + " Name " + mStore.getName());
+			mHelpshift.showSupport(StoreDetailsActivity.this);
 		}
 	};
 

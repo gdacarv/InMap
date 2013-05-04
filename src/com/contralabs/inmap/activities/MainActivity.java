@@ -21,6 +21,7 @@ import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.SyncStateContract.Helpers;
 import android.support.v4.app.FragmentManager;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -40,7 +41,6 @@ import com.contralabs.inmap.fragments.InfrastructureBarFragment.OnInfrastructure
 import com.contralabs.inmap.fragments.LegalNoticesDialogFragment;
 import com.contralabs.inmap.fragments.LevelPickerFragment;
 import com.contralabs.inmap.fragments.LevelPickerFragment.OnLevelSelectedListener;
-import com.contralabs.inmap.fragments.ProblemasDialogFragment;
 import com.contralabs.inmap.fragments.ProximityCheckDialogFragment;
 import com.contralabs.inmap.fragments.RateDialogFragment;
 import com.contralabs.inmap.fragments.SplashDialogFragment;
@@ -62,6 +62,7 @@ import com.contralabs.inmap.notifications.NotificationHelper;
 import com.contralabs.inmap.server.Utils;
 import com.contralabs.inmap.views.AnimateFrameLayout;
 import com.google.analytics.tracking.android.EasyTracker;
+import com.helpshift.Helpshift;
 import com.slidingmenu.lib.SlidingMenu;
 import com.slidingmenu.lib.SlidingMenu.OnOpenedListener;
 import com.slidingmenu.lib.SlidingMode;
@@ -91,6 +92,7 @@ public class MainActivity extends SlidingActionBarActivity implements OnInfrastr
 	private DbAdapter mDbAdapter;
 	private View mClearMarkersButton;
 	private boolean mShowingSplash = false;
+	private Helpshift mHelpshift;
 
 	private SlidingMenu mSlidingMenu;
 
@@ -132,6 +134,13 @@ public class MainActivity extends SlidingActionBarActivity implements OnInfrastr
 
 		ProximityCheckDialogFragment.showIfAppropriate(intent, getSupportFragmentManager());
 		
+		configureHelpShift();
+		
+	}
+
+	private void configureHelpShift() {
+		mHelpshift = new Helpshift(this);
+		mHelpshift.install(this, "c29cdd5f753ae99da471940d7065b4a4", "contralabs.helpshift.com", "contralabs_platform_20130501143517257-eab3ee3ac6fa113");
 	}
 
 	@Override
@@ -175,7 +184,8 @@ public class MainActivity extends SlidingActionBarActivity implements OnInfrastr
 			break;
 
 		case R.id.menu_problemas:
-			new ProblemasDialogFragment().show(getSupportFragmentManager(), "ProblemasDialogFragment");
+			//new ProblemasDialogFragment().show(getSupportFragmentManager(), "ProblemasDialogFragment");
+			mHelpshift.showSupport(this);
 			break;
 
 		case R.id.menu_sobre:

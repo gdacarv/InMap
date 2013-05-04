@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 import com.contralabs.inmap.R;
 import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.google.android.gms.common.Scopes;
 
 public class LegalNoticesDialogFragment extends DialogFragment {
 

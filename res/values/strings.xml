@@ -107,5 +107,6 @@
     </string-array>
     <string name="pref_title_maps_type">Tipo de mapa de fundo</string>
     <string name="legal_notices">Avisos Legais</string>
+    <string name="ajuda">Ajuda</string>
 
 </resources>
