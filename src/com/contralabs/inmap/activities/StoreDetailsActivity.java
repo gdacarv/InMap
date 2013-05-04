@@ -1,22 +1,22 @@
 package com.contralabs.inmap.activities;
 
 import android.annotation.TargetApi;
-import android.app.ActionBar;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 import com.contralabs.inmap.InMapApplication;
-import com.contralabs.inmap.actionbar.ActionBarActivity;
 import com.contralabs.inmap.fragments.ExtraFragment;
 import com.contralabs.inmap.fragments.InfoDialogFragment;
 import com.contralabs.inmap.fragments.LegalNoticesDialogFragment;
@@ -29,7 +29,7 @@ import com.helpshift.Helpshift;
 import com.contralabs.inmap.R;
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 
-public class StoreDetailsActivity extends ActionBarActivity {
+public class StoreDetailsActivity extends SherlockFragmentActivity{
 
 	private static final String SHOWING_EXTRA = "showingExtra";
 	public static final String STORE = "store";
@@ -41,7 +41,6 @@ public class StoreDetailsActivity extends ActionBarActivity {
 	private boolean mShowingExtra = false;
 	private Helpshift mHelpshift;
 
-	@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -53,12 +52,10 @@ public class StoreDetailsActivity extends ActionBarActivity {
 		else
 			mStore = (Store) intent.getSerializableExtra(STORE);
 
-		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-			ActionBar actionBar = getActionBar();
-			actionBar.setHomeButtonEnabled(true);
-			actionBar.setDisplayHomeAsUpEnabled(true);
-			actionBar.setBackgroundDrawable(new ColorDrawable(mStore.getCategory().getMenuColor()));
-		}
+		ActionBar actionBar = getSupportActionBar();
+		actionBar.setHomeButtonEnabled(true);
+		actionBar.setDisplayHomeAsUpEnabled(true);
+		actionBar.setBackgroundDrawable(new ColorDrawable(mStore.getCategory().getMenuColor()));
 
 		mApplicationDataFacade = ((InMapApplication)getApplication()).getApplicationDataFacade();
 		setActionBarTitle("  " + mStore.getTitle());
@@ -179,7 +176,7 @@ public class StoreDetailsActivity extends ActionBarActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.activity_store_details, menu);
+		getSupportMenuInflater().inflate(R.menu.activity_store_details, menu);
 		return true;
 	}
 

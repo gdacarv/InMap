@@ -1,16 +1,15 @@
 package com.contralabs.inmap.activities;
 
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 
-import com.contralabs.inmap.actionbar.ActionBarActivity;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.slidingmenu.lib.SlidingMenu;
 import com.slidingmenu.lib.app.SlidingActivityBase;
 import com.slidingmenu.lib.app.SlidingActivityHelper;
 
-public class SlidingActionBarActivity extends ActionBarActivity implements SlidingActivityBase {
+public class SlidingActionBarActivity extends SherlockFragmentActivity implements SlidingActivityBase {
 
 	private SlidingActivityHelper mHelper;
 

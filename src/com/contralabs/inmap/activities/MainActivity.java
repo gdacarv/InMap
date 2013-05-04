@@ -21,19 +21,16 @@ import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.SyncStateContract.Helpers;
 import android.support.v4.app.FragmentManager;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AnimationUtils;
-import android.widget.SeekBar;
 import android.widget.Toast;
 
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 import com.contralabs.inmap.InMapApplication;
 import com.contralabs.inmap.R;
-import com.contralabs.inmap.actionbar.ActionBarActivity;
 import com.contralabs.inmap.fragments.InMapFragment;
 import com.contralabs.inmap.fragments.InfoDialogFragment;
 import com.contralabs.inmap.fragments.InfrastructureBarFragment;
@@ -58,7 +55,6 @@ import com.contralabs.inmap.interfaces.StoreOnMapController;
 import com.contralabs.inmap.model.DbAdapter;
 import com.contralabs.inmap.model.Store;
 import com.contralabs.inmap.model.StoreParameters;
-import com.contralabs.inmap.notifications.NotificationHelper;
 import com.contralabs.inmap.server.Utils;
 import com.contralabs.inmap.views.AnimateFrameLayout;
 import com.google.analytics.tracking.android.EasyTracker;
@@ -96,21 +92,16 @@ public class MainActivity extends SlidingActionBarActivity implements OnInfrastr
 
 	private SlidingMenu mSlidingMenu;
 
-
 	private boolean infraHasMarkers, storesHasMarkers;
 
 
-	private Bundle mSavedInstanceState;
-
-	@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
 		setTitle("");
 
-		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH)
-			getActionBar().setHomeButtonEnabled(true);
+		getSupportActionBar().setHomeButtonEnabled(true);
 
 		mDbAdapter = DbAdapter.getInstance(getApplicationContext());
 
@@ -157,7 +148,7 @@ public class MainActivity extends SlidingActionBarActivity implements OnInfrastr
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater menuInflater = getMenuInflater();
+		MenuInflater menuInflater = getSupportMenuInflater();
 		menuInflater.inflate(R.menu.main, menu);
 		return super.onCreateOptionsMenu(menu);
 	}

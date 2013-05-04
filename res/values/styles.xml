@@ -12,57 +12,23 @@
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
   limitations under the License.
-  -->
+-->
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="AppTheme" parent="android:style/Theme.Light">
-        <item name="android:windowTitleSize">@dimen/actionbar_compat_height</item>
-        <item name="android:windowTitleBackgroundStyle">@style/ActionBarCompat</item>
-        <item name="android:windowContentOverlay">@drawable/actionbar_shadow</item>
-
-        <!-- for programmatic instantiation -->
-        <item name="actionbarCompatTitleStyle">@style/ActionBarCompatTitle</item>
-        <item name="actionbarCompatItemStyle">@style/ActionBarCompatItem</item>
-        <item name="actionbarCompatItemHomeStyle">@style/ActionBarCompatHomeItem</item>
-        <item name="actionbarCompatProgressIndicatorStyle">@style/ActionBarCompatProgressIndicator</item>
+    <style name="AppTheme" parent="@style/Theme.Sherlock.Light.DarkActionBar">
+        <item name="actionBarStyle">@style/ActionBar.Solid.AppTheme</item>
     </style>
 
-    <style name="ActionBarCompat">
+    <style name="ActionBar.Solid.AppTheme" parent="@style/Widget.Sherlock.ActionBar.Solid">
+        <item name="background">@drawable/actionbar</item>
         <item name="android:background">@drawable/actionbar</item>
+        <item name="titleTextStyle">@style/ActionBar.TitleTextStyle.AppTheme</item>
     </style>
 
-    <style name="ActionBarCompatItemBase">
-        <!-- layout_width/height must be set in code -->
-        <item name="android:scaleType">center</item>
-        <item name="android:background">@drawable/actionbar_compat_item</item>
-    </style>
-
-    <style name="ActionBarCompatProgressIndicator" parent="android:style/Widget.ProgressBar.Large">
-        <item name="android:indeterminate">true</item>
-    </style>
-
-    <style name="ActionBarCompatTitleBase">
-        <item name="android:id">@id/actionbar_compat_title</item>
-        <!-- layout_width/height/weight must be set in code -->
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:textSize">18sp</item>
-        <item name="android:paddingLeft">6dp</item>
-        <item name="android:paddingRight">6dp</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:ellipsize">marquee</item>
+    <style name="ActionBar.TitleTextStyle.AppTheme" parent="TextAppearance.Sherlock.Widget.ActionBar.Title">
         <item name="android:textStyle">bold</item>
-    </style>
-
-    <style name="ActionBarCompatTitle" parent="style/ActionBarCompatTitleBase">
-        <item name="android:textColor">@color/actionbar_title_color</item>
-    </style>
-
-    <style name="ActionBarCompatItem" parent="style/ActionBarCompatItemBase">
-    </style>
-
-    <style name="ActionBarCompatHomeItem" parent="style/ActionBarCompatItemBase">
-        <item name="android:paddingLeft">3dp</item>
+        <item name="android:textColor">@android:color/white</item>
     </style>
 
     <style name="descriptionInfo" parent="android:Widget.Holo.Light.TextView">
@@ -71,10 +37,11 @@
         <item name="android:layout_marginLeft">10dp</item>
         <item name="android:textColor">@color/blue</item>
     </style>
-    
+
     <style name="TransparentDialogTheme" parent="android:Theme.Dialog">
-		<item name="android:windowBackground">@android:color/transparent</item>
-		<item name="android:windowNoTitle">true</item>
-		<item name="android:windowFullscreen">false</item>
-	</style>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">false</item>
+    </style>
+
 </resources>
