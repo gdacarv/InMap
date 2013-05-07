@@ -109,5 +109,6 @@
     <string name="pref_title_maps_type">Tipo de mapa de fundo</string>
     <string name="legal_notices">Avisos Legais</string>
     <string name="ajuda">Ajuda</string>
+    <string name="events_empty">Nenhum evento no momento.\n\nFique ligado! =]</string>
 
 </resources>

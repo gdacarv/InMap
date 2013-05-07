@@ -115,6 +115,9 @@ public class StoreDetailsActivity extends SherlockFragmentActivity{
 		mTabExtra = findViewById(R.id.tab_extra);
 		mTabLine = findViewById(R.id.view_tab_line);
 
+		String imageUrl = getImageUrl();
+		if(imageUrl != null)
+			UrlImageViewHelper.setUrlDrawable((ImageView) findViewById(R.id.img_details_logo), imageUrl, R.drawable.img_no_brands_descricao);
 
 		String extra = mStore.getExtra();
 		if(extra != null && extra.length() > 0) {
@@ -140,10 +143,6 @@ public class StoreDetailsActivity extends SherlockFragmentActivity{
 				if(savedInstanceState != null && savedInstanceState.getBoolean(SHOWING_EXTRA, false))
 					onTabClickListener.onClick(mTabExtra);
 			}
-
-			String imageUrl = getImageUrl();
-			if(imageUrl != null)
-				UrlImageViewHelper.setUrlDrawable((ImageView) findViewById(R.id.img_details_logo), imageUrl, R.drawable.img_no_brands_descricao);
 		}
 	}
 

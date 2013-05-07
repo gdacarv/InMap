@@ -84,6 +84,7 @@
             android:visibility="invisible" >
 
             <TextView
+                android:id="@+id/txt_list_store_empty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -96,7 +97,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/sugerir_loja" />
+                android:text="@string/sugerir_loja"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp" />
         </LinearLayout>
         
         <View 

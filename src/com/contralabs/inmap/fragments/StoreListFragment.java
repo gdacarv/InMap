@@ -23,7 +23,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.contralabs.inmap.InMapApplication;
-import com.contralabs.inmap.activities.StoreDetailsActivity;
+import com.contralabs.inmap.R;
 import com.contralabs.inmap.interfaces.ApplicationDataFacade;
 import com.contralabs.inmap.model.DbAdapter;
 import com.contralabs.inmap.model.Store;
@@ -31,7 +31,6 @@ import com.contralabs.inmap.model.StoreParameters;
 import com.contralabs.inmap.salvadorshop.applicationdata.StoreCategory;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.helpshift.Helpshift;
-import com.contralabs.inmap.R;
 
 public class StoreListFragment extends Fragment {
 
@@ -343,7 +342,7 @@ public class StoreListFragment extends Fragment {
 				mStores = result;
 				notifyDataSetChanged();
 				loadingView.setVisibility(View.GONE);
-				mViewNoItemList.setVisibility(result.length == 0 ? View.VISIBLE : View.INVISIBLE);
+				configureEmptyView(result.length == 0);
 				//mStoreList.setVisibility(View.VISIBLE);
 				if(mListState != null)
 					mStoreList.onRestoreInstanceState(mListState);
@@ -359,5 +358,15 @@ public class StoreListFragment extends Fragment {
 
 	public boolean isSearch() {
 		return mStoreListAdapter.isSearch();
+	}
+	private void configureEmptyView(boolean empty) {
+		mViewNoItemList.setVisibility(empty ? View.VISIBLE : View.INVISIBLE);
+		if(!mStoreListAdapter.isSearch() && mStoreListAdapter.getStoreCategory() == StoreCategory.EVENTS) {
+			((TextView) mViewNoItemList.findViewById(R.id.txt_list_store_empty)).setText(R.string.events_empty);
+			mViewNoItemList.findViewById(R.id.btn_sugira_loja).setVisibility(View.GONE);
+		}else {
+			((TextView) mViewNoItemList.findViewById(R.id.txt_list_store_empty)).setText(R.string.message_noitems_list_store);
+			mViewNoItemList.findViewById(R.id.btn_sugira_loja).setVisibility(View.VISIBLE);
+		}
 	}
 }
