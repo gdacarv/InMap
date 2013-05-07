@@ -28,9 +28,9 @@ public enum StoreCategory {
 	ACCESSORIES(23, R.string.title_accessories, R.drawable.pin_cat_bijouteria, R.drawable.img_cat_bijouteria, 0xff846427, R.drawable.pin_cat_bijouteria_all), 
 	HOME(24, R.string.title_home, R.drawable.pin_cat_utilidades_casa, R.drawable.img_cat_utilidades_casa, 0xff663333, R.drawable.pin_cat_utilidades_casa_all), 
 	EVENTS(25, R.string.title_events, R.drawable.pin_cat_eventos, R.drawable.img_cat_eventos, 0xffc64832, R.drawable.pin_cat_eventos_all);
-	
+
 	private int id, titleRes, mapIconRes, menuIconRes, menuColor, btAllIconRes;
-	
+
 	public static final int length = values().length; 
 
 	private StoreCategory(int id, int title_res, int mapIconRes, int menuIconRes, int menuColor, int btAllIconRes){
@@ -41,7 +41,7 @@ public enum StoreCategory {
 		this.menuColor = menuColor;
 		this.btAllIconRes = btAllIconRes;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -49,24 +49,29 @@ public enum StoreCategory {
 	public int getTitleRes() {
 		return titleRes;
 	}
-	
+
 	public int getMapIconResId() {
 		return mapIconRes;
 	}
-	
+
 	public int getMenuIconResId() {
 		return menuIconRes;
 	}
-	
+
 	public int getMenuColor() {
 		return menuColor;
 	}
 
 	public static StoreCategory getStoreCategoryById(int id) {
-		StoreCategory storeCategory = values()[id-1];
-		if(storeCategory.getId() != id)
-			throw new RuntimeException("getStoreCategoryById erro!");
-		return storeCategory;
+		try {
+			StoreCategory storeCategory = values()[id-1];
+			if(storeCategory.getId() != id)
+				throw new RuntimeException("getStoreCategoryById erro!");
+			return storeCategory;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return SERVICES;
+		}
 	}
 
 	public int getBtAllIconResId() {
