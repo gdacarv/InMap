@@ -23,9 +23,6 @@ public class ProximityService extends IntentService {
 		if(intent.hasExtra(LocationManager.KEY_PROXIMITY_ENTERING)) {
 			boolean showNotification = PreferenceManager.getDefaultSharedPreferences(this).getBoolean(getString(R.string.pref_key_notif_proximity), true);
 			if(intent.getBooleanExtra(LocationManager.KEY_PROXIMITY_ENTERING, false)) {
-				/*LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-				Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-				if(location.hasSpeed() && location.getSpeed() > 5f)*/
 				if(isValid()) {
 					if(showNotification) {
 						Bundle extras = new Bundle(1);
@@ -41,7 +38,10 @@ public class ProximityService extends IntentService {
 	}
 
 	private boolean isValid() {
-		// TODO Auto-generated method stub
+		/*LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+		Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+		if(location.hasSpeed() && location.getSpeed() > 5f)
+		 	return false;*/		
 		return true;
 	}
 

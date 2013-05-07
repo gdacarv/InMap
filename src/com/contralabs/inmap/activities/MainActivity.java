@@ -16,10 +16,8 @@
 
 package com.contralabs.inmap.activities;
 
-import android.annotation.TargetApi;
 import android.app.SearchManager;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.view.View;

@@ -26,7 +26,8 @@ public enum StoreCategory {
 	BEDBATHTABLE(21, R.string.title_bedbathtable, R.drawable.pin_cat_cama_mesa, R.drawable.img_cat_cama_mesa, 0xff8dcacb, R.drawable.pin_cat_cama_mesa_all), 
 	JEWELRY(22, R.string.title_jewelry, R.drawable.pin_cat_joalheria, R.drawable.img_cat_joalheria, 0xff910280, R.drawable.pin_cat_joalheria_all), 
 	ACCESSORIES(23, R.string.title_accessories, R.drawable.pin_cat_bijouteria, R.drawable.img_cat_bijouteria, 0xff846427, R.drawable.pin_cat_bijouteria_all), 
-	HOME(24, R.string.title_home, R.drawable.pin_cat_utilidades_casa, R.drawable.img_cat_utilidades_casa, 0xff663333, R.drawable.pin_cat_utilidades_casa_all);
+	HOME(24, R.string.title_home, R.drawable.pin_cat_utilidades_casa, R.drawable.img_cat_utilidades_casa, 0xff663333, R.drawable.pin_cat_utilidades_casa_all), 
+	EVENTS(25, R.string.title_events, R.drawable.pin_cat_eventos, R.drawable.img_cat_alimentos, 0xffc64832, R.drawable.pin_cat_eventos_all); // TODO Change img_cat
 	
 	private int id, titleRes, mapIconRes, menuIconRes, menuColor, btAllIconRes;
 	

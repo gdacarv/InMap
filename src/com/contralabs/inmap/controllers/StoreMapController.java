@@ -58,9 +58,6 @@ public class StoreMapController implements MapController, StoreOnMapController, 
 	}
 
 	private MapItem[] convertStoresInMapItems(Store[] stores) {
-		/*Resources res = mContext.getResources(); XXX Maybe useless, delete
-		for(Store store : stores)
-			store.getCategory().loadMapIconBitmap(res);*/
 		return stores;
 	}
 

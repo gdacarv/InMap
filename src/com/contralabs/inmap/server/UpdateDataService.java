@@ -1,8 +1,6 @@
 package com.contralabs.inmap.server;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -31,7 +29,9 @@ import android.widget.Toast;
 import com.contralabs.inmap.model.DbAdapter;
 import com.contralabs.inmap.R;
 
-public class UpdateDataService extends Service { // TODO Check internet, if offline, create a broadcast receiver
+public class UpdateDataService extends Service { 
+	private static final String INFRA_LAST_UPDATE_MANUAL = "2013/05/06 10:38:00";
+	private static final String STORE_LAST_UPDATE_MANUAL = "2013/05/06 10:38:00";
 
 	private static final String DATE_FORMAT = "yyyy/MM/dd hh:mm:ss";
 	private static final String INFRA_LAST_UPDATE_KEY = "infra_last_update_key";
@@ -46,14 +46,18 @@ public class UpdateDataService extends Service { // TODO Check internet, if offl
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		mAsyncTask = new UpdateDataAsyncTask();
-		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
-			mAsyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-		else
+		if(Utils.isOnline(this)) {// TODO Check internet, if offline, create a broadcast receiver
+			mAsyncTask = new UpdateDataAsyncTask();
+			if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+				mAsyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			else
 
-			mAsyncTask.execute();
-		Toast.makeText(UpdateDataService.this, R.string.atualizando_, Toast.LENGTH_SHORT).show();
-		return START_STICKY;
+				mAsyncTask.execute();
+			Toast.makeText(UpdateDataService.this, R.string.atualizando_, Toast.LENGTH_SHORT).show();
+			return START_STICKY;
+		}
+		stopSelf();
+		return START_NOT_STICKY;
 	}
 
 	@Override
@@ -74,7 +78,7 @@ public class UpdateDataService extends Service { // TODO Check internet, if offl
 		protected Void doInBackground(Void... params) {
 			mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(UpdateDataService.this);
 			mDateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.US);
-		    try {
+			try {
 				mManifestMetaData = getPackageManager().getApplicationInfo(getPackageName(), PackageManager.GET_META_DATA).metaData;
 			} catch (NameNotFoundException e) {
 				e.printStackTrace();
@@ -101,7 +105,7 @@ public class UpdateDataService extends Service { // TODO Check internet, if offl
 
 		private void updateInfraFromServer() throws IOException {
 			Utils.loadURL(mManifestMetaData.getString("url_infra"), new XMLInputStreamHandler() {
-				
+
 				@Override
 				protected void handleXml(XmlPullParser xpp) {
 					if(xpp != null) {
@@ -127,7 +131,7 @@ public class UpdateDataService extends Service { // TODO Check internet, if offl
 
 		private void updateStoresFromServer() throws IOException {
 			Utils.loadURL(mManifestMetaData.getString("url_stores"), new XMLInputStreamHandler() {
-				
+
 				@Override
 				protected void handleXml(XmlPullParser xpp) {
 					if(xpp != null) {
@@ -154,7 +158,7 @@ public class UpdateDataService extends Service { // TODO Check internet, if offl
 		private void loadInfoObjectIfNeeded() throws IOException {
 			if(mInfoObject == null)
 				Utils.loadURL(mManifestMetaData.getString("url_info"), new StringInputStreamHandler() {
-					
+
 					@Override
 					protected void handleString(String string) {
 						try {
@@ -196,7 +200,7 @@ public class UpdateDataService extends Service { // TODO Check internet, if offl
 
 		private Date getInfraLastUpdateLocal() {
 			try {
-				return mDateFormat.parse(mSharedPreferences.getString(INFRA_LAST_UPDATE_KEY, "2000/01/01 00:00:00")); // TODO Change default date to actual last update
+				return mDateFormat.parse(mSharedPreferences.getString(INFRA_LAST_UPDATE_KEY, INFRA_LAST_UPDATE_MANUAL)); 
 			} catch (ParseException e) {
 				throw new RuntimeException(e);
 			}
@@ -208,7 +212,7 @@ public class UpdateDataService extends Service { // TODO Check internet, if offl
 
 		private Date getStoresLastUpdateLocal() {
 			try {
-				return mDateFormat.parse(mSharedPreferences.getString(STORES_LAST_UPDATE_KEY, "2000/01/01 00:00:00")); // TODO Change default date to actual last update
+				return mDateFormat.parse(mSharedPreferences.getString(STORES_LAST_UPDATE_KEY, STORE_LAST_UPDATE_MANUAL));
 			} catch (ParseException e) {
 				throw new RuntimeException(e);
 			}

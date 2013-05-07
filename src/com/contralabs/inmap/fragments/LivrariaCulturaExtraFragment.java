@@ -32,7 +32,7 @@ public class LivrariaCulturaExtraFragment extends ExtraFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		setReady(true); // TODO Call setReady(true) when content was loaded
+		setReady(true);
 		return new EventosCulturaView(getActivity()); 
 	}
 }
