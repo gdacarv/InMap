@@ -144,7 +144,7 @@ public class InMapFragment extends FixedSupportMapFragment implements InMapViewC
 
 	@Override
 	public void setLevel(int level) {
-		if(level != mCurrentLevel) {
+		if(level != mCurrentLevel && mMap != null) {
 			mCurrentLevel = level;
 			mLevelGroundOverlay.remove();
 			mLevelGroundOverlay = addLevelGroundOverlay(level);
