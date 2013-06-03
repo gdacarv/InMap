@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.content.res.Resources;
 
-import com.contralabs.inmap.fragments.LevelPickerFragment.OnLevelSelectedListener;
 import com.contralabs.inmap.interfaces.MapController;
 import com.contralabs.inmap.interfaces.MapItem;
 import com.contralabs.inmap.interfaces.MapItemsListener;
+import com.contralabs.inmap.interfaces.OnLevelSelectedListener;
 import com.contralabs.inmap.interfaces.StoreOnMapController;
 import com.contralabs.inmap.model.Store;
 

@@ -52,7 +52,9 @@
         <ListView
             android:id="@+id/list_store"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent" />
+            android:layout_height="fill_parent"
+            android:dividerHeight="2dp"
+            android:divider="#3c3c3c" />
 
         <RelativeLayout
             android:id="@+id/loading_stores"

@@ -34,8 +34,6 @@ import com.contralabs.inmap.fragments.InfoDialogFragment;
 import com.contralabs.inmap.fragments.InfrastructureBarFragment;
 import com.contralabs.inmap.fragments.InfrastructureBarFragment.OnInfrastructureCategoryChangedListener;
 import com.contralabs.inmap.fragments.LegalNoticesDialogFragment;
-import com.contralabs.inmap.fragments.LevelPickerFragment;
-import com.contralabs.inmap.fragments.LevelPickerFragment.OnLevelSelectedListener;
 import com.contralabs.inmap.fragments.ProximityCheckDialogFragment;
 import com.contralabs.inmap.fragments.RateDialogFragment;
 import com.contralabs.inmap.fragments.SplashDialogFragment;
@@ -47,6 +45,7 @@ import com.contralabs.inmap.fragments.StoreListFragment.StoreListController;
 import com.contralabs.inmap.interfaces.ApplicationDataFacade;
 import com.contralabs.inmap.interfaces.InMapViewController;
 import com.contralabs.inmap.interfaces.OnAnimationEnd;
+import com.contralabs.inmap.interfaces.OnLevelSelectedListener;
 import com.contralabs.inmap.interfaces.OnStoreBallonClickListener;
 import com.contralabs.inmap.interfaces.StoreMapItem;
 import com.contralabs.inmap.interfaces.StoreOnMapController;
@@ -55,6 +54,7 @@ import com.contralabs.inmap.model.Store;
 import com.contralabs.inmap.model.StoreParameters;
 import com.contralabs.inmap.server.Utils;
 import com.contralabs.inmap.views.AnimateFrameLayout;
+import com.contralabs.inmap.views.LevelPickerView;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.helpshift.Helpshift;
 import com.slidingmenu.lib.SlidingMenu;
@@ -76,7 +76,8 @@ public class MainActivity extends SlidingActionBarActivity implements OnInfrastr
 	private StoreCategoryListFragment mStoreCategoryListFragment;
 	private InfrastructureBarFragment mInfrastructureBarFragment;
 	private StoreListFragment mStoreListFragment;
-	private LevelPickerFragment mLevelPickerFragment;
+	//private LevelPickerFragment mLevelPickerFragment;
+	private LevelPickerView mLevelPickerView;
 	private boolean isShowingStoreList = false;
 	private InMapViewController mInMapViewController;
 	private InMapFragment mInMapFragment;
@@ -168,8 +169,8 @@ public class MainActivity extends SlidingActionBarActivity implements OnInfrastr
 			onSearchRequested();
 			break;
 
-		case R.id.menu_levels:
-			toggleLevelPicker();
+		case R.id.menu_social:
+			toggleRightMenu();
 			break;
 
 		case R.id.menu_problemas:
@@ -287,17 +288,17 @@ public class MainActivity extends SlidingActionBarActivity implements OnInfrastr
 
 	private void configureSlidingMenu() {
 		mSlidingMenu = getSlidingMenu();//new SlidingMenu(this);
-		mSlidingMenu.setMode(SlidingMode.LEFT_RIGHT);
+		mSlidingMenu.setMode(SlidingMode.LEFT);//_RIGHT);
 		mSlidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
 		mSlidingMenu.setShadowWidthRes(R.dimen.shadow_width);
 		mSlidingMenu.setShadowDrawable(R.drawable.shadow);
 		mSlidingMenu.setBehindOffsetRes(R.dimen.slidingmenu_offset_left, SlidingMode.LEFT);
-		mSlidingMenu.setBehindWidthRes(R.dimen.slidingmenu_width_right, SlidingMode.RIGHT);
+		//mSlidingMenu.setBehindWidthRes(R.dimen.slidingmenu_width_right, SlidingMode.RIGHT);
 		mSlidingMenu.setFadeDegree(0.00f);
 		//mSlidingMenu.attachToActivity(this, SlidingMenu.SLIDING_WINDOW);
 		//mSlidingMenu.setMenu(R.layout.layout_lists, SlidingMode.LEFT);
 		setBehindContentView(R.layout.layout_lists);
-		mSlidingMenu.setMenu(R.layout.layout_levelpicker, SlidingMode.RIGHT);
+		//mSlidingMenu.setMenu(R.layout.layout_levelpicker, SlidingMode.RIGHT);
 		mSlidingMenu.setOnOpenedListener(onOpenedListener);
 	}
 
@@ -322,14 +323,16 @@ public class MainActivity extends SlidingActionBarActivity implements OnInfrastr
 		mStoreListFragment.setOnStoreSelectedListener(this);
 		mStoreListFragment.setStoreListController(this);
 
-		mLevelPickerFragment = (LevelPickerFragment) fm.findFragmentById(R.id.fragment_levelpicker);
-		mLevelPickerFragment.setOnLevelSelectedListener(this);
+		/*mLevelPickerFragment = (LevelPickerFragment) fm.findFragmentById(R.id.fragment_levelpicker);
+		mLevelPickerFragment.setOnLevelSelectedListener(this);*/
 	}
 
 	private void configureAllLayout() {
 		configureLayoutCategoryList();
 		configureLayoutStoreList();
 		mClearMarkersButton = findViewById(R.id.btn_clear_markers);
+		mLevelPickerView = (LevelPickerView) findViewById(R.id.level_picker);
+		mLevelPickerView.setOnLevelSelectedListener(this);
 	}
 
 
@@ -368,7 +371,7 @@ public class MainActivity extends SlidingActionBarActivity implements OnInfrastr
 		mInMapViewController.setMapController(mApplicationDataFacade.getMapController());
 	}
 
-	private void toggleLevelPicker() {
+	private void toggleRightMenu() {
 		if(isRightMenuShowing())
 			mSlidingMenu.showContent();
 		else 
@@ -408,7 +411,8 @@ public class MainActivity extends SlidingActionBarActivity implements OnInfrastr
 	}
 
 	private void showStoreOnMap(Store store) {
-		mLevelPickerFragment.selectLevel(store.getLevel());
+		//mLevelPickerFragment.selectLevel(store.getLevel());
+		mLevelPickerView.selectLevel(store.getLevel());
 		mStoreOnMapController.setStores(store);
 		mInMapViewController.openStoreBallon(store);
 		storesHasMarkers = store != null;

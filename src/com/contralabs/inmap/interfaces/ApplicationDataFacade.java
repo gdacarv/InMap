@@ -1,7 +1,6 @@
 package com.contralabs.inmap.interfaces;
 
 import com.contralabs.inmap.fragments.InfrastructureBarFragment.OnInfrastructureCategoryChangedListener;
-import com.contralabs.inmap.fragments.LevelPickerFragment.OnLevelSelectedListener;
 
 public interface ApplicationDataFacade {
 

@@ -27,8 +27,8 @@
         android:orderInCategory="1"
         android:showAsAction="always" />
 
-    <item android:id="@+id/menu_levels"
-        android:title="@string/menu_levels"
+    <item android:id="@+id/menu_social"
+        android:title="@string/social"
         android:icon="@drawable/bt_niveis"
         android:orderInCategory="2"
         android:showAsAction="always" />

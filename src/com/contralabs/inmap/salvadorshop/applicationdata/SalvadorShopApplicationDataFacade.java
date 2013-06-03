@@ -6,10 +6,10 @@ import com.contralabs.inmap.controllers.InfrastructureMapController;
 import com.contralabs.inmap.controllers.StoreMapController;
 import com.contralabs.inmap.controllers.TwoMapController;
 import com.contralabs.inmap.fragments.InfrastructureBarFragment.OnInfrastructureCategoryChangedListener;
-import com.contralabs.inmap.fragments.LevelPickerFragment.OnLevelSelectedListener;
 import com.contralabs.inmap.interfaces.ApplicationDataFacade;
 import com.contralabs.inmap.interfaces.LevelInformation;
 import com.contralabs.inmap.interfaces.MapController;
+import com.contralabs.inmap.interfaces.OnLevelSelectedListener;
 import com.contralabs.inmap.interfaces.StoreOnMapController;
 
 public class SalvadorShopApplicationDataFacade implements ApplicationDataFacade {

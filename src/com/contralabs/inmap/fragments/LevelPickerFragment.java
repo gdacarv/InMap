@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 
 import com.contralabs.inmap.interfaces.ApplicationDataFacade;
 import com.contralabs.inmap.interfaces.LevelInformation;
+import com.contralabs.inmap.interfaces.OnLevelSelectedListener;
 import com.contralabs.inmap.salvadorshop.applicationdata.SalvadorShopApplicationDataFacade;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.contralabs.inmap.R;
@@ -78,10 +79,6 @@ public class LevelPickerFragment extends Fragment {
 		mOnLevelSelectedListener = listener;
 	}
 	
-	public interface OnLevelSelectedListener {
-		public void onLevelSelected(int level);
-	}
-
 	public void selectLevel(int level) {
 		selectLevel(level, null);
 	}
