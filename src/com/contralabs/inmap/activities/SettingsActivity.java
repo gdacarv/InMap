@@ -1,13 +1,16 @@
 package com.contralabs.inmap.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceCategory;
+import android.widget.Toast;
 
 import com.contralabs.inmap.R;
+import com.facebook.Session;
 
 public class SettingsActivity extends PreferenceActivity {
 	
@@ -32,5 +35,23 @@ public class SettingsActivity extends PreferenceActivity {
                 return true;
             }
         });
+        
+        Session activeSession = Session.getActiveSession();
+		if(activeSession != null && activeSession.isOpened()) {
+			final PreferenceCategory category = (PreferenceCategory) findPreference(getString(R.string.pref_key_social));
+			Preference logout = new Preference(this);
+			logout.setTitle(R.string.msg_logout);
+			logout.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+				
+				@Override
+				public boolean onPreferenceClick(Preference preference) {
+					Session.getActiveSession().closeAndClearTokenInformation();
+					category.removePreference(preference);
+					Toast.makeText(SettingsActivity.this, R.string.desconectado_, Toast.LENGTH_SHORT).show();
+					return true;
+				}
+			});
+			category.addPreference(logout);
+		}
 	}
 }

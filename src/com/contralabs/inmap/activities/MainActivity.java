@@ -34,6 +34,7 @@ import com.contralabs.inmap.fragments.InfoDialogFragment;
 import com.contralabs.inmap.fragments.InfrastructureBarFragment;
 import com.contralabs.inmap.fragments.InfrastructureBarFragment.OnInfrastructureCategoryChangedListener;
 import com.contralabs.inmap.fragments.LegalNoticesDialogFragment;
+import com.contralabs.inmap.fragments.PeopleInsideFragment;
 import com.contralabs.inmap.fragments.ProximityCheckDialogFragment;
 import com.contralabs.inmap.fragments.RateDialogFragment;
 import com.contralabs.inmap.fragments.SplashDialogFragment;
@@ -55,13 +56,15 @@ import com.contralabs.inmap.model.StoreParameters;
 import com.contralabs.inmap.server.Utils;
 import com.contralabs.inmap.views.AnimateFrameLayout;
 import com.contralabs.inmap.views.LevelPickerView;
+import com.facebook.Session;
+import com.facebook.SessionState;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.helpshift.Helpshift;
 import com.slidingmenu.lib.SlidingMenu;
 import com.slidingmenu.lib.SlidingMenu.OnOpenedListener;
 import com.slidingmenu.lib.SlidingMode;
 
-public class MainActivity extends SlidingActionBarActivity implements OnInfrastructureCategoryChangedListener, OnStoreCategoryChangedListener, OnStoreSelectedListener, OnLevelSelectedListener, StoreListController, OnStoreBallonClickListener {
+public class MainActivity extends FacebookSlidingActionBarActivity implements OnInfrastructureCategoryChangedListener, OnStoreCategoryChangedListener, OnStoreSelectedListener, OnLevelSelectedListener, StoreListController, OnStoreBallonClickListener {
 
 	protected static final String SHOW_STORE_INMAP = "show_store_inmap";
 
@@ -76,7 +79,7 @@ public class MainActivity extends SlidingActionBarActivity implements OnInfrastr
 	private StoreCategoryListFragment mStoreCategoryListFragment;
 	private InfrastructureBarFragment mInfrastructureBarFragment;
 	private StoreListFragment mStoreListFragment;
-	//private LevelPickerFragment mLevelPickerFragment;
+	//private PeopleInsideFragment mPeopleInsideFragment;
 	private LevelPickerView mLevelPickerView;
 	private boolean isShowingStoreList = false;
 	private InMapViewController mInMapViewController;
@@ -288,17 +291,17 @@ public class MainActivity extends SlidingActionBarActivity implements OnInfrastr
 
 	private void configureSlidingMenu() {
 		mSlidingMenu = getSlidingMenu();//new SlidingMenu(this);
-		mSlidingMenu.setMode(SlidingMode.LEFT);//_RIGHT);
+		mSlidingMenu.setMode(SlidingMode.LEFT_RIGHT);
 		mSlidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
 		mSlidingMenu.setShadowWidthRes(R.dimen.shadow_width);
 		mSlidingMenu.setShadowDrawable(R.drawable.shadow);
 		mSlidingMenu.setBehindOffsetRes(R.dimen.slidingmenu_offset_left, SlidingMode.LEFT);
-		//mSlidingMenu.setBehindWidthRes(R.dimen.slidingmenu_width_right, SlidingMode.RIGHT);
+		mSlidingMenu.setBehindOffsetRes(R.dimen.slidingmenu_offset_left, SlidingMode.RIGHT);
 		mSlidingMenu.setFadeDegree(0.00f);
 		//mSlidingMenu.attachToActivity(this, SlidingMenu.SLIDING_WINDOW);
 		//mSlidingMenu.setMenu(R.layout.layout_lists, SlidingMode.LEFT);
 		setBehindContentView(R.layout.layout_lists);
-		//mSlidingMenu.setMenu(R.layout.layout_levelpicker, SlidingMode.RIGHT);
+		mSlidingMenu.setMenu(R.layout.layout_peopleinside, SlidingMode.RIGHT);
 		mSlidingMenu.setOnOpenedListener(onOpenedListener);
 	}
 
@@ -323,8 +326,7 @@ public class MainActivity extends SlidingActionBarActivity implements OnInfrastr
 		mStoreListFragment.setOnStoreSelectedListener(this);
 		mStoreListFragment.setStoreListController(this);
 
-		/*mLevelPickerFragment = (LevelPickerFragment) fm.findFragmentById(R.id.fragment_levelpicker);
-		mLevelPickerFragment.setOnLevelSelectedListener(this);*/
+		//mPeopleInsideFragment = (PeopleInsideFragment) fm.findFragmentById(R.id.fragment_peopleinside);
 	}
 
 	private void configureAllLayout() {
@@ -498,5 +500,10 @@ public class MainActivity extends SlidingActionBarActivity implements OnInfrastr
 
 	private boolean isRightMenuShowing() {
 		return mSlidingMenu.isSecondaryMenuShowing();
+	}
+
+	@Override
+	public void call(Session session, SessionState state, Exception exception) {
+		// TODO Auto-generated method stub
 	}
 }

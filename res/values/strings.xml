@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="fb_app_id">507277695992566</string> 
+    
     <string name="app_name">InMap - Salvador Shopping</string>
     <string name="menu_search">Pesquisar</string>
     <string name="menu_levels">Andar</string>
@@ -92,7 +94,7 @@
     <string name="notificacoes">Notificações</string>
     <string name="pref_key_notif_proximity">pref_key_notif_proximity</string>
     <string name="pref_title_notif_proximity">Notificar ao entrar na área</string>
-    <string name="pred_summary_notif_proximity">Exibir notificação quando entrar no Shopping</string>
+    <string name="pref_summary_notif_proximity">Exibir notificação quando entrar no Shopping</string>
     <string name="mapa">Mapa</string>
 
     <string name="pref_key_maps_type">pref_key_maps_type</string>
@@ -111,5 +113,15 @@
     <string name="ajuda">Ajuda</string>
     <string name="events_empty">Nenhum evento no momento.\n\nFique ligado! =]</string>
     <string name="social">Social</string>
+    <string name="usuarios_no_shopping">USUÁRIOS NO SHOPPING</string>
+    <string name="msg_peopleinside_login">Você precisa entrar com sua conta do Facebook para visualizar pessoas no Shopping.</string>
+    
+    
+    <string name="pref_key_show_im_inside">pref_key_show_im_inside</string>
+    <string name="pref_title_show_im_inside">Mostrar que estou no Shopping</string>
+    <string name="pref_summary_show_im_inside">Se conectado ao Facebook, permite que outras pessoas vejam que você está no Shopping."</string>
+    <string name="msg_logout">Desconectar conta do Facebook</string>
+    <string name="pref_key_social">pref_key_social</string>
+    <string name="desconectado_">Desconectado.</string>
 
 </resources>

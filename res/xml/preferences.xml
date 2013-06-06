@@ -5,15 +5,24 @@
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="@string/pref_key_notif_proximity"
-            android:summary="@string/pred_summary_notif_proximity"
+            android:summary="@string/pref_summary_notif_proximity"
             android:title="@string/pref_title_notif_proximity" />
     </PreferenceCategory>
+    
     <PreferenceCategory android:title="@string/mapa" >
-        <ListPreference 
+        <ListPreference
             android:entries="@array/pref_entries_maps_type"
             android:entryValues="@array/pref_values_maps_type"
             android:key="@string/pref_key_maps_type"
-            android:title="@string/pref_title_maps_type"/>
+            android:title="@string/pref_title_maps_type" />
+    </PreferenceCategory>
+    
+    <PreferenceCategory android:title="@string/social" android:key="@string/pref_key_social" >
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_key_show_im_inside"
+            android:summary="@string/pref_summary_show_im_inside"
+            android:title="@string/pref_title_show_im_inside" />
     </PreferenceCategory>
 
 </PreferenceScreen>

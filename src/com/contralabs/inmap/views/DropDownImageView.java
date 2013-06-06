@@ -182,7 +182,7 @@ public class DropDownImageView extends ImageView {
 	
 	@Override
 	protected void onDetachedFromWindow() {
-		if(mPopupWindow.isShowing())
+		if(mPopupWindow != null && mPopupWindow.isShowing())
 			mPopupWindow.dismiss();
 		super.onDetachedFromWindow();
 	}
