@@ -1,13 +1,18 @@
 package com.contralabs.inmap.fragments;
 
-import com.facebook.Session.StatusCallback;
-import com.facebook.Session;
-import com.facebook.SessionState;
-import com.facebook.UiLifecycleHelper;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+
+import com.contralabs.inmap.social.FacebookHelper;
+import com.facebook.Request;
+import com.facebook.Response;
+import com.facebook.Session;
+import com.facebook.Session.StatusCallback;
+import com.facebook.SessionState;
+import com.facebook.UiLifecycleHelper;
+import com.facebook.model.GraphUser;
 
 public abstract class FacebookFragment extends Fragment implements StatusCallback {
 	
@@ -55,5 +60,26 @@ public abstract class FacebookFragment extends Fragment implements StatusCallbac
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		uiHelper.onSaveInstanceState(outState);
+	}
+	
+	@Override
+	public void call(Session session, SessionState state, Exception exception) {
+		if(session.isOpened()) {
+			Request.executeMeRequestAsync(session, new Request.GraphUserCallback() {
+
+
+				@Override
+				public void onCompleted(GraphUser user, Response response) {
+					FragmentActivity activity = getActivity();
+					if (user != null && activity != null) {
+						FacebookHelper.setFacebookId(activity, user.getId());
+					}
+				}
+			});
+		}else {
+			FragmentActivity activity = getActivity();
+			if(activity != null)
+				FacebookHelper.setFacebookId(activity, null);
+		}
 	}
 }

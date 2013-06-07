@@ -123,5 +123,7 @@
     <string name="msg_logout">Desconectar conta do Facebook</string>
     <string name="pref_key_social">pref_key_social</string>
     <string name="desconectado_">Desconectado.</string>
+    <string name="amigos">Amigos</string>
+    <string name="desconhecido">Desconhecido</string>
 
 </resources>
