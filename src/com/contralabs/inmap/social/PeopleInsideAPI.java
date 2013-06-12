@@ -6,6 +6,6 @@ public interface PeopleInsideAPI {
 	
 	void onExitedArea(String id);
 	
-	void requestPeopleInside(StringsCallback callback);
+	void requestPeopleInside(UsersCallback callback);
 
 }

@@ -255,7 +255,7 @@ public class StoreListFragment extends Fragment {
 			
 			Store store = (Store)getItem(position);
 			TextView nameTextView = (TextView) convertView.findViewById(R.id.txt_store_name);
-			nameTextView.setText(store.getName());
+			nameTextView.setText(store.getName() + " - " + store.getId());
 			StoreCategory storeCategory = store.getCategory();
 			ImageView imgCategory = (ImageView) convertView.findViewById(R.id.img_store_category);
 			View layout = convertView.findViewById(R.id.layout_listitem_store_category);
