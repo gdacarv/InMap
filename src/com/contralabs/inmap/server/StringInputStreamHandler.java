@@ -9,7 +9,7 @@ import org.apache.http.util.ByteArrayBuffer;
 public abstract class StringInputStreamHandler implements InputStreamHandler {
 
 	@Override
-	public void handleInputStream(InputStream inputStream) {
+	public Object handleInputStream(InputStream inputStream) {
 		BufferedInputStream bis = new BufferedInputStream(inputStream);
 		ByteArrayBuffer baf = new ByteArrayBuffer(50);
 		int read = 0;
@@ -27,9 +27,9 @@ public abstract class StringInputStreamHandler implements InputStreamHandler {
 			}
 			baf.append(buffer, 0, read);
 		}
-		handleString(new String(baf.toByteArray()));
+		return handleString(new String(baf.toByteArray()));
 	}
 
-	protected abstract void handleString(String string);
+	protected abstract Object handleString(String string);
 
 }

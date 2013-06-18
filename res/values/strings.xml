@@ -125,5 +125,7 @@
     <string name="desconectado_">Desconectado.</string>
     <string name="amigos">Amigos</string>
     <string name="desconhecido">Desconhecido</string>
+    <string name="invite_label">Convide seus amigos a usar InMap e veja-os online</string>
+    <string name="invite_msg">Ei, já viu o InMap? Além de todas as informações do shopping e lojas, ainda posso ver quem estar no Shopping no momento! Ficou muito fácil encontrar os amigos!</string>
 
 </resources>

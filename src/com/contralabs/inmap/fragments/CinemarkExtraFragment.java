@@ -19,6 +19,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.contralabs.inmap.server.StringInputStreamHandler;
+import com.contralabs.inmap.server.WebUtils;
 import com.contralabs.inmap.utils.Utils;
 import com.contralabs.inmap.R;
 
@@ -75,13 +76,13 @@ public class CinemarkExtraFragment extends ExtraFragment {
 		protected List<Movie> doInBackground(Void... params) {
 			final List<Movie> movies = new ArrayList<CinemarkExtraFragment.Movie>();
 			try {
-				com.contralabs.inmap.server.Utils.loadURL("http://www.cinemark.com.br/programacao/salvador/salvador/26/785", new StringInputStreamHandler() {
+				WebUtils.loadURL("http://www.cinemark.com.br/programacao/salvador/salvador/26/785", new StringInputStreamHandler() {
 
 					@Override
-					protected void handleString(String string) {
+					protected Object handleString(String string) {
 						int index = string.indexOf("class=\"datas-filmes\"");
 						if(index < 0)
-							return;
+							return null;
 						index = string.indexOf("href", index + 20);
 						index = getNextTextWithoutMark(string, index);
 						date = string.substring(index, string.indexOf('<', index));
@@ -115,6 +116,7 @@ public class CinemarkExtraFragment extends ExtraFragment {
 							index = getNextTextWithoutMark(string, index);
 							legendas += string.substring(index, string.indexOf('<', index)).trim() + '\n';
 						}
+						return null;
 					}
 
 					private int getNextTextWithoutMark(String string, int index) {

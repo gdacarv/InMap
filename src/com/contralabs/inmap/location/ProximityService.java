@@ -10,9 +10,10 @@ import android.preference.PreferenceManager;
 import com.contralabs.inmap.R;
 import com.contralabs.inmap.fragments.ProximityCheckDialogFragment;
 import com.contralabs.inmap.notifications.NotificationHelper;
-import com.contralabs.inmap.social.DummyPeopleInsideAPI;
 import com.contralabs.inmap.social.FacebookHelper;
 import com.contralabs.inmap.social.PeopleInsideAPI;
+import com.contralabs.inmap.social.ServerPeopleInsideAPI;
+import com.contralabs.inmap.social.User;
 
 public class ProximityService extends IntentService {
 
@@ -27,26 +28,24 @@ public class ProximityService extends IntentService {
 		if(!intent.hasExtra(LocationManager.KEY_PROXIMITY_ENTERING))
 			return;
 		
-		PeopleInsideAPI peopleInsideAPI = new DummyPeopleInsideAPI();
-		String facebookId = getFacebookId();
+		PeopleInsideAPI peopleInsideAPI = new ServerPeopleInsideAPI();
+		User user = FacebookHelper.getUser(this);
+		SharedPreferences defaultSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+		boolean showInsideToOther = defaultSharedPreferences.getBoolean(getString(R.string.pref_key_show_im_inside), true);
 		if(isReallyInside(intent.getBooleanExtra(LocationManager.KEY_PROXIMITY_ENTERING, false))) {
-			SharedPreferences defaultSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 			boolean showNotification = defaultSharedPreferences.getBoolean(getString(R.string.pref_key_notif_proximity), true);
 			if(showNotification) {
 				Bundle extras = new Bundle(1);
 				extras.putBoolean(ProximityCheckDialogFragment.SHOW, true);
 				new NotificationHelper(this).showNotification(1, String.format(getString(R.string.msg_enter_area), intent.getStringExtra(PLACE_NAME)), getString(R.string.msg_notification_open), extras, true, true);
 			}
-			if(facebookId != null)
-				peopleInsideAPI.onEnteredArea(facebookId, defaultSharedPreferences.getBoolean(getString(R.string.pref_key_show_im_inside), true));
+			if(user != null) {
+				peopleInsideAPI.onEnteredArea(user, showInsideToOther);
+			}
 		} else {
-			if(facebookId != null)
-				peopleInsideAPI.onExitedArea(facebookId);
+			if(user != null)
+				peopleInsideAPI.onExitedArea(user, showInsideToOther);
 		}
-	}
-
-	private String getFacebookId() {
-		return FacebookHelper.getFacebookId(this);
 	}
 
 	private boolean isReallyInside(boolean intentValue) {

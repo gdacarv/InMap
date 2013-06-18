@@ -46,7 +46,7 @@ public class UpdateDataService extends Service {
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		if(Utils.isOnline(this)) {// TODO Check internet, if offline, create a broadcast receiver
+		if(WebUtils.isOnline(this)) {// TODO Check internet, if offline, create a broadcast receiver
 			mAsyncTask = new UpdateDataAsyncTask();
 			if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
 				mAsyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -104,10 +104,10 @@ public class UpdateDataService extends Service {
 		}
 
 		private void updateInfraFromServer() throws IOException {
-			Utils.loadURL(mManifestMetaData.getString("url_infra"), new XMLInputStreamHandler() {
+			WebUtils.loadURL(mManifestMetaData.getString("url_infra"), new XMLInputStreamHandler() {
 
 				@Override
-				protected void handleXml(XmlPullParser xpp) {
+				protected Object handleXml(XmlPullParser xpp) {
 					if(xpp != null) {
 						if(mDb == null)
 							mDb = DbAdapter.getInstance(getApplicationContext());
@@ -124,16 +124,17 @@ public class UpdateDataService extends Service {
 							mDb.close();
 						}
 					}
+					return null;
 				}
 			});
 			setInfraLastUpdateLocal(new Date());
 		}
 
 		private void updateStoresFromServer() throws IOException {
-			Utils.loadURL(mManifestMetaData.getString("url_stores"), new XMLInputStreamHandler() {
+			WebUtils.loadURL(mManifestMetaData.getString("url_stores"), new XMLInputStreamHandler() {
 
 				@Override
-				protected void handleXml(XmlPullParser xpp) {
+				protected Object handleXml(XmlPullParser xpp) {
 					if(xpp != null) {
 						if(mDb == null)
 							mDb = DbAdapter.getInstance(getApplicationContext());
@@ -150,6 +151,7 @@ public class UpdateDataService extends Service {
 							mDb.close();
 						}
 					}
+					return null;
 				}
 			});
 			setStoresLastUpdateLocal(new Date());
@@ -157,10 +159,10 @@ public class UpdateDataService extends Service {
 
 		private void loadInfoObjectIfNeeded() throws IOException {
 			if(mInfoObject == null)
-				Utils.loadURL(mManifestMetaData.getString("url_info"), new StringInputStreamHandler() {
+				WebUtils.loadURL(mManifestMetaData.getString("url_info"), new StringInputStreamHandler() {
 
 					@Override
-					protected void handleString(String string) {
+					protected Object handleString(String string) {
 						try {
 							mInfoObject = new JSONObject(string);
 							Log.i("UpdateDataService.UpdateD...}",
@@ -168,6 +170,7 @@ public class UpdateDataService extends Service {
 						} catch (JSONException e) {
 							e.printStackTrace();
 						}
+						return string;
 					}
 				});
 		}

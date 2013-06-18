@@ -2,7 +2,9 @@ package com.contralabs.inmap.social;
 
 import java.util.List;
 
-public interface UsersCallback {
+import com.contralabs.inmap.server.Receiver;
+
+public interface UsersCallback extends Receiver<List<User>>{
 
 	void onReceived(List<User> users);
 }

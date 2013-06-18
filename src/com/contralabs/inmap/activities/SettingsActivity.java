@@ -10,6 +10,7 @@ import android.preference.PreferenceCategory;
 import android.widget.Toast;
 
 import com.contralabs.inmap.R;
+import com.contralabs.inmap.social.FacebookHelper;
 import com.facebook.Session;
 
 public class SettingsActivity extends PreferenceActivity {
@@ -47,6 +48,7 @@ public class SettingsActivity extends PreferenceActivity {
 				public boolean onPreferenceClick(Preference preference) {
 					Session.getActiveSession().closeAndClearTokenInformation();
 					category.removePreference(preference);
+					FacebookHelper.setUser(SettingsActivity.this, null);
 					Toast.makeText(SettingsActivity.this, R.string.desconectado_, Toast.LENGTH_SHORT).show();
 					return true;
 				}

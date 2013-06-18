@@ -2,9 +2,9 @@ package com.contralabs.inmap.social;
 
 public interface PeopleInsideAPI {
 
-	void onEnteredArea(String id, boolean showToOthers);
+	void onEnteredArea(User user, boolean showToOthers);
 	
-	void onExitedArea(String id);
+	void onExitedArea(User user, boolean showToOthers);
 	
 	void requestPeopleInside(UsersCallback callback);
 

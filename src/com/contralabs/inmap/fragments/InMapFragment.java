@@ -6,11 +6,9 @@ import java.util.Map;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.location.Location;
 import android.os.Bundle;
-import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.util.TypedValue;
@@ -22,7 +20,6 @@ import android.widget.Toast;
 
 import com.contralabs.inmap.R;
 import com.contralabs.inmap.activities.MainActivity;
-import com.contralabs.inmap.activities.SettingsActivity;
 import com.contralabs.inmap.controllers.PreSettedMapLatLngConverter;
 import com.contralabs.inmap.interfaces.ApplicationDataFacade;
 import com.contralabs.inmap.interfaces.InMapViewController;
@@ -33,6 +30,8 @@ import com.contralabs.inmap.interfaces.MapItemsListener;
 import com.contralabs.inmap.interfaces.MapLatLngConverter;
 import com.contralabs.inmap.interfaces.OnStoreBallonClickListener;
 import com.contralabs.inmap.interfaces.StoreMapItem;
+import com.contralabs.inmap.location.SensorHelper;
+import com.contralabs.inmap.location.SensorHelper.OnSensorChangeListener;
 import com.contralabs.inmap.model.Coordinate;
 import com.contralabs.inmap.model.DbAdapter;
 import com.contralabs.inmap.model.Store;
@@ -49,9 +48,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class InMapFragment extends FixedSupportMapFragment implements InMapViewController, MapItemsListener {
+public class InMapFragment extends FixedSupportMapFragment implements InMapViewController, MapItemsListener, OnSensorChangeListener {
 
-
+	
+	private static final String TAG = "InMapFragment";
 	private GoogleMap mMap;
 	private ApplicationDataFacade mApplicationDataFacade;
 	private GroundOverlay mLevelGroundOverlay;
@@ -64,6 +64,7 @@ public class InMapFragment extends FixedSupportMapFragment implements InMapViewC
 	private Marker mMarkerLatLng1, mMarkerLatLng2, mMarkerLatLngLevel;
 	private float mMapRotation;
 	private LevelInformation mLevelInformation;
+	private SensorHelper mSensorHelper;
 
 	public void setApplicationDataFacade(ApplicationDataFacade applicationDataFacade) {
 		mApplicationDataFacade = applicationDataFacade;
@@ -92,6 +93,20 @@ public class InMapFragment extends FixedSupportMapFragment implements InMapViewC
 			}
 		}
 		configureMapType();
+		mSensorHelper.beginListening();
+	}
+	
+	@Override
+	public void onPause() {
+		mSensorHelper.stopListening();
+		super.onPause();
+	}
+	
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		mSensorHelper = new SensorHelper(activity);
+		mSensorHelper.setOnSensorChangeListener(this);
 	}
 
 	private void initialize() {
@@ -325,6 +340,13 @@ public class InMapFragment extends FixedSupportMapFragment implements InMapViewC
 			layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
 			view.setLayoutParams(layoutParams);
 		}
+	}
+
+	@Override
+	public void onSensorChanged(float azimuth, float pitch, float roll) {
+		// TODO Auto-generated method stub
+		float angle = (float) (-azimuth*180/Math.PI);
+		Log.i(TAG, "Sensor changed: azimuth: " + azimuth + " pitch: " + pitch + " roll: " + roll + " angle: " + angle);
 	}
 
 }

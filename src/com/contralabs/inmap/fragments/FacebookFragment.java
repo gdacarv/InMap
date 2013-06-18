@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 
 import com.contralabs.inmap.social.FacebookHelper;
+import com.contralabs.inmap.social.SimpleUser;
 import com.facebook.Request;
 import com.facebook.Response;
 import com.facebook.Session;
@@ -72,14 +73,14 @@ public abstract class FacebookFragment extends Fragment implements StatusCallbac
 				public void onCompleted(GraphUser user, Response response) {
 					FragmentActivity activity = getActivity();
 					if (user != null && activity != null) {
-						FacebookHelper.setFacebookId(activity, user.getId());
+						FacebookHelper.setUser(activity, new SimpleUser(user.getName(), user.getId(), (String) response.getGraphObject().getProperty("email"), user.getBirthday()));
 					}
 				}
 			});
 		}else {
 			FragmentActivity activity = getActivity();
 			if(activity != null)
-				FacebookHelper.setFacebookId(activity, null);
+				FacebookHelper.setUser(activity, null);
 		}
 	}
 }

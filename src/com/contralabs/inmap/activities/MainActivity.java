@@ -34,7 +34,6 @@ import com.contralabs.inmap.fragments.InfoDialogFragment;
 import com.contralabs.inmap.fragments.InfrastructureBarFragment;
 import com.contralabs.inmap.fragments.InfrastructureBarFragment.OnInfrastructureCategoryChangedListener;
 import com.contralabs.inmap.fragments.LegalNoticesDialogFragment;
-import com.contralabs.inmap.fragments.PeopleInsideFragment;
 import com.contralabs.inmap.fragments.ProximityCheckDialogFragment;
 import com.contralabs.inmap.fragments.RateDialogFragment;
 import com.contralabs.inmap.fragments.SplashDialogFragment;
@@ -53,7 +52,10 @@ import com.contralabs.inmap.interfaces.StoreOnMapController;
 import com.contralabs.inmap.model.DbAdapter;
 import com.contralabs.inmap.model.Store;
 import com.contralabs.inmap.model.StoreParameters;
-import com.contralabs.inmap.server.Utils;
+import com.contralabs.inmap.server.WebUtils;
+import com.contralabs.inmap.social.FacebookHelper;
+import com.contralabs.inmap.social.ServerPeopleInsideAPI;
+import com.contralabs.inmap.social.User;
 import com.contralabs.inmap.views.AnimateFrameLayout;
 import com.contralabs.inmap.views.LevelPickerView;
 import com.facebook.Session;
@@ -64,7 +66,7 @@ import com.slidingmenu.lib.SlidingMenu;
 import com.slidingmenu.lib.SlidingMenu.OnOpenedListener;
 import com.slidingmenu.lib.SlidingMode;
 
-public class MainActivity extends FacebookSlidingActionBarActivity implements OnInfrastructureCategoryChangedListener, OnStoreCategoryChangedListener, OnStoreSelectedListener, OnLevelSelectedListener, StoreListController, OnStoreBallonClickListener {
+public class MainActivity extends SlidingActionBarActivity implements OnInfrastructureCategoryChangedListener, OnStoreCategoryChangedListener, OnStoreSelectedListener, OnLevelSelectedListener, StoreListController, OnStoreBallonClickListener {
 
 	protected static final String SHOW_STORE_INMAP = "show_store_inmap";
 
@@ -140,12 +142,19 @@ public class MainActivity extends FacebookSlidingActionBarActivity implements On
 	protected void onStart() {
 		super.onStart();
 		EasyTracker.getInstance().activityStart(this);
+		/*User user = FacebookHelper.getUser(this);
+		if(user != null)
+			new ServerPeopleInsideAPI().onEnteredArea(user, true); */
+		
 	}
 
 	@Override
 	protected void onStop() {
 		super.onStop();
 		EasyTracker.getInstance().activityStop(this);
+		/*User user = FacebookHelper.getUser(this);
+		if(user != null)
+			new ServerPeopleInsideAPI().onExitedArea(user, true);*/ 
 	}
 
 	@Override
@@ -482,7 +491,7 @@ public class MainActivity extends FacebookSlidingActionBarActivity implements On
 			public void onAnimationEnded() {
 				mInMapViewController.moveMapViewToPlacePosition(false, true);
 				mShowingSplash = false;
-				if(!Utils.isOnline(MainActivity.this))
+				if(!WebUtils.isOnline(MainActivity.this))
 					Toast.makeText(MainActivity.this, R.string.msg_no_internet_maps, Toast.LENGTH_LONG).show();
 			}
 		});
@@ -502,8 +511,4 @@ public class MainActivity extends FacebookSlidingActionBarActivity implements On
 		return mSlidingMenu.isSecondaryMenuShowing();
 	}
 
-	@Override
-	public void call(Session session, SessionState state, Exception exception) {
-		// TODO Auto-generated method stub
-	}
 }

@@ -3,22 +3,25 @@ package com.contralabs.inmap.fragments;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.TextView;
 
 import com.contralabs.inmap.R;
-import com.contralabs.inmap.social.DummyPeopleInsideAPI;
 import com.contralabs.inmap.social.FacebookHelper;
 import com.contralabs.inmap.social.PeopleInsideAPI;
+import com.contralabs.inmap.social.ServerPeopleInsideAPI;
 import com.contralabs.inmap.social.User;
 import com.contralabs.inmap.social.UsersCallback;
 import com.contralabs.inmap.utils.Utils;
@@ -29,21 +32,43 @@ import com.facebook.widget.ProfilePictureView;
 
 public class PeopleInsideFragment extends FacebookFragment {
 
+	private static final int TIMERATE_REFRESH_PEOPLE_INSIDE = 40; // In Seconds
+	private static final String TAG = "PeopleInsideFragment";
 	private View mLoginLayout;
 	private ExpandableListView mListView;
 	private PeopleInsideExpandableListAdapter mAdapter;
 	private PeopleInsideAPI mPeopleInsideAPI;
 	private List<User> mUsersInside;
 	private List<User> mAllFriends;
+	private ScheduledExecutorService mScheduler;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		mPeopleInsideAPI = new DummyPeopleInsideAPI();
+		mPeopleInsideAPI = new ServerPeopleInsideAPI();
 		setRetainInstance(true);
 		if(mAdapter == null)
 			mAdapter = new PeopleInsideExpandableListAdapter(getActivity());
-		requestPeopleInside(); // TODO Scheduale to refresh every minute
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		mScheduler = Executors.newSingleThreadScheduledExecutor();
+
+		mScheduler.scheduleAtFixedRate
+		      (new Runnable() {
+		         public void run() {
+		     		requestPeopleInside();
+		     		Log.i(TAG, "People Inside refreshing...");
+		         }
+		      }, 0, TIMERATE_REFRESH_PEOPLE_INSIDE, TimeUnit.SECONDS);
+	}
+	
+	@Override
+	public void onPause() {
+		mScheduler.shutdownNow();
+		super.onPause();
 	}
 
 	@Override
@@ -107,12 +132,12 @@ public class PeopleInsideFragment extends FacebookFragment {
 		if(mUsersInside == null || mAllFriends == null)
 			return;
 		List<User> friends, unknown;
-		String myId = FacebookHelper.getFacebookId(getActivity());
-		if(mAllFriends != null && mAllFriends.size() > 0) { // TODO remove me
+		User userMe = FacebookHelper.getUser(getActivity());
+		if(mAllFriends != null && mAllFriends.size() > 0) {
 			friends = new ArrayList<User>();
 			unknown = new ArrayList<User>(mUsersInside.size());
 			for(User user : mUsersInside) {
-				if(user.getFacebookId().equals(myId))
+				if(user.getFacebookId().equals(userMe.getFacebookId()))
 					continue;
 				if(isFriend(user))
 					friends.add(user);
@@ -139,6 +164,11 @@ public class PeopleInsideFragment extends FacebookFragment {
 		
 		@Override
 		public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+			if(mAdapter.getChildType(groupPosition, childPosition) == mAdapter.getChildTypeCount()-1) { // Invite friends
+				FacebookHelper.inviteFriends(getActivity());
+				return true;
+			}
+			
 			User user = (User) mAdapter.getChild(groupPosition, childPosition);
 			startActivity(FacebookHelper.getOpenFacebookIntent(getActivity(), user.getFacebookId()));
 			return true;
@@ -162,12 +192,12 @@ public class PeopleInsideFragment extends FacebookFragment {
 
 		@Override
 		public int getGroupCount() {
-			return 2;
+			return mUnknown.size() > 0 ? 2 : 1;
 		}
 
 		@Override
 		public int getChildrenCount(int groupPosition) {
-			return groupPosition == 0 ? mFriends.size() : mUnknown.size();
+			return groupPosition == 0 ? mFriends.size()+1 : mUnknown.size();
 		}
 
 		@Override
@@ -177,7 +207,7 @@ public class PeopleInsideFragment extends FacebookFragment {
 
 		@Override
 		public Object getChild(int groupPosition, int childPosition) {
-			return groupPosition == 0 ? mFriends.get(childPosition) : mUnknown.get(childPosition);
+			return groupPosition == 0 ? childPosition < getChildrenCount(groupPosition)-1 ? mFriends.get(childPosition) : "Invite Friends" : mUnknown.get(childPosition);
 		}
 
 		@Override
@@ -208,12 +238,28 @@ public class PeopleInsideFragment extends FacebookFragment {
 
 		@Override
 		public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+			if(getChildType(groupPosition, childPosition) == getChildTypeCount()-1) { // Is invite your friends
+				TextView textView = (TextView) View.inflate(mContext, android.R.layout.simple_list_item_1, null);
+				textView.setText(R.string.invite_label);
+				return textView;
+			}
+			
 			if(convertView == null)
 				convertView = View.inflate(mContext, R.layout.listitem_people, null);
 			User user = (User) getChild(groupPosition, childPosition);
 			((ProfilePictureView) convertView.findViewById(R.id.people_pic)).setProfileId(user.getFacebookId());
 			((TextView) convertView.findViewById(R.id.people_name)).setText(user.getName());
 			return convertView;
+		}
+		
+		@Override
+		public int getChildTypeCount() {
+			return super.getChildTypeCount()+1;
+		}
+		
+		@Override
+		public int getChildType(int groupPosition, int childPosition) {
+			return groupPosition == 0 && childPosition < getChildrenCount(groupPosition)-1 ? super.getChildType(groupPosition, childPosition) : getChildTypeCount()-1;
 		}
 
 		@Override

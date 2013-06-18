@@ -20,7 +20,7 @@ import android.widget.TextView;
 
 import com.contralabs.inmap.server.InputStreamHandler;
 import com.contralabs.inmap.server.StringInputStreamHandler;
-import com.contralabs.inmap.server.Utils;
+import com.contralabs.inmap.server.WebUtils;
 import com.contralabs.inmap.R;
 
 public class EventosCulturaView extends RelativeLayout {
@@ -53,7 +53,7 @@ public class EventosCulturaView extends RelativeLayout {
 				for(int page = 1; true; page++) {
 					list.clear();
 					int sizeBefore = list.size();
-					Utils.loadURL(getUrl(page), handler);
+					WebUtils.loadURL(getUrl(page), handler);
 					if(sizeBefore == list.size())
 						return list.toArray(new Evento[list.size()]);
 					publishProgress(list.toArray(new Evento[list.size()]));
@@ -128,7 +128,7 @@ public class EventosCulturaView extends RelativeLayout {
 		}
 
 		@Override
-		protected void handleString(String string) {
+		protected Object handleString(String string) {
 			int index = 0;
 			while((index = string.indexOf("listaEventos_interno", index)) != -1) {
 				Evento evento = new Evento();
@@ -155,6 +155,7 @@ public class EventosCulturaView extends RelativeLayout {
 				}
 				mList.add(evento);
 			}
+			return null;
 		}
 	}
 	

@@ -9,17 +9,18 @@ import org.xmlpull.v1.XmlPullParserFactory;
 public abstract class XMLInputStreamHandler implements InputStreamHandler {
 
 	@Override
-	public void handleInputStream(InputStream inputStream) {
+	public Object handleInputStream(InputStream inputStream) {
 		try {
 			XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
 			XmlPullParser xpp = factory.newPullParser();
 			xpp.setInput(inputStream, null);
-			handleXml(xpp);
+			return handleXml(xpp);
 		} catch (XmlPullParserException e) {
 			e.printStackTrace();
 		}
+		return null;
 	}
 
-	protected abstract void handleXml(XmlPullParser xpp);
+	protected abstract Object handleXml(XmlPullParser xpp);
 
 }
