@@ -1,7 +1,5 @@
 package com.contralabs.inmap.location;
 
-import com.contralabs.inmap.location.SensorHelper.OnSensorChangeListener;
-
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -26,11 +24,11 @@ public class SensorHelper{
 		mMagnetometer = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
 	}
 
-	public void beginListening() {
+	public void beginListening(int rate) {
 		if(mSensorManager == null)
 			init();
-		mSensorManager.registerListener(sensorEventListener, mAccelerometer, SensorManager.SENSOR_DELAY_UI);
-		mSensorManager.registerListener(sensorEventListener, mMagnetometer, SensorManager.SENSOR_DELAY_UI);
+		mSensorManager.registerListener(sensorEventListener, mAccelerometer, rate);
+		mSensorManager.registerListener(sensorEventListener, mMagnetometer, rate);
 	}
 
 	public void stopListening() {

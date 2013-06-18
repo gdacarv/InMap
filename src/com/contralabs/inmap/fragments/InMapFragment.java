@@ -7,8 +7,10 @@ import java.util.Map;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
+import android.hardware.SensorManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.util.TypedValue;
@@ -50,7 +52,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class InMapFragment extends FixedSupportMapFragment implements InMapViewController, MapItemsListener, OnSensorChangeListener {
 
-	
+
+	private static final int SENSOR_MIN_ANGLE_CHANGE = 5;
+	private static final int SENSOR_ANIMATION_TIME = 100;
 	private static final String TAG = "InMapFragment";
 	private GoogleMap mMap;
 	private ApplicationDataFacade mApplicationDataFacade;
@@ -65,6 +69,8 @@ public class InMapFragment extends FixedSupportMapFragment implements InMapViewC
 	private float mMapRotation;
 	private LevelInformation mLevelInformation;
 	private SensorHelper mSensorHelper;
+	private long mLastSensorChange;
+	private float mLastSensorAngle;
 
 	public void setApplicationDataFacade(ApplicationDataFacade applicationDataFacade) {
 		mApplicationDataFacade = applicationDataFacade;
@@ -93,15 +99,15 @@ public class InMapFragment extends FixedSupportMapFragment implements InMapViewC
 			}
 		}
 		configureMapType();
-		mSensorHelper.beginListening();
+		mSensorHelper.beginListening(SensorManager.SENSOR_DELAY_NORMAL);
 	}
-	
+
 	@Override
 	public void onPause() {
 		mSensorHelper.stopListening();
 		super.onPause();
 	}
-	
+
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
@@ -309,7 +315,6 @@ public class InMapFragment extends FixedSupportMapFragment implements InMapViewC
 	};
 
 	public void onMyLocationChange (Location location) {
-
 	}
 
 	private GroundOverlay addLevelGroundOverlay(int level) {
@@ -344,9 +349,16 @@ public class InMapFragment extends FixedSupportMapFragment implements InMapViewC
 
 	@Override
 	public void onSensorChanged(float azimuth, float pitch, float roll) {
-		// TODO Auto-generated method stub
-		float angle = (float) (-azimuth*180/Math.PI);
-		Log.i(TAG, "Sensor changed: azimuth: " + azimuth + " pitch: " + pitch + " roll: " + roll + " angle: " + angle);
+		/*long currentTime = SystemClock.uptimeMillis();
+		float angle = (float) (azimuth*180/Math.PI);
+		if(currentTime > mLastSensorChange + SENSOR_ANIMATION_TIME && Math.abs(mLastSensorAngle-angle) > SENSOR_MIN_ANGLE_CHANGE) {
+			//Log.i(TAG, "Sensor changed: azimuth: " + azimuth + " pitch: " + pitch + " roll: " + roll + " angle: " + angle);
+			mMap.animateCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder(mMap.getCameraPosition())
+			.bearing(angle)
+			.build()), SENSOR_ANIMATION_TIME, null);
+			mLastSensorChange = currentTime;
+			mLastSensorAngle = angle;
+		}*/
 	}
 
 }
