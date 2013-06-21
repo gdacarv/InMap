@@ -15,6 +15,11 @@
             android:entryValues="@array/pref_values_maps_type"
             android:key="@string/pref_key_maps_type"
             android:title="@string/pref_title_maps_type" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_key_compass"
+            android:summary="@string/pref_summary_compass"
+            android:title="@string/pref_title_compass" />
     </PreferenceCategory>
     
     <PreferenceCategory android:title="@string/social" android:key="@string/pref_key_social" >

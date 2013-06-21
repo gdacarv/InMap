@@ -40,6 +40,7 @@ import com.contralabs.inmap.model.Store;
 import com.contralabs.inmap.model.StoreParameters;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnCameraChangeListener;
 import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -71,6 +72,8 @@ public class InMapFragment extends FixedSupportMapFragment implements InMapViewC
 	private SensorHelper mSensorHelper;
 	private long mLastSensorChange;
 	private float mLastSensorAngle;
+	private long mCameraAnimationEnd;
+	private CameraPosition mLastSensorCameraPosition;
 
 	public void setApplicationDataFacade(ApplicationDataFacade applicationDataFacade) {
 		mApplicationDataFacade = applicationDataFacade;
@@ -99,20 +102,35 @@ public class InMapFragment extends FixedSupportMapFragment implements InMapViewC
 			}
 		}
 		configureMapType();
-		mSensorHelper.beginListening(SensorManager.SENSOR_DELAY_NORMAL);
+		configureSensorHelper(mContext);
+		if(mSensorHelper != null) 
+			mSensorHelper.beginListening(SensorManager.SENSOR_DELAY_NORMAL);
+
 	}
 
 	@Override
 	public void onPause() {
-		mSensorHelper.stopListening();
+		if(mSensorHelper != null)
+			mSensorHelper.stopListening();
 		super.onPause();
 	}
 
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		mSensorHelper = new SensorHelper(activity);
-		mSensorHelper.setOnSensorChangeListener(this);
+		configureSensorHelper(activity);
+	}
+
+	private void configureSensorHelper(Context context) {
+		if(PreferenceManager.getDefaultSharedPreferences(context).getBoolean(context.getString(R.string.pref_key_compass), true)) {
+			if(mSensorHelper == null) {
+				mSensorHelper = new SensorHelper(context);
+				mSensorHelper.setOnSensorChangeListener(this);
+			}
+		} else if(mSensorHelper != null) {
+			mSensorHelper.stopListening();
+			mSensorHelper = null;
+		}
 	}
 
 	private void initialize() {
@@ -126,6 +144,7 @@ public class InMapFragment extends FixedSupportMapFragment implements InMapViewC
 		//configureMarkerLatLng();
 
 		mMap.setOnMapClickListener(onMapClickListener);
+		mMap.setOnCameraChangeListener(onCameraChangeListener);
 	}
 
 	private void configureMapType() {
@@ -253,11 +272,13 @@ public class InMapFragment extends FixedSupportMapFragment implements InMapViewC
 			.zoom(mApplicationDataFacade.getInitialMapZoom())
 			.build()));
 		}
+		int duration = instant ? 1 : 2000;
+		mCameraAnimationEnd = SystemClock.uptimeMillis() + duration;
 		mMap.animateCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder()
-		.target(new LatLng(mApplicationDataFacade.getLatitude(), mApplicationDataFacade.getLongitude()))
-		.zoom(mApplicationDataFacade.getMapZoom())
-		.bearing(mApplicationDataFacade.getMapRotation())
-		.build()), instant ? 1 : 2000, null);
+			.target(new LatLng(mApplicationDataFacade.getLatitude(), mApplicationDataFacade.getLongitude()))
+			.zoom(mApplicationDataFacade.getMapZoom())
+			.bearing(mApplicationDataFacade.getMapRotation())
+			.build()), duration, null);
 	}
 
 	private OnInfoWindowClickListener onInfoWindowClickListener = new OnInfoWindowClickListener() {
@@ -351,14 +372,27 @@ public class InMapFragment extends FixedSupportMapFragment implements InMapViewC
 	public void onSensorChanged(float azimuth, float pitch, float roll) {
 		long currentTime = SystemClock.uptimeMillis();
 		float angle = (float) (azimuth*180/Math.PI);
-		if(currentTime > mLastSensorChange + SENSOR_ANIMATION_TIME && Math.abs(mLastSensorAngle-angle) > SENSOR_MIN_ANGLE_CHANGE) {
+		if(currentTime > mLastSensorChange + SENSOR_ANIMATION_TIME && Math.abs(mLastSensorAngle-angle) > SENSOR_MIN_ANGLE_CHANGE && !isCameraAnimating()) {
 			//Log.i(TAG, "Sensor changed: azimuth: " + azimuth + " pitch: " + pitch + " roll: " + roll + " angle: " + angle);
-			mMap.animateCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder(mMap.getCameraPosition())
-			.bearing(angle)
-			.build()), SENSOR_ANIMATION_TIME, null);
+			mMap.animateCamera(CameraUpdateFactory.newCameraPosition(mLastSensorCameraPosition = new CameraPosition.Builder(mMap.getCameraPosition())
+				.bearing(angle)
+				.build()), SENSOR_ANIMATION_TIME, null);
 			mLastSensorChange = currentTime;
 			mLastSensorAngle = angle;
 		}
 	}
+	
+	private boolean isCameraAnimating() {
+		return mCameraAnimationEnd > SystemClock.uptimeMillis();
+	}
 
+	private OnCameraChangeListener onCameraChangeListener = new OnCameraChangeListener() {
+		
+		@Override
+		public void onCameraChange(CameraPosition cameraPosition) {
+			if(!cameraPosition.equals(mLastSensorCameraPosition) && !isCameraAnimating()) {
+				mCameraAnimationEnd = SystemClock.uptimeMillis()+2000;
+			}
+		}
+	};
 }

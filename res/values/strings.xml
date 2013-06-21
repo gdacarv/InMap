@@ -128,4 +128,7 @@
     <string name="invite_label">Convide seus amigos a usar InMap e veja-os online</string>
     <string name="invite_msg">Ei, já viu o InMap? Além de todas as informações do shopping e lojas, ainda posso ver quem estar no Shopping no momento! Ficou muito fácil encontrar os amigos!</string>
 
+    <string name="pref_key_compass">pref_key_compass</string>
+    <string name="pref_title_compass">Modo bússola</string>
+    <string name="pref_summary_compass">Modo que o mapa mantém a orientação alinhada com as coordenadas reais.</string>
 </resources>
