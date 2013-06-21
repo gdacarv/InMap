@@ -1,10 +1,8 @@
 package com.contralabs.inmap.activities;
 
-import android.annotation.TargetApi;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,7 +18,6 @@ import com.contralabs.inmap.InMapApplication;
 import com.contralabs.inmap.fragments.ExtraFragment;
 import com.contralabs.inmap.fragments.InfoDialogFragment;
 import com.contralabs.inmap.fragments.LegalNoticesDialogFragment;
-import com.contralabs.inmap.fragments.ProximityCheckDialogFragment;
 import com.contralabs.inmap.fragments.ExtraFragment.OnReadyChangeListener;
 import com.contralabs.inmap.interfaces.ApplicationDataFacade;
 import com.contralabs.inmap.model.Store;
@@ -65,7 +62,7 @@ public class StoreDetailsActivity extends SherlockFragmentActivity{
 		EasyTracker.getInstance().setContext(getApplicationContext());
 		EasyTracker.getTracker().sendEvent("UserAction", "StoreDetails", "StoreView", mStore.getId());
 		
-		ProximityCheckDialogFragment.showIfAppropriate(intent, getSupportFragmentManager());
+		//ProximityCheckDialogFragment.showIfAppropriate(intent, getSupportFragmentManager());
 	}
 
 	@Override

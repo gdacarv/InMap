@@ -61,8 +61,8 @@
             android:name="com.contralabs.inmap.activities.SettingsActivity"
             android:label="@string/settings" />
 
-        <service android:name="com.contralabs.inmap.server.UpdateDataService" />
-        <service android:name="com.contralabs.inmap.location.ProximityService" />
+        <service android:name="com.contralabs.inmap.server.UpdateDataService"  android:exported="false"/>
+        <service android:name="com.contralabs.inmap.location.ProximityService" android:exported="false"/>
 
         <!--
         <receiver

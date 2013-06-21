@@ -34,7 +34,6 @@ import com.contralabs.inmap.fragments.InfoDialogFragment;
 import com.contralabs.inmap.fragments.InfrastructureBarFragment;
 import com.contralabs.inmap.fragments.InfrastructureBarFragment.OnInfrastructureCategoryChangedListener;
 import com.contralabs.inmap.fragments.LegalNoticesDialogFragment;
-import com.contralabs.inmap.fragments.ProximityCheckDialogFragment;
 import com.contralabs.inmap.fragments.RateDialogFragment;
 import com.contralabs.inmap.fragments.SplashDialogFragment;
 import com.contralabs.inmap.fragments.StoreCategoryListFragment;
@@ -68,7 +67,7 @@ import com.slidingmenu.lib.SlidingMode;
 
 public class MainActivity extends SlidingActionBarActivity implements OnInfrastructureCategoryChangedListener, OnStoreCategoryChangedListener, OnStoreSelectedListener, OnLevelSelectedListener, StoreListController, OnStoreBallonClickListener {
 
-	protected static final String SHOW_STORE_INMAP = "show_store_inmap";
+	public static final String SHOW_STORE_INMAP = "show_store_inmap";
 
 
 	public static final String SHOW_SEARCH = "com.contralabs.inmap.SHOW_SEARCH";
@@ -127,7 +126,7 @@ public class MainActivity extends SlidingActionBarActivity implements OnInfrastr
 		if(!intentSearch && !intentShowOnMap && savedInstanceState == null)
 			showSplash();
 
-		ProximityCheckDialogFragment.showIfAppropriate(intent, getSupportFragmentManager());
+		//ProximityCheckDialogFragment.showIfAppropriate(intent, getSupportFragmentManager());
 		
 		configureHelpShift();
 		

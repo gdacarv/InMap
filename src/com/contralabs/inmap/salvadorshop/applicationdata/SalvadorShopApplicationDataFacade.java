@@ -119,4 +119,9 @@ public class SalvadorShopApplicationDataFacade implements ApplicationDataFacade 
 	public String getPlaceName() {
 		return "Salvador Shopping";
 	}
+
+	@Override
+	public float getAreaRadius() {
+		return 170f;
+	}
 }

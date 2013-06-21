@@ -17,5 +17,6 @@ public interface ApplicationDataFacade {
 	double getInitialLongitude();
 	float getInitialMapZoom();
 	String getPlaceName();
+	float getAreaRadius();
 	
 }

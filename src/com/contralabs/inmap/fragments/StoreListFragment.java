@@ -1,10 +1,12 @@
 package com.contralabs.inmap.fragments;
 
+import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Comparator;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,6 +16,7 @@ import android.support.v4.app.FragmentActivity;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
@@ -24,6 +27,8 @@ import android.widget.TextView;
 
 import com.contralabs.inmap.InMapApplication;
 import com.contralabs.inmap.R;
+import com.contralabs.inmap.activities.MainActivity;
+import com.contralabs.inmap.activities.StoreDetailsActivity;
 import com.contralabs.inmap.interfaces.ApplicationDataFacade;
 import com.contralabs.inmap.model.DbAdapter;
 import com.contralabs.inmap.model.Store;
@@ -56,6 +61,8 @@ public class StoreListFragment extends Fragment {
 
 	private Helpshift mHelpshift;
 
+
+
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -72,14 +79,6 @@ public class StoreListFragment extends Fragment {
 		mStoreList = (ListView) mRoot.findViewById(R.id.list_store);
 		mStoreListAdapter = new StoreListAdapter(mContext);
 		mStoreList.setAdapter(mStoreListAdapter);
-
-		mStoreList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				selectStore((Store) mStoreListAdapter.getItem(position));
-			}
-		});
 		mTitleTextView = (TextView) mRoot.findViewById(R.id.txt_storelist_title);
 		mViewHeader = mRoot.findViewById(R.id.layout_storelist_header);
 		
@@ -250,12 +249,15 @@ public class StoreListFragment extends Fragment {
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			if(convertView == null)
+			if(convertView == null) {
 				convertView = View.inflate(mContext, R.layout.listitem_store, null);
+				convertView.setOnClickListener(onItemClickListener);
+				convertView.findViewById(R.id.layout_store_showonmap).setOnClickListener(onItemShowOnMapClickListener);
+			}
 			
 			Store store = (Store)getItem(position);
 			TextView nameTextView = (TextView) convertView.findViewById(R.id.txt_store_name);
-			nameTextView.setText(store.getName() + " - " + store.getId());
+			nameTextView.setText(store.getName());// + " - " + store.getId()); // Convenience to show store id. Should not be used in live app.
 			StoreCategory storeCategory = store.getCategory();
 			ImageView imgCategory = (ImageView) convertView.findViewById(R.id.img_store_category);
 			View layout = convertView.findViewById(R.id.layout_listitem_store_category);
@@ -289,6 +291,12 @@ public class StoreListFragment extends Fragment {
 				} 
 			} else
 				extraTextView.setVisibility(View.GONE);
+			
+			View showOnMap = convertView.findViewById(R.id.layout_store_showonmap);
+			showOnMap.setBackgroundColor(storeCategory.getMenuColor());
+			showOnMap.setTag(store);
+			
+			convertView.setTag(store);
 			
 			return convertView;
 		}
@@ -369,4 +377,22 @@ public class StoreListFragment extends Fragment {
 			mViewNoItemList.findViewById(R.id.btn_sugira_loja).setVisibility(View.VISIBLE);
 		}
 	}
+	
+	private OnClickListener onItemClickListener = new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			selectStore((Store) v.getTag());
+		}
+	};
+	
+	private OnClickListener onItemShowOnMapClickListener = new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			Intent i = new Intent(getActivity(), MainActivity.class);
+			i.putExtra(MainActivity.SHOW_STORE_INMAP, (Serializable) v.getTag());
+			startActivity(i);
+		}
+	};
 }
