@@ -8,14 +8,17 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.contralabs.inmap.R;
@@ -24,7 +27,6 @@ import com.contralabs.inmap.social.PeopleInsideAPI;
 import com.contralabs.inmap.social.ServerPeopleInsideAPI;
 import com.contralabs.inmap.social.User;
 import com.contralabs.inmap.social.UsersCallback;
-import com.contralabs.inmap.utils.Utils;
 import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.widget.LoginButton;
@@ -79,6 +81,7 @@ public class PeopleInsideFragment extends FacebookFragment {
 		authButton.setReadPermissions(Arrays.asList("email", "user_birthday"));
 		authButton.setFragment(this);
 		mListView = (ExpandableListView) view.findViewById(R.id.peopleinside_list);
+		mListView.setGroupIndicator(null);
 		mListView.setOnChildClickListener(onChildClickListener);
 		mListView.setAdapter(mAdapter);
 		mListView.expandGroup(0);
@@ -228,11 +231,10 @@ public class PeopleInsideFragment extends FacebookFragment {
 		@Override
 		public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
 			if(convertView == null) {
-				convertView = new TextView(mContext);
-				int padding = (int) Utils.convertDpToPixel(15, getResources());
-				convertView.setPadding(padding*2, padding, padding, padding);
+				convertView = View.inflate(mContext, R.layout.listitem_user_category, null);
 			}
-			((TextView)convertView).setText(groupPosition == 0 ? R.string.amigos : R.string.desconhecido);
+			((TextView)convertView.findViewById(R.id.cat_name)).setText(groupPosition == 0 ? R.string.amigos : R.string.desconhecido);
+			((ImageView)convertView.findViewById(R.id.cat_img_state)).setImageResource(isExpanded ? R.drawable.bt_ic_dropdown_active : R.drawable.bt_ic_dropdown_default);
 			return convertView;
 		}
 
@@ -241,6 +243,8 @@ public class PeopleInsideFragment extends FacebookFragment {
 			if(getChildType(groupPosition, childPosition) == getChildTypeCount()-1) { // Is invite your friends
 				TextView textView = (TextView) View.inflate(mContext, android.R.layout.simple_list_item_1, null);
 				textView.setText(R.string.invite_label);
+				textView.setGravity(Gravity.CENTER);
+				textView.setTextColor(Color.WHITE);
 				return textView;
 			}
 			

@@ -33,7 +33,7 @@
         android:layout_alignParentTop="true"
         android:src="@drawable/bt_delete_pins_mapa"
         android:layout_marginTop="8dp"
-        android:layout_marginRight="116dp"
+        android:layout_marginRight="58dp"
         android:onClick="onClearMarkersButtonClick"
         android:visibility="invisible"
         android:background="@null" />
@@ -44,8 +44,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="58dp"/>
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="58dp"/>
     
     <FrameLayout 
         android:id="@+id/layout_splash"
