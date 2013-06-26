@@ -15,15 +15,12 @@
 
     <TextView
         android:id="@+id/people_name"
+        style="@style/simple_shadow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginLeft="10dp"
         android:textColor="@android:color/white"
-        android:shadowColor="@android:color/black"
-        android:shadowDx="1"
-        android:shadowDy="1"
-        android:shadowRadius="1"
         android:textSize="18sp" />
 
 </LinearLayout>

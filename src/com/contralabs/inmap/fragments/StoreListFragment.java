@@ -18,7 +18,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -28,7 +27,6 @@ import android.widget.TextView;
 import com.contralabs.inmap.InMapApplication;
 import com.contralabs.inmap.R;
 import com.contralabs.inmap.activities.MainActivity;
-import com.contralabs.inmap.activities.StoreDetailsActivity;
 import com.contralabs.inmap.interfaces.ApplicationDataFacade;
 import com.contralabs.inmap.model.DbAdapter;
 import com.contralabs.inmap.model.Store;
@@ -43,7 +41,7 @@ public class StoreListFragment extends Fragment {
 
 	private static final String STORE_PARAMETERS = "StoreParameters";
 
-	private static final int MAX_DESCRIPTION_LENGHT = 140;
+	private static final int MAX_DESCRIPTION_LENGHT = 100;
 	
 	private View mRoot, mViewNoItemList, mViewHeader;
 	private ListView mStoreList;

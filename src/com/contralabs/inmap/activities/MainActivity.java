@@ -182,6 +182,7 @@ public class MainActivity extends SlidingActionBarActivity implements OnInfrastr
 
 		case R.id.menu_social:
 			toggleRightMenu();
+			EasyTracker.getTracker().sendView("SocialFragment");
 			break;
 
 		case R.id.menu_problemas:

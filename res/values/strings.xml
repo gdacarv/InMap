@@ -81,7 +81,7 @@
     <string name="sobre">Sobre</string>
     <string name="versao">Versão</string>
     <string name="voltar">Voltar</string>
-    <string name="sobre_texto">InMap - Tudo em um só Lugar!\n\nAplicativo em fase beta, desenvolvido pela Contra Labs ( http://www.contralabs.com ).\nEsse aplicativo irá evoluir com o tempo, e queremos que você faça parte disso. Dê seu feedback comentando na página do InMap no Google Play ou por e-mail (contralabs@gmail.com).</string>
+    <string name="sobre_texto">InMap - Tudo em um só Lugar!\n\nAplicativo em fase beta, desenvolvido pela Contra Labs ( http://www.contralabs.com ).\nEsse aplicativo irá evoluir com o tempo, e queremos que você faça parte disso. Dê seu feedback comentando na página do InMap no Google Play ou por e-mail (contato@contralabs.com).</string>
     <string name="msg_nomaps">Você precisa atualizar o Google Play para exibir corretamente o mapa.</string>
     <string name="msg_exit_area">Obrigado, e volte sempre ao %s!</string>
     <string name="msg_enter_area">Bem vindo ao %s!</string>
@@ -119,14 +119,14 @@
     
     <string name="pref_key_show_im_inside">pref_key_show_im_inside</string>
     <string name="pref_title_show_im_inside">Mostrar que estou no Shopping</string>
-    <string name="pref_summary_show_im_inside">Se conectado ao Facebook, permite que outras pessoas vejam que você está no Shopping."</string>
+    <string name="pref_summary_show_im_inside">Se conectado ao Facebook, permite que outras pessoas vejam que você está no Shopping.</string>
     <string name="msg_logout">Desconectar conta do Facebook</string>
     <string name="pref_key_social">pref_key_social</string>
     <string name="desconectado_">Desconectado.</string>
     <string name="amigos">Amigos</string>
     <string name="desconhecido">Desconhecido</string>
     <string name="invite_label">Convide seus amigos a usar InMap e veja-os online</string>
-    <string name="invite_msg">Ei, já viu o InMap? Além de todas as informações do shopping e lojas, ainda posso ver quem esta no Shopping no momento! Ficou muito fácil encontrar os amigos!</string>
+    <string name="invite_msg">Ei, conhece o InMap? Além de todas as informações do shopping e lojas, ainda posso ver quem esta no Shopping no momento! Ficou muito fácil encontrar os amigos!</string>
 
     <string name="pref_key_compass">pref_key_compass</string>
     <string name="pref_title_compass">Modo bússola</string>

@@ -16,6 +16,7 @@ import com.facebook.Session;
 public class SettingsActivity extends PreferenceActivity {
 	
 	public static final String RELOAD_MAP_TYPE = "com.contralabs.inmap.activities.SettingsActivity.RELOAD_MAP_TYPE";
+	public static final boolean SENSOR_DEFAULT = false;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -55,5 +56,7 @@ public class SettingsActivity extends PreferenceActivity {
 			});
 			category.addPreference(logout);
 		}
+		
+		findPreference(getString(R.string.pref_key_compass)).setDefaultValue(SENSOR_DEFAULT);
 	}
 }

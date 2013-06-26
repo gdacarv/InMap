@@ -2,20 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/socialize_background" >
+    android:background="@color/socialize_background"
+    android:orientation="vertical" >
 
     <TextView
+        style="@style/simple_shadow"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:gravity="center"
         android:text="@string/usuarios_no_shopping"
-        android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@android:color/white"
-        android:shadowColor="@android:color/black"
-        android:shadowDx="1"
-        android:shadowDy="1"
-        android:shadowRadius="1"/>
+        android:textSize="@dimen/peopleinside_title_textSize" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -29,32 +26,29 @@
             android:orientation="vertical" >
 
             <TextView
+                style="@style/simple_shadow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="10dp"
                 android:text="@string/msg_peopleinside_login"
-                android:textColor="@android:color/white"
-		        android:shadowColor="@android:color/black"
-		        android:shadowDx="1"
-		        android:shadowDy="1"
-		        android:shadowRadius="1"
-                android:padding="10dp" />
+                android:textColor="@android:color/white" />
 
             <com.facebook.widget.LoginButton
                 android:id="@+id/authButton"
-                android:layout_gravity="center"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
         </LinearLayout>
-        
-        <ExpandableListView 
+
+        <ExpandableListView
             android:id="@+id/peopleinside_list"
             android:layout_width="match_parent"
-        	android:layout_height="match_parent"
-        	android:cacheColorHint="@android:color/transparent"
-        	android:divider="@android:color/black"
-        	android:dividerHeight="1dp" />
+            android:layout_height="match_parent"
+            android:cacheColorHint="@android:color/transparent"
+            android:divider="@android:color/black"
+            android:dividerHeight="1dp" />
     </RelativeLayout>
 
 </LinearLayout>

@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.contralabs.inmap.R;
 import com.contralabs.inmap.activities.MainActivity;
+import com.contralabs.inmap.activities.SettingsActivity;
 import com.contralabs.inmap.controllers.PreSettedMapLatLngConverter;
 import com.contralabs.inmap.interfaces.ApplicationDataFacade;
 import com.contralabs.inmap.interfaces.InMapViewController;
@@ -54,8 +55,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class InMapFragment extends FixedSupportMapFragment implements InMapViewController, MapItemsListener, OnSensorChangeListener {
 
 
-	private static final int SENSOR_MIN_ANGLE_CHANGE = 2;
-	private static final int SENSOR_ANIMATION_TIME = 200;
+	private static final int SENSOR_MIN_ANGLE_CHANGE = 1;
+	private static final int SENSOR_ANIMATION_TIME = 400;
 	private static final String TAG = "InMapFragment";
 	private GoogleMap mMap;
 	private ApplicationDataFacade mApplicationDataFacade;
@@ -122,7 +123,7 @@ public class InMapFragment extends FixedSupportMapFragment implements InMapViewC
 	}
 
 	private void configureSensorHelper(Context context) {
-		if(PreferenceManager.getDefaultSharedPreferences(context).getBoolean(context.getString(R.string.pref_key_compass), true)) {
+		if(PreferenceManager.getDefaultSharedPreferences(context).getBoolean(context.getString(R.string.pref_key_compass), SettingsActivity.SENSOR_DEFAULT)) {
 			if(mSensorHelper == null) {
 				mSensorHelper = new SensorHelper(context);
 				mSensorHelper.setOnSensorChangeListener(this);
@@ -372,8 +373,8 @@ public class InMapFragment extends FixedSupportMapFragment implements InMapViewC
 	public void onSensorChanged(float azimuth, float pitch, float roll) {
 		long currentTime = SystemClock.uptimeMillis();
 		float angle = (float) (azimuth*180/Math.PI);
+		Log.i(TAG, "Sensor changed: azimuth: " + azimuth + " pitch: " + pitch + " roll: " + roll + " angle: " + angle);
 		if(currentTime > mLastSensorChange + SENSOR_ANIMATION_TIME && Math.abs(mLastSensorAngle-angle) > SENSOR_MIN_ANGLE_CHANGE && !isCameraAnimating()) {
-			//Log.i(TAG, "Sensor changed: azimuth: " + azimuth + " pitch: " + pitch + " roll: " + roll + " angle: " + angle);
 			mMap.animateCamera(CameraUpdateFactory.newCameraPosition(mLastSensorCameraPosition = new CameraPosition.Builder(mMap.getCameraPosition())
 				.bearing(angle)
 				.build()), SENSOR_ANIMATION_TIME, null);

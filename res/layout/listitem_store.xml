@@ -36,7 +36,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="@dimen/listitem_store_name_textSize"
             android:textStyle="bold" />
 
         <TextView

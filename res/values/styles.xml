@@ -26,9 +26,16 @@
         <item name="titleTextStyle">@style/ActionBar.TitleTextStyle.AppTheme</item>
     </style>
 
-    <style name="ActionBar.TitleTextStyle.AppTheme" parent="TextAppearance.Sherlock.Widget.ActionBar.Title">
+    <style name="ActionBar.TitleTextStyle.AppTheme" parent="TextAppearance.Sherlock.Widget.ActionBar.Title.Shadow">
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="TextAppearance.Sherlock.Widget.ActionBar.Title.Shadow" parent="TextAppearance.Sherlock.Widget.ActionBar.Title">
+        <item name="android:shadowColor">@android:color/black</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">1</item>
     </style>
 
     <style name="descriptionInfo" parent="android:Widget.Holo.Light.TextView">
@@ -42,6 +49,13 @@
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowFullscreen">false</item>
+    </style>
+
+    <style name="simple_shadow">
+        <item name="android:shadowColor">@android:color/black</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">1</item>
     </style>
 
 </resources>

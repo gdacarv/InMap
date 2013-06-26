@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.contralabs.inmap"
     android:versionCode="6"
-    android:versionName="2.0 Beta" >
+    android:versionName="2.0" >
 
     <uses-sdk
         android:minSdkVersion="8"

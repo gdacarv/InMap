@@ -11,6 +11,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,10 +28,12 @@ import com.contralabs.inmap.social.PeopleInsideAPI;
 import com.contralabs.inmap.social.ServerPeopleInsideAPI;
 import com.contralabs.inmap.social.User;
 import com.contralabs.inmap.social.UsersCallback;
+import com.contralabs.inmap.utils.Utils;
 import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.widget.LoginButton;
 import com.facebook.widget.ProfilePictureView;
+import com.google.analytics.tracking.android.EasyTracker;
 
 public class PeopleInsideFragment extends FacebookFragment {
 
@@ -169,11 +172,13 @@ public class PeopleInsideFragment extends FacebookFragment {
 		public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 			if(mAdapter.getChildType(groupPosition, childPosition) == mAdapter.getChildTypeCount()-1) { // Invite friends
 				FacebookHelper.inviteFriends(getActivity());
+				EasyTracker.getTracker().sendEvent("UserAction", "Social", "InviteFriends", 1l);
 				return true;
 			}
 			
 			User user = (User) mAdapter.getChild(groupPosition, childPosition);
 			startActivity(FacebookHelper.getOpenFacebookIntent(getActivity(), user.getFacebookId()));
+			EasyTracker.getTracker().sendEvent("UserAction", "Social", "ClickOnFriend", 1l);
 			return true;
 		}
 	};
@@ -245,6 +250,9 @@ public class PeopleInsideFragment extends FacebookFragment {
 				textView.setText(R.string.invite_label);
 				textView.setGravity(Gravity.CENTER);
 				textView.setTextColor(Color.WHITE);
+				textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+				int padding = (int) Utils.convertDpToPixel(15, mContext.getResources());
+				textView.setPadding(padding, padding, padding, padding);
 				return textView;
 			}
 			
