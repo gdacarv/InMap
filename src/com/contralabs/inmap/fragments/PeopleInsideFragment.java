@@ -15,6 +15,7 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
@@ -39,13 +40,14 @@ public class PeopleInsideFragment extends FacebookFragment {
 
 	private static final int TIMERATE_REFRESH_PEOPLE_INSIDE = 40; // In Seconds
 	private static final String TAG = "PeopleInsideFragment";
-	private View mLoginLayout;
+	private View mLoginLayout, mRefreshProgressBar, mRefreshButton;
 	private ExpandableListView mListView;
 	private PeopleInsideExpandableListAdapter mAdapter;
 	private PeopleInsideAPI mPeopleInsideAPI;
 	private List<User> mUsersInside;
 	private List<User> mAllFriends;
 	private ScheduledExecutorService mScheduler;
+	private boolean mRefreshing = false;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -55,21 +57,23 @@ public class PeopleInsideFragment extends FacebookFragment {
 		if(mAdapter == null)
 			mAdapter = new PeopleInsideExpandableListAdapter(getActivity());
 	}
-	
+
 	@Override
 	public void onResume() {
 		super.onResume();
 		mScheduler = Executors.newSingleThreadScheduledExecutor();
 
 		mScheduler.scheduleAtFixedRate
-		      (new Runnable() {
-		         public void run() {
-		     		requestPeopleInside();
-		     		Log.i(TAG, "People Inside refreshing...");
-		         }
-		      }, 0, TIMERATE_REFRESH_PEOPLE_INSIDE, TimeUnit.SECONDS);
+		(new Runnable() {
+			public void run() {
+				if(!mRefreshing) {
+					requestPeopleInside();
+					Log.i(TAG, "People Inside refreshing...");
+				}
+			}
+		}, 0, TIMERATE_REFRESH_PEOPLE_INSIDE, TimeUnit.SECONDS);
 	}
-	
+
 	@Override
 	public void onPause() {
 		mScheduler.shutdownNow();
@@ -79,6 +83,9 @@ public class PeopleInsideFragment extends FacebookFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_peopleinside, container, false);
+		mRefreshProgressBar = view.findViewById(R.id.peopleinside_refresh_pgs);
+		mRefreshButton = view.findViewById(R.id.peopleinside_refresh);
+		mRefreshButton.setOnClickListener(onRefreshClickListener);
 		mLoginLayout = view.findViewById(R.id.peopleinside_login_layout);
 		LoginButton authButton = (LoginButton) view.findViewById(R.id.authButton);
 		authButton.setReadPermissions(Arrays.asList("email", "user_birthday"));
@@ -103,7 +110,7 @@ public class PeopleInsideFragment extends FacebookFragment {
 	}
 
 	private UsersCallback friendsCallback = new UsersCallback() {
-		
+
 
 		@Override
 		public void onReceived(List<User> users) {
@@ -120,17 +127,19 @@ public class PeopleInsideFragment extends FacebookFragment {
 		mLoginLayout.setVisibility(loggedIn ? View.INVISIBLE : View.VISIBLE);
 		mListView.setVisibility(loggedIn ? View.VISIBLE : View.INVISIBLE);
 	}
-	
+
 	private void requestPeopleInside() {
+		setRefreshing(true);
 		mPeopleInsideAPI.requestPeopleInside(peopleInsideCallback);
 	}
-	
+
 	private UsersCallback peopleInsideCallback = new UsersCallback() {
-		
+
 		@Override
 		public void onReceived(List<User> users) {
 			mUsersInside = users;
 			refreshAdapterData();
+			setRefreshing(false);
 		}
 	};
 
@@ -154,10 +163,10 @@ public class PeopleInsideFragment extends FacebookFragment {
 			friends = null;
 			unknown = mUsersInside;
 		}
-		
+
 		mAdapter.setData(friends, unknown);
 	}
-	
+
 	private boolean isFriend(User user) {
 		if(mAllFriends != null) 
 			for(User friend : mAllFriends)
@@ -167,7 +176,7 @@ public class PeopleInsideFragment extends FacebookFragment {
 	}
 
 	private OnChildClickListener onChildClickListener = new OnChildClickListener() {
-		
+
 		@Override
 		public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 			if(mAdapter.getChildType(groupPosition, childPosition) == mAdapter.getChildTypeCount()-1) { // Invite friends
@@ -175,13 +184,28 @@ public class PeopleInsideFragment extends FacebookFragment {
 				EasyTracker.getTracker().sendEvent("UserAction", "Social", "InviteFriends", 1l);
 				return true;
 			}
-			
+
 			User user = (User) mAdapter.getChild(groupPosition, childPosition);
 			startActivity(FacebookHelper.getOpenFacebookIntent(getActivity(), user.getFacebookId()));
 			EasyTracker.getTracker().sendEvent("UserAction", "Social", "ClickOnFriend", 1l);
 			return true;
 		}
 	};
+
+
+	private OnClickListener onRefreshClickListener = new OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+			requestPeopleInside();
+		}
+	};
+
+	private void setRefreshing(boolean b) {
+		mRefreshing = b;
+		mRefreshButton.setVisibility(b ? View.INVISIBLE : View.VISIBLE);
+		mRefreshProgressBar.setVisibility(b ? View.VISIBLE : View.INVISIBLE);
+	}
 
 	private class PeopleInsideExpandableListAdapter extends BaseExpandableListAdapter{
 
@@ -240,6 +264,7 @@ public class PeopleInsideFragment extends FacebookFragment {
 			}
 			((TextView)convertView.findViewById(R.id.cat_name)).setText(groupPosition == 0 ? R.string.amigos : R.string.desconhecido);
 			((ImageView)convertView.findViewById(R.id.cat_img_state)).setImageResource(isExpanded ? R.drawable.bt_ic_dropdown_active : R.drawable.bt_ic_dropdown_default);
+			convertView.setBackgroundResource(isExpanded ? R.drawable.bg_bar_socialize_press : R.drawable.bg_bar_socialize_default);
 			return convertView;
 		}
 
@@ -247,7 +272,8 @@ public class PeopleInsideFragment extends FacebookFragment {
 		public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 			if(getChildType(groupPosition, childPosition) == getChildTypeCount()-1) { // Is invite your friends
 				TextView textView = (TextView) View.inflate(mContext, android.R.layout.simple_list_item_1, null);
-				textView.setText(R.string.invite_label);
+				textView.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, R.drawable.bt_convide_amigos_selector);
+				textView.setText((mFriends.isEmpty() ? mContext.getString(R.string.no_friends) + "\n" : "") + mContext.getString(R.string.invite_label));
 				textView.setGravity(Gravity.CENTER);
 				textView.setTextColor(Color.WHITE);
 				textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
@@ -255,7 +281,7 @@ public class PeopleInsideFragment extends FacebookFragment {
 				textView.setPadding(padding, padding, padding, padding);
 				return textView;
 			}
-			
+
 			if(convertView == null)
 				convertView = View.inflate(mContext, R.layout.listitem_people, null);
 			User user = (User) getChild(groupPosition, childPosition);
@@ -263,21 +289,21 @@ public class PeopleInsideFragment extends FacebookFragment {
 			((TextView) convertView.findViewById(R.id.people_name)).setText(user.getName());
 			return convertView;
 		}
-		
+
 		@Override
 		public int getChildTypeCount() {
 			return super.getChildTypeCount()+1;
 		}
-		
+
 		@Override
 		public int getChildType(int groupPosition, int childPosition) {
-			return groupPosition == 0 && childPosition < getChildrenCount(groupPosition)-1 ? super.getChildType(groupPosition, childPosition) : getChildTypeCount()-1;
+			return groupPosition == 0 && childPosition == getChildrenCount(groupPosition)-1 ? getChildTypeCount()-1 : super.getChildType(groupPosition, childPosition);
 		}
 
 		@Override
 		public boolean isChildSelectable(int groupPosition, int childPosition) {
 			return true;
 		}
-		
+
 	}
 }

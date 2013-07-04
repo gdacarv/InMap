@@ -165,7 +165,7 @@ public class StoreListFragment extends Fragment {
 			mBackToCategoryButton.setImageResource(R.drawable.bt_pesquisar);
 			mTitleTextView.setText(mStoreListAdapter.getSearchQuery());
 			mViewHeader.setBackgroundColor(0xff0b6897);
-			mShowOnMapButton.setImageResource(R.drawable.bt_pin_loja_cat_all);
+			mShowOnMapButton.setImageResource(R.drawable.bt_pin_loja_mapa);
 		}else {
 			StoreCategory category = mStoreListAdapter.getStoreCategory();
 			mBackToCategoryButton.setImageResource(category.getMenuIconResId());

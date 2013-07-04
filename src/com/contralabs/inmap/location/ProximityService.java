@@ -32,6 +32,8 @@ public class ProximityService extends IntentService {
 			apiInside = intent.getBooleanExtra(LocationManager.KEY_PROXIMITY_ENTERING, false);
 		else
 			apiInside = getInsideByGeofence(intent);
+		if(apiInside == null)
+			return;
 		PeopleInsideAPI peopleInsideAPI = new ServerPeopleInsideAPI();
 		User user = FacebookHelper.getUser(this);
 		SharedPreferences defaultSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -60,14 +62,14 @@ public class ProximityService extends IntentService {
 			Log.e("ReceiveTransitionsIntentService",
 					"Location Services error: " +
 					Integer.toString(errorCode));
-			// Get the type of transition (entry or exit)
-			int transitionType = LocationClient.getGeofenceTransition(intent);
-			// Test that a valid transition was reported
-			return (transitionType == Geofence.GEOFENCE_TRANSITION_ENTER) ? Boolean.TRUE :
-				(transitionType == Geofence.GEOFENCE_TRANSITION_EXIT)? Boolean.FALSE :
-				null;
+			return null;
 		}
-		return null;
+		// Get the type of transition (entry or exit)
+		int transitionType = LocationClient.getGeofenceTransition(intent);
+		// Test that a valid transition was reported
+		return (transitionType == Geofence.GEOFENCE_TRANSITION_ENTER) ? Boolean.TRUE :
+			(transitionType == Geofence.GEOFENCE_TRANSITION_EXIT)? Boolean.FALSE :
+				null;
 	}
 
 	private boolean isReallyInside(boolean intentValue) {

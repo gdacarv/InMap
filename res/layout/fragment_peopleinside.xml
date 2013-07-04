@@ -5,14 +5,45 @@
     android:background="@color/socialize_background"
     android:orientation="vertical" >
 
-    <TextView
-        style="@style/simple_shadow"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:gravity="center"
-        android:text="@string/usuarios_no_shopping"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/peopleinside_title_textSize" />
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/simple_shadow"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/usuarios_no_shopping"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/peopleinside_title_textSize" />
+
+        <RelativeLayout
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="center_vertical">
+
+            <ProgressBar
+                android:id="@+id/peopleinside_refresh_pgs"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+               	android:layout_centerInParent="true"
+               	android:visibility="invisible" />
+            
+            <ImageButton 
+                android:id="@+id/peopleinside_refresh"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_navigation_refresh_dark"
+                android:background="@null"
+               	android:layout_centerInParent="true"/>
+            
+        </RelativeLayout>
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
