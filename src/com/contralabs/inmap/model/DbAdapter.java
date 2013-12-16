@@ -1,10 +1,15 @@
 package com.contralabs.inmap.model;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -21,6 +26,7 @@ public class DbAdapter {
 
 	private DatabaseHelper mDbHelper;
 	private SQLiteDatabase mDb;
+	private DateFormat mDateFormat;
 
 	private final Context mCtx; 
 
@@ -32,6 +38,7 @@ public class DbAdapter {
 
 	private DbAdapter(Context ctx){
 		this.mCtx = ctx;
+		mDateFormat = new SimpleDateFormat(DatabaseHelper.DATE_FORMAT_WRITE, Locale.US);
 	}
 
 	public synchronized DbAdapter open() throws SQLException{
@@ -237,5 +244,15 @@ public class DbAdapter {
 
 	public void populateStores(XmlPullParser xpp) throws XmlPullParserException, IOException {
 		mDbHelper.populateStores(mDb, xpp);
+	}
+	
+	public void saveStoreDetailView(String user, Store store){
+		String when = mDateFormat.format(new Date());
+		ContentValues values = new ContentValues(user != null && user.length() > 0 ? 3 : 2);
+		if(user != null && user.length() > 0)
+			values.put(DatabaseHelper.KEY_USER, user);
+		values.put(DatabaseHelper.KEY_STOREID, store.getId());
+		values.put(DatabaseHelper.KEY_WHEN, when);
+		mDb.insert(DatabaseHelper.DATABASE_TABLE_DETAIL_VIEW, null, values);
 	}
 }

@@ -19,7 +19,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	private Context mCtx;
 
 	private final static String DATABASE_NAME = "inmapdatabase";
-	private final static int DATABASE_VERSION = 1;
+	private final static int DATABASE_VERSION = 2; // Modified 16/12/13 08:57
 
 	static final String KEY_ID = "_id";
 
@@ -46,10 +46,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	static final String KEY_INFRACATEGORY = "id_infracategory";
 	static final String KEY_X = "x";
 	static final String KEY_Y = "y";
+	
+	static final String DATABASE_TABLE_DETAIL_VIEW = "detailview";
+	static final String KEY_USER = "user";
+	static final String KEY_STOREID = "storeid";
+	static final String KEY_WHEN = "time_viewed";
 
 
 	//static final String DATE_FORMAT_READ = "dd/MM/yyyy hh:mm";
-	//static final String DATE_FORMAT_WRITE = "yyyy/MM/dd hh:mm";
+	static final String DATE_FORMAT_WRITE = "yyyy/MM/dd hh:mm";
+	
+	private final String DATABASE_CREATE_DETAIL_VIEW = "create table " + DATABASE_TABLE_DETAIL_VIEW + " (" 
+			+ KEY_ID + " integer primary key, "
+			+ KEY_USER + " text, "
+			+ KEY_STOREID + " integer not null, "
+			+ KEY_WHEN + " text not null, "
+			+ "FOREIGN KEY ("+KEY_STOREID+") REFERENCES "+DATABASE_TABLE_STORE+" ("+KEY_ID+"));";
 
 	private final String DATABASE_CREATE[] = {"create table " + DATABASE_TABLE_STORE + " (" 
 			+ KEY_ID + " integer primary key, "
@@ -71,13 +83,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			+ KEY_AREAR2P2Y + " integer);",
 
 			"create table " + DATABASE_TABLE_INFRASTRUCTURE + " (" 
-			+ KEY_ID + " integer primary key, "
+			+ KEY_ID + " integer primary key autoincrement, "
+			+ KEY_USER + " text, "
 			+ KEY_INFRACATEGORY + " integer not null, "
 			+ KEY_X + " integer not null, "
 			+ KEY_Y + " integer not null, "
-			+ KEY_LEVEL + " integer not null);"
+			+ KEY_LEVEL + " integer not null);",
 
-
+			DATABASE_CREATE_DETAIL_VIEW
 	};
 
 	public DatabaseHelper(Context context) {
@@ -210,5 +223,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 						db.insert(DATABASE_TABLE_MSGS, null, args);
 					}
 			}*/
+		switch (oldVersion) {
+		case 1:
+			db.execSQL(DATABASE_CREATE_DETAIL_VIEW);
+		}
 	}
 }

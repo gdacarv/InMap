@@ -31,7 +31,8 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:logo="@drawable/img_marca_inmap"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme" 
+        android:debuggable="true">
         <activity
             android:name="com.contralabs.inmap.activities.MainActivity"
             android:label="@string/app_name"
@@ -93,6 +94,9 @@
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="@string/maps_api_key" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="url_info"
             android:value="https://dl.dropbox.com/s/awpi1m99j1m20c1/SalvadorShopInfo.json?dl=1" />

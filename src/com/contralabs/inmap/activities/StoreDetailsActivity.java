@@ -20,6 +20,7 @@ import com.contralabs.inmap.fragments.InfoDialogFragment;
 import com.contralabs.inmap.fragments.LegalNoticesDialogFragment;
 import com.contralabs.inmap.fragments.ExtraFragment.OnReadyChangeListener;
 import com.contralabs.inmap.interfaces.ApplicationDataFacade;
+import com.contralabs.inmap.model.DbAdapter;
 import com.contralabs.inmap.model.Store;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.helpshift.Helpshift;
@@ -37,6 +38,7 @@ public class StoreDetailsActivity extends SherlockFragmentActivity{
 	private FrameLayout mLayoutExtra;
 	private boolean mShowingExtra = false;
 	private Helpshift mHelpshift;
+	private boolean alreadySavedView = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +46,10 @@ public class StoreDetailsActivity extends SherlockFragmentActivity{
 		setContentView(R.layout.activity_store_details);
 
 		Intent intent = getIntent();
-		if(savedInstanceState != null)
+		if(savedInstanceState != null){
 			mStore = (Store) savedInstanceState.getSerializable(STORE);
-		else
+			alreadySavedView = savedInstanceState.getBoolean("alreadySavedView", false);
+		}else
 			mStore = (Store) intent.getSerializableExtra(STORE);
 
 		ActionBar actionBar = getSupportActionBar();
@@ -63,6 +66,16 @@ public class StoreDetailsActivity extends SherlockFragmentActivity{
 		EasyTracker.getTracker().sendEvent("UserAction", "StoreDetails", "StoreView", mStore.getId());
 		
 		//ProximityCheckDialogFragment.showIfAppropriate(intent, getSupportFragmentManager());
+		
+		if(!alreadySavedView){
+			DbAdapter dbAdapter = DbAdapter.getInstance(this).open();
+			try{
+				dbAdapter.saveStoreDetailView(null, mStore); // FIXME Get facebook id if logged in
+				alreadySavedView = true;
+			} finally {
+				dbAdapter.close();
+			}
+		}
 	}
 
 	@Override
@@ -82,6 +95,7 @@ public class StoreDetailsActivity extends SherlockFragmentActivity{
 		super.onSaveInstanceState(outState);
 		outState.putSerializable(STORE, mStore);
 		outState.putBoolean(SHOWING_EXTRA, mShowingExtra);
+		outState.putBoolean("alreadySavedView", alreadySavedView);
 	}
 
 	private void populateViews(Bundle savedInstanceState) {
