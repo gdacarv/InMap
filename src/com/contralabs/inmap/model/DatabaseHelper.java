@@ -210,19 +210,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		/*switch (oldVersion) {
-			case 1:
-				db.execSQL("ALTER TABLE " + DATABASE_TABLE_MSGS + " ADD COLUMN " + KEY_MENSAGEM + " text;");
-				ContentValues args;
-				int[] primsgs1 = { R.string.msg1_1_1, R.string.msg2_1_1, R.string.msg3_1_1, R.string.msg4_1_1, R.string.msg5_1_1, R.string.msg_1_end};
-				for(int j = 0; j < 5; j++)
-					for(int i = 0; primsgs1[j]+i < primsgs1[j+1]; i++){
-						args = new ContentValues();
-						args.put(KEY_MSGID, primsgs1[j]+i);
-						args.put(KEY_NIVEL, j+1);
-						db.insert(DATABASE_TABLE_MSGS, null, args);
-					}
-			}*/
 		switch (oldVersion) {
 		case 1:
 			db.execSQL(DATABASE_CREATE_DETAIL_VIEW);
