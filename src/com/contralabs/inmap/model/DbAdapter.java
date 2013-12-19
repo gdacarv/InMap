@@ -255,4 +255,13 @@ public class DbAdapter {
 		values.put(DatabaseHelper.KEY_WHEN, when);
 		mDb.insert(DatabaseHelper.DATABASE_TABLE_DETAIL_VIEW, null, values);
 	}
+	
+	public void saveUserModel(String user, String setdv){
+		ContentValues values = new ContentValues(user != null && user.length() > 0 ? 2 : 1);
+		if(user != null && user.length() > 0)
+			values.put(DatabaseHelper.KEY_USER, user);
+		values.put(DatabaseHelper.KEY_SET_DETAILSVIEW, setdv);
+		if(mDb.update(DatabaseHelper.DATABASE_TABLE_USER_MODEL, values, DatabaseHelper.KEY_USER + (user != null && user.length() > 0 ? " = " + user : " IS NULL"), null) == 0)
+			mDb.insert(DatabaseHelper.DATABASE_TABLE_USER_MODEL, null, values);
+	}
 }

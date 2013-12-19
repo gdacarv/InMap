@@ -51,6 +51,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	static final String KEY_USER = "user";
 	static final String KEY_STOREID = "storeid";
 	static final String KEY_WHEN = "time_viewed";
+	
+	static final String DATABASE_TABLE_USER_MODEL = "usermodel";
+	static final String KEY_SET_DETAILSVIEW = "setdv";
 
 
 	//static final String DATE_FORMAT_READ = "dd/MM/yyyy hh:mm";
@@ -62,6 +65,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			+ KEY_STOREID + " integer not null, "
 			+ KEY_WHEN + " text not null, "
 			+ "FOREIGN KEY ("+KEY_STOREID+") REFERENCES "+DATABASE_TABLE_STORE+" ("+KEY_ID+"));";
+	
+	private final String DATABASE_CREATE_USER_MODEL = "create table " + DATABASE_TABLE_USER_MODEL + " (" 
+			+ KEY_ID + " integer primary key, "
+			+ KEY_SET_DETAILSVIEW + " text);";
 
 	private final String DATABASE_CREATE[] = {"create table " + DATABASE_TABLE_STORE + " (" 
 			+ KEY_ID + " integer primary key, "
@@ -90,7 +97,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			+ KEY_Y + " integer not null, "
 			+ KEY_LEVEL + " integer not null);",
 
-			DATABASE_CREATE_DETAIL_VIEW
+			DATABASE_CREATE_DETAIL_VIEW,
+			
+			DATABASE_CREATE_USER_MODEL
 	};
 
 	public DatabaseHelper(Context context) {
@@ -213,6 +222,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		switch (oldVersion) {
 		case 1:
 			db.execSQL(DATABASE_CREATE_DETAIL_VIEW);
+			db.execSQL(DATABASE_CREATE_USER_MODEL);
 		}
 	}
 }
