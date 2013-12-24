@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import org.apache.http.impl.client.DefaultTargetAuthenticationHandler;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -17,6 +18,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.contralabs.inmap.salvadorshop.applicationdata.InfrastructureCategory;
 import com.contralabs.inmap.salvadorshop.applicationdata.StoreCategory;
+import static com.contralabs.inmap.model.DatabaseHelper.*;
 
 
 public class DbAdapter {
@@ -38,7 +40,7 @@ public class DbAdapter {
 
 	private DbAdapter(Context ctx){
 		this.mCtx = ctx;
-		mDateFormat = new SimpleDateFormat(DatabaseHelper.DATE_FORMAT_WRITE, Locale.US);
+		mDateFormat = new SimpleDateFormat(DATE_FORMAT_WRITE, Locale.US);
 	}
 
 	public synchronized DbAdapter open() throws SQLException{
@@ -60,7 +62,7 @@ public class DbAdapter {
 	}
 
 	public Store getStore(long id) {
-		return getStoreFromCursor(mDb.query(DatabaseHelper.DATABASE_TABLE_STORE, null, DatabaseHelper.KEY_ID + " = " + id, null, null, null, null));
+		return getStoreFromCursor(mDb.query(DATABASE_TABLE_STORE, null, KEY_ID + " = " + id, null, null, null, null));
 	}
 
 	public Store[] getStores(StoreParameters parameters) {
@@ -69,7 +71,7 @@ public class DbAdapter {
 
 		String categoryString = parameters.getCategoryString();
 		if(categoryString.length() > 0) {
-			selectionBuilder.append(DatabaseHelper.KEY_STORECATEGORY).append(" in (").append(categoryString).append(")");
+			selectionBuilder.append(KEY_STORECATEGORY).append(" in (").append(categoryString).append(")");
 			useAnd = true;
 		}
 
@@ -79,7 +81,7 @@ public class DbAdapter {
 				selectionBuilder.append(" AND ");
 			else 
 				useAnd = true;
-			selectionBuilder.append(DatabaseHelper.KEY_LEVEL).append(" = ").append(level);
+			selectionBuilder.append(KEY_LEVEL).append(" = ").append(level);
 		}
 
 		Coordinate hasPoint = parameters.getContainsPoint();
@@ -89,15 +91,15 @@ public class DbAdapter {
 			else 
 				useAnd = true;
 			selectionBuilder.append("((")
-			.append(DatabaseHelper.KEY_AREAR1P1X).append(" < ").append(hasPoint.x)
-			.append(" AND ").append(DatabaseHelper.KEY_AREAR1P1Y).append(" < ").append(hasPoint.y)
-			.append(" AND ").append(DatabaseHelper.KEY_AREAR1P2X).append(" >= ").append(hasPoint.x)
-			.append(" AND ").append(DatabaseHelper.KEY_AREAR1P2Y).append(" >= ").append(hasPoint.y)
+			.append(KEY_AREAR1P1X).append(" < ").append(hasPoint.x)
+			.append(" AND ").append(KEY_AREAR1P1Y).append(" < ").append(hasPoint.y)
+			.append(" AND ").append(KEY_AREAR1P2X).append(" >= ").append(hasPoint.x)
+			.append(" AND ").append(KEY_AREAR1P2Y).append(" >= ").append(hasPoint.y)
 			.append(") OR (")
-			.append(DatabaseHelper.KEY_AREAR2P1X).append(" < ").append(hasPoint.x)
-			.append(" AND ").append(DatabaseHelper.KEY_AREAR2P1Y).append(" < ").append(hasPoint.y)
-			.append(" AND ").append(DatabaseHelper.KEY_AREAR2P2X).append(" >= ").append(hasPoint.x)
-			.append(" AND ").append(DatabaseHelper.KEY_AREAR2P2Y).append(" >= ").append(hasPoint.y)
+			.append(KEY_AREAR2P1X).append(" < ").append(hasPoint.x)
+			.append(" AND ").append(KEY_AREAR2P1Y).append(" < ").append(hasPoint.y)
+			.append(" AND ").append(KEY_AREAR2P2X).append(" >= ").append(hasPoint.x)
+			.append(" AND ").append(KEY_AREAR2P2Y).append(" >= ").append(hasPoint.y)
 			.append("))");
 		}
 
@@ -108,23 +110,23 @@ public class DbAdapter {
 			else 
 				useAnd = true;
 			selectionBuilder.append("(")
-			.append(DatabaseHelper.KEY_NAME).append(" LIKE '%").append(anytext).append("%' OR ")
-			.append(DatabaseHelper.KEY_TAGS).append(" LIKE '%").append(anytext).append("%' OR ")
-			.append(DatabaseHelper.KEY_DESCRIPTION).append(" LIKE '%").append(anytext).append("%' OR ")
-			.append(DatabaseHelper.KEY_WEBSITE).append(" LIKE '%").append(anytext)
+			.append(KEY_NAME).append(" LIKE '%").append(anytext).append("%' OR ")
+			.append(KEY_TAGS).append(" LIKE '%").append(anytext).append("%' OR ")
+			.append(KEY_DESCRIPTION).append(" LIKE '%").append(anytext).append("%' OR ")
+			.append(KEY_WEBSITE).append(" LIKE '%").append(anytext)
 			.append("%')");
 		}
 
 		String selection = selectionBuilder.toString();
-		Cursor cursor = mDb.query(DatabaseHelper.DATABASE_TABLE_STORE, null, selection, null, null, null, null); // TODO Right things based on Parameters
+		Cursor cursor = mDb.query(DATABASE_TABLE_STORE, null, selection, null, null, null, null); // TODO Right things based on Parameters
 		return cursor != null ? getStoresFromCursor(cursor) : null;
 	}
 
 	public void getStoresCountByCategory(int[] storesCount) {
-		Cursor cursor = mDb.query(DatabaseHelper.DATABASE_TABLE_STORE, new String[]{ DatabaseHelper.KEY_STORECATEGORY, "COUNT(*) as storecount" } , null, null, DatabaseHelper.KEY_STORECATEGORY, null, null);
+		Cursor cursor = mDb.query(DATABASE_TABLE_STORE, new String[]{ KEY_STORECATEGORY, "COUNT(*) as storecount" } , null, null, KEY_STORECATEGORY, null, null);
 		if(cursor != null && cursor.moveToFirst()) {
 			int countColumn = cursor.getColumnIndex("storecount"),
-				idColumn = cursor.getColumnIndex(DatabaseHelper.KEY_STORECATEGORY);
+				idColumn = cursor.getColumnIndex(KEY_STORECATEGORY);
 			do {
 				storesCount[cursor.getInt(idColumn)-1] = cursor.getInt(countColumn);
 			} while(cursor.moveToNext());
@@ -134,24 +136,24 @@ public class DbAdapter {
 	private Store[] getStoresFromCursor(Cursor cursor) {
 		Store[] stores;
 		if(cursor.moveToFirst()){
-			int[] pointsColumn = {cursor.getColumnIndex(DatabaseHelper.KEY_AREAR1P1X), 
-					cursor.getColumnIndex(DatabaseHelper.KEY_AREAR1P1Y), 
-					cursor.getColumnIndex(DatabaseHelper.KEY_AREAR1P2X), 
-					cursor.getColumnIndex(DatabaseHelper.KEY_AREAR1P2Y), 
-					cursor.getColumnIndex(DatabaseHelper.KEY_AREAR2P1X), 
-					cursor.getColumnIndex(DatabaseHelper.KEY_AREAR2P1Y), 
-					cursor.getColumnIndex(DatabaseHelper.KEY_AREAR2P2X), 
-					cursor.getColumnIndex(DatabaseHelper.KEY_AREAR2P2Y)};
+			int[] pointsColumn = {cursor.getColumnIndex(KEY_AREAR1P1X), 
+					cursor.getColumnIndex(KEY_AREAR1P1Y), 
+					cursor.getColumnIndex(KEY_AREAR1P2X), 
+					cursor.getColumnIndex(KEY_AREAR1P2Y), 
+					cursor.getColumnIndex(KEY_AREAR2P1X), 
+					cursor.getColumnIndex(KEY_AREAR2P1Y), 
+					cursor.getColumnIndex(KEY_AREAR2P2X), 
+					cursor.getColumnIndex(KEY_AREAR2P2Y)};
 			stores = new Store[cursor.getCount()];
-			int idColumn = cursor.getColumnIndex(DatabaseHelper.KEY_ID),
-			nameColumn = cursor.getColumnIndex(DatabaseHelper.KEY_NAME),
-			descriptionColumn = cursor.getColumnIndex(DatabaseHelper.KEY_DESCRIPTION),
-			phoneColumn = cursor.getColumnIndex(DatabaseHelper.KEY_PHONE),
-			websiteColumn = cursor.getColumnIndex(DatabaseHelper.KEY_WEBSITE),
-			levelColumn = cursor.getColumnIndex(DatabaseHelper.KEY_LEVEL),
-			categoryColumn = cursor.getColumnIndex(DatabaseHelper.KEY_STORECATEGORY),
-			tagsColumn = cursor.getColumnIndex(DatabaseHelper.KEY_TAGS),
-			extrasColumn = cursor.getColumnIndex(DatabaseHelper.KEY_EXTRAS);
+			int idColumn = cursor.getColumnIndex(KEY_ID),
+			nameColumn = cursor.getColumnIndex(KEY_NAME),
+			descriptionColumn = cursor.getColumnIndex(KEY_DESCRIPTION),
+			phoneColumn = cursor.getColumnIndex(KEY_PHONE),
+			websiteColumn = cursor.getColumnIndex(KEY_WEBSITE),
+			levelColumn = cursor.getColumnIndex(KEY_LEVEL),
+			categoryColumn = cursor.getColumnIndex(KEY_STORECATEGORY),
+			tagsColumn = cursor.getColumnIndex(KEY_TAGS),
+			extrasColumn = cursor.getColumnIndex(KEY_EXTRAS);
 			StoreCategory[] categorys = StoreCategory.values();
 			for(int i = 0; i < stores.length; i++){
 				int[] areaIntArray = new int[pointsColumn.length];
@@ -177,23 +179,23 @@ public class DbAdapter {
 	private Store getStoreFromCursor(Cursor cursor) {
 		if(!cursor.moveToFirst())
 			return null;
-		int[] pointsColumn = {cursor.getColumnIndex(DatabaseHelper.KEY_AREAR1P1X), 
-				cursor.getColumnIndex(DatabaseHelper.KEY_AREAR1P1Y), 
-				cursor.getColumnIndex(DatabaseHelper.KEY_AREAR1P2X), 
-				cursor.getColumnIndex(DatabaseHelper.KEY_AREAR1P2Y), 
-				cursor.getColumnIndex(DatabaseHelper.KEY_AREAR2P1X), 
-				cursor.getColumnIndex(DatabaseHelper.KEY_AREAR2P1Y), 
-				cursor.getColumnIndex(DatabaseHelper.KEY_AREAR2P2X), 
-				cursor.getColumnIndex(DatabaseHelper.KEY_AREAR2P2Y)};
-		int idColumn = cursor.getColumnIndex(DatabaseHelper.KEY_ID),
-		nameColumn = cursor.getColumnIndex(DatabaseHelper.KEY_NAME),
-		descriptionColumn = cursor.getColumnIndex(DatabaseHelper.KEY_DESCRIPTION),
-		phoneColumn = cursor.getColumnIndex(DatabaseHelper.KEY_PHONE),
-		websiteColumn = cursor.getColumnIndex(DatabaseHelper.KEY_WEBSITE),
-		levelColumn = cursor.getColumnIndex(DatabaseHelper.KEY_LEVEL),
-		categoryColumn = cursor.getColumnIndex(DatabaseHelper.KEY_STORECATEGORY),
-		tagsColumn = cursor.getColumnIndex(DatabaseHelper.KEY_TAGS),
-		extrasColumn = cursor.getColumnIndex(DatabaseHelper.KEY_EXTRAS);
+		int[] pointsColumn = {cursor.getColumnIndex(KEY_AREAR1P1X), 
+				cursor.getColumnIndex(KEY_AREAR1P1Y), 
+				cursor.getColumnIndex(KEY_AREAR1P2X), 
+				cursor.getColumnIndex(KEY_AREAR1P2Y), 
+				cursor.getColumnIndex(KEY_AREAR2P1X), 
+				cursor.getColumnIndex(KEY_AREAR2P1Y), 
+				cursor.getColumnIndex(KEY_AREAR2P2X), 
+				cursor.getColumnIndex(KEY_AREAR2P2Y)};
+		int idColumn = cursor.getColumnIndex(KEY_ID),
+		nameColumn = cursor.getColumnIndex(KEY_NAME),
+		descriptionColumn = cursor.getColumnIndex(KEY_DESCRIPTION),
+		phoneColumn = cursor.getColumnIndex(KEY_PHONE),
+		websiteColumn = cursor.getColumnIndex(KEY_WEBSITE),
+		levelColumn = cursor.getColumnIndex(KEY_LEVEL),
+		categoryColumn = cursor.getColumnIndex(KEY_STORECATEGORY),
+		tagsColumn = cursor.getColumnIndex(KEY_TAGS),
+		extrasColumn = cursor.getColumnIndex(KEY_EXTRAS);
 		StoreCategory[] categorys = StoreCategory.values();
 		int[] areaIntArray = new int[pointsColumn.length];
 		for(int l = 0; l < areaIntArray.length; l++)
@@ -210,10 +212,10 @@ public class DbAdapter {
 	}
 
 	public Infrastructure[] getInfrastructures(int category, int level) {
-		Cursor cursor = mDb.query(DatabaseHelper.DATABASE_TABLE_INFRASTRUCTURE, null, 
-				DatabaseHelper.KEY_INFRACATEGORY + " = ? and " + DatabaseHelper.KEY_LEVEL + " = ?", 
+		Cursor cursor = mDb.query(DATABASE_TABLE_INFRASTRUCTURE, null, 
+				KEY_INFRACATEGORY + " = ? and " + KEY_LEVEL + " = ?", 
 				new String[] {String.valueOf(category), String.valueOf(level)}, null, null, null); 
-		/*Cursor cursor = mDb.query(DatabaseHelper.DATABASE_TABLE_INFRASTRUCTURE, null, null, null, null, null, null); */
+		/*Cursor cursor = mDb.query(DATABASE_TABLE_INFRASTRUCTURE, null, null, null, null, null, null); */
 		return cursor != null ? getInfrastructuresFromCursor(cursor) : null;
 	}
 
@@ -221,10 +223,10 @@ public class DbAdapter {
 		Infrastructure[] infras;
 		if(cursor.moveToFirst()){
 			infras = new Infrastructure[cursor.getCount()];
-			int categoryColumn = cursor.getColumnIndex(DatabaseHelper.KEY_INFRACATEGORY),
-			levelColumn = cursor.getColumnIndex(DatabaseHelper.KEY_LEVEL),
-			xColumn = cursor.getColumnIndex(DatabaseHelper.KEY_X),
-			yColumn = cursor.getColumnIndex(DatabaseHelper.KEY_Y);
+			int categoryColumn = cursor.getColumnIndex(KEY_INFRACATEGORY),
+			levelColumn = cursor.getColumnIndex(KEY_LEVEL),
+			xColumn = cursor.getColumnIndex(KEY_X),
+			yColumn = cursor.getColumnIndex(KEY_Y);
 			InfrastructureCategory[] categorys = InfrastructureCategory.values();
 			for(int i = 0; i < infras.length; i++){
 				infras[i] = new Infrastructure(categorys[cursor.getInt(categoryColumn)-1], 
@@ -250,18 +252,66 @@ public class DbAdapter {
 		String when = mDateFormat.format(new Date());
 		ContentValues values = new ContentValues(user != null && user.length() > 0 ? 3 : 2);
 		if(user != null && user.length() > 0)
-			values.put(DatabaseHelper.KEY_USER, user);
-		values.put(DatabaseHelper.KEY_STOREID, store.getId());
-		values.put(DatabaseHelper.KEY_WHEN, when);
-		mDb.insert(DatabaseHelper.DATABASE_TABLE_DETAIL_VIEW, null, values);
+			values.put(KEY_USER, user);
+		values.put(KEY_STOREID, store.getId());
+		values.put(KEY_WHEN, when);
+		mDb.insert(DATABASE_TABLE_DETAIL_VIEW, null, values);
 	}
 	
 	public void saveUserModel(String user, String setdv){
 		ContentValues values = new ContentValues(user != null && user.length() > 0 ? 2 : 1);
 		if(user != null && user.length() > 0)
-			values.put(DatabaseHelper.KEY_USER, user);
-		values.put(DatabaseHelper.KEY_SET_DETAILSVIEW, setdv);
-		if(mDb.update(DatabaseHelper.DATABASE_TABLE_USER_MODEL, values, DatabaseHelper.KEY_USER + (user != null && user.length() > 0 ? " = " + user : " IS NULL"), null) == 0)
-			mDb.insert(DatabaseHelper.DATABASE_TABLE_USER_MODEL, null, values);
+			values.put(KEY_USER, user);
+		values.put(KEY_SET_DETAILSVIEW, setdv);
+		if(mDb.update(DATABASE_TABLE_USER_MODEL, values, KEY_USER + (user != null && user.length() > 0 ? " = " + user : " IS NULL"), null) == 0)
+			mDb.insert(DATABASE_TABLE_USER_MODEL, null, values);
+	}
+	
+	public int deleteStoreDetailViewBefore(String when){
+		return mDb.delete(DATABASE_TABLE_DETAIL_VIEW, KEY_WHEN + " < " + when, null);
+	}
+	
+	public String returnAllTagsFromStoreDetailsView(String user){
+		Cursor cursor = mDb.rawQuery(
+				"SELECT " + DATABASE_TABLE_STORE + "." + KEY_TAGS + " FROM " + DATABASE_TABLE_DETAIL_VIEW + " INNER JOIN " + DATABASE_TABLE_STORE + " ON " + DATABASE_TABLE_DETAIL_VIEW + "." + KEY_STOREID + "=" + DATABASE_TABLE_STORE + "." + KEY_ID + " WHERE " + DATABASE_TABLE_DETAIL_VIEW + "." + KEY_USER + " = ?"
+				, new String[]{user});
+		if(cursor == null)
+			return "";
+		try{
+			int columnTags = cursor.getColumnIndex(KEY_TAGS);
+			StringBuilder tags = new StringBuilder();
+			if(cursor.moveToFirst()){
+				tags.append(cursor.getString(columnTags));
+				while(cursor.moveToNext()){
+					tags.append(',').append(cursor.getString(columnTags));
+				}
+			}
+			return tags.toString();
+		} finally {
+			cursor.close();
+		}
+	}
+	
+	public void clearSimilarity(String user){
+		mDb.delete(DATABASE_TABLE_SIMILARITY, KEY_USER + " = " + user, null);
+	}
+	
+	public Cursor getStoreTags(){
+		return mDb.query(DATABASE_TABLE_STORE, new String[]{KEY_ID, KEY_TAGS}, null, null, null, null, null);
+	}
+
+	public void saveSimilarity(String user, long storeId, float similarityScore) {
+		ContentValues values = new ContentValues(user != null && user.length() > 0 ? 3 : 2);
+		if(user != null && user.length() > 0)
+			values.put(KEY_USER, user);
+		values.put(KEY_STOREID, storeId);
+		values.put(KEY_SCORE, similarityScore);
+		mDb.insert(DATABASE_TABLE_SIMILARITY, null, values);
+	}
+	
+	public Store[] getStoresFromSimilarityScore(String user, int results) {
+		return getStoresFromCursor(mDb.rawQuery(
+				"SELECT " + DATABASE_TABLE_SIMILARITY + "." + KEY_SCORE + ", " + DATABASE_TABLE_STORE + ".* FROM " + DATABASE_TABLE_STORE + " INNER JOIN " + DATABASE_TABLE_SIMILARITY + " ON " + DATABASE_TABLE_SIMILARITY + "." + KEY_STOREID + "=" + DATABASE_TABLE_STORE + "." + KEY_ID + " WHERE " + DATABASE_TABLE_SIMILARITY + "." + KEY_USER + " = ? ORDER BY " + DATABASE_TABLE_SIMILARITY + "." + KEY_SCORE + " DESC LIMIT ?"
+				, new String[] {user, String.valueOf(results)}));
 	}
 }

@@ -21,7 +21,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	private final static String DATABASE_NAME = "inmapdatabase";
 	private final static int DATABASE_VERSION = 2; // Modified 16/12/13 08:57
 
-	static final String KEY_ID = "_id";
+	public static final String KEY_ID = "_id";
 
 	static final String DATABASE_TABLE_STORE = "store";
 	static final String KEY_NAME = "name";
@@ -30,7 +30,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	static final String KEY_WEBSITE = "website";
 	static final String KEY_LEVEL = "level";
 	static final String KEY_STORECATEGORY = "id_storecategory";
-	static final String KEY_TAGS = "tags";
+	public static final String KEY_TAGS = "tags";
 	static final String KEY_EXTRAS = "extras";
 	static final String KEY_AREAR1P1X = "arear1p1x";
 	static final String KEY_AREAR1P1Y = "arear1p1y";
@@ -54,10 +54,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	
 	static final String DATABASE_TABLE_USER_MODEL = "usermodel";
 	static final String KEY_SET_DETAILSVIEW = "setdv";
+	
+	static final String DATABASE_TABLE_SIMILARITY = "similarity";
+	static final String KEY_SCORE = "score";
 
 
 	//static final String DATE_FORMAT_READ = "dd/MM/yyyy hh:mm";
-	static final String DATE_FORMAT_WRITE = "yyyy/MM/dd hh:mm";
+	public static final String DATE_FORMAT_WRITE = "yyyy/MM/dd hh:mm";
 	
 	private final String DATABASE_CREATE_DETAIL_VIEW = "create table " + DATABASE_TABLE_DETAIL_VIEW + " (" 
 			+ KEY_ID + " integer primary key, "
@@ -69,6 +72,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	private final String DATABASE_CREATE_USER_MODEL = "create table " + DATABASE_TABLE_USER_MODEL + " (" 
 			+ KEY_ID + " integer primary key, "
 			+ KEY_SET_DETAILSVIEW + " text);";
+	
+	private final String DATABASE_CREATE_SIMILARITY = "create table " + DATABASE_TABLE_SIMILARITY + " (" 
+			+ KEY_ID + " integer primary key, "
+			+ KEY_SCORE + " real not null, "
+			+ KEY_USER + " text, "
+			+ KEY_STOREID + " integer not null, "
+			+ "FOREIGN KEY ("+KEY_STOREID+") REFERENCES "+DATABASE_TABLE_STORE+" ("+KEY_ID+"));";
 
 	private final String DATABASE_CREATE[] = {"create table " + DATABASE_TABLE_STORE + " (" 
 			+ KEY_ID + " integer primary key, "
@@ -99,7 +109,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 			DATABASE_CREATE_DETAIL_VIEW,
 			
-			DATABASE_CREATE_USER_MODEL
+			DATABASE_CREATE_USER_MODEL,
+			
+			DATABASE_CREATE_SIMILARITY
 	};
 
 	public DatabaseHelper(Context context) {
@@ -223,6 +235,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		case 1:
 			db.execSQL(DATABASE_CREATE_DETAIL_VIEW);
 			db.execSQL(DATABASE_CREATE_USER_MODEL);
+			db.execSQL(DATABASE_CREATE_SIMILARITY);
 		}
 	}
 }
