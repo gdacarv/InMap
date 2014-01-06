@@ -71,6 +71,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	
 	private final String DATABASE_CREATE_USER_MODEL = "create table " + DATABASE_TABLE_USER_MODEL + " (" 
 			+ KEY_ID + " integer primary key, "
+			+ KEY_USER + " text, "
 			+ KEY_SET_DETAILSVIEW + " text);";
 	
 	private final String DATABASE_CREATE_SIMILARITY = "create table " + DATABASE_TABLE_SIMILARITY + " (" 

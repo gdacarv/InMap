@@ -268,13 +268,13 @@ public class DbAdapter {
 	}
 	
 	public int deleteStoreDetailViewBefore(String when){
-		return mDb.delete(DATABASE_TABLE_DETAIL_VIEW, KEY_WHEN + " < " + when, null);
+		return mDb.delete(DATABASE_TABLE_DETAIL_VIEW, KEY_WHEN + " < ?", new String[]{when});
 	}
 	
 	public String returnAllTagsFromStoreDetailsView(String user){
 		Cursor cursor = mDb.rawQuery(
-				"SELECT " + DATABASE_TABLE_STORE + "." + KEY_TAGS + " FROM " + DATABASE_TABLE_DETAIL_VIEW + " INNER JOIN " + DATABASE_TABLE_STORE + " ON " + DATABASE_TABLE_DETAIL_VIEW + "." + KEY_STOREID + "=" + DATABASE_TABLE_STORE + "." + KEY_ID + " WHERE " + DATABASE_TABLE_DETAIL_VIEW + "." + KEY_USER + " = ?"
-				, new String[]{user});
+				"SELECT " + DATABASE_TABLE_STORE + "." + KEY_TAGS + " FROM " + DATABASE_TABLE_DETAIL_VIEW + " INNER JOIN " + DATABASE_TABLE_STORE + " ON " + DATABASE_TABLE_DETAIL_VIEW + "." + KEY_STOREID + "=" + DATABASE_TABLE_STORE + "." + KEY_ID + " WHERE " + DATABASE_TABLE_DETAIL_VIEW + "." + KEY_USER + (user == null ? " IS NULL" : " = ?")
+				, (user == null ? null : new String[]{user}));
 		if(cursor == null)
 			return "";
 		try{
@@ -311,7 +311,7 @@ public class DbAdapter {
 	
 	public Store[] getStoresFromSimilarityScore(String user, int results) {
 		return getStoresFromCursor(mDb.rawQuery(
-				"SELECT " + DATABASE_TABLE_SIMILARITY + "." + KEY_SCORE + ", " + DATABASE_TABLE_STORE + ".* FROM " + DATABASE_TABLE_STORE + " INNER JOIN " + DATABASE_TABLE_SIMILARITY + " ON " + DATABASE_TABLE_SIMILARITY + "." + KEY_STOREID + "=" + DATABASE_TABLE_STORE + "." + KEY_ID + " WHERE " + DATABASE_TABLE_SIMILARITY + "." + KEY_USER + " = ? ORDER BY " + DATABASE_TABLE_SIMILARITY + "." + KEY_SCORE + " DESC LIMIT ?"
-				, new String[] {user, String.valueOf(results)}));
+				"SELECT " + DATABASE_TABLE_SIMILARITY + "." + KEY_SCORE + ", " + DATABASE_TABLE_STORE + ".* FROM " + DATABASE_TABLE_STORE + " INNER JOIN " + DATABASE_TABLE_SIMILARITY + " ON " + DATABASE_TABLE_SIMILARITY + "." + KEY_STOREID + "=" + DATABASE_TABLE_STORE + "." + KEY_ID + " WHERE " + DATABASE_TABLE_SIMILARITY + "." + KEY_USER + (user == null ? " IS NULL" : " = ?") + " ORDER BY " + DATABASE_TABLE_SIMILARITY + "." + KEY_SCORE + " DESC LIMIT ?"
+				, (user == null ? new String[] {String.valueOf(results)} : new String[] {user, String.valueOf(results)})));
 	}
 }

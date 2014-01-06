@@ -13,7 +13,8 @@ import com.contralabs.inmap.model.DbAdapter;
 
 public class SimilarityBuilderService extends IntentService {
 
-	private static final float SCORE_MINIMUM = 0f;
+	private static final float SCORE_MINIMUM = 0.1f;
+	private static final String EXTRA_USER = "extraUser";
 
 	public SimilarityBuilderService() {
 		super("SimilarityBuilderService");
@@ -58,8 +59,7 @@ public class SimilarityBuilderService extends IntentService {
 	}
 
 	private String getUser(Intent intent) {
-		// TODO Auto-generated method stub
-		return null;
+		return intent.getStringExtra(EXTRA_USER);
 	}
 
 	private Date getDecayDate() {

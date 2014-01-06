@@ -132,4 +132,5 @@
     <string name="pref_key_compass">pref_key_compass</string>
     <string name="pref_title_compass">Modo bússola</string>
     <string name="pref_summary_compass">Modo que o mapa mantém a orientação alinhada com as coordenadas reais.</string>
+    <string name="recomendacoes">Recomendações</string>
 </resources>

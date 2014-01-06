@@ -51,14 +51,10 @@ import com.contralabs.inmap.interfaces.StoreOnMapController;
 import com.contralabs.inmap.model.DbAdapter;
 import com.contralabs.inmap.model.Store;
 import com.contralabs.inmap.model.StoreParameters;
+import com.contralabs.inmap.recommendation.SimilarityBuilderService;
 import com.contralabs.inmap.server.WebUtils;
-import com.contralabs.inmap.social.FacebookHelper;
-import com.contralabs.inmap.social.ServerPeopleInsideAPI;
-import com.contralabs.inmap.social.User;
 import com.contralabs.inmap.views.AnimateFrameLayout;
 import com.contralabs.inmap.views.LevelPickerView;
-import com.facebook.Session;
-import com.facebook.SessionState;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.helpshift.Helpshift;
 import com.slidingmenu.lib.SlidingMenu;
@@ -130,6 +126,7 @@ public class MainActivity extends SlidingActionBarActivity implements OnInfrastr
 		
 		configureHelpShift();
 		
+		startSimilarityBuilder();
 	}
 
 	private void configureHelpShift() {
@@ -200,6 +197,10 @@ public class MainActivity extends SlidingActionBarActivity implements OnInfrastr
 
 		case R.id.menu_legal_notices:
 			new LegalNoticesDialogFragment().show(getSupportFragmentManager(), "LegalNoticesDialogFragment");
+			break;
+			
+		case R.id.menu_recomendacoes:
+			startActivity(new Intent(this, RecommendationActivity.class));
 			break;
 		}
 		return super.onOptionsItemSelected(item);
@@ -509,6 +510,10 @@ public class MainActivity extends SlidingActionBarActivity implements OnInfrastr
 
 	private boolean isRightMenuShowing() {
 		return mSlidingMenu.isSecondaryMenuShowing();
+	}
+
+	private void startSimilarityBuilder() {
+		startService(new Intent(this, SimilarityBuilderService.class));
 	}
 
 }

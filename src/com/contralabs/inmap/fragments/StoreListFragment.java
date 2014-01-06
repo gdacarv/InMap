@@ -58,9 +58,6 @@ public class StoreListFragment extends Fragment {
 	private Bundle mSavedIntanceState;
 
 	private Helpshift mHelpshift;
-
-
-
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -99,6 +96,18 @@ public class StoreListFragment extends Fragment {
 		outState.putSerializable(STORE_PARAMETERS, mStoreListAdapter.getStoreParameters());
 		outState.putParcelable(LIST_STATE, mStoreList.onSaveInstanceState());
 		mSavedIntanceState = outState;
+	}
+	
+	public void setStores(Store[] stores){
+		mStoreListAdapter.setStores(stores);
+	}
+	
+	public void setHeaderVisibility(int visibility){
+		mViewHeader.setVisibility(visibility);
+	}
+	
+	public void setAutoSortByTitle(boolean sort){
+		mStoreListAdapter.mAutoSortByTitle = sort;
 	}
 	
 	private void configureButtons() {
@@ -191,13 +200,14 @@ public class StoreListFragment extends Fragment {
 		private StoreParameters mParameters;
 		private boolean mIsSearch;
 		private Parcelable mListState;
+		private boolean mAutoSortByTitle = true;
 		
 		public StoreListAdapter(Context context){
 			mContext = context;
 		}
 		
 		public StoreCategory getStoreCategory() {
-			if(mIsSearch)
+			if(mIsSearch || mParameters == null)
 				return null;
 			return StoreCategory.getStoreCategoryById(Integer.valueOf(mParameters.getCategoryString().split(",")[0]));
 		}
@@ -219,6 +229,8 @@ public class StoreListFragment extends Fragment {
 		}
 		
 		public String getSearchQuery() {
+			if(mParameters == null)
+				return "";
 			return mParameters.getAnytext();
 		}
 
@@ -301,7 +313,8 @@ public class StoreListFragment extends Fragment {
 		
 		@Override
 		public void notifyDataSetChanged() {
-			Arrays.sort(mStores, comparator);
+			if(mAutoSortByTitle)
+				Arrays.sort(mStores, comparator);
 			super.notifyDataSetChanged();
 		}
 		
@@ -324,13 +337,10 @@ public class StoreListFragment extends Fragment {
 
 		private class getStoresAsyncTask extends AsyncTask<Void, Void, Store[]>{
 			
-			private View loadingView;
-			
 			@Override
 			protected void onPreExecute() {
 				super.onPreExecute();
-				loadingView = mRoot.findViewById(R.id.loading_stores);
-				loadingView.setVisibility(View.VISIBLE);
+				mRoot.findViewById(R.id.loading_stores).setVisibility(View.VISIBLE);
 				//mStoreList.setVisibility(View.GONE);
 			}
 
@@ -345,13 +355,7 @@ public class StoreListFragment extends Fragment {
 			@Override
 			protected void onPostExecute(Store[] result) {
 				super.onPostExecute(result);
-				mStores = result;
-				notifyDataSetChanged();
-				loadingView.setVisibility(View.GONE);
-				configureEmptyView(result.length == 0);
-				//mStoreList.setVisibility(View.VISIBLE);
-				if(mListState != null)
-					mStoreList.onRestoreInstanceState(mListState);
+				setStores(result);
 				if(result.length == 0)
 					EasyTracker.getTracker().sendEvent("UserAction", "SearchWithoutResults", mParameters.getAnytext(), 0l);
 			}
@@ -359,6 +363,16 @@ public class StoreListFragment extends Fragment {
 		
 		public StoreParameters getStoreParameters() {
 			return mParameters;
+		}
+
+		private void setStores(Store[] result) {
+			mStores = result;
+			notifyDataSetChanged();
+			configureEmptyView(result.length == 0);
+			mRoot.findViewById(R.id.loading_stores).setVisibility(View.GONE);
+			//mStoreList.setVisibility(View.VISIBLE);
+			if(mListState != null)
+				mStoreList.onRestoreInstanceState(mListState);
 		}
 	}
 
