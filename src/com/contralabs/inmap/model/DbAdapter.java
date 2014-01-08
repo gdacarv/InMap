@@ -293,7 +293,7 @@ public class DbAdapter {
 	}
 	
 	public void clearSimilarity(String user){
-		mDb.delete(DATABASE_TABLE_SIMILARITY, KEY_USER + " = " + user, null);
+		mDb.delete(DATABASE_TABLE_SIMILARITY, KEY_USER + (user == null ? " IS NULL" : " = ?"), (user == null ? null : new String[] {user}));
 	}
 	
 	public Cursor getStoreTags(){
@@ -310,8 +310,9 @@ public class DbAdapter {
 	}
 	
 	public Store[] getStoresFromSimilarityScore(String user, int results) {
+		final String query = "SELECT " + DATABASE_TABLE_SIMILARITY + "." + KEY_SCORE + ", " + DATABASE_TABLE_STORE + ".* FROM " + DATABASE_TABLE_STORE + " INNER JOIN " + DATABASE_TABLE_SIMILARITY + " ON " + DATABASE_TABLE_SIMILARITY + "." + KEY_STOREID + "=" + DATABASE_TABLE_STORE + "." + KEY_ID + " WHERE " + DATABASE_TABLE_SIMILARITY + "." + KEY_USER + (user == null ? " IS NULL" : " = ?") + " ORDER BY " + DATABASE_TABLE_SIMILARITY + "." + KEY_SCORE + " DESC LIMIT ?";
 		return getStoresFromCursor(mDb.rawQuery(
-				"SELECT " + DATABASE_TABLE_SIMILARITY + "." + KEY_SCORE + ", " + DATABASE_TABLE_STORE + ".* FROM " + DATABASE_TABLE_STORE + " INNER JOIN " + DATABASE_TABLE_SIMILARITY + " ON " + DATABASE_TABLE_SIMILARITY + "." + KEY_STOREID + "=" + DATABASE_TABLE_STORE + "." + KEY_ID + " WHERE " + DATABASE_TABLE_SIMILARITY + "." + KEY_USER + (user == null ? " IS NULL" : " = ?") + " ORDER BY " + DATABASE_TABLE_SIMILARITY + "." + KEY_SCORE + " DESC LIMIT ?"
+				query
 				, (user == null ? new String[] {String.valueOf(results)} : new String[] {user, String.valueOf(results)})));
 	}
 }

@@ -72,7 +72,7 @@ public class SimilarityBuilderService extends IntentService {
 		int count = 0;
 		for(String u : userModelTags)
 			for(String s : storeTags)
-				if(u.equals(s))
+				if(u.equalsIgnoreCase(s))
 					count++;
 		return Math.min(1f, (float)count/(float)userModelTags.length);
 	}
