@@ -300,7 +300,7 @@ public class DbAdapter {
 		return mDb.query(DATABASE_TABLE_STORE, new String[]{KEY_ID, KEY_TAGS}, null, null, null, null, null);
 	}
 
-	public void saveSimilarity(String user, long storeId, float similarityScore) {
+	public void saveSimilarity(String user, long storeId, double similarityScore) {
 		ContentValues values = new ContentValues(user != null && user.length() > 0 ? 3 : 2);
 		if(user != null && user.length() > 0)
 			values.put(KEY_USER, user);
