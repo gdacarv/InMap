@@ -43,17 +43,17 @@ public class StoreListFragment extends Fragment {
 
 	private static final int MAX_DESCRIPTION_LENGHT = 100;
 	
-	private View mRoot, mViewNoItemList, mViewHeader;
-	private ListView mStoreList;
+	protected View mRoot, mViewNoItemList, mViewHeader;
+	protected ListView mStoreList;
 	private ImageButton mBackToCategoryButton, mShowOnMapButton;
-	private Context mContext;
-	private TextView mTitleTextView;
+	protected Context mContext;
+	protected TextView mTitleTextView;
 	
-	private StoreListAdapter mStoreListAdapter;
+	protected StoreListAdapter mStoreListAdapter;
 	
-	private OnStoreSelectedListener mOnStoreSelectedListener;
-	private StoreListController mStoreListController;
-	private ApplicationDataFacade mApplicationDataFacade;
+	protected OnStoreSelectedListener mOnStoreSelectedListener;
+	protected StoreListController mStoreListController;
+	protected ApplicationDataFacade mApplicationDataFacade;
 
 	private Bundle mSavedIntanceState;
 
@@ -72,7 +72,7 @@ public class StoreListFragment extends Fragment {
 		mRoot = inflater.inflate(R.layout.fragment_liststore, null);
 		mViewNoItemList = mRoot.findViewById(R.id.view_list_store_empty);
 		mStoreList = (ListView) mRoot.findViewById(R.id.list_store);
-		mStoreListAdapter = new StoreListAdapter(mContext);
+		mStoreListAdapter = getListAdapter();
 		mStoreList.setAdapter(mStoreListAdapter);
 		mTitleTextView = (TextView) mRoot.findViewById(R.id.txt_storelist_title);
 		mViewHeader = mRoot.findViewById(R.id.layout_storelist_header);
@@ -88,6 +88,10 @@ public class StoreListFragment extends Fragment {
 			setStoreParameters((StoreParameters) savedInstanceState.getSerializable(STORE_PARAMETERS), savedInstanceState.getParcelable(LIST_STATE));
 		}
 		return mRoot;
+	}
+	
+	protected StoreListAdapter getListAdapter() {
+		return new StoreListAdapter(mContext);
 	}
 	
 	@Override
@@ -194,7 +198,7 @@ public class StoreListFragment extends Fragment {
 		void onSearchClicked();
 	}
 	
-	private class StoreListAdapter extends BaseAdapter{
+	protected class StoreListAdapter extends BaseAdapter{
 		private Context mContext;
 		private Store[] mStores;
 		private StoreParameters mParameters;

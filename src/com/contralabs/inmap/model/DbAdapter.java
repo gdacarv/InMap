@@ -6,7 +6,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import org.apache.http.impl.client.DefaultTargetAuthenticationHandler;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -15,9 +14,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Pair;
 
 import com.contralabs.inmap.salvadorshop.applicationdata.InfrastructureCategory;
 import com.contralabs.inmap.salvadorshop.applicationdata.StoreCategory;
+import com.contralabs.inmap.utils.Utils;
+
 import static com.contralabs.inmap.model.DatabaseHelper.*;
 
 
@@ -258,17 +260,36 @@ public class DbAdapter {
 		mDb.insert(DATABASE_TABLE_DETAIL_VIEW, null, values);
 	}
 	
-	public void saveUserModel(String user, String setdv){
-		ContentValues values = new ContentValues(user != null && user.length() > 0 ? 2 : 1);
+	public void saveSearchPerformed(String user, String query){
+		String when = mDateFormat.format(new Date());
+		ContentValues values = new ContentValues(user != null && user.length() > 0 ? 3 : 2);
+		if(user != null && user.length() > 0)
+			values.put(KEY_USER, user);
+		values.put(KEY_QUERY, query);
+		values.put(KEY_WHEN, when);
+		mDb.insert(DATABASE_TABLE_SEARCH_PERFORMED, null, values);
+	}
+	
+	public void saveUserModel(String user, String setdv, String[] searchPerformeds){
+		ContentValues values = new ContentValues(user != null && user.length() > 0 ? 3 : 2);
 		if(user != null && user.length() > 0)
 			values.put(KEY_USER, user);
 		values.put(KEY_SET_DETAILSVIEW, setdv);
+		values.put(KEY_SET_SEARCHPERFORMED, Utils.arrayToString(searchPerformeds, ","));
 		if(mDb.update(DATABASE_TABLE_USER_MODEL, values, KEY_USER + (user != null && user.length() > 0 ? " = " + user : " IS NULL"), null) == 0)
 			mDb.insert(DATABASE_TABLE_USER_MODEL, null, values);
 	}
 	
+	public int deleteBefore(String table, String when){
+		return mDb.delete(table, KEY_WHEN + " < ?", new String[]{when});
+	}
+	
 	public int deleteStoreDetailViewBefore(String when){
-		return mDb.delete(DATABASE_TABLE_DETAIL_VIEW, KEY_WHEN + " < ?", new String[]{when});
+		return deleteBefore(DATABASE_TABLE_DETAIL_VIEW, when);
+	}
+	
+	public int deleteSearchPerformedBefore(String when){
+		return deleteBefore(DATABASE_TABLE_SEARCH_PERFORMED, when);
 	}
 	
 	public String returnAllTagsFromStoreDetailsView(String user){
@@ -292,6 +313,29 @@ public class DbAdapter {
 		}
 	}
 	
+	public String[] returnAllSearchPerformed(String user){
+		Cursor cursor = mDb.rawQuery(
+				"SELECT " + KEY_QUERY + " FROM " + DATABASE_TABLE_SEARCH_PERFORMED + " WHERE " + KEY_USER + (user == null ? " IS NULL" : " = ?")
+				, (user == null ? null : new String[]{user}));
+		if(cursor == null)
+			return new String[0];
+		try{
+			int columnQuery = cursor.getColumnIndex(KEY_QUERY);
+			if(cursor.moveToFirst()){
+				String[] queries = new String[cursor.getCount()];
+				int i = 0;
+				do{
+					queries[i] = cursor.getString(columnQuery);
+					i++;
+				}while(cursor.moveToNext());
+				return queries;
+			}
+			return new String[0];
+		} finally {
+			cursor.close();
+		}
+	}
+	
 	public void clearSimilarity(String user){
 		mDb.delete(DATABASE_TABLE_SIMILARITY, KEY_USER + (user == null ? " IS NULL" : " = ?"), (user == null ? null : new String[] {user}));
 	}
@@ -309,10 +353,55 @@ public class DbAdapter {
 		mDb.insert(DATABASE_TABLE_SIMILARITY, null, values);
 	}
 	
-	public Store[] getStoresFromSimilarityScore(String user, int results) {
+	public Pair<Store, Double>[] getStoresFromSimilarityScore(String user, int results) {
 		final String query = "SELECT " + DATABASE_TABLE_SIMILARITY + "." + KEY_SCORE + ", " + DATABASE_TABLE_STORE + ".* FROM " + DATABASE_TABLE_STORE + " INNER JOIN " + DATABASE_TABLE_SIMILARITY + " ON " + DATABASE_TABLE_SIMILARITY + "." + KEY_STOREID + "=" + DATABASE_TABLE_STORE + "." + KEY_ID + " WHERE " + DATABASE_TABLE_SIMILARITY + "." + KEY_USER + (user == null ? " IS NULL" : " = ?") + " ORDER BY " + DATABASE_TABLE_SIMILARITY + "." + KEY_SCORE + " DESC LIMIT ?";
-		return getStoresFromCursor(mDb.rawQuery(
+		return getStoresAndScoreFromCursor(mDb.rawQuery(
 				query
 				, (user == null ? new String[] {String.valueOf(results)} : new String[] {user, String.valueOf(results)})));
+	}
+
+	private Pair<Store, Double>[] getStoresAndScoreFromCursor(Cursor cursor) {
+		Pair<Store, Double>[] stores;
+		if(cursor.moveToFirst()){
+			int[] pointsColumn = {cursor.getColumnIndex(KEY_AREAR1P1X), 
+					cursor.getColumnIndex(KEY_AREAR1P1Y), 
+					cursor.getColumnIndex(KEY_AREAR1P2X), 
+					cursor.getColumnIndex(KEY_AREAR1P2Y), 
+					cursor.getColumnIndex(KEY_AREAR2P1X), 
+					cursor.getColumnIndex(KEY_AREAR2P1Y), 
+					cursor.getColumnIndex(KEY_AREAR2P2X), 
+					cursor.getColumnIndex(KEY_AREAR2P2Y)};
+			stores = new Pair[cursor.getCount()];
+			int idColumn = cursor.getColumnIndex(KEY_ID),
+			nameColumn = cursor.getColumnIndex(KEY_NAME),
+			descriptionColumn = cursor.getColumnIndex(KEY_DESCRIPTION),
+			phoneColumn = cursor.getColumnIndex(KEY_PHONE),
+			websiteColumn = cursor.getColumnIndex(KEY_WEBSITE),
+			levelColumn = cursor.getColumnIndex(KEY_LEVEL),
+			categoryColumn = cursor.getColumnIndex(KEY_STORECATEGORY),
+			tagsColumn = cursor.getColumnIndex(KEY_TAGS),
+			extrasColumn = cursor.getColumnIndex(KEY_EXTRAS),
+			scoreColumn = cursor.getColumnIndex(KEY_SCORE);
+			StoreCategory[] categorys = StoreCategory.values();
+			for(int i = 0; i < stores.length; i++){
+				int[] areaIntArray = new int[pointsColumn.length];
+				for(int l = 0; l < areaIntArray.length; l++)
+					areaIntArray[l] = cursor.getInt(pointsColumn[l]);
+				String tagsString = cursor.getString(tagsColumn);
+				Store store = new Store(cursor.getLong(idColumn), cursor.getString(nameColumn),
+						cursor.getString(descriptionColumn), cursor.getString(phoneColumn), 
+						cursor.getString(websiteColumn), categorys[cursor.getInt(categoryColumn)-1], 
+						cursor.getInt(levelColumn), tagsString == null ? new String[0] : tagsString.split(","),
+						areaIntArray,
+						cursor.getString(extrasColumn)
+						);
+				stores[i] = new Pair<Store, Double>(store, Double.valueOf(cursor.getDouble(scoreColumn)));
+				cursor.moveToNext();
+			}
+		}else
+			stores = new Pair[0];
+
+		cursor.close();
+		return stores;
 	}
 }

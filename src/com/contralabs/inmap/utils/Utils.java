@@ -28,4 +28,14 @@ public class Utils {
 	    float px = dp * (metrics.densityDpi / 160f);
 	    return px;
 	}
+	
+	public static String arrayToString(Object[] array, CharSequence separator){
+		StringBuilder result = new StringBuilder();
+		if(array.length > 0) {
+			result.append(array[0]);
+			for(int i = 1; i < array.length; i++)
+				result.append(separator).append(array[i]);
+		}
+		return result.toString();
+	}
 }

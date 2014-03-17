@@ -7,5 +7,5 @@
         android:id="@+id/frag_storelist"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        class="com.contralabs.inmap.fragments.StoreListFragment"/>
+        class="com.contralabs.inmap.fragments.RecommendationStoreListFragment"/>
 </RelativeLayout>

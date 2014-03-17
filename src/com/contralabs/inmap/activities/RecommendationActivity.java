@@ -9,7 +9,7 @@ import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.contralabs.inmap.R;
-import com.contralabs.inmap.fragments.StoreListFragment;
+import com.contralabs.inmap.fragments.RecommendationStoreListFragment;
 import com.contralabs.inmap.fragments.StoreListFragment.OnStoreSelectedListener;
 import com.contralabs.inmap.model.DbAdapter;
 import com.contralabs.inmap.model.Store;
@@ -26,7 +26,7 @@ public class RecommendationActivity extends SherlockFragmentActivity implements 
 		actionBar.setHomeButtonEnabled(true);
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		
-		StoreListFragment storeListFragment = (StoreListFragment) getSupportFragmentManager().findFragmentById(R.id.frag_storelist);
+		RecommendationStoreListFragment storeListFragment = (RecommendationStoreListFragment) getSupportFragmentManager().findFragmentById(R.id.frag_storelist);
 		storeListFragment.setOnStoreSelectedListener(this);
 		storeListFragment.setHeaderVisibility(View.GONE);
 		storeListFragment.setAutoSortByTitle(false);

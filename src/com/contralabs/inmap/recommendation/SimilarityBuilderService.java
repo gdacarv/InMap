@@ -18,7 +18,7 @@ import com.contralabs.inmap.model.DbAdapter;
 
 public class SimilarityBuilderService extends IntentService {
 
-	private static final double SCORE_MINIMUM = 0.1f;
+	private static final double SCORE_MINIMUM = 0.0001f;
 	private static final String EXTRA_USER = "extraUser";
 	private static final String EXTRA_ALGORITHM = "extraUser";
 	private static final SimilarityAlgorithm DEFAULT_ALGORITHM = SimilarityAlgorithm.COSINE;
@@ -32,7 +32,7 @@ public class SimilarityBuilderService extends IntentService {
 		String user = getUser(intent);
 		DbAdapter db = DbAdapter.getInstance(getApplicationContext()).open();
 		try{
-			String userModel = buildUserModel(user, db);
+			UserModel userModel = buildUserModel(user, db);
 			SimilarityAlgorithm algorithm = (SimilarityAlgorithm) intent.getSerializableExtra(EXTRA_ALGORITHM);
 			buildSimilarity(user, db, userModel, algorithm == null ? DEFAULT_ALGORITHM : algorithm);
 		} finally { 
@@ -40,16 +40,16 @@ public class SimilarityBuilderService extends IntentService {
 		}
 	}
 
-	private void buildSimilarity(String user, DbAdapter db, String userModel, SimilarityAlgorithm similarityAlgorithm) {
+	private void buildSimilarity(String user, DbAdapter db, UserModel userModel, SimilarityAlgorithm similarityAlgorithm) {
 		db.clearSimilarity(user);
 		Cursor cursor = db.getStoreTags();
 		if(cursor != null)
 			try{
-				String[] userModelTags = userModel.split(",");
+				String[] userModelStoreDetailsView = userModel.storeDetailsView;
 				int columnId = cursor.getColumnIndex(DatabaseHelper.KEY_ID),
 						columnTags = cursor.getColumnIndex(DatabaseHelper.KEY_TAGS);
 				if(cursor.moveToFirst()) do{
-					double similarityScore = getSimilarityScore(userModelTags, cursor.getString(columnTags).split(","), similarityAlgorithm);
+					double similarityScore = getSimilarityScore(userModelStoreDetailsView, userModel.searchPerformed, cursor.getString(columnTags).split(","), similarityAlgorithm);
 					if(similarityScore > SCORE_MINIMUM)
 						db.saveSimilarity(user, cursor.getLong(columnId), similarityScore);
 				} while(cursor.moveToNext());
@@ -59,11 +59,17 @@ public class SimilarityBuilderService extends IntentService {
 
 	}
 
-	private String buildUserModel(String user, DbAdapter db) {
-		db.deleteStoreDetailViewBefore(DateFormat.format(DatabaseHelper.DATE_FORMAT_WRITE, getDecayDate()).toString());
+	private UserModel buildUserModel(String user, DbAdapter db) {
+		UserModel userModel = new UserModel();
+		final String decayDate = DateFormat.format(DatabaseHelper.DATE_FORMAT_WRITE, getDecayDate()).toString();
+		db.deleteStoreDetailViewBefore(decayDate);
+		db.deleteSearchPerformedBefore(decayDate);
 		String tags = db.returnAllTagsFromStoreDetailsView(user);
-		db.saveUserModel(user, tags);
-		return tags;
+		String[] searchs = db.returnAllSearchPerformed(user);
+		db.saveUserModel(user, tags, searchs);
+		userModel.searchPerformed = searchs;
+		userModel.storeDetailsView = tags.split(",");
+		return userModel;
 	}
 
 	private String getUser(Intent intent) {
@@ -76,12 +82,14 @@ public class SimilarityBuilderService extends IntentService {
 		return cal.getTime();
 	}
 
-	private double getSimilarityScore(String[] userModelTags, String[] storeTags, SimilarityAlgorithm similarityAlgorithm) {
+	private double getSimilarityScore(String[] storeDetailView, String[] searchPerformed, String[] storeTags, SimilarityAlgorithm similarityAlgorithm) {
 		switch (similarityAlgorithm) {
 		case COSINE:
-			return calculateCosineSimilarity(convertStringArrayToMap(userModelTags), convertStringArrayToMap(storeTags));
-		case SIMPLE:
-			return calculateSimpleSimilarity(userModelTags, storeTags);
+			final Map<String, Double> storeTagsMap = convertStringArrayToMap(storeTags);
+			return calculateCosineSimilarity(convertStringArrayToMap(storeDetailView), storeTagsMap) * 0.3f +
+					calculateCosineSimilarity(convertStringArrayToMap(searchPerformed), storeTagsMap) * 0.7f;
+		case SIMPLE: // TODO Old version, using only StoreDetailView
+			return calculateSimpleSimilarity(storeDetailView, storeTags);
 		}
 		throw new InvalidParameterException("Similarity Algorithm " + similarityAlgorithm.name() + " not know.");
 	}

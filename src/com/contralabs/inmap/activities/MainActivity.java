@@ -449,12 +449,18 @@ public class MainActivity extends SlidingActionBarActivity implements OnInfrastr
 				toggleList();
 			if(!isShowingStoreList)
 				showStoreList();
+			mDbAdapter.open();
+			try {
+				mDbAdapter.saveSearchPerformed(null, query); // FIXME Get facebook id if logged in
+			}finally {
+				mDbAdapter.close();
+			}
 			return true;
 		}else if (Intent.ACTION_VIEW.equals(intent.getAction())) {
 			// Handle a suggestions click (because the suggestions all use ACTION_VIEW)
 			long id = Long.parseLong(intent.getDataString());
-			mDbAdapter.open();
 			Store store;
+			mDbAdapter.open();
 			try {
 				store = mDbAdapter.getStore(id);
 			}finally {
