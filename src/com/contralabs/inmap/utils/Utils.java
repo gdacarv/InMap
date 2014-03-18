@@ -1,5 +1,7 @@
 package com.contralabs.inmap.utils;
 
+import java.util.Arrays;
+
 import android.annotation.TargetApi;
 import android.content.res.Resources;
 import android.os.AsyncTask;
@@ -30,6 +32,16 @@ public class Utils {
 	}
 	
 	public static String arrayToString(Object[] array, CharSequence separator){
+		StringBuilder result = new StringBuilder();
+		if(array.length > 0) {
+			result.append(array[0]);
+			for(int i = 1; i < array.length; i++)
+				result.append(separator).append(array[i]);
+		}
+		return result.toString();
+	}
+
+	public static String arrayToString(int[] array, String separator) {
 		StringBuilder result = new StringBuilder();
 		if(array.length > 0) {
 			result.append(array[0]);

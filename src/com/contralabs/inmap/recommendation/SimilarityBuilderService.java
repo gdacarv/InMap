@@ -18,10 +18,11 @@ import com.contralabs.inmap.model.DbAdapter;
 
 public class SimilarityBuilderService extends IntentService {
 
-	private static final double SCORE_MINIMUM = 0.0001f;
+	private static final double SCORE_MINIMUM = 0.0001d;
 	private static final String EXTRA_USER = "extraUser";
 	private static final String EXTRA_ALGORITHM = "extraUser";
 	private static final SimilarityAlgorithm DEFAULT_ALGORITHM = SimilarityAlgorithm.COSINE;
+	private Map<Integer, Integer> mFrequencyMap;
 
 	public SimilarityBuilderService() {
 		super("SimilarityBuilderService");
@@ -40,16 +41,32 @@ public class SimilarityBuilderService extends IntentService {
 		}
 	}
 
+	private UserModel buildUserModel(String user, DbAdapter db) {
+		UserModel userModel = new UserModel();
+		final String decayDate = DateFormat.format(DatabaseHelper.DATE_FORMAT_WRITE, getDecayDate()).toString();
+		db.deleteStoreDetailViewBefore(decayDate);
+		db.deleteSearchPerformedBefore(decayDate);
+		db.deleteCategoryVisitedBefore(decayDate);
+		String tags = db.returnAllTagsFromStoreDetailsView(user);
+		String[] searchs = db.returnAllSearchPerformed(user);
+		int[] categoriesVisited = db.returnAllCategoriesVisited(user);
+		db.saveUserModel(user, tags, searchs, categoriesVisited);
+		userModel.searchPerformed = searchs;
+		userModel.storeDetailsView = tags.split(",");
+		userModel.categoriesVisited = categoriesVisited;
+		return userModel;
+	}
+
 	private void buildSimilarity(String user, DbAdapter db, UserModel userModel, SimilarityAlgorithm similarityAlgorithm) {
 		db.clearSimilarity(user);
-		Cursor cursor = db.getStoreTags();
+		Cursor cursor = db.getStoreBasicInfo();
 		if(cursor != null)
 			try{
-				String[] userModelStoreDetailsView = userModel.storeDetailsView;
 				int columnId = cursor.getColumnIndex(DatabaseHelper.KEY_ID),
-						columnTags = cursor.getColumnIndex(DatabaseHelper.KEY_TAGS);
+					columnTags = cursor.getColumnIndex(DatabaseHelper.KEY_TAGS),
+					columnStoreCategory = cursor.getColumnIndex(DatabaseHelper.KEY_STORECATEGORY);
 				if(cursor.moveToFirst()) do{
-					double similarityScore = getSimilarityScore(userModelStoreDetailsView, userModel.searchPerformed, cursor.getString(columnTags).split(","), similarityAlgorithm);
+					double similarityScore = getSimilarityScore(userModel, cursor.getString(columnTags).split(","), cursor.getInt(columnStoreCategory), similarityAlgorithm);
 					if(similarityScore > SCORE_MINIMUM)
 						db.saveSimilarity(user, cursor.getLong(columnId), similarityScore);
 				} while(cursor.moveToNext());
@@ -57,19 +74,6 @@ public class SimilarityBuilderService extends IntentService {
 				cursor.close();
 			}
 
-	}
-
-	private UserModel buildUserModel(String user, DbAdapter db) {
-		UserModel userModel = new UserModel();
-		final String decayDate = DateFormat.format(DatabaseHelper.DATE_FORMAT_WRITE, getDecayDate()).toString();
-		db.deleteStoreDetailViewBefore(decayDate);
-		db.deleteSearchPerformedBefore(decayDate);
-		String tags = db.returnAllTagsFromStoreDetailsView(user);
-		String[] searchs = db.returnAllSearchPerformed(user);
-		db.saveUserModel(user, tags, searchs);
-		userModel.searchPerformed = searchs;
-		userModel.storeDetailsView = tags.split(",");
-		return userModel;
 	}
 
 	private String getUser(Intent intent) {
@@ -82,12 +86,19 @@ public class SimilarityBuilderService extends IntentService {
 		return cal.getTime();
 	}
 
-	private double getSimilarityScore(String[] storeDetailView, String[] searchPerformed, String[] storeTags, SimilarityAlgorithm similarityAlgorithm) {
+	private double getSimilarityScore(UserModel userModel, String[] storeTags, int storeCategory, SimilarityAlgorithm similarityAlgorithm) {
+		String[] storeDetailView = userModel.storeDetailsView;
+		String[] searchPerformed = userModel.searchPerformed;
+		int[] categoriesVisited = userModel.categoriesVisited;
 		switch (similarityAlgorithm) {
 		case COSINE:
 			final Map<String, Double> storeTagsMap = convertStringArrayToMap(storeTags);
-			return calculateCosineSimilarity(convertStringArrayToMap(storeDetailView), storeTagsMap) * 0.3f +
-					calculateCosineSimilarity(convertStringArrayToMap(searchPerformed), storeTagsMap) * 0.7f;
+			final double similarityStoreDetailView = (storeDetailView == null || storeDetailView.length == 0 ? 0 : calculateCosineSimilarity(convertStringArrayToMap(storeDetailView), storeTagsMap));
+			final double similaritySearchPerformed = (searchPerformed == null || searchPerformed.length == 0 ? 0 : calculateCosineSimilarity(convertStringArrayToMap(searchPerformed), storeTagsMap));
+			final double similarityCategoriesVisited = (categoriesVisited == null || categoriesVisited.length == 0 ? 0 : getFrequencyMap(userModel.categoriesVisited).get(storeCategory).doubleValue()/(double)categoriesVisited.length);
+			return similarityStoreDetailView * 0.2d +
+					similaritySearchPerformed * 0.5d +
+					similarityCategoriesVisited * 0.3d;
 		case SIMPLE: // TODO Old version, using only StoreDetailView
 			return calculateSimpleSimilarity(storeDetailView, storeTags);
 		}
@@ -124,6 +135,15 @@ public class SimilarityBuilderService extends IntentService {
 			map.put(str, one);
 		}
 		return map;
+	}
+
+	private Map<Integer, Integer> getFrequencyMap(int[] categoriesVisited) {
+		if(mFrequencyMap == null) {
+			mFrequencyMap = new NonNullIntegerMap<Integer>(new HashMap<Integer, Integer>());
+			for(int i : categoriesVisited)
+				mFrequencyMap.put(i, mFrequencyMap.get(i)+1);
+		}
+		return mFrequencyMap;
 	}
 	
 	public enum SimilarityAlgorithm {

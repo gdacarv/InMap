@@ -269,13 +269,24 @@ public class DbAdapter {
 		values.put(KEY_WHEN, when);
 		mDb.insert(DATABASE_TABLE_SEARCH_PERFORMED, null, values);
 	}
-	
-	public void saveUserModel(String user, String setdv, String[] searchPerformeds){
+
+	public void saveCategoryVisited(String user, int id) {
+		String when = mDateFormat.format(new Date());
 		ContentValues values = new ContentValues(user != null && user.length() > 0 ? 3 : 2);
+		if(user != null && user.length() > 0)
+			values.put(KEY_USER, user);
+		values.put(KEY_STORECATEGORY, id);
+		values.put(KEY_WHEN, when);
+		mDb.insert(DATABASE_TABLE_CATEGORY_VISITED, null, values);
+	}
+	
+	public void saveUserModel(String user, String setdv, String[] searchPerformeds, int[] categoriesVisited){
+		ContentValues values = new ContentValues(user != null && user.length() > 0 ? 4 : 3);
 		if(user != null && user.length() > 0)
 			values.put(KEY_USER, user);
 		values.put(KEY_SET_DETAILSVIEW, setdv);
 		values.put(KEY_SET_SEARCHPERFORMED, Utils.arrayToString(searchPerformeds, ","));
+		values.put(KEY_SET_CATEGORYVISITED, Utils.arrayToString(categoriesVisited, ","));
 		if(mDb.update(DATABASE_TABLE_USER_MODEL, values, KEY_USER + (user != null && user.length() > 0 ? " = " + user : " IS NULL"), null) == 0)
 			mDb.insert(DATABASE_TABLE_USER_MODEL, null, values);
 	}
@@ -290,6 +301,10 @@ public class DbAdapter {
 	
 	public int deleteSearchPerformedBefore(String when){
 		return deleteBefore(DATABASE_TABLE_SEARCH_PERFORMED, when);
+	}
+	
+	public int deleteCategoryVisitedBefore(String when){
+		return deleteBefore(DATABASE_TABLE_CATEGORY_VISITED, when);
 	}
 	
 	public String returnAllTagsFromStoreDetailsView(String user){
@@ -336,12 +351,35 @@ public class DbAdapter {
 		}
 	}
 	
+	public int[] returnAllCategoriesVisited(String user){
+		Cursor cursor = mDb.rawQuery(
+				"SELECT " + KEY_STORECATEGORY + " FROM " + DATABASE_TABLE_CATEGORY_VISITED + " WHERE " + KEY_USER + (user == null ? " IS NULL" : " = ?")
+				, (user == null ? null : new String[]{user}));
+		if(cursor == null)
+			return new int[0];
+		try{
+			int columnId = cursor.getColumnIndex(KEY_STORECATEGORY);
+			if(cursor.moveToFirst()){
+				int[] ids = new int[cursor.getCount()];
+				int i = 0;
+				do{
+					ids[i] = cursor.getInt(columnId);
+					i++;
+				}while(cursor.moveToNext());
+				return ids;
+			}
+			return new int[0];
+		} finally {
+			cursor.close();
+		}
+	}
+	
 	public void clearSimilarity(String user){
 		mDb.delete(DATABASE_TABLE_SIMILARITY, KEY_USER + (user == null ? " IS NULL" : " = ?"), (user == null ? null : new String[] {user}));
 	}
 	
-	public Cursor getStoreTags(){
-		return mDb.query(DATABASE_TABLE_STORE, new String[]{KEY_ID, KEY_TAGS}, null, null, null, null, null);
+	public Cursor getStoreBasicInfo(){
+		return mDb.query(DATABASE_TABLE_STORE, new String[]{KEY_ID, KEY_TAGS, KEY_STORECATEGORY}, null, null, null, null, null);
 	}
 
 	public void saveSimilarity(String user, long storeId, double similarityScore) {

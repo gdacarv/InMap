@@ -29,7 +29,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	static final String KEY_PHONE = "phone";
 	static final String KEY_WEBSITE = "website";
 	static final String KEY_LEVEL = "level";
-	static final String KEY_STORECATEGORY = "id_storecategory";
+	public static final String KEY_STORECATEGORY = "id_storecategory";
 	public static final String KEY_TAGS = "tags";
 	static final String KEY_EXTRAS = "extras";
 	static final String KEY_AREAR1P1X = "arear1p1x";
@@ -55,9 +55,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	static final String DATABASE_TABLE_SEARCH_PERFORMED = "searchperformed";
 	static final String KEY_QUERY = "query";
 	
+	static final String DATABASE_TABLE_CATEGORY_VISITED = "categoryvisited";
+	
 	static final String DATABASE_TABLE_USER_MODEL = "usermodel";
 	static final String KEY_SET_DETAILSVIEW = "setdv";
 	static final String KEY_SET_SEARCHPERFORMED = "setsp";
+	static final String KEY_SET_CATEGORYVISITED = "setcv";
 	
 	static final String DATABASE_TABLE_SIMILARITY = "similarity";
 	static final String KEY_SCORE = "score";
@@ -79,11 +82,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			+ KEY_QUERY + " text not null, "
 			+ KEY_WHEN + " text not null);";
 	
+	private final String DATABASE_CREATE_CATEGORY_VISITED = "create table " + DATABASE_TABLE_CATEGORY_VISITED + " (" 
+			+ KEY_ID + " integer primary key, "
+			+ KEY_USER + " text, "
+			+ KEY_STORECATEGORY + " integer not null, "
+			+ KEY_WHEN + " text not null);";
+	
 	private final String DATABASE_CREATE_USER_MODEL = "create table " + DATABASE_TABLE_USER_MODEL + " (" 
 			+ KEY_ID + " integer primary key, "
 			+ KEY_USER + " text, "
 			+ KEY_SET_DETAILSVIEW + " text, "
-			+ KEY_SET_SEARCHPERFORMED + " text);";
+			+ KEY_SET_SEARCHPERFORMED + " text, "
+			+ KEY_SET_CATEGORYVISITED + " text);";
 	
 	private final String DATABASE_CREATE_SIMILARITY = "create table " + DATABASE_TABLE_SIMILARITY + " (" 
 			+ KEY_ID + " integer primary key, "
@@ -122,6 +132,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			DATABASE_CREATE_DETAIL_VIEW,
 			
 			DATABASE_CREATE_SEARCH_PERFORMED,
+			
+			DATABASE_CREATE_CATEGORY_VISITED,
 			
 			DATABASE_CREATE_USER_MODEL,
 			
@@ -249,6 +261,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		case 1:
 			db.execSQL(DATABASE_CREATE_DETAIL_VIEW);
 			db.execSQL(DATABASE_CREATE_SEARCH_PERFORMED);
+			db.execSQL(DATABASE_CREATE_CATEGORY_VISITED);
 			db.execSQL(DATABASE_CREATE_USER_MODEL);
 			db.execSQL(DATABASE_CREATE_SIMILARITY);
 		}

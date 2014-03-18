@@ -64,6 +64,12 @@ public class StoreCategoryListFragment extends Fragment {
 		if(mOnStoreCategoryChangedListener != null)
 			mOnStoreCategoryChangedListener.onStoreCategoryChanged(id);
 		EasyTracker.getTracker().sendView(String.format(getString(R.string.view_category), id));
+		DbAdapter dbAdapter = DbAdapter.getInstance(mContext).open();
+		try{
+			dbAdapter.saveCategoryVisited(null, id);
+		} finally {
+			dbAdapter.close();
+		}
 	}
 	
 	public interface OnStoreCategoryChangedListener {
