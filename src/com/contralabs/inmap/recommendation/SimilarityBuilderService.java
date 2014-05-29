@@ -34,6 +34,7 @@ public class SimilarityBuilderService extends IntentService {
 		DbAdapter db = DbAdapter.getInstance(getApplicationContext()).open();
 		try{
 			UserModel userModel = buildUserModel(user, db);
+			userModel = getDummyUserModel();
 			SimilarityAlgorithm algorithm = (SimilarityAlgorithm) intent.getSerializableExtra(EXTRA_ALGORITHM);
 			buildSimilarity(user, db, userModel, algorithm == null ? DEFAULT_ALGORITHM : algorithm);
 		} finally { 
@@ -148,5 +149,13 @@ public class SimilarityBuilderService extends IntentService {
 	
 	public enum SimilarityAlgorithm {
 		SIMPLE, COSINE;
+	}
+
+	private UserModel getDummyUserModel() {
+		UserModel userModel = new UserModel();
+		userModel.storeDetailsView = new String[]{ "sapato" };
+		userModel.searchPerformed = new String[]{ "hamburger" };
+		userModel.categoriesVisited = new int[] { };
+		return userModel;
 	}
 }
