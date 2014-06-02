@@ -3,8 +3,12 @@ package com.contralabs.inmap.model;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -16,6 +20,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Pair;
 
+import com.contralabs.inmap.recommendation.UserModel;
 import com.contralabs.inmap.salvadorshop.applicationdata.InfrastructureCategory;
 import com.contralabs.inmap.salvadorshop.applicationdata.StoreCategory;
 import com.contralabs.inmap.utils.Utils;
@@ -280,14 +285,14 @@ public class DbAdapter {
 		mDb.insert(DATABASE_TABLE_CATEGORY_VISITED, null, values);
 	}
 	
-	public void saveUserModel(String user, String setdv, String[] searchPerformeds, int[] categoriesVisited){
-		ContentValues values = new ContentValues(user != null && user.length() > 0 ? 4 : 3);
-		if(user != null && user.length() > 0)
-			values.put(KEY_USER, user);
-		values.put(KEY_SET_DETAILSVIEW, setdv);
-		values.put(KEY_SET_SEARCHPERFORMED, Utils.arrayToString(searchPerformeds, ","));
-		values.put(KEY_SET_CATEGORYVISITED, Utils.arrayToString(categoriesVisited, ","));
-		if(mDb.update(DATABASE_TABLE_USER_MODEL, values, KEY_USER + (user != null && user.length() > 0 ? " = " + user : " IS NULL"), null) == 0)
+	public void saveUserModel(UserModel userModel){
+		ContentValues values = new ContentValues(userModel.name != null && userModel.name.length() > 0 ? 4 : 3);
+		if(userModel.name != null && userModel.name.length() > 0)
+			values.put(KEY_USER, userModel.name);
+		values.put(KEY_SET_DETAILSVIEW, userModel.getAllStoreDetailViewTags());
+		values.put(KEY_SET_SEARCHPERFORMED, Utils.arrayToString(userModel.searchPerformed, ","));
+		values.put(KEY_SET_CATEGORYVISITED, Utils.arrayToString(userModel.categoriesVisited, ","));
+		if(mDb.update(DATABASE_TABLE_USER_MODEL, values, KEY_USER + (userModel.name != null && userModel.name.length() > 0 ? " = " + userModel.name : " IS NULL"), null) == 0)
 			mDb.insert(DATABASE_TABLE_USER_MODEL, null, values);
 	}
 	
@@ -307,22 +312,23 @@ public class DbAdapter {
 		return deleteBefore(DATABASE_TABLE_CATEGORY_VISITED, when);
 	}
 	
-	public String returnAllTagsFromStoreDetailsView(String user){
+	public Map<Long, String[]> returnAllTagsFromStoreDetailsView(String user){
 		Cursor cursor = mDb.rawQuery(
-				"SELECT " + DATABASE_TABLE_STORE + "." + KEY_TAGS + " FROM " + DATABASE_TABLE_DETAIL_VIEW + " INNER JOIN " + DATABASE_TABLE_STORE + " ON " + DATABASE_TABLE_DETAIL_VIEW + "." + KEY_STOREID + "=" + DATABASE_TABLE_STORE + "." + KEY_ID + " WHERE " + DATABASE_TABLE_DETAIL_VIEW + "." + KEY_USER + (user == null ? " IS NULL" : " = ?")
+				"SELECT " + DATABASE_TABLE_STORE + "." + KEY_TAGS + ", " + DATABASE_TABLE_DETAIL_VIEW + "." + KEY_STOREID + " FROM " + DATABASE_TABLE_DETAIL_VIEW + " INNER JOIN " + DATABASE_TABLE_STORE + " ON " + DATABASE_TABLE_DETAIL_VIEW + "." + KEY_STOREID + "=" + DATABASE_TABLE_STORE + "." + KEY_ID + " WHERE " + DATABASE_TABLE_DETAIL_VIEW + "." + KEY_USER + (user == null ? " IS NULL" : " = ?")
 				, (user == null ? null : new String[]{user}));
 		if(cursor == null)
-			return "";
+			throw new RuntimeException("Could not get Store Details View info.");
 		try{
-			int columnTags = cursor.getColumnIndex(KEY_TAGS);
-			StringBuilder tags = new StringBuilder();
+			int columnTags = cursor.getColumnIndex(KEY_TAGS),
+					columnId = cursor.getColumnIndex(KEY_STOREID);
+			Map<Long, String[]> map = null;
 			if(cursor.moveToFirst()){
-				tags.append(cursor.getString(columnTags));
-				while(cursor.moveToNext()){
-					tags.append(',').append(cursor.getString(columnTags));
-				}
+				map = new HashMap<Long, String[]>(cursor.getCount());
+				do {
+					map.put(Long.valueOf(cursor.getLong(columnId)), cursor.getString(columnTags).split(","));
+				} while(cursor.moveToNext());
 			}
-			return tags.toString();
+			return map;
 		} finally {
 			cursor.close();
 		}
@@ -378,8 +384,16 @@ public class DbAdapter {
 		mDb.delete(DATABASE_TABLE_SIMILARITY, KEY_USER + (user == null ? " IS NULL" : " = ?"), (user == null ? null : new String[] {user}));
 	}
 	
-	public Cursor getStoreBasicInfo(){
-		return mDb.query(DATABASE_TABLE_STORE, new String[]{KEY_ID, KEY_TAGS, KEY_STORECATEGORY}, null, null, null, null, null);
+	public Cursor getStoreBasicInfo(Collection<Long> set){
+		String exceptIds = "";
+		if(set != null && !set.isEmpty()){
+			StringBuilder ids = new StringBuilder();
+			for(Long id : set){
+				ids.append('\'').append(id).append('\'').append(',');
+			}
+			exceptIds = ids.substring(0, ids.length()-1);
+		}
+		return mDb.query(DATABASE_TABLE_STORE, new String[]{KEY_ID, KEY_TAGS, KEY_STORECATEGORY}, KEY_ID + " NOT IN (" + exceptIds + ")", null, null, null, null);
 	}
 
 	public void saveSimilarity(String user, long storeId, double similarityScore) {
