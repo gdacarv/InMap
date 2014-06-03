@@ -34,7 +34,9 @@ public class SimilarityBuilderService extends IntentService {
 		DbAdapter db = DbAdapter.getInstance(getApplicationContext()).open();
 		try{
 			UserModel userModel = buildUserModel(user, db);
-			userModel = UMdummyEsportistaNatureba;
+			UserModel evalModel = Evaluation.getEvalatuationModel();
+			if(evalModel != null)
+				userModel = evalModel;
 			SimilarityAlgorithm algorithm = (SimilarityAlgorithm) intent.getSerializableExtra(EXTRA_ALGORITHM);
 			buildSimilarity(user, db, userModel, algorithm == null ? DEFAULT_ALGORITHM : algorithm);
 		} finally { 
@@ -148,28 +150,5 @@ public class SimilarityBuilderService extends IntentService {
 		SIMPLE, COSINE;
 	}
 
-	private UserModel UMdummyEsportista = new UserModel(
-			"Esportista",
-			new HashMap<Long, String[]>() {{
-				put(Long.valueOf(4l), "saude,pe,clinica,pes,clinicas,podologia,bem estar,massagem,relaxamento,mãos,calos,calosidades,unha,unhas encravadas,G1".split(","));
-				put(Long.valueOf(58l), "sapatos,L1,tênis,calçados,acessórios,caminhar,andar,correr,cooper,running,chuteiras,adventure".split(","));
-				put(Long.valueOf(176l), "streetwear,L1,moda,praia,sungas,biquinis,blusas,batas,saída de praia".split(","));
-				put(Long.valueOf(258l), "esporte,L2,tenis,camisas,seleção,camisetas,moletom,jaquetas,futebol,relógios,corrida,chuteiras,dri-fit".split(","));
-			}},
-			"corrida,bike,futebol".split(","), 
-			new int[]{17, 13, 4}
-			), UMdummyEsportistaNatureba = new UserModel(
-			"Esportista Natureba",
-			new HashMap<Long, String[]>() {{
-				put(Long.valueOf(4l), "saude,pe,clinica,pes,clinicas,podologia,bem estar,massagem,relaxamento,mãos,calos,calosidades,unha,unhas encravadas,G1".split(","));
-				put(Long.valueOf(58l), "sapatos,L1,tênis,calçados,acessórios,caminhar,andar,correr,cooper,running,chuteiras,adventure".split(","));
-				put(Long.valueOf(176l), "streetwear,L1,moda,praia,sungas,biquinis,blusas,batas,saída de praia".split(","));
-				put(Long.valueOf(258l), "esporte,L2,tenis,camisas,seleção,camisetas,moletom,jaquetas,futebol,relógios,corrida,chuteiras,dri-fit".split(","));
-				put(Long.valueOf(129l), "saude,L1,produtos naturais,suplementos,esotéricos,whey protein,chás,incensos".split(","));
-				put(Long.valueOf(188l), "alimentacao,L1,chás,açaí,açaí na tigela,baguete,bolinho,chocolate,café expresso,cappuccino,pãozinho,salgados,folhados,chá gelado".split(","));
-				put(Long.valueOf(372l), "alimentacao,L3,refrigerantes,agua,sucos,bebidas,camarão,frango,peixe,galinha,frango,lasanhas,massas,sobremesas,espetinhos,pasteis,pastel,bolinhos,saladas,bacalhau,parmegiana".split(","));
-			}}, 
-			"corrida,bike,futebol,sanduiche natural,salada,frango,açaí".split(","), 
-			new int[]{17, 13, 4, 6}
-			);
+	
 }

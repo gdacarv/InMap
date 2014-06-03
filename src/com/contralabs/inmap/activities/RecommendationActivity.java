@@ -17,6 +17,8 @@ import com.google.analytics.tracking.android.EasyTracker;
 
 public class RecommendationActivity extends SherlockFragmentActivity implements OnStoreSelectedListener{
 	
+	private static final int RECOMMEND_QUANTITY = 10;
+
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
@@ -32,7 +34,7 @@ public class RecommendationActivity extends SherlockFragmentActivity implements 
 		storeListFragment.setAutoSortByTitle(false);
 		DbAdapter db = DbAdapter.getInstance(this).open();
 		try{
-			storeListFragment.setStores(db.getStoresFromSimilarityScore(null, 15)); // TODO Fix user
+			storeListFragment.setStores(db.getStoresFromSimilarityScore(null, RECOMMEND_QUANTITY)); // TODO Fix user
 		} finally {
 			db.close();
 		}
