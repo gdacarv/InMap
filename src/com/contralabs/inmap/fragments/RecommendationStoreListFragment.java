@@ -4,8 +4,12 @@ import java.security.InvalidParameterException;
 import java.util.Arrays;
 
 import android.annotation.TargetApi;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Build;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.util.Pair;
 import android.view.View;
@@ -17,7 +21,9 @@ import com.contralabs.inmap.R;
 import com.contralabs.inmap.activities.RecommendationActivity;
 import com.contralabs.inmap.model.Store;
 import com.contralabs.inmap.recommendation.Evaluation;
+import com.contralabs.inmap.recommendation.Evaluation.Model;
 import com.contralabs.inmap.recommendation.SimilarityBuilderService;
+import com.contralabs.inmap.recommendation.SimilarityBuilderService.SimilarityAlgorithm;
 
 public class RecommendationStoreListFragment extends StoreListFragment {
 	
@@ -34,6 +40,7 @@ public class RecommendationStoreListFragment extends StoreListFragment {
 			stores[i] = storesWithScore[i].first;
 		super.setStores(stores);
 		mStoresWithScore = storesWithScore;
+		
 		analyzeEvaluation();
 	}
 
@@ -75,8 +82,35 @@ public class RecommendationStoreListFragment extends StoreListFragment {
 		float precision = ((float)matchedRecommendation)/((float)mStoresWithScore.length);
 		float recall = ((float)matchedRecommendation)/((float)shouldRecommend.length);
 		float fmeasure = (2*precision*recall)/(precision+recall);
-		String message = "Recommender Evaluation Algorithm: " + SimilarityBuilderService.DEFAULT_ALGORITHM + " and model " + Evaluation.getEvalatuationModel().name + ": precision = " + precision + "; recall = " + recall + "; f-measure = " + fmeasure + ";";
+		String message = "Recommender Evaluation Algorithm: " + SimilarityBuilderService.DEFAULT_ALGORITHM + " and model " + Evaluation.getEvalatuationModel().name + " n = " + RecommendationActivity.RECOMMEND_QUANTITY + " precision = " + precision + " recall = " + recall + " f-measure = " + fmeasure;
 		Log.d("Evaluation", message);
 		Toast.makeText(mContext, message, Toast.LENGTH_LONG).show();
+		
+		if(RecommendationActivity.RECOMMEND_QUANTITY == 4){
+			RecommendationActivity.RECOMMEND_QUANTITY = 12;
+			switch(SimilarityBuilderService.DEFAULT_ALGORITHM){
+			case STORE_BASED:
+				SimilarityBuilderService.DEFAULT_ALGORITHM = SimilarityAlgorithm.SIMPLE;
+				break;
+			case SIMPLE:
+				SimilarityBuilderService.DEFAULT_ALGORITHM = SimilarityAlgorithm.RANDOM;
+				break;
+			case RANDOM:
+				SimilarityBuilderService.DEFAULT_ALGORITHM = SimilarityAlgorithm.STORE_BASED;
+				switch (Evaluation.USE_EVALUATION_MODEL) {
+				case ESPORTISTA:
+					Evaluation.USE_EVALUATION_MODEL = Model.ESPORTISTA_NATUREBA;
+					break;
+				case ESPORTISTA_NATUREBA:
+					Evaluation.USE_EVALUATION_MODEL = Model.PATRICINHA;
+					break;
+				case PATRICINHA:
+					return;
+				}
+				break;
+			}
+		} else
+			RecommendationActivity.RECOMMEND_QUANTITY -= 4;
+		mContext.startService(new Intent(mContext, SimilarityBuilderService.class));
 	}
 }

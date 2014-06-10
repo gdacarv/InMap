@@ -1,8 +1,13 @@
 package com.contralabs.inmap.activities;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
 import android.view.View;
 
 import com.actionbarsherlock.app.ActionBar;
@@ -13,11 +18,12 @@ import com.contralabs.inmap.fragments.RecommendationStoreListFragment;
 import com.contralabs.inmap.fragments.StoreListFragment.OnStoreSelectedListener;
 import com.contralabs.inmap.model.DbAdapter;
 import com.contralabs.inmap.model.Store;
+import com.contralabs.inmap.recommendation.SimilarityBuilderService;
 import com.google.analytics.tracking.android.EasyTracker;
 
 public class RecommendationActivity extends SherlockFragmentActivity implements OnStoreSelectedListener{
 	
-	public static final int RECOMMEND_QUANTITY = 15;
+	public static int RECOMMEND_QUANTITY = 12;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -39,6 +45,36 @@ public class RecommendationActivity extends SherlockFragmentActivity implements 
 			db.close();
 		}
 	}
+	
+	private BroadcastReceiver onSimilarityUpdated = new BroadcastReceiver() {
+        
+        @Override
+        public void onReceive(Context context, Intent intent) {
+        	RecommendationStoreListFragment storeListFragment = (RecommendationStoreListFragment) getSupportFragmentManager().findFragmentById(R.id.frag_storelist);
+    		DbAdapter db = DbAdapter.getInstance(RecommendationActivity.this).open();
+    		try{
+    			storeListFragment.setStores(db.getStoresFromSimilarityScore(null, RECOMMEND_QUANTITY)); // TODO Fix user
+    		} finally {
+    			db.close();
+    		}
+         
+        }
+    };
+	
+	@Override
+	public void onPause() {
+        super.onPause();
+         
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(onSimilarityUpdated);
+    }
+	
+    @Override
+	public void onResume() {
+        super.onResume();
+         
+        IntentFilter iff= new IntentFilter(SimilarityBuilderService.ACTION_SIMILIRARITY_BUILD_FINISHED);
+        LocalBroadcastManager.getInstance(this).registerReceiver(onSimilarityUpdated, iff);
+    }
 
 	@Override
 	protected void onStart() {

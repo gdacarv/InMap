@@ -11,17 +11,21 @@ import java.util.Set;
 import android.app.IntentService;
 import android.content.Intent;
 import android.database.Cursor;
+import android.support.v4.content.LocalBroadcastManager;
 import android.text.format.DateFormat;
+import android.util.Log;
 
+import com.contralabs.inmap.activities.RecommendationActivity;
 import com.contralabs.inmap.model.DatabaseHelper;
 import com.contralabs.inmap.model.DbAdapter;
 
 public class SimilarityBuilderService extends IntentService {
 
-	private static final double SCORE_MINIMUM = 0.01d;
+	public static final String ACTION_SIMILIRARITY_BUILD_FINISHED = "SIMILIRARITY_BUILD_FINISHED";
+	private static final double SCORE_MINIMUM = 0.15d;
 	private static final String EXTRA_USER = "extraUser";
 	private static final String EXTRA_ALGORITHM = "extraUser";
-	public static final SimilarityAlgorithm DEFAULT_ALGORITHM = SimilarityAlgorithm.STORE_BASED;
+	public static SimilarityAlgorithm DEFAULT_ALGORITHM = SimilarityAlgorithm.STORE_BASED;
 	private Map<Integer, Integer> mFrequencyMap;
 
 	public SimilarityBuilderService() {
@@ -39,6 +43,8 @@ public class SimilarityBuilderService extends IntentService {
 				userModel = evalModel;
 			SimilarityAlgorithm algorithm = (SimilarityAlgorithm) intent.getSerializableExtra(EXTRA_ALGORITHM);
 			buildSimilarity(user, db, userModel, algorithm == null ? DEFAULT_ALGORITHM : algorithm);
+			//Log.d("Evaluation", "Finished build similarity. Algorithm: " + SimilarityBuilderService.DEFAULT_ALGORITHM + " and model " + Evaluation.getEvalatuationModel().name + " n = " + RecommendationActivity.RECOMMEND_QUANTITY);
+			LocalBroadcastManager.getInstance(this).sendBroadcast(new Intent(ACTION_SIMILIRARITY_BUILD_FINISHED));
 		} finally { 
 			db.close();
 		}

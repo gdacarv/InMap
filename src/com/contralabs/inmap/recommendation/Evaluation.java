@@ -1,12 +1,15 @@
 package com.contralabs.inmap.recommendation;
 
+import android.annotation.TargetApi;
+import android.os.Build;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class Evaluation {
 	
-	private static final Model USE_EVALUATION_MODEL = Model.ESPORTISTA;
+	public static Model USE_EVALUATION_MODEL = Model.ESPORTISTA;
 	
-	private enum Model { ESPORTISTA, ESPORTISTA_NATUREBA, PATRICINHA };
+	public enum Model { ESPORTISTA, ESPORTISTA_NATUREBA, PATRICINHA };
 
 	private static final UserModel UMdummyEsportista = new UserModel(
 			"Esportista",
@@ -40,13 +43,13 @@ public class Evaluation {
 				put(Long.valueOf(254l), "roupa feminina,L2,vestidos,vestido,saia,saias,jaquetas,jaqueta,casaco,casacos,blusa,blusas,trench,chemise,macacao,bolsas,cintos,clutch,carteira,carteiras".split(","));
 				put(Long.valueOf(72l), "roupa feminina,L1,roupas,acessórios,moda feminina,fashion,tendência,coleção,calças,bermudas,camisas,camisetas,saias,vestidos,cintos,shorts".split(","));
 			}}, 
-			"sapato,vestido,grife,bolsas".split(","), 
+			"sapato,vestido,grife,bolsas,perfumes".split(","), 
 			new int[]{16, 4, 2}
 			);
 	
-	private static final long[] shouldRecommendEsportista = new long[] { 16l, 209l, 325l, 116l, 138l, 65l, 200l, 97l },
-			shouldRecommendEsportistaNatureba = new long[] { 65l, 209l, 325l, 16l, 116l, 138l, 200l, 398l, 412l, 198l },
-			shouldRecommendPatricinha = new long[] { 69l, 148l, 163l, 283l, 319l, 341l };
+	private static final long[] shouldRecommendEsportista = new long[] { 16l, 209l, 325l, 116l, 138l, 65l, 200l, 97l, 120l, 194l, 101l, 107l },
+			shouldRecommendEsportistaNatureba = new long[] { 209l, 325l, 16l, 116l, 412l, 65l, 398l, 138l, 200l, 198l, 120l, 194l },
+			shouldRecommendPatricinha = new long[] { 69l, 148l, 163l, 140l, 186l, 283l, 319l, 195l, 341l, 64l, 168l, 143l };
 	
 	public static UserModel getEvalatuationModel(){
 		switch (USE_EVALUATION_MODEL) {
@@ -60,14 +63,15 @@ public class Evaluation {
 		return null;
 	}
 	
+	@TargetApi(Build.VERSION_CODES.GINGERBREAD)
 	public static long[] getEvaluationShouldRecommendStores(){
 		switch (USE_EVALUATION_MODEL) {
 		case ESPORTISTA:
-			return shouldRecommendEsportista;
+			return Arrays.copyOf(shouldRecommendEsportista, shouldRecommendEsportista.length);
 		case ESPORTISTA_NATUREBA:
-			return shouldRecommendEsportistaNatureba;
+			return Arrays.copyOf(shouldRecommendEsportistaNatureba, shouldRecommendEsportistaNatureba.length);
 		case PATRICINHA:
-			return shouldRecommendPatricinha;
+			return Arrays.copyOf(shouldRecommendPatricinha, shouldRecommendPatricinha.length);
 		}
 		return null;
 	}
