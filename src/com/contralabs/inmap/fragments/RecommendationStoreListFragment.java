@@ -3,7 +3,9 @@ package com.contralabs.inmap.fragments;
 import java.security.InvalidParameterException;
 import java.util.Arrays;
 
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.os.Build;
 import android.util.Log;
 import android.util.Pair;
 import android.view.View;
@@ -12,8 +14,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.contralabs.inmap.R;
+import com.contralabs.inmap.activities.RecommendationActivity;
 import com.contralabs.inmap.model.Store;
 import com.contralabs.inmap.recommendation.Evaluation;
+import com.contralabs.inmap.recommendation.SimilarityBuilderService;
 
 public class RecommendationStoreListFragment extends StoreListFragment {
 	
@@ -54,10 +58,14 @@ public class RecommendationStoreListFragment extends StoreListFragment {
 		
 	}
 	
+	@TargetApi(Build.VERSION_CODES.GINGERBREAD)
 	private void analyzeEvaluation() {
 		long[] shouldRecommend = Evaluation.getEvaluationShouldRecommendStores();
 		if(shouldRecommend == null)
 			return;
+		if(shouldRecommend.length > RecommendationActivity.RECOMMEND_QUANTITY){
+			shouldRecommend = Arrays.copyOf(shouldRecommend, RecommendationActivity.RECOMMEND_QUANTITY);
+		}
 		Arrays.sort(shouldRecommend);
 		int matchedRecommendation = 0;
 		for(Pair<Store, Double> storeAndScore : mStoresWithScore){
@@ -67,7 +75,7 @@ public class RecommendationStoreListFragment extends StoreListFragment {
 		float precision = ((float)matchedRecommendation)/((float)mStoresWithScore.length);
 		float recall = ((float)matchedRecommendation)/((float)shouldRecommend.length);
 		float fmeasure = (2*precision*recall)/(precision+recall);
-		String message = "Recommender Evaluation " + Evaluation.getEvalatuationModel().name + ": precision = " + precision + "; recall = " + recall + "; f-measure = " + fmeasure + ";";
+		String message = "Recommender Evaluation Algorithm: " + SimilarityBuilderService.DEFAULT_ALGORITHM + " and model " + Evaluation.getEvalatuationModel().name + ": precision = " + precision + "; recall = " + recall + "; f-measure = " + fmeasure + ";";
 		Log.d("Evaluation", message);
 		Toast.makeText(mContext, message, Toast.LENGTH_LONG).show();
 	}

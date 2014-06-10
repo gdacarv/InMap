@@ -16,8 +16,8 @@ public class Evaluation {
 				put(Long.valueOf(176l), "streetwear,L1,moda,praia,sungas,biquinis,blusas,batas,saída de praia".split(","));
 				put(Long.valueOf(258l), "esporte,L2,tenis,camisas,seleção,camisetas,moletom,jaquetas,futebol,relógios,corrida,chuteiras,dri-fit".split(","));
 			}},
-			"corrida,bike,futebol".split(","), 
-			new int[]{17, 13, 4}
+			"corrida,bike,futebol,esporte,tensor".split(","), 
+			new int[]{17, 13, 4, 17}
 			), UMdummyEsportistaNatureba = new UserModel(
 			"Esportista Natureba",
 			new HashMap<Long, String[]>() {{
@@ -29,8 +29,8 @@ public class Evaluation {
 				put(Long.valueOf(188l), "alimentacao,L1,chás,açaí,açaí na tigela,baguete,bolinho,chocolate,café expresso,cappuccino,pãozinho,salgados,folhados,chá gelado".split(","));
 				put(Long.valueOf(372l), "alimentacao,L3,refrigerantes,agua,sucos,bebidas,camarão,frango,peixe,galinha,frango,lasanhas,massas,sobremesas,espetinhos,pasteis,pastel,bolinhos,saladas,bacalhau,parmegiana".split(","));
 			}}, 
-			"corrida,bike,futebol,sanduiche natural,salada,frango,açaí".split(","), 
-			new int[]{17, 13, 4, 6}
+			"corrida,bike,futebol,esporte,tensor,sanduiche natural,salada,frango,açaí".split(","), 
+			new int[]{17, 13, 4, 6, 17}
 			), UMdummyPatricinha = new UserModel(
 			"Patricinha",
 			new HashMap<Long, String[]>() {{
@@ -44,7 +44,7 @@ public class Evaluation {
 			new int[]{16, 4, 2}
 			);
 	
-	private static final long[] shouldRecommendEsportista = new long[] { 65l, 209l, 325l, 16l, 116l, 138l, 200l },
+	private static final long[] shouldRecommendEsportista = new long[] { 16l, 209l, 325l, 116l, 138l, 65l, 200l, 97l },
 			shouldRecommendEsportistaNatureba = new long[] { 65l, 209l, 325l, 16l, 116l, 138l, 200l, 398l, 412l, 198l },
 			shouldRecommendPatricinha = new long[] { 69l, 148l, 163l, 283l, 319l, 341l };
 	

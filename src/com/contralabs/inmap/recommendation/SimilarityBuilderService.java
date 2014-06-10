@@ -21,7 +21,7 @@ public class SimilarityBuilderService extends IntentService {
 	private static final double SCORE_MINIMUM = 0.01d;
 	private static final String EXTRA_USER = "extraUser";
 	private static final String EXTRA_ALGORITHM = "extraUser";
-	private static final SimilarityAlgorithm DEFAULT_ALGORITHM = SimilarityAlgorithm.COSINE;
+	public static final SimilarityAlgorithm DEFAULT_ALGORITHM = SimilarityAlgorithm.STORE_BASED;
 	private Map<Integer, Integer> mFrequencyMap;
 
 	public SimilarityBuilderService() {
@@ -91,16 +91,18 @@ public class SimilarityBuilderService extends IntentService {
 		String[] searchPerformed = userModel.searchPerformed;
 		int[] categoriesVisited = userModel.categoriesVisited;
 		switch (similarityAlgorithm) {
-		case COSINE:
+		case STORE_BASED:
 			final Map<String, Double> storeTagsMap = convertStringArrayToMap(storeTags);
 			final double similarityStoreDetailView = (storeDetailView == null || storeDetailView.length == 0 ? 0 : calculateCosineSimilarity(convertStringArrayToMap(storeDetailView), storeTagsMap));
 			final double similaritySearchPerformed = (searchPerformed == null || searchPerformed.length == 0 ? 0 : calculateCosineSimilarity(convertStringArrayToMap(searchPerformed), storeTagsMap));
-			final double similarityCategoriesVisited = (categoriesVisited == null || categoriesVisited.length == 0 ? 0 : getFrequencyMap(userModel.categoriesVisited).get(storeCategory).doubleValue()/(double)categoriesVisited.length);
-			return similarityStoreDetailView * 0.2d +
-					similaritySearchPerformed * 0.5d +
-					similarityCategoriesVisited * 0.3d;
-		case SIMPLE: // TODO Old version, using only StoreDetailView
+			final double similarityCategoriesVisited = (categoriesVisited == null || categoriesVisited.length == 0 ? 0 : getFrequencyMap(categoriesVisited).get(storeCategory).doubleValue()/(double)categoriesVisited.length);
+			return similarityStoreDetailView * 0.15d +
+					similaritySearchPerformed * 0.6d +
+					similarityCategoriesVisited * 0.25d;
+		case SIMPLE:
 			return calculateSimpleSimilarity(storeDetailView, storeTags);
+		case RANDOM:
+			return Math.random();
 		}
 		throw new InvalidParameterException("Similarity Algorithm " + similarityAlgorithm.name() + " not know.");
 	}
@@ -147,7 +149,7 @@ public class SimilarityBuilderService extends IntentService {
 	}
 	
 	public enum SimilarityAlgorithm {
-		SIMPLE, COSINE;
+		SIMPLE, STORE_BASED, RANDOM;
 	}
 
 	

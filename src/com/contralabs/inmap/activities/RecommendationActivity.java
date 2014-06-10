@@ -17,7 +17,7 @@ import com.google.analytics.tracking.android.EasyTracker;
 
 public class RecommendationActivity extends SherlockFragmentActivity implements OnStoreSelectedListener{
 	
-	private static final int RECOMMEND_QUANTITY = 10;
+	public static final int RECOMMEND_QUANTITY = 15;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
