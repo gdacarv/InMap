@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -321,7 +322,7 @@ public class DbAdapter {
 		try{
 			int columnTags = cursor.getColumnIndex(KEY_TAGS),
 					columnId = cursor.getColumnIndex(KEY_STOREID);
-			Map<Long, String[]> map = null;
+			Map<Long, String[]> map = Collections.emptyMap();
 			if(cursor.moveToFirst()){
 				map = new HashMap<Long, String[]>(cursor.getCount());
 				do {

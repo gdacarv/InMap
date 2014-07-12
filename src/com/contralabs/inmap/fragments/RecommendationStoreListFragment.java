@@ -3,13 +3,12 @@ package com.contralabs.inmap.fragments;
 import java.security.InvalidParameterException;
 import java.util.Arrays;
 
+import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
+
 import android.annotation.TargetApi;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Build;
-import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.util.Pair;
 import android.view.View;
@@ -21,13 +20,14 @@ import com.contralabs.inmap.R;
 import com.contralabs.inmap.activities.RecommendationActivity;
 import com.contralabs.inmap.model.Store;
 import com.contralabs.inmap.recommendation.Evaluation;
-import com.contralabs.inmap.recommendation.Evaluation.Model;
 import com.contralabs.inmap.recommendation.SimilarityBuilderService;
 import com.contralabs.inmap.recommendation.SimilarityBuilderService.SimilarityAlgorithm;
 
 public class RecommendationStoreListFragment extends StoreListFragment {
 	
 	private Pair<Store, Double>[] mStoresWithScore;
+	
+	private DescriptiveStatistics mPrecision = new DescriptiveStatistics(), mRecall = new DescriptiveStatistics(), mFmeasure = new DescriptiveStatistics();
 
 	@Override
 	public void setStores(Store[] stores) {
@@ -82,35 +82,39 @@ public class RecommendationStoreListFragment extends StoreListFragment {
 		float precision = ((float)matchedRecommendation)/((float)mStoresWithScore.length);
 		float recall = ((float)matchedRecommendation)/((float)shouldRecommend.length);
 		float fmeasure = (2*precision*recall)/(precision+recall);
-		String message = "Recommender Evaluation Algorithm: " + SimilarityBuilderService.DEFAULT_ALGORITHM + " and model " + Evaluation.getEvalatuationModel().name + " n = " + RecommendationActivity.RECOMMEND_QUANTITY + " precision = " + precision + " recall = " + recall + " f-measure = " + fmeasure;
-		Log.d("Evaluation", message);
-		Toast.makeText(mContext, message, Toast.LENGTH_LONG).show();
+		//String message = "Recommender Evaluation Algorithm: " + SimilarityBuilderService.DEFAULT_ALGORITHM + " and model " + Evaluation.getEvaluationModel().name + " n = " + RecommendationActivity.RECOMMEND_QUANTITY + " precision = " + precision + " recall = " + recall + " f-measure = " + fmeasure;
+		//Log.d("Evaluation", message);
+		//Toast.makeText(mContext, message, Toast.LENGTH_LONG).show();
+		mPrecision.addValue(Float.isNaN(precision) ? 0 : precision);
+		mRecall.addValue(Float.isNaN(recall) ? 0 : recall);
+		mFmeasure.addValue(Float.isNaN(fmeasure) ? 0 : fmeasure);
 		
-		if(RecommendationActivity.RECOMMEND_QUANTITY == 4){
-			RecommendationActivity.RECOMMEND_QUANTITY = 12;
-			switch(SimilarityBuilderService.DEFAULT_ALGORITHM){
-			case STORE_BASED:
-				SimilarityBuilderService.DEFAULT_ALGORITHM = SimilarityAlgorithm.SIMPLE;
-				break;
-			case SIMPLE:
-				SimilarityBuilderService.DEFAULT_ALGORITHM = SimilarityAlgorithm.RANDOM;
-				break;
-			case RANDOM:
-				SimilarityBuilderService.DEFAULT_ALGORITHM = SimilarityAlgorithm.STORE_BASED;
-				switch (Evaluation.USE_EVALUATION_MODEL) {
-				case ESPORTISTA:
-					Evaluation.USE_EVALUATION_MODEL = Model.ESPORTISTA_NATUREBA;
+		if(Evaluation.mIndex < Evaluation.getEvaluationDataSize()-1)
+			Evaluation.mIndex++;
+		else {
+			Log.d("Evaluation", "Recommender Evaluation Algorithm: " + SimilarityBuilderService.DEFAULT_ALGORITHM + " n = " + RecommendationActivity.RECOMMEND_QUANTITY + " precision = " + mPrecision.getMean() + " (" + mPrecision.getStandardDeviation() + ") recall = " + mRecall.getMean() + " (" + mRecall.getStandardDeviation() + ") f-measure = " + mFmeasure.getMean() + " (" + mFmeasure.getStandardDeviation() + ")");
+			Evaluation.mIndex = 0;
+			mPrecision.clear();
+			mRecall.clear();
+			mFmeasure.clear();
+			RecommendationActivity.RECOMMEND_QUANTITY -= 4;
+			if(RecommendationActivity.RECOMMEND_QUANTITY == 0){
+				RecommendationActivity.RECOMMEND_QUANTITY = 12;
+				switch(SimilarityBuilderService.DEFAULT_ALGORITHM){
+				case STORE_BASED:
+					SimilarityBuilderService.DEFAULT_ALGORITHM = SimilarityAlgorithm.TAG_BASED;
 					break;
-				case ESPORTISTA_NATUREBA:
-					Evaluation.USE_EVALUATION_MODEL = Model.PATRICINHA;
+				case TAG_BASED:
+					SimilarityBuilderService.DEFAULT_ALGORITHM = SimilarityAlgorithm.SIMPLE;
 					break;
-				case PATRICINHA:
+				case SIMPLE:
+					SimilarityBuilderService.DEFAULT_ALGORITHM = SimilarityAlgorithm.RANDOM;
+					break;
+				case RANDOM:
 					return;
 				}
-				break;
 			}
-		} else
-			RecommendationActivity.RECOMMEND_QUANTITY -= 4;
+		}
 		mContext.startService(new Intent(mContext, SimilarityBuilderService.class));
 	}
 }

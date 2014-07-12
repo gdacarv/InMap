@@ -1,17 +1,13 @@
 package com.contralabs.inmap.recommendation;
 
-import android.annotation.TargetApi;
-import android.os.Build;
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class Evaluation {
 	
-	public static Model USE_EVALUATION_MODEL = Model.ESPORTISTA;
+	public static int mIndex = 0;
 	
-	public enum Model { ESPORTISTA, ESPORTISTA_NATUREBA, PATRICINHA };
-
-	private static final UserModel UMdummyEsportista = new UserModel(
+	private static final UserModel[] mUserModels = new UserModel[] {
+			new UserModel(
 			"Esportista",
 			new HashMap<Long, String[]>() {{
 				put(Long.valueOf(4l), "saude,pe,clinica,pes,clinicas,podologia,bem estar,massagem,relaxamento,mãos,calos,calosidades,unha,unhas encravadas,G1".split(","));
@@ -21,7 +17,7 @@ public class Evaluation {
 			}},
 			"corrida,bike,futebol,esporte,tensor".split(","), 
 			new int[]{17, 13, 4, 17}
-			), UMdummyEsportistaNatureba = new UserModel(
+			), new UserModel(
 			"Esportista Natureba",
 			new HashMap<Long, String[]>() {{
 				put(Long.valueOf(4l), "saude,pe,clinica,pes,clinicas,podologia,bem estar,massagem,relaxamento,mãos,calos,calosidades,unha,unhas encravadas,G1".split(","));
@@ -34,7 +30,7 @@ public class Evaluation {
 			}}, 
 			"corrida,bike,futebol,esporte,tensor,sanduiche natural,salada,frango,açaí".split(","), 
 			new int[]{17, 13, 4, 6, 17}
-			), UMdummyPatricinha = new UserModel(
+			), new UserModel(
 			"Patricinha",
 			new HashMap<Long, String[]>() {{
 				put(Long.valueOf(33l), "cosmetico,L1,salão de beleza,estética,serviços,serviços de beleza,bem-estar,Jacques Janine,cabelos,peles".split(","));
@@ -45,34 +41,23 @@ public class Evaluation {
 			}}, 
 			"sapato,vestido,grife,bolsas,perfumes".split(","), 
 			new int[]{16, 4, 2}
-			);
+			)};
 	
-	private static final long[] shouldRecommendEsportista = new long[] { 16l, 209l, 325l, 116l, 138l, 65l, 200l, 97l, 120l, 194l, 101l, 107l },
-			shouldRecommendEsportistaNatureba = new long[] { 209l, 325l, 16l, 116l, 412l, 65l, 398l, 138l, 200l, 198l, 120l, 194l },
-			shouldRecommendPatricinha = new long[] { 69l, 148l, 163l, 140l, 186l, 283l, 319l, 195l, 341l, 64l, 168l, 143l };
+	private static final long[][] mShouldRecommendEsportista = new long[][] { 
+			new long[] { 16l, 209l, 325l, 116l, 138l, 65l, 200l, 97l, 120l, 194l, 101l, 107l },
+			new long[] { 209l, 325l, 16l, 116l, 412l, 65l, 398l, 138l, 200l, 198l, 120l, 194l },
+			new long[] { 69l, 148l, 163l, 140l, 186l, 283l, 319l, 195l, 341l, 64l, 168l, 143l } 
+			};
 	
-	public static UserModel getEvalatuationModel(){
-		switch (USE_EVALUATION_MODEL) {
-		case ESPORTISTA:
-			return UMdummyEsportista;
-		case ESPORTISTA_NATUREBA:
-			return UMdummyEsportistaNatureba;
-		case PATRICINHA:
-			return UMdummyPatricinha;
-		}
-		return null;
+	public static UserModel getEvaluationModel(){
+		return mUserModels[mIndex];
 	}
 	
-	@TargetApi(Build.VERSION_CODES.GINGERBREAD)
 	public static long[] getEvaluationShouldRecommendStores(){
-		switch (USE_EVALUATION_MODEL) {
-		case ESPORTISTA:
-			return Arrays.copyOf(shouldRecommendEsportista, shouldRecommendEsportista.length);
-		case ESPORTISTA_NATUREBA:
-			return Arrays.copyOf(shouldRecommendEsportistaNatureba, shouldRecommendEsportistaNatureba.length);
-		case PATRICINHA:
-			return Arrays.copyOf(shouldRecommendPatricinha, shouldRecommendPatricinha.length);
-		}
-		return null;
+		return mShouldRecommendEsportista[mIndex];
+	}
+	
+	public static int getEvaluationDataSize(){
+		return mUserModels.length;
 	}
 }

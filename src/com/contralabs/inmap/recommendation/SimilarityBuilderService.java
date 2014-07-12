@@ -13,9 +13,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.format.DateFormat;
-import android.util.Log;
-
-import com.contralabs.inmap.activities.RecommendationActivity;
 import com.contralabs.inmap.model.DatabaseHelper;
 import com.contralabs.inmap.model.DbAdapter;
 
@@ -38,7 +35,7 @@ public class SimilarityBuilderService extends IntentService {
 		DbAdapter db = DbAdapter.getInstance(getApplicationContext()).open();
 		try{
 			UserModel userModel = buildUserModel(user, db);
-			UserModel evalModel = Evaluation.getEvalatuationModel();
+			UserModel evalModel = Evaluation.getEvaluationModel();
 			if(evalModel != null)
 				userModel = evalModel;
 			SimilarityAlgorithm algorithm = (SimilarityAlgorithm) intent.getSerializableExtra(EXTRA_ALGORITHM);
@@ -109,6 +106,9 @@ public class SimilarityBuilderService extends IntentService {
 			return calculateSimpleSimilarity(storeDetailView, storeTags);
 		case RANDOM:
 			return Math.random();
+		case TAG_BASED:
+			final Map<String, Double> storeTagsMap2 = convertStringArrayToMap(storeTags);
+			return (storeDetailView == null || storeDetailView.length == 0 ? 0 : calculateCosineSimilarity(convertStringArrayToMap(storeDetailView), storeTagsMap2));
 		}
 		throw new InvalidParameterException("Similarity Algorithm " + similarityAlgorithm.name() + " not know.");
 	}
@@ -155,7 +155,7 @@ public class SimilarityBuilderService extends IntentService {
 	}
 	
 	public enum SimilarityAlgorithm {
-		SIMPLE, STORE_BASED, RANDOM;
+		SIMPLE, STORE_BASED, RANDOM, TAG_BASED;
 	}
 
 	
