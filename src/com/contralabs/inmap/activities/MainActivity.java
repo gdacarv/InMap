@@ -519,6 +519,12 @@ public class MainActivity extends SlidingActionBarActivity implements OnInfrastr
 	}
 
 	private void startSimilarityBuilder() {
+		mDbAdapter.open();
+		try{
+			mDbAdapter.clearRecommendation();
+		} finally {
+			mDbAdapter.close();
+		}
 		startService(new Intent(this, SimilarityBuilderService.class));
 	}
 

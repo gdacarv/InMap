@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class Evaluation {
 	
-	public static int mIndex = 0;
+	public static int mIndex = -1;
 	
 	private static final UserModel[] mUserModels = new UserModel[] {
 			new UserModel(
@@ -41,19 +41,39 @@ public class Evaluation {
 			}}, 
 			"sapato,vestido,grife,bolsas,perfumes".split(","), 
 			new int[]{16, 4, 2}
-			)};
+			), new UserModel(
+			"Doceira",
+			new HashMap<Long, String[]>() {{
+				put(Long.valueOf(11l), "alimentacao,chocolates,cacau,sorvetes,cafés,chas,doces,chá,G1".split(","));
+				put(Long.valueOf(27l), "departamento,L1,eletrônicos,doces,eletrodomésticos,acessórios,brinquedos,lar,americanas,lojas americanas,jogos".split(","));
+				put(Long.valueOf(31l), "alimentacao,L1,Frozen Yogurt,iogurte,sorvetes,lanches,fast food,Yoggis,smoothies,blends,toppings,açaí".split(","));
+				put(Long.valueOf(108l), "alimentacao,L1,chá,café,doceria,sorveteria".split(","));
+			}}, 
+			"doces,sorveteria,chocolates,shakes".split(","), 
+			new int[]{6}
+			), new UserModel("Mãe de bebê",new HashMap<Long, String[]>() {{put(Long.valueOf(17l), "G1,infantil,crianças,parques,diversão,diversões,brinquedos,pula-pula,diversão,parquinhos".split(","));put(Long.valueOf(221l), "L2,camisas,blusas,shorts,sapatos,bones,meias,calca,bermudas,camisetas,blusao,conjuntos,jaquetas,coletes,chinelo,sunga,regata".split(","));put(Long.valueOf(80l), "L1,roupas,acessórios,crianças,moda,look,roupas infantis,body,camisas,camisetas,blusas,meias,legging,mochilas,jaquetas,bolsas,casacos,calças,jardineiras,jumper".split(","));put(Long.valueOf(261l), "L2,roupas,moda,moda infantil,teen,camisa,short,bermuda,jaqueta,saia,casaco,calça,blusa,crianças,moda,coleção,camisas,shorts,blusas,bermudas,vestidos,saias,sapatos,bones,meias,calca,bermudas,camisetas,blusao,conjuntos,jaquetas,coletes,chinelo,sunga,regata".split(","));}},"brinquedo,mamadeira".split(","),new int[]{18, 7}),
+			new UserModel("Executivo",new HashMap<Long, String[]>() {{put(Long.valueOf(85l), "L1,bancos,serivços financeiros,finanças,financiamento,poupança,banco,caixa eletrônico,conta,investimento,saque,extrato,depósito".split(","));put(Long.valueOf(207l), "L2,livros,dvds,coleções,teatro,revistas,cds,eventos".split(","));put(Long.valueOf(21l), "G1,correios,correspondência,encomendas,sedex,cartas,entregas,pac,telegrama,nacional,internacional,mala direta,malotes".split(","));put(Long.valueOf(159l), "L1,óculos,lentes,armações,óculos de sol,lentes de grau".split(","));put(Long.valueOf(189l), "L1,passagem,passagens,hoteis,hotel,resorts,resort,cruzeiros,viagem,viagens,guias,guia,pacotes,pacotes de viagem,hotel,hoteis,destinos,lua de mel".split(","));put(Long.valueOf(227l), "L2,calcas,camisas,calças,camisetas,regatas,jaquetas,casacos,cintos,blazers,fio tinto,polos,tricots,paletos,paletós,calçados,sapatos,camisas softs,t-shirts,jeans,bermudas,pastas,mochilas,porta terno,mala,carteira".split(","));put(Long.valueOf(88l), "L1,bancos,serivços financeiros,finanças,financiamento,poupança,banco,pagamentos,saque,depósito,extrato".split(","));put(Long.valueOf(165l), "L1,camisas,poló,terno,gravata,cinto,calça,grife,moda".split(","));put(Long.valueOf(105l), "L1,calçados,bolsas,acessórios,cintos,sapatos,sapatenis,pasta".split(","));put(Long.valueOf(224l), "L2,calcas,bermudas,shorts,blusas,camisas,jaquetas,blazers,vestidos".split(","));}},"paleto,sapato".split(","),new int[]{9,8,10,20,1})
+			
+	};
 	
 	private static final long[][] mShouldRecommendEsportista = new long[][] { 
 			new long[] { 16l, 209l, 325l, 116l, 138l, 65l, 200l, 97l, 120l, 194l, 101l, 107l },
 			new long[] { 209l, 325l, 16l, 116l, 412l, 65l, 398l, 138l, 200l, 198l, 120l, 194l },
-			new long[] { 69l, 148l, 163l, 140l, 186l, 283l, 319l, 195l, 341l, 64l, 168l, 143l } 
+			new long[] { 69l, 148l, 163l, 140l, 186l, 283l, 319l, 195l, 341l, 64l, 168l, 143l },
+			new long[] { 150l, 67l, 375l, 109l, 378l, 188l, 380l, 15l, 172l, 198l, 279l, 153l },
+			new long[] { 267l, 322l, 46l, 350l, 408l, 409l, 52l, 73l, 44l, 50l, 47l, 38l },
+			new long[] { 244l, 70l, 86l, 334l, 121l, 287l, 331l, 103l, 177l, 274l, 178l, 68 },
 			};
 	
 	public static UserModel getEvaluationModel(){
+		if(mIndex < 0 || mIndex >= getEvaluationDataSize())
+			return null;
 		return mUserModels[mIndex];
 	}
 	
 	public static long[] getEvaluationShouldRecommendStores(){
+		if(mIndex < 0 || mIndex >= getEvaluationDataSize())
+			return null;
 		return mShouldRecommendEsportista[mIndex];
 	}
 	

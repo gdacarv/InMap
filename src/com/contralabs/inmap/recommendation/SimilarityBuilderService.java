@@ -13,6 +13,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.format.DateFormat;
+import android.util.Log;
+
 import com.contralabs.inmap.model.DatabaseHelper;
 import com.contralabs.inmap.model.DbAdapter;
 
@@ -35,6 +37,8 @@ public class SimilarityBuilderService extends IntentService {
 		DbAdapter db = DbAdapter.getInstance(getApplicationContext()).open();
 		try{
 			UserModel userModel = buildUserModel(user, db);
+			Log.d("Evaluation", userModel.toJavaCode());
+			Log.d("Evaluation", "Do not recommend: " + userModel.storeDetailsView.keySet().toString());
 			UserModel evalModel = Evaluation.getEvaluationModel();
 			if(evalModel != null)
 				userModel = evalModel;

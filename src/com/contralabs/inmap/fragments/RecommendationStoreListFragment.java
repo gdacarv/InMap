@@ -9,12 +9,12 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Bundle;
 import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.contralabs.inmap.R;
 import com.contralabs.inmap.activities.RecommendationActivity;
@@ -28,6 +28,12 @@ public class RecommendationStoreListFragment extends StoreListFragment {
 	private Pair<Store, Double>[] mStoresWithScore;
 	
 	private DescriptiveStatistics mPrecision = new DescriptiveStatistics(), mRecall = new DescriptiveStatistics(), mFmeasure = new DescriptiveStatistics();
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		mContext.startService(new Intent(mContext, SimilarityBuilderService.class));
+	}
 
 	@Override
 	public void setStores(Store[] stores) {
@@ -60,6 +66,8 @@ public class RecommendationStoreListFragment extends StoreListFragment {
 			View view = super.getView(position, convertView, parent);
 			TextView description = (TextView) view.findViewById(R.id.txt_store_description);
 			description.setText(String.format(mContext.getString(R.string.recomendacao_score), mStoresWithScore[position].second.toString()) + "\n" + description.getText());
+			TextView name = (TextView) view.findViewById(R.id.txt_store_name);
+			name.setText(name.getText() + " (" + mStoresWithScore[position].first.getId() + ")");
 			return view;
 		}
 		

@@ -385,6 +385,14 @@ public class DbAdapter {
 		mDb.delete(DATABASE_TABLE_SIMILARITY, KEY_USER + (user == null ? " IS NULL" : " = ?"), (user == null ? null : new String[] {user}));
 	}
 	
+	public void clearRecommendation(){
+		mDb.delete(DATABASE_TABLE_DETAIL_VIEW, null, null);
+		mDb.delete(DATABASE_TABLE_CATEGORY_VISITED, null, null);
+		mDb.delete(DATABASE_TABLE_SEARCH_PERFORMED, null, null);
+		mDb.delete(DATABASE_TABLE_SIMILARITY, null, null);
+		mDb.delete(DATABASE_TABLE_USER_MODEL, null, null);
+	}
+	
 	public Cursor getStoreBasicInfo(Collection<Long> set){
 		String exceptIds = "";
 		if(set != null && !set.isEmpty()){
