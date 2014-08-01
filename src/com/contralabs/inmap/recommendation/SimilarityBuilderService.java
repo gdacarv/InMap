@@ -11,21 +11,25 @@ import java.util.Set;
 import android.app.IntentService;
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.SystemClock;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.format.DateFormat;
 import android.util.Log;
 
+import com.contralabs.inmap.activities.RecommendationActivity;
 import com.contralabs.inmap.model.DatabaseHelper;
 import com.contralabs.inmap.model.DbAdapter;
+import com.contralabs.inmap.utils.Utils;
 
 public class SimilarityBuilderService extends IntentService {
 
 	public static final String ACTION_SIMILIRARITY_BUILD_FINISHED = "SIMILIRARITY_BUILD_FINISHED";
-	private static final double SCORE_MINIMUM = 0.15d;
+	private static final double SCORE_MINIMUM = 0.01d;
 	private static final String EXTRA_USER = "extraUser";
 	private static final String EXTRA_ALGORITHM = "extraUser";
 	public static SimilarityAlgorithm DEFAULT_ALGORITHM = SimilarityAlgorithm.STORE_BASED;
 	private Map<Integer, Integer> mFrequencyMap;
+	private double initMemory;
 
 	public SimilarityBuilderService() {
 		super("SimilarityBuilderService");
@@ -33,22 +37,27 @@ public class SimilarityBuilderService extends IntentService {
 
 	@Override
 	protected void onHandleIntent(Intent intent) {
+		initMemory = Utils.getUsedMemoryMB(true);
+		long initTime = SystemClock.elapsedRealtime();
 		String user = getUser(intent);
 		DbAdapter db = DbAdapter.getInstance(getApplicationContext()).open();
 		try{
 			UserModel userModel = buildUserModel(user, db);
-			Log.d("Evaluation", userModel.toJavaCode());
-			Log.d("Evaluation", "Do not recommend: " + userModel.storeDetailsView.keySet().toString());
+			//Log.d("Evaluation", userModel.toJavaCode());
+			//Log.d("Evaluation", "Do not recommend: " + userModel.storeDetailsView.keySet().toString());
 			UserModel evalModel = Evaluation.getEvaluationModel();
 			if(evalModel != null)
 				userModel = evalModel;
 			SimilarityAlgorithm algorithm = (SimilarityAlgorithm) intent.getSerializableExtra(EXTRA_ALGORITHM);
 			buildSimilarity(user, db, userModel, algorithm == null ? DEFAULT_ALGORITHM : algorithm);
-			//Log.d("Evaluation", "Finished build similarity. Algorithm: " + SimilarityBuilderService.DEFAULT_ALGORITHM + " and model " + Evaluation.getEvalatuationModel().name + " n = " + RecommendationActivity.RECOMMEND_QUANTITY);
+			//Log.d("Evaluation", "Finished build similarity. Algorithm: " + SimilarityBuilderService.DEFAULT_ALGORITHM + " and model " + Evaluation.getEvaluationModel().name + " n = " + RecommendationActivity.RECOMMEND_QUANTITY);
 			LocalBroadcastManager.getInstance(this).sendBroadcast(new Intent(ACTION_SIMILIRARITY_BUILD_FINISHED));
 		} finally { 
 			db.close();
 		}
+		double finalMemory = Utils.getUsedMemoryMB(false);
+		//Log.d("Memory", "Initial: " + initMemory + " Final: " + finalMemory + " Diff: " + (finalMemory - initMemory));
+		PerformanceEvaluation.instance.addExecutionTime(SystemClock.elapsedRealtime() - initTime);
 	}
 
 	private UserModel buildUserModel(String user, DbAdapter db) {
@@ -61,6 +70,10 @@ public class SimilarityBuilderService extends IntentService {
 		int[] categoriesVisited = db.returnAllCategoriesVisited(user);
 		UserModel userModel = new UserModel(user, tags, searchs, categoriesVisited);
 		db.saveUserModel(userModel);
+
+		//double finalMemory = Utils.getUsedMemoryMB(false);
+		//Log.d("Memory", "Initial: " + initMemory + " User Model Final: " + finalMemory + " Diff: " + (finalMemory - initMemory));
+		
 		return userModel;
 	}
 
@@ -77,6 +90,9 @@ public class SimilarityBuilderService extends IntentService {
 					if(similarityScore > SCORE_MINIMUM)
 						db.saveSimilarity(user, cursor.getLong(columnId), similarityScore);
 				} while(cursor.moveToNext());
+				//double finalMemory = Utils.getUsedMemoryMB(false);
+				//Log.d("Memory", "Initial: " + initMemory + " Build SimilarityFinal: " + finalMemory + " Diff: " + (finalMemory - initMemory));
+				PerformanceEvaluation.instance.addMemoryUsed(Utils.getUsedMemory(false));
 			} finally {
 				cursor.close();
 			}

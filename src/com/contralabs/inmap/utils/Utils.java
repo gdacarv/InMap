@@ -1,7 +1,5 @@
 package com.contralabs.inmap.utils;
 
-import java.util.Arrays;
-
 import android.annotation.TargetApi;
 import android.content.res.Resources;
 import android.os.AsyncTask;
@@ -49,5 +47,18 @@ public class Utils {
 				result.append(separator).append(array[i]);
 		}
 		return result.toString();
+	}
+	
+	public static long getUsedMemory(boolean runGCBefore){
+		Runtime runtime = Runtime.getRuntime();
+	    // Run the garbage collector
+		if(runGCBefore)
+			runtime.gc();
+	    // Calculate the used memory
+	    return runtime.totalMemory() - runtime.freeMemory();
+	}
+	
+	public static double getUsedMemoryMB(boolean runGCBefore){
+		return getUsedMemory(runGCBefore) / (1024d*1024d);
 	}
 }

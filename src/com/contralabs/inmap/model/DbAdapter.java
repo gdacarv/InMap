@@ -21,6 +21,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Pair;
 
+import com.contralabs.inmap.recommendation.PerformanceEvaluation;
 import com.contralabs.inmap.recommendation.UserModel;
 import com.contralabs.inmap.salvadorshop.applicationdata.InfrastructureCategory;
 import com.contralabs.inmap.salvadorshop.applicationdata.StoreCategory;
@@ -402,7 +403,7 @@ public class DbAdapter {
 			}
 			exceptIds = ids.substring(0, ids.length()-1);
 		}
-		return mDb.query(DATABASE_TABLE_STORE, new String[]{KEY_ID, KEY_TAGS, KEY_STORECATEGORY}, KEY_ID + " NOT IN (" + exceptIds + ")", null, null, null, null);
+		return mDb.query(DATABASE_TABLE_STORE, new String[]{KEY_ID, KEY_TAGS, KEY_STORECATEGORY}, KEY_ID + " NOT IN (" + exceptIds + ")", null, null, null, null, PerformanceEvaluation.instance.getQuantityStore());
 	}
 
 	public void saveSimilarity(String user, long storeId, double similarityScore) {
