@@ -7,7 +7,7 @@ import android.util.Log;
 
 public class PerformanceEvaluation {
 
-	public static final PerformanceEvaluation instance = new PerformanceEvaluation(); // FIXME Change to NullPerformanceEvaluation
+	public static final PerformanceEvaluation instance = new NullPerformanceEvaluation(); // FIXME Change to NullPerformanceEvaluation
 	
 	private List<Long> executionTimes;
 	private List<Long> memoryUsed;
@@ -58,7 +58,7 @@ public class PerformanceEvaluation {
 		return String.valueOf(quantityStores);
 	}
 	
-	private class NullPerformanceEvaluation extends PerformanceEvaluation{
+	private static class NullPerformanceEvaluation extends PerformanceEvaluation{
 		private NullPerformanceEvaluation(){
 		}
 		

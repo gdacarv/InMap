@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class Evaluation {
 	
-	public static int mIndex = 0;
+	public static int mIndex = -1;
 	
 	private static final UserModel[] mUserModels = new UserModel[] {
 			new UserModel(
